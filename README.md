@@ -35,4 +35,4 @@ Aplikasi Web Pembelajaran Terpadu berbasis **GitHub Pages** yang terhubung langs
 ---
 
 ## 🔐 Kredensial & Akses Guru
-- **PIN Mode Guru**: `GURUCERDAS` (atau `1234`)
+
