@@ -248,7 +248,7 @@
     
     <!-- HEADER -->
     <div class="header">
-      <div class="header-badge">SMP NEGERI MUARA SIRAM</div>
+      <div class="header-badge">SMP NEGERI 5 MUARA SIRAM</div>
       <h1>PORTAL SISWA &amp; GURU</h1>
       <p>Pengumpulan Tugas, Rekap Nilai, Jadwal, dan Materi Belajar</p>
     </div>
@@ -384,6 +384,7 @@
         <button type="button" class="day-pill" onclick="selectJadwalDay('Rabu', this)">Rabu</button>
         <button type="button" class="day-pill" onclick="selectJadwalDay('Kamis', this)">Kamis</button>
         <button type="button" class="day-pill" onclick="selectJadwalDay('Jumat', this)">Jumat</button>
+        <button type="button" class="day-pill" onclick="selectJadwalDay('Sabtu', this)">Sabtu</button>
       </div>
 
       <div class="recap-header" style="margin-bottom:10px;">
@@ -1118,90 +1119,569 @@
     // ========================================================
     // TAB 3: JADWAL PELAJARAN LOGIC
     // ========================================================
+    const PIKET_HARIAN = {
+  "Senin": "Hamdani & Dony",
+  "Selasa": "Hetty & Deyby",
+  "Rabu": "Amanda & Dwi",
+  "Kamis": "Ilham & Roi",
+  "Jumat": "Supianto",
+  "Sabtu": "Yanti"
+};
+
     const DEFAULT_JADWAL = {
-      "VII": {
-        "Senin": [
-          { jam: 1, waktu: "07.00 - 07.45", mapel: "Upacara Bendera", guru: "Pembina Upacara" },
-          { jam: 2, waktu: "07.45 - 09.05", mapel: "Bahasa Indonesia", guru: "Ibu Rahmawati, S.Pd" },
-          { jam: 3, waktu: "09.25 - 10.45", mapel: "Matematika", guru: "Bpk. Ahmad, S.Pd" },
-          { jam: 4, waktu: "10.45 - 12.05", mapel: "Informatika", guru: "Bpk. Hendra, S.Kom" }
-        ],
-        "Selasa": [
-          { jam: 1, waktu: "07.30 - 08.50", mapel: "IPA Terpadu", guru: "Ibu Nurul, M.Pd" },
-          { jam: 2, waktu: "09.10 - 10.30", mapel: "Bahasa Inggris", guru: "Bpk. David, M.Pd" },
-          { jam: 3, waktu: "10.30 - 11.50", mapel: "Pendidikan Agama", guru: "Bpk. H. Syarif, S.Ag" }
-        ],
-        "Rabu": [
-          { jam: 1, waktu: "07.30 - 08.50", mapel: "Pendidikan Pancasila", guru: "Ibu Sri Wahyuni, S.Pd" },
-          { jam: 2, waktu: "09.10 - 10.30", mapel: "IPS Terpadu", guru: "Bpk. Joko, S.Pd" },
-          { jam: 3, waktu: "10.30 - 11.50", mapel: "Seni Budaya", guru: "Ibu Rina, S.Sn" }
-        ],
-        "Kamis": [
-          { jam: 1, waktu: "07.30 - 08.50", mapel: "PJOK / Penjaskes", guru: "Bpk. Budi Santoso, S.Pd" },
-          { jam: 2, waktu: "09.10 - 10.30", mapel: "Prakarya", guru: "Ibu Dewi, S.Pd" },
-          { jam: 3, waktu: "10.30 - 11.50", mapel: "Bahasa Daerah", guru: "Ibu Siti, S.Pd" }
-        ],
-        "Jumat": [
-          { jam: 1, waktu: "07.30 - 08.15", mapel: "Senam Pagi & Literasi", guru: "Wali Kelas VII" },
-          { jam: 2, waktu: "08.15 - 09.35", mapel: "Bimbingan Konseling", guru: "Ibu Fitri, S.Psi" },
-          { jam: 3, waktu: "09.35 - 10.30", mapel: "Ekstrakurikuler", guru: "Pembina Ekstra" }
-        ]
+  "VII": {
+    "Senin": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.10",
+        "mapel": "Upacara Bendera",
+        "guru": "Pembina Upacara"
       },
-      "VIII": {
-        "Senin": [
-          { jam: 1, waktu: "07.00 - 07.45", mapel: "Upacara Bendera", guru: "Pembina Upacara" },
-          { jam: 2, waktu: "07.45 - 09.05", mapel: "Matematika", guru: "Bpk. Ahmad, S.Pd" },
-          { jam: 3, waktu: "09.25 - 10.45", mapel: "Bahasa Indonesia", guru: "Ibu Rahmawati, S.Pd" },
-          { jam: 4, waktu: "10.45 - 12.05", mapel: "IPA Terpadu", guru: "Ibu Nurul, M.Pd" }
-        ],
-        "Selasa": [
-          { jam: 1, waktu: "07.30 - 08.50", mapel: "Informatika", guru: "Bpk. Hendra, S.Kom" },
-          { jam: 2, waktu: "09.10 - 10.30", mapel: "Pendidikan Agama", guru: "Bpk. H. Syarif, S.Ag" },
-          { jam: 3, waktu: "10.30 - 11.50", mapel: "Bahasa Inggris", guru: "Bpk. David, M.Pd" }
-        ],
-        "Rabu": [
-          { jam: 1, waktu: "07.30 - 08.50", mapel: "IPS Terpadu", guru: "Bpk. Joko, S.Pd" },
-          { jam: 2, waktu: "09.10 - 10.30", mapel: "Pendidikan Pancasila", guru: "Ibu Sri Wahyuni, S.Pd" },
-          { jam: 3, waktu: "10.30 - 11.50", mapel: "PJOK / Penjaskes", guru: "Bpk. Budi Santoso, S.Pd" }
-        ],
-        "Kamis": [
-          { jam: 1, waktu: "07.30 - 08.50", mapel: "Seni Budaya", guru: "Ibu Rina, S.Sn" },
-          { jam: 2, waktu: "09.10 - 10.30", mapel: "Prakarya", guru: "Ibu Dewi, S.Pd" },
-          { jam: 3, waktu: "10.30 - 11.50", mapel: "Bahasa Daerah", guru: "Ibu Siti, S.Pd" }
-        ],
-        "Jumat": [
-          { jam: 1, waktu: "07.30 - 08.15", mapel: "Senam Pagi & Literasi", guru: "Wali Kelas VIII" },
-          { jam: 2, waktu: "08.15 - 09.35", mapel: "Informatika Mandiri", guru: "Bpk. Hendra, S.Kom" }
-        ]
+      {
+        "jam": 2,
+        "waktu": "08.10 - 09.30",
+        "mapel": "Bahasa Indonesia",
+        "guru": "Roi Martin, S.Pd.,Gr."
       },
-      "IX": {
-        "Senin": [
-          { jam: 1, waktu: "07.00 - 07.45", mapel: "Upacara Bendera", guru: "Pembina Upacara" },
-          { jam: 2, waktu: "07.45 - 09.05", mapel: "IPA Terpadu", guru: "Ibu Nurul, M.Pd" },
-          { jam: 3, waktu: "09.25 - 10.45", mapel: "Bahasa Inggris", guru: "Bpk. David, M.Pd" },
-          { jam: 4, waktu: "10.45 - 12.05", mapel: "Matematika", guru: "Bpk. Ahmad, S.Pd" }
-        ],
-        "Selasa": [
-          { jam: 1, waktu: "07.30 - 08.50", mapel: "Bahasa Indonesia", guru: "Ibu Rahmawati, S.Pd" },
-          { jam: 2, waktu: "09.10 - 10.30", mapel: "Informatika", guru: "Bpk. Hendra, S.Kom" },
-          { jam: 3, waktu: "10.30 - 11.50", mapel: "IPS Terpadu", guru: "Bpk. Joko, S.Pd" }
-        ],
-        "Rabu": [
-          { jam: 1, waktu: "07.30 - 08.50", mapel: "Pendidikan Agama", guru: "Bpk. H. Syarif, S.Ag" },
-          { jam: 2, waktu: "09.10 - 10.30", mapel: "PJOK / Penjaskes", guru: "Bpk. Budi Santoso, S.Pd" },
-          { jam: 3, waktu: "10.30 - 11.50", mapel: "Pendidikan Pancasila", guru: "Ibu Sri Wahyuni, S.Pd" }
-        ],
-        "Kamis": [
-          { jam: 1, waktu: "07.30 - 08.50", mapel: "Prakarya", guru: "Ibu Dewi, S.Pd" },
-          { jam: 2, waktu: "09.10 - 10.30", mapel: "Seni Budaya", guru: "Ibu Rina, S.Sn" },
-          { jam: 3, waktu: "10.30 - 11.50", mapel: "Bahasa Daerah", guru: "Ibu Siti, S.Pd" }
-        ],
-        "Jumat": [
-          { jam: 1, waktu: "07.30 - 08.15", mapel: "Senam Pagi & Rohani", guru: "Wali Kelas IX" },
-          { jam: 2, waktu: "08.15 - 09.35", mapel: "Bimbingan Ujian & Karir", guru: "Ibu Fitri, S.Psi" }
-        ]
+      {
+        "jam": 3,
+        "waktu": "09.30 - 10.10",
+        "mapel": "Bahasa Indonesia",
+        "guru": "Roi Martin, S.Pd.,Gr."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "PPKn",
+        "guru": "Hetti, S.Pd.,Gr."
+      },
+      {
+        "jam": 8,
+        "waktu": "12.00 - 13.20",
+        "mapel": "Prakarya",
+        "guru": "Dwi Oktaviani S, S.Pd.,Gr."
       }
-    };
+    ],
+    "Selasa": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.50",
+        "mapel": "PJOK",
+        "guru": "Hamdani, S.Pd.,Gr."
+      },
+      {
+        "jam": 3,
+        "waktu": "08.50 - 10.10",
+        "mapel": "Matematika",
+        "guru": "Supianto, S.Pd.,Gr."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "Bahasa Indonesia",
+        "guru": "Roi Martin, S.Pd.,Gr."
+      },
+      {
+        "jam": 8,
+        "waktu": "12.00 - 13.20",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      }
+    ],
+    "Rabu": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.50",
+        "mapel": "Matematika",
+        "guru": "Supianto, S.Pd.,Gr."
+      },
+      {
+        "jam": 3,
+        "waktu": "08.50 - 10.10",
+        "mapel": "Pendidikan Agama (PAI / PAK)",
+        "guru": "M. Dony Wardhana (PAI) / Deyby Taniowas (PAK)"
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "IPA",
+        "guru": "Amanda Kartika, S.Pd.,Gr."
+      },
+      {
+        "jam": 8,
+        "waktu": "12.00 - 13.20",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      }
+    ],
+    "Kamis": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 09.30",
+        "mapel": "Bahasa Inggris",
+        "guru": "M. Ilham, S.Pd.,Gr."
+      },
+      {
+        "jam": 3,
+        "waktu": "09.30 - 10.10",
+        "mapel": "IPS",
+        "guru": "Yanti, S.Pd."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "IPS",
+        "guru": "Yanti, S.Pd."
+      },
+      {
+        "jam": 8,
+        "waktu": "12.00 - 13.20",
+        "mapel": "Jam Guru Wali",
+        "guru": "Wali Kelas VII"
+      }
+    ],
+    "Jumat": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.10",
+        "mapel": "Senam Pagi Bersama",
+        "guru": "Guru PJOK / Wali Kelas"
+      },
+      {
+        "jam": 2,
+        "waktu": "08.10 - 09.30",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "09.30 - 09.50",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 4,
+        "waktu": "09.50 - 11.10",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      }
+    ],
+    "Sabtu": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.50",
+        "mapel": "Pembinaan Keagamaan",
+        "guru": "Guru Keagamaan (Dony / Deyby)"
+      },
+      {
+        "jam": 3,
+        "waktu": "08.50 - 10.10",
+        "mapel": "IPA",
+        "guru": "Amanda Kartika, S.Pd.,Gr."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "TIK / Informatika",
+        "guru": "Hamdani, S.Pd.,Gr."
+      }
+    ]
+  },
+  "VIII": {
+    "Senin": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.10",
+        "mapel": "Upacara Bendera",
+        "guru": "Pembina Upacara"
+      },
+      {
+        "jam": 2,
+        "waktu": "08.10 - 10.10",
+        "mapel": "IPS",
+        "guru": "Yanti, S.Pd."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 11.20",
+        "mapel": "Bahasa Inggris",
+        "guru": "M. Ilham, S.Pd.,Gr."
+      },
+      {
+        "jam": 6,
+        "waktu": "11.20 - 13.20",
+        "mapel": "Bahasa Indonesia",
+        "guru": "Roi Martin, S.Pd.,Gr."
+      }
+    ],
+    "Selasa": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.50",
+        "mapel": "Matematika",
+        "guru": "Supianto, S.Pd.,Gr."
+      },
+      {
+        "jam": 3,
+        "waktu": "08.50 - 10.10",
+        "mapel": "Pendidikan Agama (PAI / PAK)",
+        "guru": "M. Dony Wardhana (PAI) / Deyby Taniowas (PAK)"
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "IPA",
+        "guru": "Amanda Kartika, S.Pd.,Gr."
+      },
+      {
+        "jam": 8,
+        "waktu": "12.00 - 13.20",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      }
+    ],
+    "Rabu": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.50",
+        "mapel": "PJOK",
+        "guru": "Hamdani, S.Pd.,Gr."
+      },
+      {
+        "jam": 3,
+        "waktu": "08.50 - 10.10",
+        "mapel": "PPKn",
+        "guru": "Hetti, S.Pd.,Gr."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "Prakarya",
+        "guru": "Dwi Oktaviani S, S.Pd.,Gr."
+      },
+      {
+        "jam": 8,
+        "waktu": "12.00 - 13.20",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      }
+    ],
+    "Kamis": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.50",
+        "mapel": "Bahasa Indonesia",
+        "guru": "Roi Martin, S.Pd.,Gr."
+      },
+      {
+        "jam": 3,
+        "waktu": "08.50 - 10.10",
+        "mapel": "IPA",
+        "guru": "Amanda Kartika, S.Pd.,Gr."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "Matematika",
+        "guru": "Supianto, S.Pd.,Gr."
+      },
+      {
+        "jam": 8,
+        "waktu": "12.00 - 13.20",
+        "mapel": "Jam Guru Wali",
+        "guru": "Wali Kelas VIII"
+      }
+    ],
+    "Jumat": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.10",
+        "mapel": "Senam Pagi Bersama",
+        "guru": "Guru PJOK / Wali Kelas"
+      },
+      {
+        "jam": 2,
+        "waktu": "08.10 - 09.30",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "09.30 - 09.50",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 4,
+        "waktu": "09.50 - 11.10",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      }
+    ],
+    "Sabtu": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.50",
+        "mapel": "Pembinaan Keagamaan",
+        "guru": "Guru Keagamaan (Dony / Deyby)"
+      },
+      {
+        "jam": 3,
+        "waktu": "08.50 - 10.10",
+        "mapel": "TIK / Informatika",
+        "guru": "Deyby Taniowas, S.Pd.K."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "Bahasa Inggris",
+        "guru": "M. Ilham, S.Pd.,Gr."
+      }
+    ]
+  },
+  "IX": {
+    "Senin": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.10",
+        "mapel": "Upacara Bendera",
+        "guru": "Pembina Upacara"
+      },
+      {
+        "jam": 2,
+        "waktu": "08.10 - 10.10",
+        "mapel": "Bahasa Inggris",
+        "guru": "M. Ilham, S.Pd.,Gr."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "IPA",
+        "guru": "Amanda Kartika, S.Pd.,Gr."
+      },
+      {
+        "jam": 8,
+        "waktu": "12.00 - 13.20",
+        "mapel": "Matematika",
+        "guru": "Supianto, S.Pd.,Gr."
+      }
+    ],
+    "Selasa": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.50",
+        "mapel": "Bahasa Indonesia",
+        "guru": "Roi Martin, S.Pd.,Gr."
+      },
+      {
+        "jam": 3,
+        "waktu": "08.50 - 10.10",
+        "mapel": "IPA",
+        "guru": "Amanda Kartika, S.Pd.,Gr."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "PPKn",
+        "guru": "Hetti, S.Pd.,Gr."
+      },
+      {
+        "jam": 8,
+        "waktu": "12.00 - 13.20",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      }
+    ],
+    "Rabu": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 09.30",
+        "mapel": "Bahasa Indonesia",
+        "guru": "Roi Martin, S.Pd.,Gr."
+      },
+      {
+        "jam": 3,
+        "waktu": "09.30 - 10.10",
+        "mapel": "IPS",
+        "guru": "Yanti, S.Pd."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "IPS",
+        "guru": "Yanti, S.Pd."
+      },
+      {
+        "jam": 8,
+        "waktu": "12.00 - 13.20",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      }
+    ],
+    "Kamis": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.50",
+        "mapel": "PJOK",
+        "guru": "Hamdani, S.Pd.,Gr."
+      },
+      {
+        "jam": 3,
+        "waktu": "08.50 - 10.10",
+        "mapel": "Matematika",
+        "guru": "Supianto, S.Pd.,Gr."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "Pendidikan Agama (PAI / PAK)",
+        "guru": "M. Dony Wardhana (PAI) / Deyby Taniowas (PAK)"
+      },
+      {
+        "jam": 8,
+        "waktu": "12.00 - 13.20",
+        "mapel": "Jam Guru Wali",
+        "guru": "Wali Kelas IX"
+      }
+    ],
+    "Jumat": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.10",
+        "mapel": "Senam Pagi Bersama",
+        "guru": "Guru PJOK / Wali Kelas"
+      },
+      {
+        "jam": 2,
+        "waktu": "08.10 - 09.30",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "09.30 - 09.50",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 4,
+        "waktu": "09.50 - 11.10",
+        "mapel": "Ko-Kurikuler (KOKUR)",
+        "guru": "Guru Pembina KOKUR"
+      }
+    ],
+    "Sabtu": [
+      {
+        "jam": 1,
+        "waktu": "07.30 - 08.50",
+        "mapel": "Pembinaan Keagamaan",
+        "guru": "Guru Keagamaan (Dony / Deyby)"
+      },
+      {
+        "jam": 3,
+        "waktu": "08.50 - 10.10",
+        "mapel": "Prakarya",
+        "guru": "Dwi Oktaviani S, S.Pd.,Gr."
+      },
+      {
+        "jam": "Istirahat",
+        "waktu": "10.10 - 10.40",
+        "mapel": "ISTIRAHAT",
+        "guru": "-"
+      },
+      {
+        "jam": 5,
+        "waktu": "10.40 - 12.00",
+        "mapel": "TIK / Informatika",
+        "guru": "Dwi Oktaviani S, S.Pd.,Gr."
+      }
+    ]
+  }
+};
 
     function selectJadwalClass(kelas, btn) {
       selectedJadwalKelas = kelas;
@@ -1251,20 +1731,35 @@
         container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:18px;'>Tidak ada jadwal belajar untuk hari ini.</p>";
         return;
       }
-      let html = "";
+      const piket = PIKET_HARIAN[selectedJadwalHari] || "-";
+      let html = `
+        <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(79,70,229,0.12);border:1px solid rgba(79,70,229,0.25);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:0.82rem;">
+          <span style="color:var(--text-muted);">👮 <strong>Guru Piket Hari ${selectedJadwalHari}:</strong></span>
+          <span style="font-weight:800;color:#a5b4fc;background:rgba(79,70,229,0.2);padding:3px 10px;border-radius:999px;">${piket}</span>
+        </div>
+      `;
+
       list.forEach(item => {
-        html += `
-          <div class="schedule-card">
-            <div class="schedule-left">
-              <div class="schedule-num">#${item.jam}</div>
-              <div>
-                <div class="schedule-mapel">${item.mapel}</div>
-                <div class="schedule-guru">👨‍🏫 ${item.guru}</div>
-              </div>
+        if (item.jam === "Istirahat") {
+          html += `
+            <div style="text-align:center;background:rgba(245,158,11,0.08);border:1px dashed rgba(245,158,11,0.3);border-radius:10px;padding:8px;margin:8px 0;font-size:0.8rem;color:var(--warning);font-weight:700;">
+              ☕ ${item.mapel} (${item.waktu})
             </div>
-            <div class="schedule-time">⏰ ${item.waktu}</div>
-          </div>
-        `;
+          `;
+        } else {
+          html += `
+            <div class="schedule-card">
+              <div class="schedule-left">
+                <div class="schedule-num">#${item.jam}</div>
+                <div>
+                  <div class="schedule-mapel">${item.mapel}</div>
+                  <div class="schedule-guru">👨‍🏫 ${item.guru}</div>
+                </div>
+              </div>
+              <div class="schedule-time">⏰ ${item.waktu}</div>
+            </div>
+          `;
+        }
       });
       container.innerHTML = html;
     }

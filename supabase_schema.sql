@@ -1,5 +1,5 @@
 -- ===================================================================
--- SKRIP DATABASE SUPABASE: PORTAL SMP NEGERI MUARA SIRAM
+-- SKRIP DATABASE SUPABASE: PORTAL SMP NEGERI 5 MUARA SIRAM
 -- Tabel: materi_pelajaran & jadwal_pelajaran
 -- Jalankan skrip ini di: Supabase Dashboard -> SQL Editor -> Run
 -- ===================================================================
@@ -57,71 +57,96 @@ CREATE POLICY "Public Insert Jadwal" ON jadwal_pelajaran FOR INSERT WITH CHECK (
 CREATE POLICY "Public Update Jadwal" ON jadwal_pelajaran FOR UPDATE USING (true);
 CREATE POLICY "Public Delete Jadwal" ON jadwal_pelajaran FOR DELETE USING (true);
 
--- 3. DATA AWAL JADWAL PELAJARAN (STANDAR SMP)
+-- 3. DATA RESMI JADWAL PELAJARAN (SMPN 5 MUARA SIRAM T.P 2026/2027)
+TRUNCATE TABLE jadwal_pelajaran;
 INSERT INTO jadwal_pelajaran (kelas, hari, jam_ke, waktu, mapel, guru, ruang) VALUES
 -- KELAS VII
-('Kelas VII', 'Senin', 1, '07.00 - 07.45', 'Upacara Bendera', 'Pembina Upacara', 'Lapangan'),
-('Kelas VII', 'Senin', 2, '07.45 - 09.05', 'Bahasa Indonesia', 'Ibu Rahmawati, S.Pd', 'Kelas VII'),
-('Kelas VII', 'Senin', 3, '09.25 - 10.45', 'Matematika', 'Bpk. Ahmad, S.Pd', 'Kelas VII'),
-('Kelas VII', 'Senin', 4, '10.45 - 12.05', 'Informatika', 'Bpk. Hendra, S.Kom', 'Lab Komputer'),
+('Kelas VII', 'Senin', 1, '07.30 - 08.10', 'Upacara Bendera', 'Pembina Upacara', 'Lapangan'),
+('Kelas VII', 'Senin', 2, '08.10 - 09.30', 'Bahasa Indonesia', 'Roi Martin, S.Pd.,Gr.', 'Kelas VII'),
+('Kelas VII', 'Senin', 3, '09.30 - 10.10', 'Bahasa Indonesia', 'Roi Martin, S.Pd.,Gr.', 'Kelas VII'),
+('Kelas VII', 'Senin', 5, '10.40 - 12.00', 'PPKn', 'Hetti, S.Pd.,Gr.', 'Kelas VII'),
+('Kelas VII', 'Senin', 8, '12.00 - 13.20', 'Prakarya', 'Dwi Oktaviani S, S.Pd.,Gr.', 'Kelas VII'),
 
-('Kelas VII', 'Selasa', 1, '07.30 - 08.50', 'IPA Terpadu', 'Ibu Nurul, M.Pd', 'Lab IPA'),
-('Kelas VII', 'Selasa', 2, '09.10 - 10.30', 'Bahasa Inggris', 'Bpk. David, M.Pd', 'Kelas VII'),
-('Kelas VII', 'Selasa', 3, '10.30 - 11.50', 'Pendidikan Agama', 'Bpk. H. Syarif, S.Ag', 'Kelas VII'),
+('Kelas VII', 'Selasa', 1, '07.30 - 08.50', 'PJOK', 'Hamdani, S.Pd.,Gr.', 'Lapangan'),
+('Kelas VII', 'Selasa', 3, '08.50 - 10.10', 'Matematika', 'Supianto, S.Pd.,Gr.', 'Kelas VII'),
+('Kelas VII', 'Selasa', 5, '10.40 - 12.00', 'Bahasa Indonesia', 'Roi Martin, S.Pd.,Gr.', 'Kelas VII'),
+('Kelas VII', 'Selasa', 8, '12.00 - 13.20', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas VII'),
 
-('Kelas VII', 'Rabu', 1, '07.30 - 08.50', 'Pendidikan Pancasila', 'Ibu Sri Wahyuni, S.Pd', 'Kelas VII'),
-('Kelas VII', 'Rabu', 2, '09.10 - 10.30', 'IPS Terpadu', 'Bpk. Joko, S.Pd', 'Kelas VII'),
-('Kelas VII', 'Rabu', 3, '10.30 - 11.50', 'Seni Budaya', 'Ibu Rina, S.Sn', 'Kelas VII'),
+('Kelas VII', 'Rabu', 1, '07.30 - 08.50', 'Matematika', 'Supianto, S.Pd.,Gr.', 'Kelas VII'),
+('Kelas VII', 'Rabu', 3, '08.50 - 10.10', 'Pendidikan Agama (PAI/PAK)', 'M. Dony Wardhana / Deyby Taniowas', 'Kelas VII'),
+('Kelas VII', 'Rabu', 5, '10.40 - 12.00', 'IPA', 'Amanda Kartika, S.Pd.,Gr.', 'Lab IPA'),
+('Kelas VII', 'Rabu', 8, '12.00 - 13.20', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas VII'),
 
-('Kelas VII', 'Kamis', 1, '07.30 - 08.50', 'PJOK / Penjaskes', 'Bpk. Budi Santoso, S.Pd', 'Lapangan'),
-('Kelas VII', 'Kamis', 2, '09.10 - 10.30', 'Prakarya', 'Ibu Dewi, S.Pd', 'Kelas VII'),
-('Kelas VII', 'Kamis', 3, '10.30 - 11.50', 'Bahasa Daerah', 'Ibu Siti, S.Pd', 'Kelas VII'),
+('Kelas VII', 'Kamis', 1, '07.30 - 09.30', 'Bahasa Inggris', 'M. Ilham, S.Pd.,Gr.', 'Kelas VII'),
+('Kelas VII', 'Kamis', 3, '09.30 - 10.10', 'IPS', 'Yanti, S.Pd.', 'Kelas VII'),
+('Kelas VII', 'Kamis', 5, '10.40 - 12.00', 'IPS', 'Yanti, S.Pd.', 'Kelas VII'),
+('Kelas VII', 'Kamis', 8, '12.00 - 13.20', 'Jam Guru Wali', 'Wali Kelas VII', 'Kelas VII'),
 
-('Kelas VII', 'Jumat', 1, '07.30 - 08.15', 'Senam Pagi & Literasi', 'Wali Kelas', 'Lapangan'),
-('Kelas VII', 'Jumat', 2, '08.15 - 09.35', 'Bimbingan Konseling', 'Ibu Fitri, S.Psi', 'Ruang BK'),
-('Kelas VII', 'Jumat', 3, '09.35 - 10.30', 'Pengembangan Diri / Ekstra', 'Pembina Ekstra', 'Kelas VII'),
+('Kelas VII', 'Jumat', 1, '07.30 - 08.10', 'Senam Pagi Bersama', 'Guru PJOK / Wali Kelas', 'Lapangan'),
+('Kelas VII', 'Jumat', 2, '08.10 - 09.30', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas VII'),
+('Kelas VII', 'Jumat', 4, '09.50 - 11.10', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas VII'),
+
+('Kelas VII', 'Sabtu', 1, '07.30 - 08.50', 'Pembinaan Keagamaan', 'Guru Keagamaan', 'Kelas VII'),
+('Kelas VII', 'Sabtu', 3, '08.50 - 10.10', 'IPA', 'Amanda Kartika, S.Pd.,Gr.', 'Lab IPA'),
+('Kelas VII', 'Sabtu', 5, '10.40 - 12.00', 'TIK / Informatika', 'Hamdani, S.Pd.,Gr.', 'Lab Komputer'),
 
 -- KELAS VIII
-('Kelas VIII', 'Senin', 1, '07.00 - 07.45', 'Upacara Bendera', 'Pembina Upacara', 'Lapangan'),
-('Kelas VIII', 'Senin', 2, '07.45 - 09.05', 'Matematika', 'Bpk. Ahmad, S.Pd', 'Kelas VIII'),
-('Kelas VIII', 'Senin', 3, '09.25 - 10.45', 'Bahasa Indonesia', 'Ibu Rahmawati, S.Pd', 'Kelas VIII'),
-('Kelas VIII', 'Senin', 4, '10.45 - 12.05', 'IPA Terpadu', 'Ibu Nurul, M.Pd', 'Lab IPA'),
+('Kelas VIII', 'Senin', 1, '07.30 - 08.10', 'Upacara Bendera', 'Pembina Upacara', 'Lapangan'),
+('Kelas VIII', 'Senin', 2, '08.10 - 10.10', 'IPS', 'Yanti, S.Pd.', 'Kelas VIII'),
+('Kelas VIII', 'Senin', 5, '10.40 - 11.20', 'Bahasa Inggris', 'M. Ilham, S.Pd.,Gr.', 'Kelas VIII'),
+('Kelas VIII', 'Senin', 6, '11.20 - 13.20', 'Bahasa Indonesia', 'Roi Martin, S.Pd.,Gr.', 'Kelas VIII'),
 
-('Kelas VIII', 'Selasa', 1, '07.30 - 08.50', 'Informatika', 'Bpk. Hendra, S.Kom', 'Lab Komputer'),
-('Kelas VIII', 'Selasa', 2, '09.10 - 10.30', 'Pendidikan Agama', 'Bpk. H. Syarif, S.Ag', 'Kelas VIII'),
-('Kelas VIII', 'Selasa', 3, '10.30 - 11.50', 'Bahasa Inggris', 'Bpk. David, M.Pd', 'Kelas VIII'),
+('Kelas VIII', 'Selasa', 1, '07.30 - 08.50', 'Matematika', 'Supianto, S.Pd.,Gr.', 'Kelas VIII'),
+('Kelas VIII', 'Selasa', 3, '08.50 - 10.10', 'Pendidikan Agama (PAI/PAK)', 'M. Dony Wardhana / Deyby Taniowas', 'Kelas VIII'),
+('Kelas VIII', 'Selasa', 5, '10.40 - 12.00', 'IPA', 'Amanda Kartika, S.Pd.,Gr.', 'Lab IPA'),
+('Kelas VIII', 'Selasa', 8, '12.00 - 13.20', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas VIII'),
 
-('Kelas VIII', 'Rabu', 1, '07.30 - 08.50', 'IPS Terpadu', 'Bpk. Joko, S.Pd', 'Kelas VIII'),
-('Kelas VIII', 'Rabu', 2, '09.10 - 10.30', 'Pendidikan Pancasila', 'Ibu Sri Wahyuni, S.Pd', 'Kelas VIII'),
-('Kelas VIII', 'Rabu', 3, '10.30 - 11.50', 'PJOK / Penjaskes', 'Bpk. Budi Santoso, S.Pd', 'Lapangan'),
+('Kelas VIII', 'Rabu', 1, '07.30 - 08.50', 'PJOK', 'Hamdani, S.Pd.,Gr.', 'Lapangan'),
+('Kelas VIII', 'Rabu', 3, '08.50 - 10.10', 'PPKn', 'Hetti, S.Pd.,Gr.', 'Kelas VIII'),
+('Kelas VIII', 'Rabu', 5, '10.40 - 12.00', 'Prakarya', 'Dwi Oktaviani S, S.Pd.,Gr.', 'Kelas VIII'),
+('Kelas VIII', 'Rabu', 8, '12.00 - 13.20', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas VIII'),
 
-('Kelas VIII', 'Kamis', 1, '07.30 - 08.50', 'Seni Budaya', 'Ibu Rina, S.Sn', 'Kelas VIII'),
-('Kelas VIII', 'Kamis', 2, '09.10 - 10.30', 'Prakarya', 'Ibu Dewi, S.Pd', 'Kelas VIII'),
-('Kelas VIII', 'Kamis', 3, '10.30 - 11.50', 'Bahasa Daerah', 'Ibu Siti, S.Pd', 'Kelas VIII'),
+('Kelas VIII', 'Kamis', 1, '07.30 - 08.50', 'Bahasa Indonesia', 'Roi Martin, S.Pd.,Gr.', 'Kelas VIII'),
+('Kelas VIII', 'Kamis', 3, '08.50 - 10.10', 'IPA', 'Amanda Kartika, S.Pd.,Gr.', 'Lab IPA'),
+('Kelas VIII', 'Kamis', 5, '10.40 - 12.00', 'Matematika', 'Supianto, S.Pd.,Gr.', 'Kelas VIII'),
+('Kelas VIII', 'Kamis', 8, '12.00 - 13.20', 'Jam Guru Wali', 'Wali Kelas VIII', 'Kelas VIII'),
 
-('Kelas VIII', 'Jumat', 1, '07.30 - 08.15', 'Senam Pagi & Literasi', 'Wali Kelas', 'Lapangan'),
-('Kelas VIII', 'Jumat', 2, '08.15 - 09.35', 'Informatika Mandiri', 'Bpk. Hendra, S.Kom', 'Lab Komputer'),
+('Kelas VIII', 'Jumat', 1, '07.30 - 08.10', 'Senam Pagi Bersama', 'Guru PJOK / Wali Kelas', 'Lapangan'),
+('Kelas VIII', 'Jumat', 2, '08.10 - 09.30', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas VIII'),
+('Kelas VIII', 'Jumat', 4, '09.50 - 11.10', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas VIII'),
+
+('Kelas VIII', 'Sabtu', 1, '07.30 - 08.50', 'Pembinaan Keagamaan', 'Guru Keagamaan', 'Kelas VIII'),
+('Kelas VIII', 'Sabtu', 3, '08.50 - 10.10', 'TIK / Informatika', 'Deyby Taniowas, S.Pd.K.', 'Lab Komputer'),
+('Kelas VIII', 'Sabtu', 5, '10.40 - 12.00', 'Bahasa Inggris', 'M. Ilham, S.Pd.,Gr.', 'Kelas VIII'),
 
 -- KELAS IX
-('Kelas IX', 'Senin', 1, '07.00 - 07.45', 'Upacara Bendera', 'Pembina Upacara', 'Lapangan'),
-('Kelas IX', 'Senin', 2, '07.45 - 09.05', 'IPA Terpadu', 'Ibu Nurul, M.Pd', 'Lab IPA'),
-('Kelas IX', 'Senin', 3, '09.25 - 10.45', 'Bahasa Inggris', 'Bpk. David, M.Pd', 'Kelas IX'),
-('Kelas IX', 'Senin', 4, '10.45 - 12.05', 'Matematika', 'Bpk. Ahmad, S.Pd', 'Kelas IX'),
+('Kelas IX', 'Senin', 1, '07.30 - 08.10', 'Upacara Bendera', 'Pembina Upacara', 'Lapangan'),
+('Kelas IX', 'Senin', 2, '08.10 - 10.10', 'Bahasa Inggris', 'M. Ilham, S.Pd.,Gr.', 'Kelas IX'),
+('Kelas IX', 'Senin', 5, '10.40 - 12.00', 'IPA', 'Amanda Kartika, S.Pd.,Gr.', 'Lab IPA'),
+('Kelas IX', 'Senin', 8, '12.00 - 13.20', 'Matematika', 'Supianto, S.Pd.,Gr.', 'Kelas IX'),
 
-('Kelas IX', 'Selasa', 1, '07.30 - 08.50', 'Bahasa Indonesia', 'Ibu Rahmawati, S.Pd', 'Kelas IX'),
-('Kelas IX', 'Selasa', 2, '09.10 - 10.30', 'Informatika', 'Bpk. Hendra, S.Kom', 'Lab Komputer'),
-('Kelas IX', 'Selasa', 3, '10.30 - 11.50', 'IPS Terpadu', 'Bpk. Joko, S.Pd', 'Kelas IX'),
+('Kelas IX', 'Selasa', 1, '07.30 - 08.50', 'Bahasa Indonesia', 'Roi Martin, S.Pd.,Gr.', 'Kelas IX'),
+('Kelas IX', 'Selasa', 3, '08.50 - 10.10', 'IPA', 'Amanda Kartika, S.Pd.,Gr.', 'Lab IPA'),
+('Kelas IX', 'Selasa', 5, '10.40 - 12.00', 'PPKn', 'Hetti, S.Pd.,Gr.', 'Kelas IX'),
+('Kelas IX', 'Selasa', 8, '12.00 - 13.20', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas IX'),
 
-('Kelas IX', 'Rabu', 1, '07.30 - 08.50', 'Pendidikan Agama', 'Bpk. H. Syarif, S.Ag', 'Kelas IX'),
-('Kelas IX', 'Rabu', 2, '09.10 - 10.30', 'PJOK / Penjaskes', 'Bpk. Budi Santoso, S.Pd', 'Lapangan'),
-('Kelas IX', 'Rabu', 3, '10.30 - 11.50', 'Pendidikan Pancasila', 'Ibu Sri Wahyuni, S.Pd', 'Kelas IX'),
+('Kelas IX', 'Rabu', 1, '07.30 - 09.30', 'Bahasa Indonesia', 'Roi Martin, S.Pd.,Gr.', 'Kelas IX'),
+('Kelas IX', 'Rabu', 3, '09.30 - 10.10', 'IPS', 'Yanti, S.Pd.', 'Kelas IX'),
+('Kelas IX', 'Rabu', 5, '10.40 - 12.00', 'IPS', 'Yanti, S.Pd.', 'Kelas IX'),
+('Kelas IX', 'Rabu', 8, '12.00 - 13.20', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas IX'),
 
-('Kelas IX', 'Kamis', 1, '07.30 - 08.50', 'Prakarya', 'Ibu Dewi, S.Pd', 'Kelas IX'),
-('Kelas IX', 'Kamis', 2, '09.10 - 10.30', 'Seni Budaya', 'Ibu Rina, S.Sn', 'Kelas IX'),
-('Kelas IX', 'Kamis', 3, '10.30 - 11.50', 'Bahasa Daerah', 'Ibu Siti, S.Pd', 'Kelas IX'),
+('Kelas IX', 'Kamis', 1, '07.30 - 08.50', 'PJOK', 'Hamdani, S.Pd.,Gr.', 'Lapangan'),
+('Kelas IX', 'Kamis', 3, '08.50 - 10.10', 'Matematika', 'Supianto, S.Pd.,Gr.', 'Kelas IX'),
+('Kelas IX', 'Kamis', 5, '10.40 - 12.00', 'Pendidikan Agama (PAI/PAK)', 'M. Dony Wardhana / Deyby Taniowas', 'Kelas IX'),
+('Kelas IX', 'Kamis', 8, '12.00 - 13.20', 'Jam Guru Wali', 'Wali Kelas IX', 'Kelas IX'),
 
-('Kelas IX', 'Jumat', 1, '07.30 - 08.15', 'Senam Pagi & Pembinaan Rohani', 'Wali Kelas', 'Lapangan'),
-('Kelas IX', 'Jumat', 2, '08.15 - 09.35', 'Bimbingan Konseling / Ujian', 'Ibu Fitri, S.Psi', 'Kelas IX');
+('Kelas IX', 'Jumat', 1, '07.30 - 08.10', 'Senam Pagi Bersama', 'Guru PJOK / Wali Kelas', 'Lapangan'),
+('Kelas IX', 'Jumat', 2, '08.10 - 09.30', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas IX'),
+('Kelas IX', 'Jumat', 4, '09.50 - 11.10', 'Ko-Kurikuler (KOKUR)', 'Guru Pembina', 'Kelas IX'),
+
+('Kelas IX', 'Sabtu', 1, '07.30 - 08.50', 'Pembinaan Keagamaan', 'Guru Keagamaan', 'Kelas IX'),
+('Kelas IX', 'Sabtu', 3, '08.50 - 10.10', 'Prakarya', 'Dwi Oktaviani S, S.Pd.,Gr.', 'Kelas IX'),
+('Kelas IX', 'Sabtu', 5, '10.40 - 12.00', 'TIK / Informatika', 'Dwi Oktaviani S, S.Pd.,Gr.', 'Lab Komputer');
 
 -- 4. CONTOH DATA AWAL MATERI PELAJARAN
 INSERT INTO materi_pelajaran (kelas, mapel, pertemuan, judul, deskripsi, file_url, file_type, nama_guru) VALUES
