@@ -647,16 +647,37 @@
         </div>
 
         <div class="form-group">
-          <label>Pilih File Dokumen / Modul (PDF, Word, Gambar) ATAU Masukkan Link:</label>
-          <input type="file" id="materiFileInput" accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png">
+          <label>Pilih File Modul (HTML Web Interaktif, PDF, Word, PPT, Gambar) ATAU Masukkan Link:</label>
+          <input type="file" id="materiFileInput" accept=".html,.htm,.pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png">
           <div style="text-align:center; font-size:0.75rem; color:var(--text-muted); margin: 6px 0;">-- ATAU --</div>
-          <input type="text" id="materiLinkInput" placeholder="https://drive.google.com/... atau link referensi materi web">
+          <input type="text" id="materiLinkInput" placeholder="https://... atau link referensi materi / simulasi web">
         </div>
 
         <div id="materiAlertBox" class="alert-error"></div>
         <button type="submit" id="btnUploadMateri" class="btn-submit" style="margin-top:10px;">🚀 Terbitkan Materi Matematika</button>
         <div id="materiLoading" class="loading-spinner">⏳ Mengunggah materi ke database...</div>
       </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: PREVIEW & BACA MATERI INTERAKTIF (HTML & DOKUMEN) -->
+  <!-- ======================================================== -->
+  <div id="materiViewerModal" class="modal-backdrop" onclick="closeMateriViewerModal(event)" style="display:none;z-index:1100;">
+    <div class="modal-content" style="max-width:850px;width:95%;height:90vh;display:flex;flex-direction:column;padding:16px;" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid var(--card-border);padding-bottom:8px;">
+        <div>
+          <h3 id="viewerMateriTitle" style="font-size:1.05rem;font-weight:700;color:#fff;">Materi Matematika</h3>
+          <span style="font-size:0.75rem;color:var(--math-accent);">📐 Tampilan Interaktif Langsung</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <a id="btnViewerOpenExternal" href="#" target="_blank" rel="noopener" class="btn-action-sm" style="text-decoration:none;font-size:0.75rem;padding:5px 10px;">🔗 Tab Penuh</a>
+          <button type="button" class="modal-close" style="position:static;" onclick="closeMateriViewerModal()">✕</button>
+        </div>
+      </div>
+      <div style="flex:1;background:#ffffff;border-radius:10px;overflow:hidden;position:relative;">
+        <iframe id="materiViewerFrame" style="width:100%;height:100%;border:none;background:#ffffff;" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+      </div>
     </div>
   </div>
 
@@ -1464,6 +1485,11 @@
           ? `<button type="button" class="btn-action-sm" style="background:rgba(239,68,68,0.15);color:#fca5a5;border-color:rgba(239,68,68,0.3);padding:5px 10px;font-size:0.75rem;" onclick="deleteMateri(${m.id})" title="Hapus Materi Ini">🗑️ Hapus</button>`
           : "";
 
+        const isHtml = m.fileUrl && (m.fileUrl.toLowerCase().includes('.html') || m.fileUrl.toLowerCase().includes('.htm'));
+        const viewBtn = isHtml
+          ? `<button type="button" class="btn-download-materi" style="background:#059669;" onclick="viewMateriContent('${encodeURIComponent(m.fileUrl)}', '${encodeURIComponent(m.judul)}')">📖 Buka &amp; Baca Langsung</button>`
+          : `<button type="button" class="btn-download-materi" style="background:#059669;" onclick="viewMateriContent('${encodeURIComponent(m.fileUrl)}', '${encodeURIComponent(m.judul)}')">📖 Buka Modul</button>`;
+
         html += `
           <div class="materi-card">
             <div class="materi-header">
@@ -1473,13 +1499,14 @@
               </div>
               <span class="badge-pertemuan">Pertemuan ${m.pertemuan}</span>
             </div>
-            <div class="materi-desc">${m.deskripsi || 'Silakan unduh dan pelajari materi modul matematika berikut untuk panduan pengerjaan latihan & tugas.'}</div>
+            <div class="materi-desc">${m.deskripsi || 'Silakan pelajari materi modul matematika berikut untuk panduan pengerjaan latihan &amp; tugas.'}</div>
             <div class="materi-actions">
               <span class="materi-meta">🗓️ ${m.tanggal || 'Tersedia'}</span>
-              <div style="display:flex;gap:8px;align-items:center;">
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
                 ${btnDelete}
-                <a href="${m.fileUrl}" target="_blank" rel="noopener" class="btn-download-materi">
-                  📥 Buka / Unduh Modul
+                ${viewBtn}
+                <a href="${m.fileUrl}" target="_blank" rel="noopener" class="btn-action-sm" style="text-decoration:none;padding:6px 10px;" title="Buka di Tab Baru / Download File">
+                  🔗 Tab Baru
                 </a>
               </div>
             </div>
@@ -1487,6 +1514,46 @@
         `;
       });
       container.innerHTML = html;
+    }
+
+    async function viewMateriContent(encodedUrl, encodedTitle) {
+      const url = decodeURIComponent(encodedUrl);
+      const title = decodeURIComponent(encodedTitle);
+      const modal = document.getElementById("materiViewerModal");
+      const titleEl = document.getElementById("viewerMateriTitle");
+      const frame = document.getElementById("materiViewerFrame");
+      const extBtn = document.getElementById("btnViewerOpenExternal");
+
+      titleEl.textContent = title;
+      extBtn.href = url;
+      modal.style.display = "flex";
+
+      // Jika format HTML, fetch isi konten dan render otomatis via srcdoc (langsung render sempurna)
+      const isHtml = url.toLowerCase().includes(".html") || url.toLowerCase().includes(".htm");
+      if (isHtml) {
+        frame.srcdoc = "<div style='font-family:sans-serif;text-align:center;padding:40px;color:#64748b;font-size:1.1rem;'>⏳ Sedang memuat materi matematika interaktif...</div>";
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            const htmlText = await res.text();
+            frame.srcdoc = htmlText;
+            return;
+          }
+        } catch (err) {
+          console.warn("Fetch html failed:", err);
+        }
+      }
+      frame.removeAttribute("srcdoc");
+      frame.src = url;
+    }
+
+    function closeMateriViewerModal(e) {
+      if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('modal-close')) return;
+      const modal = document.getElementById("materiViewerModal");
+      modal.style.display = "none";
+      const frame = document.getElementById("materiViewerFrame");
+      frame.src = "about:blank";
+      frame.removeAttribute("srcdoc");
     }
 
     async function clearAllMateri() {
