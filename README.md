@@ -8,50 +8,31 @@ Aplikasi Web Pembelajaran Terpadu berbasis **GitHub Pages** yang terhubung langs
 
 ---
 
-## 🚀 Cara Menghubungkan ke GitHub Pages (Selesai dalam 2 Menit)
+## 🌐 Link Repository & Website Anda
 
-### Opsi 1: Lewat Web GitHub (Paling Praktis Tanpa Command Line)
-1. Buka [github.com/new](https://github.com/new) dan buat repository baru (contoh nama repo: `portal-smp`). Pilih opsi **Public**.
-2. Klik tombol **"uploading an existing file"**.
-3. Drag & drop seluruh isi folder ini (`index.html`, `supabase_schema.sql`, dan `README.md`) ke web GitHub, lalu klik **Commit changes**.
-4. Masuk ke menu **Settings** repository > pilih tab **Pages** (di sidebar kiri).
-5. Pada bagian **Build and deployment > Branch**:
-   - Pilih Branch: `main` (atau `master`)
+- **Repository GitHub**: [https://github.com/portalmtk/portalmtk.github.io](https://github.com/portalmtk/portalmtk.github.io)
+- **Link Upload File Cepat**: [https://github.com/portalmtk/portalmtk.github.io/upload/main](https://github.com/portalmtk/portalmtk.github.io/upload/main)
+- **Link Pengaturan Pages**: [https://github.com/portalmtk/portalmtk.github.io/settings/pages](https://github.com/portalmtk/portalmtk.github.io/settings/pages)
+- **Link Website Portal Live**: [https://portalmtk.github.io/](https://portalmtk.github.io/)
+
+---
+
+## 🚀 Cara Upload & Aktivasi (Hanya 1 Menit)
+
+1. Buka link upload: 👉 **[Upload ke Repository](https://github.com/portalmtk/portalmtk.github.io/upload/main)**
+2. Buka folder `PORTAL_GITHUB_PAGES` di komputer Anda, lalu tarik (*drag & drop*) file:
+   - `index.html`
+   - `supabase_schema.sql`
+   - `README.md`
+3. Gulir ke bawah dan klik tombol hijau **Commit changes**.
+4. Buka link pengaturan: 👉 **[Settings GitHub Pages](https://github.com/portalmtk/portalmtk.github.io/settings/pages)**
+   - Pada bagian **Branch**, pilih: `main` (atau `master`)
    - Folder: `/ (root)`
    - Klik **Save**.
-6. Tunggu sekitar 1 menit, link website Anda akan langsung aktif di:
-   `https://<username-anda>.github.io/portal-smp/`
-
----
-
-### Opsi 2: Menggunakan Git Bash / Terminal
-Buka terminal di folder `PORTAL_GITHUB_PAGES`:
-```bash
-git init
-git add .
-git commit -m "Deploy Portal Siswa SMP Muara Siram"
-git branch -M main
-git remote add origin https://github.com/<username-anda>/<nama-repo>.git
-git push -u origin main
-```
-Lalu aktifkan GitHub Pages di menu **Settings > Pages > Branch: main > Save**.
-
----
-
-## 🗄️ Menjalankan Skrip Database Supabase (Opsional tapi Direkomendasikan)
-Buka [Supabase Dashboard](https://supabase.com/dashboard) project Anda:
-1. Pilih menu **SQL Editor** di sidebar kiri.
-2. Buka file `supabase_schema.sql` di folder ini, lalu salin (*copy*) seluruh isinya.
-3. Tempel (*paste*) ke SQL Editor Supabase, kemudian klik **Run**.
-4. Tabel `materi_pelajaran` dan `jadwal_pelajaran` otomatis terbentuk lengkap dengan data jadwal default!
-*(Catatan: Web portal sudah dilengkapi sistem cerdas fallback/cache lokal, sehingga tetap berjalan lancar saat diakses pertama kali).*
+5. Selesai! Dalam 1-2 menit web portal Anda dapat langsung diakses publik oleh siswa dan guru di:
+   👉 **[https://portalmtk.github.io/](https://portalmtk.github.io/)**
 
 ---
 
 ## 🔐 Kredensial & Akses Guru
-- **PIN Akses Guru**: `GURUCERDAS` (atau `1234`)
-- **Fungsi Mode Guru**:
-  - Memeriksa foto lembar tugas siswa ukuran penuh.
-  - Memberi nilai & catatan guru yang langsung tersimpan di Supabase.
-  - Mengunduh rekap nilai format file CSV Excel.
-  - Mengunggah file modul materi pelajaran baru berdasarkan nomor pertemuan.
+- **PIN Mode Guru**: `GURUCERDAS` (atau `1234`)
