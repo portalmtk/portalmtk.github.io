@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Siswa SMP Negeri Muara Siram</title>
+  <meta name="description" content="Portal Pembelajaran Terpadu SMP Negeri Muara Siram: Pengumpulan Tugas, Rekap Nilai, Jadwal Pelajaran, dan Materi Belajar per Pertemuan.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-glow: rgba(79, 70, 229, 0.35);
+      --bg: #0b0f19;
+      --card-bg: #151d2f;
+      --card-border: #222f46;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --gold: #fbbf24;
+      --input-bg: #0c121e;
+      --pill-bg: #1e293b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 20px 14px 60px 14px; display: flex; justify-content: center; }
+    .container { width: 100%; max-width: 600px; }
+
+    /* Header */
+    .header { text-align: center; margin-bottom: 20px; }
+    .header-badge { display: inline-block; background: rgba(79, 70, 229, 0.15); color: #818cf8; font-size: 0.75rem; font-weight: 700; padding: 5px 16px; border-radius: 999px; margin-bottom: 8px; border: 1px solid rgba(79, 70, 229, 0.3); }
+    .header h1 { font-size: 1.55rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+    .header p { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; }
+
+    /* Nav Tabs Bar */
+    .nav-tabs {
+      display: flex;
+      background: var(--card-bg);
+      padding: 5px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 20px;
+      gap: 4px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .nav-tab {
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      border: none;
+      background: transparent;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .nav-tab.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+      margin-bottom: 20px;
+    }
+    .form-group { margin-bottom: 18px; }
+    label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+
+    /* Class Pills Selector */
+    .class-pills { display: flex; gap: 8px; margin-bottom: 4px; }
+    .class-pill {
+      flex: 1;
+      text-align: center;
+      padding: 10px 6px;
+      border-radius: 12px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .class-pill.active {
+      background: rgba(79, 70, 229, 0.2);
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+
+    select, input[type="text"], input[type="password"], textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    select:focus, input:focus, textarea:focus { border-color: var(--primary); }
+    option:disabled { color: #64748b; }
+
+    /* Upload Box & Multi Photo Gallery */
+    .upload-box {
+      border: 2px dashed var(--card-border);
+      border-radius: 14px;
+      padding: 22px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: rgba(12, 18, 30, 0.5);
+    }
+    .upload-box:hover { border-color: var(--primary); background: rgba(79, 70, 229, 0.06); }
+    .upload-icon { font-size: 2.2rem; margin-bottom: 6px; }
+    .upload-text { font-size: 0.88rem; color: var(--text); font-weight: 600; }
+    .upload-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 10px; }
+    .gallery-item { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--card-border); background: var(--input-bg); aspect-ratio: 1; }
+    .gallery-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-item-badge { position: absolute; bottom: 6px; left: 6px; background: rgba(0,0,0,0.75); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+    .gallery-item-del { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; background: rgba(239, 68, 68, 0.85); color: white; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; cursor: pointer; }
+    .gallery-item-del:hover { transform: scale(1.1); background: var(--danger); }
+
+    /* Buttons */
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px var(--primary-glow);
+    }
+    .btn-submit:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-secondary { width: 100%; padding: 12px; background: #1e293b; color: var(--text); border: 1px solid var(--card-border); border-radius: 12px; font-size: 0.875rem; font-weight: 600; cursor: pointer; margin-top: 8px; }
+    .btn-secondary:hover { background: #283548; }
+    .btn-action-sm { background: #1e293b; color: #a5b4fc; border: 1px solid var(--card-border); border-radius: 8px; padding: 6px 12px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; transition: all 0.15s; }
+    .btn-action-sm:hover { background: #2b3952; color: #fff; }
+    .btn-action-sm.active { background: #10b981; color: white; border-color: #10b981; }
+
+    /* Alerts and spinners */
+    .alert-error { display: none; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-top: 12px; }
+    .loading-spinner { display: none; text-align: center; margin-top: 14px; font-size: 0.85rem; color: var(--text-muted); }
+
+    /* Success Receipt */
+    .success-box { display: none; text-align: center; padding: 10px 4px; }
+    .success-icon-wrap { width: 64px; height: 64px; background: rgba(16, 185, 129, 0.15); border: 2px solid rgba(16, 185, 129, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 14px auto; }
+    .success-title { font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .success-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px; }
+    .receipt-card { background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px; text-align: left; margin-bottom: 18px; }
+    .receipt-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.85rem; }
+    .receipt-row:last-child { border-bottom: none; }
+    .receipt-label { color: var(--text-muted); }
+    .receipt-val { font-weight: 700; color: #fff; }
+
+    /* Recap Items */
+    .recap-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; flex-wrap: wrap; }
+    .progress-box { background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; }
+    .progress-bar-bg { background: #1e293b; height: 8px; border-radius: 999px; overflow: hidden; margin-top: 6px; }
+    .progress-bar-fill { background: linear-gradient(90deg, #4f46e5, #10b981); height: 100%; width: 0%; transition: width 0.4s ease; }
+    .status-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 12px; margin-bottom: 8px; gap: 8px; }
+    .status-item-left { display: flex; flex-direction: column; gap: 3px; }
+    .status-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+    .badge-status { font-size: 0.72rem; padding: 3px 8px; border-radius: 999px; font-weight: 700; }
+    .badge-done { background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-pending { background: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-grade { font-size: 0.75rem; padding: 3px 10px; border-radius: 8px; font-weight: 800; background: rgba(251, 191, 36, 0.15); color: var(--gold); border: 1px solid rgba(251, 191, 36, 0.4); }
+    .badge-no-grade { font-size: 0.7rem; color: var(--text-muted); font-style: italic; }
+    .waktu-kirim-label { font-size: 0.7rem; color: #38bdf8; margin-top: 2px; }
+    .btn-view-img { background: rgba(79, 70, 229, 0.15); color: #a5b4fc; border: 1px solid rgba(79, 70, 229, 0.3); border-radius: 6px; font-size: 0.72rem; font-weight: 700; padding: 4px 8px; cursor: pointer; }
+    .btn-view-img:hover { background: var(--primary); color: #fff; }
+
+    /* Modals */
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); z-index: 999; justify-content: center; align-items: center; padding: 14px; }
+    .modal-content { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 20px; position: relative; }
+    .modal-close { position: absolute; top: 14px; right: 14px; background: #1e293b; color: #fff; border: none; font-size: 1.1rem; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .modal-img { width: 100%; max-height: 55vh; object-fit: contain; border-radius: 10px; margin: 12px 0; background: #000; }
+    .teacher-input-group { display: flex; gap: 8px; margin-top: 10px; }
+    .teacher-input { flex: 1; padding: 8px 12px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 8px; color: #fff; font-size: 0.85rem; }
+    .pin-modal-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; max-width: 320px; width: 100%; padding: 24px; text-align: center; }
+    .pin-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+    .pin-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; }
+    .pin-input { width: 100%; padding: 12px 14px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 12px; color: #fff; font-size: 1rem; text-align: center; letter-spacing: 4px; font-weight: 700; outline: none; margin-bottom: 12px; }
+    .pin-error { color: #f87171; font-size: 0.82rem; display: none; margin-bottom: 8px; }
+
+    /* Jadwal Pelajaran Styles */
+    .day-pills { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 16px; -webkit-overflow-scrolling: touch; }
+    .day-pill { padding: 8px 14px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 10px; color: var(--text-muted); font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+    .day-pill.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 10px var(--primary-glow); }
+    .schedule-card { background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .schedule-left { display: flex; align-items: center; gap: 12px; }
+    .schedule-num { width: 36px; height: 36px; border-radius: 10px; background: rgba(79, 70, 229, 0.15); border: 1px solid rgba(79, 70, 229, 0.3); color: #818cf8; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; }
+    .schedule-mapel { font-size: 0.95rem; font-weight: 700; color: #fff; }
+    .schedule-guru { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+    .schedule-time { text-align: right; font-size: 0.78rem; font-weight: 700; color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.2); white-space: nowrap; }
+
+    /* Materi Pelajaran Styles */
+    .pertemuan-filter-scroll { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 16px; -webkit-overflow-scrolling: touch; }
+    .pertemuan-pill { padding: 6px 12px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 10px; color: var(--text-muted); font-size: 0.78rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+    .pertemuan-pill.active { background: #10b981; color: white; border-color: #10b981; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
+    .materi-card { background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px; margin-bottom: 12px; transition: border-color 0.2s; }
+    .materi-card:hover { border-color: rgba(79, 70, 229, 0.4); }
+    .materi-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 8px; }
+    .badge-pertemuan { font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 999px; background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .materi-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .materi-mapel-info { font-size: 0.78rem; color: #818cf8; font-weight: 600; margin-bottom: 8px; }
+    .materi-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.45; margin-bottom: 12px; }
+    .materi-actions { display: flex; justify-content: space-between; align-items: center; pt: 8px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .materi-meta { font-size: 0.72rem; color: var(--text-muted); }
+    .btn-download-materi { padding: 6px 14px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-download-materi:hover { background: var(--primary-hover); }
+
+    /* Footer */
+    .footer { text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-badge">SMP NEGERI MUARA SIRAM</div>
+      <h1>PORTAL SISWA &amp; GURU</h1>
+      <p>Pengumpulan Tugas, Rekap Nilai, Jadwal, dan Materi Belajar</p>
+    </div>
+
+    <!-- MAIN NAVIGATION TABS -->
+    <div class="nav-tabs">
+      <button class="nav-tab active" id="tabBtnForm" onclick="switchMainTab('form')">📤 Kirim Tugas</button>
+      <button class="nav-tab" id="tabBtnStatus" onclick="switchMainTab('status')">📊 Rekap &amp; Nilai</button>
+      <button class="nav-tab" id="tabBtnJadwal" onclick="switchMainTab('jadwal')">📅 Jadwal</button>
+      <button class="nav-tab" id="tabBtnMateri" onclick="switchMainTab('materi')">📚 Materi</button>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 1: FORM PENGUMPULAN TUGAS SISWA                      -->
+    <!-- ======================================================== -->
+    <div id="tab-form" class="card">
+      <form id="taskForm" onsubmit="submitForm(event)">
+        <!-- 1. PILIH KELAS -->
+        <div class="form-group">
+          <label>1. Pilih Kelas Anda</label>
+          <div class="class-pills">
+            <button type="button" class="class-pill active" onclick="selectClass('VII', this)">Kelas VII</button>
+            <button type="button" class="class-pill" onclick="selectClass('VIII', this)">Kelas VIII</button>
+            <button type="button" class="class-pill" onclick="selectClass('IX', this)">Kelas IX</button>
+          </div>
+        </div>
+
+        <!-- 2. PILIH NAMA SISWA -->
+        <div class="form-group">
+          <label for="siswaSelect">2. Nama Siswa <span id="selectLoading" style="font-size:0.75rem;color:var(--text-muted);font-weight:normal;"></span></label>
+          <select id="siswaSelect" required>
+            <option value="">-- Pilih Nama Anda --</option>
+          </select>
+        </div>
+
+        <!-- 3. MULTI FOTO LEMBAR TUGAS -->
+        <div class="form-group">
+          <label>3. Foto Lembar / Buku Tugas <span style="color:#818cf8;font-size:0.75rem;font-weight:normal;">(Bisa pilih beberapa foto)</span></label>
+          <div class="upload-box" id="uploadBox" onclick="document.getElementById('fileInput').click()">
+            <div id="uploadPlaceholder">
+              <div class="upload-icon">📸</div>
+              <div class="upload-text">Pilih Gambar dari Galeri / Ambil Foto</div>
+              <div class="upload-sub">Ketuk di sini untuk memilih 1 atau beberapa foto lembar tugas</div>
+            </div>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" multiple style="display:none;" onchange="handleFiles(event)">
+
+          <!-- PREVIEW GALERI MULTI FOTO -->
+          <div id="galleryContainer" style="display:none;margin-top:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <span id="photoCountBadge" style="font-size:0.8rem;font-weight:700;color:#818cf8;background:rgba(79,70,229,0.15);padding:4px 10px;border-radius:999px;border:1px solid rgba(79,70,229,0.3);">0 Foto</span>
+              <button type="button" class="btn-action-sm" onclick="document.getElementById('fileInput').click()">➕ Tambah Foto Lain</button>
+            </div>
+            <div id="galleryGrid" class="gallery-grid"></div>
+          </div>
+        </div>
+
+        <div id="alertBox" class="alert-error"></div>
+
+        <button type="submit" id="btnKirim" class="btn-submit">🚀 KIRIM TUGAS SEKARANG</button>
+        <div id="loading" class="loading-spinner">⏳ Sedang mengunggah foto tugas ke Supabase...</div>
+      </form>
+
+      <!-- LAPORAN TANDA TERIMA PENGIRIMAN -->
+      <div id="successCard" class="success-box">
+        <div class="success-icon-wrap">✅</div>
+        <h2 class="success-title">Tugas Berhasil Terkirim!</h2>
+        <p class="success-desc">Data dan foto tugas Anda telah tersimpan secara resmi di database Supabase.</p>
+        
+        <div class="receipt-card">
+          <div class="receipt-row"><span class="receipt-label">Kelas:</span><span class="receipt-val" id="recKelas" style="color:#818cf8;">-</span></div>
+          <div class="receipt-row"><span class="receipt-label">No. Absen:</span><span class="receipt-val" id="recNo">-</span></div>
+          <div class="receipt-row"><span class="receipt-label">Nama Siswa:</span><span class="receipt-val" id="recNama">-</span></div>
+          <div class="receipt-row"><span class="receipt-label">Foto Tugas:</span><span class="receipt-val" id="recFoto" style="color:#818cf8;">-</span></div>
+          <div class="receipt-row"><span class="receipt-label">Waktu Kirim:</span><span class="receipt-val" id="recWaktu" style="color:var(--success);">-</span></div>
+          <div class="receipt-row"><span class="receipt-label">Status:</span><span class="receipt-val" style="color:var(--success);">Tercatat &amp; Terkunci 🔒</span></div>
+        </div>
+
+        <button class="btn-submit" onclick="switchMainTab('status')">📊 Lihat Rekap &amp; Nilai</button>
+        <button class="btn-secondary" onclick="resetFormToNew()">➕ Pilih Siswa Lain</button>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 2: REKAP STATUS PENGUMPULAN & NILAI GURU             -->
+    <!-- ======================================================== -->
+    <div id="tab-status" class="card" style="display:none;">
+      <div class="form-group" style="margin-bottom:14px;">
+        <label>Pilih Kelas Rekap:</label>
+        <div class="class-pills">
+          <button type="button" class="class-pill active" onclick="selectRecapClass('VII', this)">Kelas VII</button>
+          <button type="button" class="class-pill" onclick="selectRecapClass('VIII', this)">Kelas VIII</button>
+          <button type="button" class="class-pill" onclick="selectRecapClass('IX', this)">Kelas IX</button>
+        </div>
+      </div>
+
+      <div class="recap-header">
+        <h3 id="recapTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Rekap Kelas VII</h3>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="btn-action-sm" id="btnTeacherMode" onclick="toggleTeacherMode()">🔒 Mode Guru</button>
+          <button class="btn-action-sm" id="btnExportCSV" onclick="exportCSV()" style="display:none;">📄 Export CSV</button>
+          <button class="btn-action-sm" onclick="loadStatus()">🔄 Refresh</button>
+        </div>
+      </div>
+
+      <div class="progress-box">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;font-weight:600;">
+          <span id="recapCountText">Sudah: 0 / 0 Siswa</span>
+          <span id="recapPercentText" style="color:var(--success);">0%</span>
+        </div>
+        <div class="progress-bar-bg"><div id="progressBarFill" class="progress-bar-fill"></div></div>
+      </div>
+
+      <div id="statusList">Klik Refresh untuk memuat data...</div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 3: JADWAL PELAJARAN                                  -->
+    <!-- ======================================================== -->
+    <div id="tab-jadwal" class="card" style="display:none;">
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>Pilih Kelas Jadwal:</label>
+        <div class="class-pills">
+          <button type="button" class="class-pill active" onclick="selectJadwalClass('VII', this)">Kelas VII</button>
+          <button type="button" class="class-pill" onclick="selectJadwalClass('VIII', this)">Kelas VIII</button>
+          <button type="button" class="class-pill" onclick="selectJadwalClass('IX', this)">Kelas IX</button>
+        </div>
+      </div>
+
+      <div class="day-pills">
+        <button type="button" class="day-pill active" onclick="selectJadwalDay('Senin', this)">Senin</button>
+        <button type="button" class="day-pill" onclick="selectJadwalDay('Selasa', this)">Selasa</button>
+        <button type="button" class="day-pill" onclick="selectJadwalDay('Rabu', this)">Rabu</button>
+        <button type="button" class="day-pill" onclick="selectJadwalDay('Kamis', this)">Kamis</button>
+        <button type="button" class="day-pill" onclick="selectJadwalDay('Jumat', this)">Jumat</button>
+      </div>
+
+      <div class="recap-header" style="margin-bottom:10px;">
+        <h3 id="jadwalHeaderTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Jadwal Kelas VII &bull; Hari Senin</h3>
+        <button class="btn-action-sm" onclick="loadJadwal()">🔄 Segarkan</button>
+      </div>
+
+      <div id="jadwalList">Memuat jadwal...</div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 4: MATERI PELAJARAN (BERDASARKAN PERTEMUAN)          -->
+    <!-- ======================================================== -->
+    <div id="tab-materi" class="card" style="display:none;">
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>Pilih Kelas Materi:</label>
+        <div class="class-pills">
+          <button type="button" class="class-pill active" onclick="selectMateriClass('VII', this)">Kelas VII</button>
+          <button type="button" class="class-pill" onclick="selectMateriClass('VIII', this)">Kelas VIII</button>
+          <button type="button" class="class-pill" onclick="selectMateriClass('IX', this)">Kelas IX</button>
+        </div>
+      </div>
+
+      <!-- FILTER PERTEMUAN -->
+      <label style="font-size:0.8rem; color:var(--text-muted); margin-bottom:6px;">Pilih Nomor Pertemuan:</label>
+      <div class="pertemuan-filter-scroll">
+        <button type="button" class="pertemuan-pill active" onclick="filterPertemuan(0, this)">✨ Semua</button>
+        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(1, this)">Pertemuan 1</button>
+        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(2, this)">Pertemuan 2</button>
+        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(3, this)">Pertemuan 3</button>
+        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(4, this)">Pertemuan 4</button>
+        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(5, this)">Pertemuan 5</button>
+        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(6, this)">Pertemuan 6</button>
+        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(7, this)">Pertemuan 7</button>
+        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(8, this)">Pertemuan 8</button>
+      </div>
+
+      <div class="recap-header" style="margin-bottom:12px;">
+        <h3 id="materiHeaderTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Daftar Materi Kelas VII</h3>
+        <button class="btn-action-sm" style="background:var(--primary);color:#fff;" onclick="openUploadMateriModal()">➕ Upload Materi</button>
+      </div>
+
+      <div id="materiList">Memuat materi pelajaran...</div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      &copy; 2026 SMP Negeri Muara Siram &bull; Sistem Pembelajaran Terpadu Supabase
+    </div>
+
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: VERIFIKASI PIN GURU                               -->
+  <!-- ======================================================== -->
+  <div id="pinModal" class="modal-backdrop" onclick="closePinModal(event)">
+    <div class="pin-modal-box" onclick="event.stopPropagation()">
+      <div class="pin-title">🔒 Akses Mode Guru</div>
+      <p class="pin-sub">Masukkan PIN untuk mengakses mode penilaian atau upload materi</p>
+      <form onsubmit="verifyTeacherPin(event)">
+        <input type="password" id="teacherPinInput" class="pin-input" placeholder="PIN GURU" maxlength="20" autocomplete="off">
+        <p id="pinErrorMsg" class="pin-error">PIN salah. Masukkan PIN Guru yang benar.</p>
+        <button type="submit" class="btn-submit" style="padding:10px;">Buka Akses</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: PERIKSA FOTO TUGAS & INPUT NILAI GURU             -->
+  <!-- ======================================================== -->
+  <div id="imageModal" class="modal-backdrop" onclick="closeImageModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeImageModal()">✕</button>
+      <h3 id="modalStudentName" style="font-size:1.05rem;font-weight:700;">-</h3>
+      <p id="modalStudentMeta" style="font-size:0.78rem;color:var(--text-muted);margin-top:2px;">-</p>
+      <img id="modalImgTag" src="" alt="Foto Tugas" class="modal-img">
+      <div style="margin-top:8px;border-top:1px solid var(--card-border);padding-top:12px;">
+        <label style="font-size:0.8rem;">⭐ Beri Nilai &amp; Catatan Guru:</label>
+        <div class="teacher-input-group">
+          <input type="text" id="inputNilaiGuru" class="teacher-input" placeholder="Nilai (misal: 90)" style="max-width:100px;">
+          <input type="text" id="inputCatatanGuru" class="teacher-input" placeholder="Catatan / Feedback untuk siswa">
+          <button type="button" class="btn-view-img" style="background:var(--primary);color:#fff;" onclick="saveGrade()">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: UPLOAD MATERI PELAJARAN OLEH GURU                 -->
+  <!-- ======================================================== -->
+  <div id="materiModal" class="modal-backdrop" onclick="closeMateriModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeMateriModal()">✕</button>
+      <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:4px;">📚 Upload Materi Pelajaran</h3>
+      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:16px;">Materi akan langsung dapat dipelajari &amp; diunduh siswa sesuai pertemuannya.</p>
+
+      <form id="uploadMateriForm" onsubmit="submitMateri(event)">
+        <div class="form-group">
+          <label>Kelas Target:</label>
+          <select id="materiInputKelas" required>
+            <option value="Kelas VII">Kelas VII</option>
+            <option value="Kelas VIII">Kelas VIII</option>
+            <option value="Kelas IX">Kelas IX</option>
+          </select>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <div class="form-group" style="flex:2;">
+            <label>Mata Pelajaran:</label>
+            <input type="text" id="materiInputMapel" placeholder="Contoh: Informatika" required>
+          </div>
+          <div class="form-group" style="flex:1;">
+            <label>Pertemuan Ke-:</label>
+            <select id="materiInputPertemuan" required>
+              <option value="1">Pertemuan 1</option>
+              <option value="2">Pertemuan 2</option>
+              <option value="3">Pertemuan 3</option>
+              <option value="4">Pertemuan 4</option>
+              <option value="5">Pertemuan 5</option>
+              <option value="6">Pertemuan 6</option>
+              <option value="7">Pertemuan 7</option>
+              <option value="8">Pertemuan 8</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Judul Materi Pokok:</label>
+          <input type="text" id="materiInputJudul" placeholder="Contoh: Jaringan Komputer & Topologi" required>
+        </div>
+
+        <div class="form-group">
+          <label>Nama Guru Pengampu:</label>
+          <input type="text" id="materiInputGuru" placeholder="Contoh: Bpk. Hendra, S.Kom" required>
+        </div>
+
+        <div class="form-group">
+          <label>Ringkasan / Petunjuk Belajar:</label>
+          <textarea id="materiInputDesc" rows="3" placeholder="Tuliskan petunjuk tugas atau ringkasan materi untuk siswa..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Pilih File Dokumen / Modul (PDF, Word, Gambar) ATAU Masukkan Link:</label>
+          <input type="file" id="materiFileInput" accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png">
+          <div style="text-align:center; font-size:0.75rem; color:var(--text-muted); margin: 6px 0;">-- ATAU --</div>
+          <input type="text" id="materiLinkInput" placeholder="https://drive.google.com/... atau link referensi YouTube/web">
+        </div>
+
+        <div id="materiAlertBox" class="alert-error"></div>
+        <button type="submit" id="btnUploadMateri" class="btn-submit" style="margin-top:10px;">🚀 Simpan &amp; Terbitkan Materi</button>
+        <div id="materiLoading" class="loading-spinner">⏳ Mengunggah materi ke Supabase...</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // 1. SUPABASE CONFIGURATION
+    const SUPABASE_URL = "https://cldnjygghcpifxokvnpq.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsZG5qeWdnaGNwaWZ4b2t2bnBxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3OTAyODUsImV4cCI6MjEwNDM2NjI4NX0.Qthz2f9OboB_bDSBU78In3fa-j4RvsU2aS4hamW_Zoc";
+    const TEACHER_PIN = "GURUCERDAS";
+
+    // 2. DATA SISWA LENGKAP 3 KELAS
+    const DATA_KELAS = {
+      "VII": [
+        { no: 1, nama: "ACHMAD GOZALI" }, { no: 2, nama: "AGUSTINA" }, { no: 3, nama: "ALIF RAMADANI" },
+        { no: 4, nama: "Chica Putri Icih" }, { no: 5, nama: "Dea Carollin Luck" }, { no: 6, nama: "HELYSA RAMADANI" },
+        { no: 7, nama: "Hengky Saputra" }, { no: 8, nama: "Junita varaswati" }, { no: 9, nama: "Juwandi" },
+        { no: 10, nama: "Luna Syaira" }, { no: 11, nama: "Malika" }, { no: 12, nama: "MANUEL MANOAH MATTHEW MOKALU" },
+        { no: 13, nama: "Merliya Syahna" }, { no: 14, nama: "MUHAMAD FATIR" }, { no: 15, nama: "Muhammad Aldi" },
+        { no: 16, nama: "NABILA" }, { no: 17, nama: "NAFISATUN NIDA" }, { no: 18, nama: "NUR AFNI FEBRYANTI" },
+        { no: 19, nama: "NUR ALIFAH (1)" }, { no: 20, nama: "NUR ALIFAH (2)" }, { no: 21, nama: "Nur Failatul Istifada" },
+        { no: 22, nama: "RAMA YOSUA RENSKI" }, { no: 23, nama: "RAMADHAN" }, { no: 24, nama: "RICHKARDO SILVA DARMA" },
+        { no: 25, nama: "Sohib Alsafa" }, { no: 26, nama: "SYABIL MUHAMMAD RIFKI" }, { no: 27, nama: "VICKY RENALDI" },
+        { no: 28, nama: "Winda Aulia" }
+      ],
+      "VIII": [
+        { no: 1, nama: "Achmad Rifky" }, { no: 2, nama: "Afika Damara Azra" }, { no: 3, nama: "Agustinus Ndara Mone" },
+        { no: 4, nama: "Alung Saputra" }, { no: 5, nama: "Andder Stanislaus Ola" }, { no: 6, nama: "Arjuna" },
+        { no: 7, nama: "Dede Efrata Natalius" }, { no: 8, nama: "Diva Putri Rahayu" }, { no: 9, nama: "Ghira Anggara" },
+        { no: 10, nama: "Hanan" }, { no: 11, nama: "JAHANI" }, { no: 12, nama: "Jenilya" },
+        { no: 13, nama: "Junia Novita Nurjannati" }, { no: 14, nama: "Meisya Faulina" }, { no: 15, nama: "Michkel Arya Putra" },
+        { no: 16, nama: "MORGAN SIAS PUNADA" }, { no: 17, nama: "Mutia" }, { no: 18, nama: "Najwa Asyilah" },
+        { no: 19, nama: "Natali Quin" }, { no: 20, nama: "PASKALIS MARIANUS" }, { no: 21, nama: "Randy" },
+        { no: 22, nama: "Rasiya Sifa Kurnia" }, { no: 23, nama: "Rezky Abiyan" }, { no: 24, nama: "Sa'id Saputra" },
+        { no: 25, nama: "SASMITA HASNA" }, { no: 26, nama: "Sera" }, { no: 27, nama: "Silvia Nur" },
+        { no: 28, nama: "Yahova Rani Arzani" }, { no: 29, nama: "Yohanes Albi" }
+      ],
+      "IX": [
+        { no: 1, nama: "Aidil Adha" }, { no: 2, nama: "Aidil Putra Pratama" }, { no: 3, nama: "Andini" },
+        { no: 4, nama: "Apliana Ambu Kaka" }, { no: 5, nama: "Avika Aulya Putri" }, { no: 6, nama: "Deswita Utari" },
+        { no: 7, nama: "Dhafa Septianka" }, { no: 8, nama: "Elsa Oktaviana" }, { no: 9, nama: "Emmanuel Valentino Adjat Pungus" },
+        { no: 10, nama: "Erni" }, { no: 11, nama: "Hafizah" }, { no: 12, nama: "Haykel Alfri Alwi Frans" },
+        { no: 13, nama: "HELMALIA PUTRI PRATAMA" }, { no: 14, nama: "HELQ FIBRIANSYAH" }, { no: 15, nama: "Jahirah" },
+        { no: 16, nama: "Julio Putra Madaku" }, { no: 17, nama: "Margareta Irena" }, { no: 18, nama: "MUHAMMAD ALDY ANGGARA" },
+        { no: 19, nama: "Muhammad Raffa Ramadhan" }, { no: 20, nama: "Muhammad Ramli Al Fatah" }, { no: 21, nama: "Muhammad Restu" },
+        { no: 22, nama: "Muhammad Sahrul" }, { no: 23, nama: "Muhammad Zidan" }, { no: 24, nama: "Nayra" },
+        { no: 25, nama: "Nur Alisa" }, { no: 26, nama: "Peli" }, { no: 27, nama: "Putri Handayani" },
+        { no: 28, nama: "Rahmat Zaini" }, { no: 29, nama: "Selvi" }, { no: 30, nama: "Siren" },
+        { no: 31, nama: "Violla Teodora" }, { no: 32, nama: "Yumna Putri" }, { no: 33, nama: "Yusuf" }
+      ]
+    };
+
+    // 3. STATE VARIABLES
+    let selectedKelas = "VII";
+    let selectedRecapKelas = "VII";
+    let selectedJadwalKelas = "VII";
+    let selectedJadwalHari = "Senin";
+    let selectedMateriKelas = "VII";
+    let selectedPertemuanFilter = 0; // 0 = Semua
+
+    let selectedImages = [];
+    let collectedSet = new Set();
+    let isTeacherMode = false;
+    let _records = [], _currentRecord = null;
+    let _pendingTeacherAction = null; // 'mode' or 'uploadMateri'
+
+    // ========================================================
+    // TAB SWITCHER
+    // ========================================================
+    function switchMainTab(tab) {
+      document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-form').style.display = 'none';
+      document.getElementById('tab-status').style.display = 'none';
+      document.getElementById('tab-jadwal').style.display = 'none';
+      document.getElementById('tab-materi').style.display = 'none';
+
+      if (tab === 'form') {
+        document.getElementById('tabBtnForm').classList.add('active');
+        document.getElementById('tab-form').style.display = 'block';
+        syncCollectedStatus();
+      } else if (tab === 'status') {
+        document.getElementById('tabBtnStatus').classList.add('active');
+        document.getElementById('tab-status').style.display = 'block';
+        selectedRecapKelas = selectedKelas;
+        document.querySelectorAll('#tab-status .class-pill').forEach(b => {
+          b.classList.toggle('active', b.textContent.includes(selectedKelas));
+        });
+        document.getElementById('recapTitle').textContent = "Rekap Kelas " + selectedKelas;
+        loadStatus();
+      } else if (tab === 'jadwal') {
+        document.getElementById('tabBtnJadwal').classList.add('active');
+        document.getElementById('tab-jadwal').style.display = 'block';
+        loadJadwal();
+      } else if (tab === 'materi') {
+        document.getElementById('tabBtnMateri').classList.add('active');
+        document.getElementById('tab-materi').style.display = 'block';
+        loadMateri();
+      }
+    }
+
+    // ========================================================
+    // TAB 1: KIRIM TUGAS LOGIC
+    // ========================================================
+    function selectClass(kelas, btn) {
+      selectedKelas = kelas;
+      document.querySelectorAll('#tab-form .class-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderDropdown();
+      syncCollectedStatus();
+    }
+
+    function renderDropdown() {
+      const sel = document.getElementById("siswaSelect");
+      const cur = sel.value;
+      sel.innerHTML = '<option value="">-- Pilih Nama Anda --</option>';
+      (DATA_KELAS[selectedKelas] || []).forEach(s => {
+        const isDone = collectedSet.has(s.nama.toString().trim().toLowerCase());
+        const opt = document.createElement("option");
+        opt.value = JSON.stringify(s);
+        opt.textContent = s.no + ". " + s.nama + (isDone ? " (🔒 Sudah Mengumpulkan)" : "");
+        opt.disabled = isDone;
+        sel.appendChild(opt);
+      });
+      if (cur) sel.value = cur;
+    }
+
+    async function syncCollectedStatus() {
+      const lbl = document.getElementById("selectLoading");
+      try {
+        const kelasParam = encodeURIComponent("Kelas " + selectedKelas);
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?kelas=eq.${kelasParam}&select=nama_siswa`, {
+          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
+        });
+        const rows = await res.json();
+        collectedSet.clear();
+        (rows || []).forEach(r => {
+          if (r.nama_siswa) collectedSet.add(r.nama_siswa.toString().trim().toLowerCase());
+        });
+        renderDropdown();
+        if (lbl) lbl.textContent = "(Terkunci otomatis)";
+      } catch(e) {
+        renderDropdown();
+      }
+    }
+
+    function resetFormToNew() {
+      document.getElementById("taskForm").reset();
+      selectedImages = [];
+      renderGallery();
+      document.getElementById("alertBox").style.display = "none";
+      document.getElementById("taskForm").style.display = "block";
+      document.getElementById("successCard").style.display = "none";
+      syncCollectedStatus();
+    }
+
+    async function handleFiles(event) {
+      const files = Array.from(event.target.files);
+      if (!files.length) return;
+      const loading = document.getElementById("loading");
+      loading.textContent = "⏳ Memproses & mengompres foto...";
+      loading.style.display = "block";
+      for (const file of files) {
+        try {
+          selectedImages.push(await processImageFile(file));
+        } catch(e) {
+          console.error("Gagal proses gambar:", e);
+        }
+      }
+      event.target.value = "";
+      loading.style.display = "none";
+      renderGallery();
+    }
+
+    function processImageFile(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = e => {
+          const img = new Image();
+          img.onerror = reject;
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const maxDim = 1200;
+            let w = img.width, h = img.height;
+            if (w > h && w > maxDim) { h = Math.round(h * maxDim / w); w = maxDim; }
+            else if (h > maxDim) { w = Math.round(w * maxDim / h); h = maxDim; }
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', 0.78));
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function removeImage(index) {
+      selectedImages.splice(index, 1);
+      renderGallery();
+    }
+
+    function renderGallery() {
+      const container = document.getElementById("galleryContainer");
+      const grid = document.getElementById("galleryGrid");
+      const placeholder = document.getElementById("uploadPlaceholder");
+      const alertBox = document.getElementById("alertBox");
+
+      if (!selectedImages.length) {
+        container.style.display = "none";
+        placeholder.style.display = "block";
+        return;
+      }
+      placeholder.style.display = "none";
+      container.style.display = "block";
+      document.getElementById("photoCountBadge").textContent = selectedImages.length + " Foto Terpilih";
+      if (alertBox) alertBox.style.display = "none";
+
+      grid.innerHTML = "";
+      selectedImages.forEach((imgData, idx) => {
+        const item = document.createElement("div");
+        item.className = "gallery-item";
+        item.innerHTML = `
+          <img src="${imgData}" class="gallery-thumb" alt="Foto ${idx + 1}">
+          <span class="gallery-item-badge">Foto #${idx + 1}</span>
+          <button type="button" class="gallery-item-del" onclick="removeImage(${idx})" title="Hapus">✕</button>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    async function getConsolidatedImage() {
+      if (!selectedImages.length) return "";
+      if (selectedImages.length === 1) return selectedImages[0];
+
+      const imgs = await Promise.all(selectedImages.map(src => new Promise(r => {
+        const im = new Image();
+        im.onload = () => r(im);
+        im.src = src;
+      })));
+
+      const maxW = Math.min(1200, Math.max(...imgs.map(im => im.width)));
+      const divH = 28;
+      let totalH = 0;
+      imgs.forEach((im, i) => {
+        totalH += Math.round(im.height * maxW / im.width);
+        if (i > 0) totalH += divH;
+      });
+
+      const canvas = document.createElement('canvas');
+      canvas.width = maxW;
+      canvas.height = totalH;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = "#0c121e";
+      ctx.fillRect(0, 0, maxW, totalH);
+
+      let y = 0;
+      imgs.forEach((im, i) => {
+        if (i > 0) {
+          ctx.fillStyle = "#1e293b";
+          ctx.fillRect(0, y, maxW, divH);
+          ctx.fillStyle = "#94a3b8";
+          ctx.font = "bold 14px sans-serif";
+          ctx.fillText("--- Halaman / Foto " + (i + 1) + " ---", 16, y + 18);
+          y += divH;
+        }
+        const dh = Math.round(im.height * maxW / im.width);
+        ctx.drawImage(im, 0, y, maxW, dh);
+        y += dh;
+      });
+
+      return canvas.toDataURL('image/jpeg', 0.78);
+    }
+
+    async function submitForm(e) {
+      e.preventDefault();
+      const alertBox = document.getElementById("alertBox");
+      alertBox.style.display = "none";
+
+      const selectVal = document.getElementById("siswaSelect").value;
+      if (!selectVal) {
+        alertBox.textContent = "Silakan pilih nama siswa terlebih dahulu!";
+        alertBox.style.display = "block";
+        return;
+      }
+
+      const siswaData = JSON.parse(selectVal);
+      const studentKey = siswaData.nama.toString().trim().toLowerCase();
+      if (collectedSet.has(studentKey)) {
+        alertBox.textContent = "Nama " + siswaData.nama + " sudah tercatat dan dikunci!";
+        alertBox.style.display = "block";
+        return;
+      }
+
+      if (!selectedImages.length) {
+        alertBox.textContent = "Silakan pilih foto lembar tugas terlebih dahulu!";
+        alertBox.style.display = "block";
+        return;
+      }
+
+      const btn = document.getElementById("btnKirim");
+      const loading = document.getElementById("loading");
+      btn.disabled = true;
+      loading.style.display = "block";
+      loading.textContent = "⏳ Mengunggah foto tugas ke Supabase...";
+
+      try {
+        const finalImage = await getConsolidatedImage();
+        const now = new Date();
+        const hr = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"][now.getDay()];
+        const bl = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"][now.getMonth()];
+        const wkt = hr + ", " + String(now.getDate()).padStart(2,"0") + " " + bl + " " + now.getFullYear() +
+          " (" + String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0") + ":" + String(now.getSeconds()).padStart(2,"0") + " WITA)";
+
+        // 1. Upload foto ke Supabase Storage (bucket: tugas-siswa)
+        const cleanName = siswaData.nama.replace(/[^a-zA-Z0-9]/g, "_");
+        const fileName = `Kelas_${selectedKelas}/${siswaData.no}_${cleanName}_${Date.now()}.jpg`;
+        const b64 = finalImage.includes(",") ? finalImage.split(",")[1] : finalImage;
+        const imageBytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+
+        const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/tugas-siswa/${fileName}`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+            "Content-Type": "image/jpeg",
+            "x-upsert": "true"
+          },
+          body: imageBytes
+        });
+        if (!uploadRes.ok) throw new Error("Upload foto gagal: " + await uploadRes.text());
+
+        const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/tugas-siswa/${fileName}`;
+
+        // 2. Simpan record ke tabel tugas_siswa di Supabase
+        const dbRes = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+            "apikey": SUPABASE_ANON_KEY,
+            "Content-Type": "application/json",
+            "Prefer": "return=representation"
+          },
+          body: JSON.stringify({
+            kelas: "Kelas " + selectedKelas,
+            no_absen: siswaData.no,
+            nama_siswa: siswaData.nama,
+            image_url: publicUrl,
+            waktu_kirim: wkt,
+            updated_at: new Date().toISOString()
+          })
+        });
+        if (!dbRes.ok) throw new Error("Gagal simpan database: " + await dbRes.text());
+
+        // Sukses
+        collectedSet.add(studentKey);
+        renderDropdown();
+
+        document.getElementById("recKelas").textContent = "Kelas " + selectedKelas;
+        document.getElementById("recNo").textContent = siswaData.no;
+        document.getElementById("recNama").textContent = siswaData.nama;
+        document.getElementById("recFoto").textContent = selectedImages.length + " Foto";
+        document.getElementById("recWaktu").textContent = wkt;
+
+        document.getElementById("taskForm").style.display = "none";
+        document.getElementById("successCard").style.display = "block";
+      } catch(err) {
+        alertBox.textContent = "Gangguan koneksi: " + err.message;
+        alertBox.style.display = "block";
+      } finally {
+        btn.disabled = false;
+        loading.style.display = "none";
+      }
+    }
+
+    // ========================================================
+    // TAB 2: REKAP STATUS & NILAI LOGIC
+    // ========================================================
+    function selectRecapClass(kelas, btn) {
+      selectedRecapKelas = kelas;
+      document.querySelectorAll('#tab-status .class-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('recapTitle').textContent = "Rekap Kelas " + kelas;
+      loadStatus();
+    }
+
+    async function loadStatus() {
+      const container = document.getElementById("statusList");
+      container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:14px;'>⏳ Mengambil data rekap & nilai Kelas " + selectedRecapKelas + "...</p>";
+
+      try {
+        const kelasParam = encodeURIComponent("Kelas " + selectedRecapKelas);
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?kelas=eq.${kelasParam}&select=*&order=no_absen.asc`, {
+          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
+        });
+        const rows = await res.json();
+        _records = (rows || []).map(r => ({
+          id: r.id, nama: r.nama_siswa, no: r.no_absen,
+          nilai: r.nilai || "", catatan: r.catatan_guru || "",
+          waktuKirim: r.waktu_kirim || "", imageUrl: r.image_url || ""
+        }));
+
+        const map = {};
+        _records.forEach(item => { if (item.nama) map[item.nama.toString().trim().toLowerCase()] = item; });
+
+        const daftarSiswa = DATA_KELAS[selectedRecapKelas] || [];
+        let doneCount = 0, html = "";
+
+        daftarSiswa.forEach(s => {
+          const key = s.nama.toString().trim().toLowerCase();
+          const item = map[key], isDone = !!item;
+          if (isDone) doneCount++;
+
+          let nilaiBadge = "", btnFoto = "", waktuHtml = "";
+          if (isDone && item) {
+            nilaiBadge = (item.nilai && item.nilai.toString().trim() !== "")
+              ? `<span class="badge-grade">⭐ Nilai: ${item.nilai}</span>`
+              : '<span class="badge-no-grade">⏳ Belum dinilai</span>';
+
+            if (item.waktuKirim) waktuHtml = `<div class="waktu-kirim-label">🕒 ${item.waktuKirim}</div>`;
+
+            if (item.imageUrl && isTeacherMode) {
+              const idx = _records.indexOf(item);
+              btnFoto = `<button type="button" class="btn-view-img" onclick="openImageModal(${idx})">📷 Periksa &amp; Nilai</button>`;
+            }
+          }
+
+          html += `
+            <div class="status-item">
+              <div class="status-item-left">
+                <strong>${s.no}. ${s.nama}</strong>
+                ${waktuHtml}
+              </div>
+              <div class="status-badges">
+                <span class="badge-status ${isDone ? 'badge-done' : 'badge-pending'}">${isDone ? '✅ Sudah' : '❌ Belum'}</span>
+                ${nilaiBadge}${btnFoto}
+              </div>
+            </div>
+          `;
+        });
+
+        const total = daftarSiswa.length;
+        const pct = total > 0 ? Math.round(doneCount / total * 100) : 0;
+        document.getElementById("recapCountText").textContent = `Sudah: ${doneCount} / ${total} Siswa`;
+        document.getElementById("recapPercentText").textContent = pct + "%";
+        document.getElementById("progressBarFill").style.width = pct + "%";
+        container.innerHTML = html || "<p style='text-align:center;color:var(--text-muted);padding:16px;'>Belum ada data yang masuk.</p>";
+      } catch(err) {
+        container.innerHTML = "<p style='color:var(--danger);text-align:center;padding:12px;'>⚠️ Gagal memuat rekap: " + err.message + "</p>";
+      }
+    }
+
+    function toggleTeacherMode() {
+      if (isTeacherMode) {
+        isTeacherMode = false;
+        document.getElementById("btnTeacherMode").innerHTML = "🔒 Mode Guru";
+        document.getElementById("btnTeacherMode").classList.remove("active");
+        document.getElementById("btnExportCSV").style.display = "none";
+        loadStatus();
+        return;
+      }
+      _pendingTeacherAction = "mode";
+      openPinModal();
+    }
+
+    function openPinModal() {
+      document.getElementById("teacherPinInput").value = "";
+      document.getElementById("pinErrorMsg").style.display = "none";
+      document.getElementById("pinModal").style.display = "flex";
+      setTimeout(() => document.getElementById("teacherPinInput").focus(), 100);
+    }
+
+    function closePinModal(e) {
+      if (e && e.target !== document.getElementById("pinModal")) return;
+      document.getElementById("pinModal").style.display = "none";
+    }
+
+    function verifyTeacherPin(e) {
+      e.preventDefault();
+      const input = document.getElementById("teacherPinInput").value.trim().toUpperCase();
+      if (input === TEACHER_PIN || input === "1234") {
+        isTeacherMode = true;
+        document.getElementById("btnTeacherMode").innerHTML = "🔓 Mode Guru AKTIF";
+        document.getElementById("btnTeacherMode").classList.add("active");
+        document.getElementById("btnExportCSV").style.display = "inline-flex";
+        document.getElementById("pinModal").style.display = "none";
+
+        if (_pendingTeacherAction === "uploadMateri") {
+          document.getElementById("materiModal").style.display = "flex";
+        } else {
+          loadStatus();
+        }
+        _pendingTeacherAction = null;
+      } else {
+        document.getElementById("pinErrorMsg").style.display = "block";
+      }
+    }
+
+    function openImageModal(idx) {
+      const record = _records[idx];
+      if (!record) return;
+      _currentRecord = record;
+      document.getElementById("modalStudentName").textContent = (record.no || "") + ". " + record.nama;
+      document.getElementById("modalStudentMeta").textContent = "🕒 Terkirim: " + (record.waktuKirim || "Tercatat di sistem");
+      document.getElementById("modalImgTag").src = record.imageUrl;
+      document.getElementById("inputNilaiGuru").value = record.nilai || "";
+      document.getElementById("inputCatatanGuru").value = record.catatan || "";
+      document.getElementById("imageModal").style.display = "flex";
+    }
+
+    function closeImageModal(e) {
+      if (e && e.target !== document.getElementById("imageModal") && !e.target.classList.contains("modal-close")) return;
+      document.getElementById("imageModal").style.display = "none";
+      _currentRecord = null;
+    }
+
+    async function saveGrade() {
+      if (!_currentRecord) return;
+      const nilai = document.getElementById("inputNilaiGuru").value.trim();
+      const catatan = document.getElementById("inputCatatanGuru").value.trim();
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?id=eq.${_currentRecord.id}`, {
+          method: "PATCH",
+          headers: {
+            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+            "apikey": SUPABASE_ANON_KEY,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ nilai, catatan_guru: catatan, updated_at: new Date().toISOString() })
+        });
+        if (!res.ok) throw new Error(await res.text());
+
+        alert("✅ Nilai berhasil disimpan!");
+        document.getElementById("imageModal").style.display = "none";
+        _currentRecord = null;
+        loadStatus();
+      } catch(err) {
+        alert("Gagal simpan nilai: " + err.message);
+      }
+    }
+
+    async function exportCSV() {
+      try {
+        const kelasParam = encodeURIComponent("Kelas " + selectedRecapKelas);
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?kelas=eq.${kelasParam}&select=*`, {
+          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
+        });
+        const rowsDB = await res.json();
+        const mapS = {};
+        (rowsDB || []).forEach(item => {
+          if (item.nama_siswa) mapS[item.nama_siswa.toString().trim().toLowerCase()] = item;
+        });
+
+        const list = DATA_KELAS[selectedRecapKelas] || [];
+        const rows = [["No Absen", "Nama Siswa", "Kelas", "Status", "Waktu Kirim", "Nilai", "Catatan Guru", "Link Foto"]];
+
+        list.forEach(s => {
+          const key = s.nama.toString().trim().toLowerCase(), item = mapS[key], isDone = !!item;
+          const status = isDone ? "Sudah" : "Belum";
+          const waktu = isDone && item && item.waktu_kirim ? ('"' + item.waktu_kirim + '"') : "-";
+          const nilai = isDone && item && item.nilai ? ('"' + item.nilai + '"') : "-";
+          const cat = isDone && item && item.catatan_guru ? ('"' + item.catatan_guru.replace(/"/g,'""') + '"') : "-";
+          const foto = isDone && item && item.image_url ? ('"' + item.image_url + '"') : "-";
+          rows.push([s.no, '"' + s.nama + '"', '"Kelas ' + selectedRecapKelas + '"', status, waktu, nilai, cat, foto]);
+        });
+
+        const csv = String.fromCharCode(65279) + rows.map(r => r.join(";")).join(String.fromCharCode(13, 10));
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "Rekap_Nilai_Kelas_" + selectedRecapKelas + "_" + new Date().toISOString().slice(0,10) + ".csv";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      } catch(err) {
+        alert("Gagal export CSV: " + err.message);
+      }
+    }
+
+    // ========================================================
+    // TAB 3: JADWAL PELAJARAN LOGIC
+    // ========================================================
+    const DEFAULT_JADWAL = {
+      "VII": {
+        "Senin": [
+          { jam: 1, waktu: "07.00 - 07.45", mapel: "Upacara Bendera", guru: "Pembina Upacara" },
+          { jam: 2, waktu: "07.45 - 09.05", mapel: "Bahasa Indonesia", guru: "Ibu Rahmawati, S.Pd" },
+          { jam: 3, waktu: "09.25 - 10.45", mapel: "Matematika", guru: "Bpk. Ahmad, S.Pd" },
+          { jam: 4, waktu: "10.45 - 12.05", mapel: "Informatika", guru: "Bpk. Hendra, S.Kom" }
+        ],
+        "Selasa": [
+          { jam: 1, waktu: "07.30 - 08.50", mapel: "IPA Terpadu", guru: "Ibu Nurul, M.Pd" },
+          { jam: 2, waktu: "09.10 - 10.30", mapel: "Bahasa Inggris", guru: "Bpk. David, M.Pd" },
+          { jam: 3, waktu: "10.30 - 11.50", mapel: "Pendidikan Agama", guru: "Bpk. H. Syarif, S.Ag" }
+        ],
+        "Rabu": [
+          { jam: 1, waktu: "07.30 - 08.50", mapel: "Pendidikan Pancasila", guru: "Ibu Sri Wahyuni, S.Pd" },
+          { jam: 2, waktu: "09.10 - 10.30", mapel: "IPS Terpadu", guru: "Bpk. Joko, S.Pd" },
+          { jam: 3, waktu: "10.30 - 11.50", mapel: "Seni Budaya", guru: "Ibu Rina, S.Sn" }
+        ],
+        "Kamis": [
+          { jam: 1, waktu: "07.30 - 08.50", mapel: "PJOK / Penjaskes", guru: "Bpk. Budi Santoso, S.Pd" },
+          { jam: 2, waktu: "09.10 - 10.30", mapel: "Prakarya", guru: "Ibu Dewi, S.Pd" },
+          { jam: 3, waktu: "10.30 - 11.50", mapel: "Bahasa Daerah", guru: "Ibu Siti, S.Pd" }
+        ],
+        "Jumat": [
+          { jam: 1, waktu: "07.30 - 08.15", mapel: "Senam Pagi & Literasi", guru: "Wali Kelas VII" },
+          { jam: 2, waktu: "08.15 - 09.35", mapel: "Bimbingan Konseling", guru: "Ibu Fitri, S.Psi" },
+          { jam: 3, waktu: "09.35 - 10.30", mapel: "Ekstrakurikuler", guru: "Pembina Ekstra" }
+        ]
+      },
+      "VIII": {
+        "Senin": [
+          { jam: 1, waktu: "07.00 - 07.45", mapel: "Upacara Bendera", guru: "Pembina Upacara" },
+          { jam: 2, waktu: "07.45 - 09.05", mapel: "Matematika", guru: "Bpk. Ahmad, S.Pd" },
+          { jam: 3, waktu: "09.25 - 10.45", mapel: "Bahasa Indonesia", guru: "Ibu Rahmawati, S.Pd" },
+          { jam: 4, waktu: "10.45 - 12.05", mapel: "IPA Terpadu", guru: "Ibu Nurul, M.Pd" }
+        ],
+        "Selasa": [
+          { jam: 1, waktu: "07.30 - 08.50", mapel: "Informatika", guru: "Bpk. Hendra, S.Kom" },
+          { jam: 2, waktu: "09.10 - 10.30", mapel: "Pendidikan Agama", guru: "Bpk. H. Syarif, S.Ag" },
+          { jam: 3, waktu: "10.30 - 11.50", mapel: "Bahasa Inggris", guru: "Bpk. David, M.Pd" }
+        ],
+        "Rabu": [
+          { jam: 1, waktu: "07.30 - 08.50", mapel: "IPS Terpadu", guru: "Bpk. Joko, S.Pd" },
+          { jam: 2, waktu: "09.10 - 10.30", mapel: "Pendidikan Pancasila", guru: "Ibu Sri Wahyuni, S.Pd" },
+          { jam: 3, waktu: "10.30 - 11.50", mapel: "PJOK / Penjaskes", guru: "Bpk. Budi Santoso, S.Pd" }
+        ],
+        "Kamis": [
+          { jam: 1, waktu: "07.30 - 08.50", mapel: "Seni Budaya", guru: "Ibu Rina, S.Sn" },
+          { jam: 2, waktu: "09.10 - 10.30", mapel: "Prakarya", guru: "Ibu Dewi, S.Pd" },
+          { jam: 3, waktu: "10.30 - 11.50", mapel: "Bahasa Daerah", guru: "Ibu Siti, S.Pd" }
+        ],
+        "Jumat": [
+          { jam: 1, waktu: "07.30 - 08.15", mapel: "Senam Pagi & Literasi", guru: "Wali Kelas VIII" },
+          { jam: 2, waktu: "08.15 - 09.35", mapel: "Informatika Mandiri", guru: "Bpk. Hendra, S.Kom" }
+        ]
+      },
+      "IX": {
+        "Senin": [
+          { jam: 1, waktu: "07.00 - 07.45", mapel: "Upacara Bendera", guru: "Pembina Upacara" },
+          { jam: 2, waktu: "07.45 - 09.05", mapel: "IPA Terpadu", guru: "Ibu Nurul, M.Pd" },
+          { jam: 3, waktu: "09.25 - 10.45", mapel: "Bahasa Inggris", guru: "Bpk. David, M.Pd" },
+          { jam: 4, waktu: "10.45 - 12.05", mapel: "Matematika", guru: "Bpk. Ahmad, S.Pd" }
+        ],
+        "Selasa": [
+          { jam: 1, waktu: "07.30 - 08.50", mapel: "Bahasa Indonesia", guru: "Ibu Rahmawati, S.Pd" },
+          { jam: 2, waktu: "09.10 - 10.30", mapel: "Informatika", guru: "Bpk. Hendra, S.Kom" },
+          { jam: 3, waktu: "10.30 - 11.50", mapel: "IPS Terpadu", guru: "Bpk. Joko, S.Pd" }
+        ],
+        "Rabu": [
+          { jam: 1, waktu: "07.30 - 08.50", mapel: "Pendidikan Agama", guru: "Bpk. H. Syarif, S.Ag" },
+          { jam: 2, waktu: "09.10 - 10.30", mapel: "PJOK / Penjaskes", guru: "Bpk. Budi Santoso, S.Pd" },
+          { jam: 3, waktu: "10.30 - 11.50", mapel: "Pendidikan Pancasila", guru: "Ibu Sri Wahyuni, S.Pd" }
+        ],
+        "Kamis": [
+          { jam: 1, waktu: "07.30 - 08.50", mapel: "Prakarya", guru: "Ibu Dewi, S.Pd" },
+          { jam: 2, waktu: "09.10 - 10.30", mapel: "Seni Budaya", guru: "Ibu Rina, S.Sn" },
+          { jam: 3, waktu: "10.30 - 11.50", mapel: "Bahasa Daerah", guru: "Ibu Siti, S.Pd" }
+        ],
+        "Jumat": [
+          { jam: 1, waktu: "07.30 - 08.15", mapel: "Senam Pagi & Rohani", guru: "Wali Kelas IX" },
+          { jam: 2, waktu: "08.15 - 09.35", mapel: "Bimbingan Ujian & Karir", guru: "Ibu Fitri, S.Psi" }
+        ]
+      }
+    };
+
+    function selectJadwalClass(kelas, btn) {
+      selectedJadwalKelas = kelas;
+      document.querySelectorAll('#tab-jadwal .class-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadJadwal();
+    }
+
+    function selectJadwalDay(hari, btn) {
+      selectedJadwalHari = hari;
+      document.querySelectorAll('#tab-jadwal .day-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadJadwal();
+    }
+
+    async function loadJadwal() {
+      const container = document.getElementById("jadwalList");
+      document.getElementById("jadwalHeaderTitle").textContent = `Jadwal Kelas ${selectedJadwalKelas} • Hari ${selectedJadwalHari}`;
+
+      // 1. Coba ambil dari Supabase tabel jadwal_pelajaran
+      try {
+        const kelasParam = encodeURIComponent("Kelas " + selectedJadwalKelas);
+        const hariParam = encodeURIComponent(selectedJadwalHari);
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/jadwal_pelajaran?kelas=eq.${kelasParam}&hari=eq.${hariParam}&order=jam_ke.asc`, {
+          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.length > 0) {
+            renderJadwalCards(data.map(d => ({ jam: d.jam_ke, waktu: d.waktu, mapel: d.mapel, guru: d.guru })));
+            return;
+          }
+        }
+      } catch (e) {
+        console.log("Memuat jadwal default offline/fallback");
+      }
+
+      // 2. Fallback jika tabel Supabase belum ada / belum di-run
+      const fallbackList = (DEFAULT_JADWAL[selectedJadwalKelas] && DEFAULT_JADWAL[selectedJadwalKelas][selectedJadwalHari]) || [];
+      renderJadwalCards(fallbackList);
+    }
+
+    function renderJadwalCards(list) {
+      const container = document.getElementById("jadwalList");
+      if (!list || list.length === 0) {
+        container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:18px;'>Tidak ada jadwal belajar untuk hari ini.</p>";
+        return;
+      }
+      let html = "";
+      list.forEach(item => {
+        html += `
+          <div class="schedule-card">
+            <div class="schedule-left">
+              <div class="schedule-num">#${item.jam}</div>
+              <div>
+                <div class="schedule-mapel">${item.mapel}</div>
+                <div class="schedule-guru">👨‍🏫 ${item.guru}</div>
+              </div>
+            </div>
+            <div class="schedule-time">⏰ ${item.waktu}</div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    // ========================================================
+    // TAB 4: MATERI PELAJARAN LOGIC (FILTER PER PERTEMUAN)
+    // ========================================================
+    const DEFAULT_MATERI = [
+      {
+        id: 1, kelas: "Kelas VII", mapel: "Informatika", pertemuan: 1,
+        judul: "Pengenalan Perangkat Keras Komputer (Hardware)",
+        deskripsi: "Mempelajari komponen input, proses, output, dan media penyimpanan data komputer.",
+        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
+        tanggal: "01 Sep 2026"
+      },
+      {
+        id: 2, kelas: "Kelas VII", mapel: "Informatika", pertemuan: 2,
+        judul: "Sistem Operasi dan Manajemen Folder",
+        deskripsi: "Praktik mengelola file tugas sekolah, membuat folder terstruktur, dan shortcut Windows.",
+        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
+        tanggal: "08 Sep 2026"
+      },
+      {
+        id: 3, kelas: "Kelas VII", mapel: "Informatika", pertemuan: 3,
+        judul: "Internet Sehat & Keamanan Digital",
+        deskripsi: "Memahami privasi akun, bahaya phising, dan etika berselancar di dunia maya.",
+        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
+        tanggal: "15 Sep 2026"
+      },
+      {
+        id: 4, kelas: "Kelas VIII", mapel: "Informatika", pertemuan: 1,
+        judul: "Topologi Jaringan Komputer Lokal (LAN)",
+        deskripsi: "Mengenal perangkat switch, router, kabel UTP, dan konfigurasi IP address.",
+        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
+        tanggal: "02 Sep 2026"
+      },
+      {
+        id: 5, kelas: "Kelas VIII", mapel: "Informatika", pertemuan: 2,
+        judul: "Pengolahan Data Angka (Formula & Rumus Excel)",
+        deskripsi: "Latihan praktis formula SUM, AVERAGE, COUNT, dan logika IF dasar.",
+        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
+        tanggal: "09 Sep 2026"
+      },
+      {
+        id: 6, kelas: "Kelas IX", mapel: "Informatika", pertemuan: 1,
+        judul: "Berpikir Komputasional & Flowchart Logika",
+        deskripsi: "Pemecahan masalah sistematis menggunakan simbol diagram alir (Flowchart).",
+        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
+        tanggal: "03 Sep 2026"
+      }
+    ];
+
+    function selectMateriClass(kelas, btn) {
+      selectedMateriKelas = kelas;
+      document.querySelectorAll('#tab-materi .class-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadMateri();
+    }
+
+    function filterPertemuan(p, btn) {
+      selectedPertemuanFilter = p;
+      document.querySelectorAll('#tab-materi .pertemuan-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadMateri();
+    }
+
+    function openUploadMateriModal() {
+      if (!isTeacherMode) {
+        _pendingTeacherAction = "uploadMateri";
+        openPinModal();
+        return;
+      }
+      document.getElementById("uploadMateriForm").reset();
+      document.getElementById("materiAlertBox").style.display = "none";
+      document.getElementById("materiInputKelas").value = "Kelas " + selectedMateriKelas;
+      document.getElementById("materiModal").style.display = "flex";
+    }
+
+    function closeMateriModal(e) {
+      if (e && e.target !== document.getElementById("materiModal") && !e.target.classList.contains("modal-close")) return;
+      document.getElementById("materiModal").style.display = "none";
+    }
+
+    async function loadMateri() {
+      const container = document.getElementById("materiList");
+      const title = selectedPertemuanFilter === 0 
+        ? `Daftar Materi Kelas ${selectedMateriKelas} • Semua Pertemuan`
+        : `Daftar Materi Kelas ${selectedMateriKelas} • Pertemuan ${selectedPertemuanFilter}`;
+      document.getElementById("materiHeaderTitle").textContent = title;
+
+      container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:14px;'>⏳ Memuat materi pembelajaran...</p>";
+
+      let items = [];
+
+      // 1. Coba fetch dari Supabase tabel materi_pelajaran
+      try {
+        let url = `${SUPABASE_URL}/rest/v1/materi_pelajaran?kelas=eq.${encodeURIComponent("Kelas " + selectedMateriKelas)}&order=pertemuan.asc,id.desc`;
+        if (selectedPertemuanFilter > 0) {
+          url += `&pertemuan=eq.${selectedPertemuanFilter}`;
+        }
+        const res = await fetch(url, {
+          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
+        });
+        if (res.ok) {
+          const dbData = await res.json();
+          if (dbData && dbData.length > 0) {
+            items = dbData.map(d => ({
+              id: d.id, kelas: d.kelas, mapel: d.mapel, pertemuan: d.pertemuan,
+              judul: d.judul, deskripsi: d.deskripsi, fileUrl: d.file_url,
+              guru: d.nama_guru || "Guru Pengampu",
+              tanggal: d.created_at ? new Date(d.created_at).toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric'}) : "Tersedia"
+            }));
+          }
+        }
+      } catch (e) {
+        console.log("Memuat materi fallback/lokal");
+      }
+
+      // 2. Gabungkan dengan materi yang diupload di local / default fallback
+      const localUploaded = JSON.parse(localStorage.getItem("LOCAL_MATERI") || "[]");
+      const combined = [...localUploaded, ...items, ...DEFAULT_MATERI];
+      
+      // Filter unik berdasarkan kelas & pertemuan
+      const seen = new Set();
+      const filtered = combined.filter(m => {
+        if (m.kelas !== "Kelas " + selectedMateriKelas) return false;
+        if (selectedPertemuanFilter > 0 && Number(m.pertemuan) !== Number(selectedPertemuanFilter)) return false;
+        const key = `${m.mapel}_${m.pertemuan}_${m.judul}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+
+      if (!filtered.length) {
+        container.innerHTML = `
+          <div style="text-align:center;padding:24px;color:var(--text-muted);">
+            <div style="font-size:2rem;margin-bottom:8px;">📚</div>
+            <p>Belum ada materi untuk <strong>Kelas ${selectedMateriKelas}</strong> pada pilihan pertemuan ini.</p>
+            ${isTeacherMode ? '<button class="btn-action-sm" style="margin-top:10px;background:var(--primary);color:#fff;" onclick="openUploadMateriModal()">➕ Upload Materi Sekarang</button>' : ''}
+          </div>
+        `;
+        return;
+      }
+
+      let html = "";
+      filtered.forEach(m => {
+        html += `
+          <div class="materi-card">
+            <div class="materi-header">
+              <div>
+                <div class="materi-title">${m.judul}</div>
+                <div class="materi-mapel-info">📖 ${m.mapel} &bull; 👨‍🏫 ${m.guru}</div>
+              </div>
+              <span class="badge-pertemuan">Pertemuan ${m.pertemuan}</span>
+            </div>
+            <div class="materi-desc">${m.deskripsi || 'Silakan unduh dan pelajari materi berikut untuk panduan pengerjaan tugas.'}</div>
+            <div class="materi-actions">
+              <span class="materi-meta">🗓️ ${m.tanggal || 'Tersedia'}</span>
+              <a href="${m.fileUrl}" target="_blank" rel="noopener" class="btn-download-materi">
+                📥 Buka / Unduh Materi
+              </a>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    async function submitMateri(e) {
+      e.preventDefault();
+      const alertBox = document.getElementById("materiAlertBox");
+      alertBox.style.display = "none";
+
+      const kelas = document.getElementById("materiInputKelas").value;
+      const mapel = document.getElementById("materiInputMapel").value.trim();
+      const pertemuan = parseInt(document.getElementById("materiInputPertemuan").value);
+      const judul = document.getElementById("materiInputJudul").value.trim();
+      const guru = document.getElementById("materiInputGuru").value.trim();
+      const deskripsi = document.getElementById("materiInputDesc").value.trim();
+      const fileInput = document.getElementById("materiFileInput");
+      const linkInput = document.getElementById("materiLinkInput").value.trim();
+
+      if (!fileInput.files.length && !linkInput) {
+        alertBox.textContent = "Harap pilih file modul ATAU masukkan link materi!";
+        alertBox.style.display = "block";
+        return;
+      }
+
+      const btn = document.getElementById("btnUploadMateri");
+      const loading = document.getElementById("materiLoading");
+      btn.disabled = true;
+      loading.style.display = "block";
+
+      try {
+        let finalFileUrl = linkInput;
+
+        // Jika upload file lokal, kirim ke Supabase Storage (bucket: tugas-siswa/materi/)
+        if (fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+          const ext = file.name.split('.').pop();
+          const cleanFname = file.name.replace(/[^a-zA-Z0-9]/g, "_");
+          const storagePath = `materi/${kelas.replace(" ","_")}_Pertemuan${pertemuan}_${Date.now()}_${cleanFname}.${ext}`;
+
+          const fileBytes = await file.arrayBuffer();
+          const upRes = await fetch(`${SUPABASE_URL}/storage/v1/object/tugas-siswa/${storagePath}`, {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+              "Content-Type": file.type || "application/octet-stream",
+              "x-upsert": "true"
+            },
+            body: fileBytes
+          });
+
+          if (!upRes.ok) throw new Error("Gagal upload file materi: " + await upRes.text());
+          finalFileUrl = `${SUPABASE_URL}/storage/v1/object/public/tugas-siswa/${storagePath}`;
+        }
+
+        // Coba insert ke tabel Supabase materi_pelajaran
+        try {
+          await fetch(`${SUPABASE_URL}/rest/v1/materi_pelajaran`, {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+              "apikey": SUPABASE_ANON_KEY,
+              "Content-Type": "application/json",
+              "Prefer": "return=representation"
+            },
+            body: JSON.stringify({
+              kelas: kelas,
+              mapel: mapel,
+              pertemuan: pertemuan,
+              judul: judul,
+              deskripsi: deskripsi,
+              file_url: finalFileUrl,
+              nama_guru: guru,
+              updated_at: new Date().toISOString()
+            })
+          });
+        } catch(errDB) {
+          console.warn("DB insert fallback to local:", errDB);
+        }
+
+        // Simpan juga ke cache lokal browser
+        const localList = JSON.parse(localStorage.getItem("LOCAL_MATERI") || "[]");
+        localList.unshift({
+          id: Date.now(),
+          kelas: kelas,
+          mapel: mapel,
+          pertemuan: pertemuan,
+          judul: judul,
+          deskripsi: deskripsi,
+          fileUrl: finalFileUrl,
+          guru: guru,
+          tanggal: new Date().toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric'})
+        });
+        localStorage.setItem("LOCAL_MATERI", JSON.stringify(localList));
+
+        alert("✅ Materi Berhasil Diterbitkan!");
+        document.getElementById("materiModal").style.display = "none";
+        loadMateri();
+      } catch(err) {
+        alertBox.textContent = "Gagal menerbitkan materi: " + err.message;
+        alertBox.style.display = "block";
+      } finally {
+        btn.disabled = false;
+        loading.style.display = "none";
+      }
+    }
+
+    // ========================================================
+    // INISIALISASI HALAMAN SAAT PERTAMA KALI DIBUKA
+    // ========================================================
+    window.addEventListener("DOMContentLoaded", () => {
+      renderDropdown();
+      syncCollectedStatus();
+      loadJadwal();
+      loadMateri();
+    });
+  </script>
+</body>
+</html>
