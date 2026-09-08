@@ -148,11 +148,4 @@ INSERT INTO jadwal_pelajaran (kelas, hari, jam_ke, waktu, mapel, guru, ruang) VA
 ('Kelas IX', 'Sabtu', 3, '08.50 - 10.10', 'Prakarya', 'Dwi Oktaviani S, S.Pd.,Gr.', 'Kelas IX'),
 ('Kelas IX', 'Sabtu', 5, '10.40 - 12.00', 'TIK / Informatika', 'Dwi Oktaviani S, S.Pd.,Gr.', 'Lab Komputer');
 
--- 4. CONTOH DATA AWAL MATERI PELAJARAN
-INSERT INTO materi_pelajaran (kelas, mapel, pertemuan, judul, deskripsi, file_url, file_type, nama_guru) VALUES
-('Kelas VII', 'Informatika', 1, 'Pengenalan Perangkat Keras Komputer (Hardware)', 'Mempelajari komponen input, proses, output, dan penyimpanan pada komputer.', 'https://drive.google.com', 'pdf', 'Bpk. Hendra, S.Kom'),
-('Kelas VII', 'Informatika', 2, 'Sistem Operasi dan Pengelolaan File', 'Memahami sistem operasi Windows dan cara manajemen folder tugas sekolah.', 'https://drive.google.com', 'doc', 'Bpk. Hendra, S.Kom'),
-('Kelas VII', 'Informatika', 3, 'Internet Aman dan Etika Berkomunikasi Digital', 'Panduan menggunakan internet sehat, media sosial, dan etika digital.', 'https://drive.google.com', 'pdf', 'Bpk. Hendra, S.Kom'),
-('Kelas VIII', 'Informatika', 1, 'Jaringan Komputer dan Internet (Topologi Jaringan)', 'Mengenal konsep LAN, WAN, IP Address, dan topologi jaringan lokal sekolah.', 'https://drive.google.com', 'pdf', 'Bpk. Hendra, S.Kom'),
-('Kelas VIII', 'Informatika', 2, 'Pengolahan Angka (Spreadsheet & Rumus Excel)', 'Praktik rumus SUM, AVERAGE, IF, dan pembuatan tabel rekapitulasi data.', 'https://drive.google.com', 'doc', 'Bpk. Hendra, S.Kom'),
-('Kelas IX', 'Informatika', 1, 'Berpikir Komputasional dan Pemrograman Dasar', 'Memahami algoritma, flowchart, dan logika pemecahan masalah komputasi.', 'https://drive.google.com', 'pdf', 'Bpk. Hendra, S.Kom');
+-- 4. MATERI PELAJARAN (Kosong - Dikelola oleh Guru via Portal)

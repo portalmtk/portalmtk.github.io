@@ -993,6 +993,7 @@
         document.getElementById("btnTeacherMode").classList.remove("active");
         document.getElementById("btnExportCSV").style.display = "none";
         loadStatus();
+        loadMateri();
         return;
       }
       _pendingTeacherAction = "mode";
@@ -1025,6 +1026,7 @@
           document.getElementById("materiModal").style.display = "flex";
         } else {
           loadStatus();
+          loadMateri();
         }
         _pendingTeacherAction = null;
       } else {
@@ -1767,50 +1769,7 @@
     // ========================================================
     // TAB 4: MATERI PELAJARAN LOGIC (FILTER PER PERTEMUAN)
     // ========================================================
-    const DEFAULT_MATERI = [
-      {
-        id: 1, kelas: "Kelas VII", mapel: "Informatika", pertemuan: 1,
-        judul: "Pengenalan Perangkat Keras Komputer (Hardware)",
-        deskripsi: "Mempelajari komponen input, proses, output, dan media penyimpanan data komputer.",
-        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
-        tanggal: "01 Sep 2026"
-      },
-      {
-        id: 2, kelas: "Kelas VII", mapel: "Informatika", pertemuan: 2,
-        judul: "Sistem Operasi dan Manajemen Folder",
-        deskripsi: "Praktik mengelola file tugas sekolah, membuat folder terstruktur, dan shortcut Windows.",
-        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
-        tanggal: "08 Sep 2026"
-      },
-      {
-        id: 3, kelas: "Kelas VII", mapel: "Informatika", pertemuan: 3,
-        judul: "Internet Sehat & Keamanan Digital",
-        deskripsi: "Memahami privasi akun, bahaya phising, dan etika berselancar di dunia maya.",
-        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
-        tanggal: "15 Sep 2026"
-      },
-      {
-        id: 4, kelas: "Kelas VIII", mapel: "Informatika", pertemuan: 1,
-        judul: "Topologi Jaringan Komputer Lokal (LAN)",
-        deskripsi: "Mengenal perangkat switch, router, kabel UTP, dan konfigurasi IP address.",
-        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
-        tanggal: "02 Sep 2026"
-      },
-      {
-        id: 5, kelas: "Kelas VIII", mapel: "Informatika", pertemuan: 2,
-        judul: "Pengolahan Data Angka (Formula & Rumus Excel)",
-        deskripsi: "Latihan praktis formula SUM, AVERAGE, COUNT, dan logika IF dasar.",
-        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
-        tanggal: "09 Sep 2026"
-      },
-      {
-        id: 6, kelas: "Kelas IX", mapel: "Informatika", pertemuan: 1,
-        judul: "Berpikir Komputasional & Flowchart Logika",
-        deskripsi: "Pemecahan masalah sistematis menggunakan simbol diagram alir (Flowchart).",
-        fileUrl: "https://drive.google.com", guru: "Bpk. Hendra, S.Kom",
-        tanggal: "03 Sep 2026"
-      }
-    ];
+    const DEFAULT_MATERI = [];
 
     function selectMateriClass(kelas, btn) {
       selectedMateriKelas = kelas;
@@ -1854,7 +1813,7 @@
 
       let items = [];
 
-      // 1. Coba fetch dari Supabase tabel materi_pelajaran
+      // 1. Fetch dari Supabase tabel materi_pelajaran
       try {
         let url = `${SUPABASE_URL}/rest/v1/materi_pelajaran?kelas=eq.${encodeURIComponent("Kelas " + selectedMateriKelas)}&order=pertemuan.asc,id.desc`;
         if (selectedPertemuanFilter > 0) {
@@ -1875,19 +1834,19 @@
           }
         }
       } catch (e) {
-        console.log("Memuat materi fallback/lokal");
+        console.log("Memuat materi dari database:", e);
       }
 
-      // 2. Gabungkan dengan materi yang diupload di local / default fallback
+      // 2. Gabungkan dengan materi lokal yang diunggah
       const localUploaded = JSON.parse(localStorage.getItem("LOCAL_MATERI") || "[]");
-      const combined = [...localUploaded, ...items, ...DEFAULT_MATERI];
+      const combined = [...localUploaded, ...items];
       
-      // Filter unik berdasarkan kelas & pertemuan
+      // Filter unik berdasarkan kelas, pertemuan, dan ID/Judul
       const seen = new Set();
       const filtered = combined.filter(m => {
         if (m.kelas !== "Kelas " + selectedMateriKelas) return false;
         if (selectedPertemuanFilter > 0 && Number(m.pertemuan) !== Number(selectedPertemuanFilter)) return false;
-        const key = `${m.mapel}_${m.pertemuan}_${m.judul}`;
+        const key = m.id ? ("id_" + m.id) : (`${m.mapel}_${m.pertemuan}_${m.judul}`);
         if (seen.has(key)) return false;
         seen.add(key);
         return true;
@@ -1895,10 +1854,11 @@
 
       if (!filtered.length) {
         container.innerHTML = `
-          <div style="text-align:center;padding:24px;color:var(--text-muted);">
-            <div style="font-size:2rem;margin-bottom:8px;">📚</div>
-            <p>Belum ada materi untuk <strong>Kelas ${selectedMateriKelas}</strong> pada pilihan pertemuan ini.</p>
-            ${isTeacherMode ? '<button class="btn-action-sm" style="margin-top:10px;background:var(--primary);color:#fff;" onclick="openUploadMateriModal()">➕ Upload Materi Sekarang</button>' : ''}
+          <div style="text-align:center;padding:32px 14px;color:var(--text-muted);background:var(--input-bg);border:1px dashed var(--card-border);border-radius:14px;">
+            <div style="font-size:2.4rem;margin-bottom:8px;">📚</div>
+            <p style="font-size:0.95rem;font-weight:700;color:#fff;">Belum Ada Materi untuk Kelas ${selectedMateriKelas} ${selectedPertemuanFilter > 0 ? 'Pertemuan ' + selectedPertemuanFilter : ''}</p>
+            <p style="font-size:0.8rem;margin-top:4px;">Guru dapat menambahkan materi pelajaran baru melalui tombol Upload Materi.</p>
+            <button class="btn-action-sm" style="margin-top:14px;background:var(--primary);color:#fff;padding:8px 16px;font-size:0.85rem;" onclick="openUploadMateriModal()">➕ Upload Materi Sekarang</button>
           </div>
         `;
         return;
@@ -1906,6 +1866,10 @@
 
       let html = "";
       filtered.forEach(m => {
+        const btnDelete = isTeacherMode
+          ? `<button type="button" class="btn-action-sm" style="background:rgba(239,68,68,0.15);color:#fca5a5;border-color:rgba(239,68,68,0.3);padding:5px 10px;font-size:0.75rem;" onclick="deleteMateri(${m.id})" title="Hapus Materi Ini">🗑️ Hapus</button>`
+          : "";
+
         html += `
           <div class="materi-card">
             <div class="materi-header">
@@ -1915,17 +1879,52 @@
               </div>
               <span class="badge-pertemuan">Pertemuan ${m.pertemuan}</span>
             </div>
-            <div class="materi-desc">${m.deskripsi || 'Silakan unduh dan pelajari materi berikut untuk panduan pengerjaan tugas.'}</div>
+            <div class="materi-desc">${m.deskripsi || 'Silakan unduh dan pelajari materi berikut untuk panduan belajar & tugas.'}</div>
             <div class="materi-actions">
               <span class="materi-meta">🗓️ ${m.tanggal || 'Tersedia'}</span>
-              <a href="${m.fileUrl}" target="_blank" rel="noopener" class="btn-download-materi">
-                📥 Buka / Unduh Materi
-              </a>
+              <div style="display:flex;gap:8px;align-items:center;">
+                ${btnDelete}
+                <a href="${m.fileUrl}" target="_blank" rel="noopener" class="btn-download-materi">
+                  📥 Buka / Unduh
+                </a>
+              </div>
             </div>
           </div>
         `;
       });
       container.innerHTML = html;
+    }
+
+    async function deleteMateri(id) {
+      if (!isTeacherMode) {
+        _pendingTeacherAction = "deleteMateri";
+        openPinModal();
+        return;
+      }
+      if (!confirm("Apakah Anda yakin ingin menghapus materi pelajaran ini?")) return;
+
+      try {
+        // 1. Hapus dari Supabase DB
+        if (id) {
+          await fetch(`${SUPABASE_URL}/rest/v1/materi_pelajaran?id=eq.${id}`, {
+            method: "DELETE",
+            headers: {
+              "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+              "apikey": SUPABASE_ANON_KEY
+            }
+          });
+        }
+
+        // 2. Hapus dari localStorage
+        let localList = JSON.parse(localStorage.getItem("LOCAL_MATERI") || "[]");
+        localList = localList.filter(m => String(m.id) !== String(id));
+        localStorage.setItem("LOCAL_MATERI", JSON.stringify(localList));
+
+        alert("🗑️ Materi berhasil dihapus!");
+        loadMateri();
+      } catch(err) {
+        alert("Gagal menghapus materi: " + err.message);
+      }
     }
 
     async function submitMateri(e) {
