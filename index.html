@@ -424,7 +424,10 @@
 
       <div class="recap-header" style="margin-bottom:12px;">
         <h3 id="materiHeaderTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Daftar Materi Kelas VII</h3>
-        <button class="btn-action-sm" style="background:var(--primary);color:#fff;" onclick="openUploadMateriModal()">➕ Upload Materi</button>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="btn-action-sm" id="btnHapusSemuaMateri" style="display:none;background:rgba(239,68,68,0.15);color:#fca5a5;border-color:rgba(239,68,68,0.3);" onclick="clearAllMateri()">🗑️ Bersihkan Semua</button>
+          <button class="btn-action-sm" style="background:var(--primary);color:#fff;" onclick="openUploadMateriModal()">➕ Upload Materi</button>
+        </div>
       </div>
 
       <div id="materiList">Memuat materi pelajaran...</div>
@@ -992,6 +995,7 @@
         document.getElementById("btnTeacherMode").innerHTML = "🔒 Mode Guru";
         document.getElementById("btnTeacherMode").classList.remove("active");
         document.getElementById("btnExportCSV").style.display = "none";
+        if (document.getElementById("btnHapusSemuaMateri")) document.getElementById("btnHapusSemuaMateri").style.display = "none";
         loadStatus();
         loadMateri();
         return;
@@ -1020,6 +1024,7 @@
         document.getElementById("btnTeacherMode").innerHTML = "🔓 Mode Guru AKTIF";
         document.getElementById("btnTeacherMode").classList.add("active");
         document.getElementById("btnExportCSV").style.display = "inline-flex";
+        if (document.getElementById("btnHapusSemuaMateri")) document.getElementById("btnHapusSemuaMateri").style.display = "inline-flex";
         document.getElementById("pinModal").style.display = "none";
 
         if (_pendingTeacherAction === "uploadMateri") {
@@ -1895,6 +1900,30 @@
       container.innerHTML = html;
     }
 
+    async function clearAllMateri() {
+      if (!isTeacherMode) {
+        _pendingTeacherAction = "clearAllMateri";
+        openPinModal();
+        return;
+      }
+      if (!confirm("Apakah Anda yakin ingin MENGHAPUS SEMUA materi pelajaran di database?")) return;
+
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/materi_pelajaran?id=gt.0`, {
+          method: "DELETE",
+          headers: {
+            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+            "apikey": SUPABASE_ANON_KEY
+          }
+        });
+        localStorage.removeItem("LOCAL_MATERI");
+        alert("✅ Seluruh materi berhasil dibersihkan total!");
+        loadMateri();
+      } catch(err) {
+        alert("Gagal membersihkan materi: " + err.message);
+      }
+    }
+
     async function deleteMateri(id) {
       if (!isTeacherMode) {
         _pendingTeacherAction = "deleteMateri";
@@ -2033,6 +2062,14 @@
     // INISIALISASI HALAMAN SAAT PERTAMA KALI DIBUKA
     // ========================================================
     window.addEventListener("DOMContentLoaded", () => {
+      // Pembersihan otomatis cache materi lama
+      if (!localStorage.getItem("MATERI_CLEANED_FINAL")) {
+        localStorage.removeItem("LOCAL_MATERI");
+        localStorage.setItem("MATERI_CLEANED_FINAL", "true");
+      }
+      if (isTeacherMode && document.getElementById("btnHapusSemuaMateri")) {
+        document.getElementById("btnHapusSemuaMateri").style.display = "inline-flex";
+      }
       renderDropdown();
       syncCollectedStatus();
       loadJadwal();
