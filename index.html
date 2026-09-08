@@ -532,19 +532,7 @@
         </div>
       </div>
 
-      <!-- FILTER PERTEMUAN -->
-      <label style="font-size:0.8rem; color:var(--text-muted); margin-bottom:6px;">Pilih Pertemuan Matematika:</label>
-      <div class="pertemuan-filter-scroll">
-        <button type="button" class="pertemuan-pill active" onclick="filterPertemuan(0, this)">✨ Semua</button>
-        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(1, this)">Pertemuan 1</button>
-        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(2, this)">Pertemuan 2</button>
-        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(3, this)">Pertemuan 3</button>
-        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(4, this)">Pertemuan 4</button>
-        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(5, this)">Pertemuan 5</button>
-        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(6, this)">Pertemuan 6</button>
-        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(7, this)">Pertemuan 7</button>
-        <button type="button" class="pertemuan-pill" onclick="filterPertemuan(8, this)">Pertemuan 8</button>
-      </div>
+      <!-- DAFTAR MATERI PER KELAS -->
 
       <div class="recap-header" style="margin-bottom:12px;">
         <h3 id="materiHeaderTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Materi Matematika Kelas VII</h3>
@@ -1415,12 +1403,6 @@
       loadMateri();
     }
 
-    function filterPertemuan(p, btn) {
-      selectedPertemuanFilter = p;
-      document.querySelectorAll('#tab-materi .pertemuan-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      loadMateri();
-    }
 
     function openUploadMateriModal() {
       if (!isTeacherMode) {
@@ -1443,10 +1425,7 @@
 
     async function loadMateri() {
       const container = document.getElementById("materiList");
-      const title = selectedPertemuanFilter === 0 
-        ? `Materi Matematika Kelas ${selectedMateriKelas} • Semua Pertemuan`
-        : `Materi Matematika Kelas ${selectedMateriKelas} • Pertemuan ${selectedPertemuanFilter}`;
-      document.getElementById("materiHeaderTitle").textContent = title;
+      document.getElementById("materiHeaderTitle").textContent = `Materi Matematika Kelas ${selectedMateriKelas}`;
 
       container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:14px;'>⏳ Memuat materi matematika...</p>";
 
@@ -1455,9 +1434,6 @@
       // 1. Fetch dari Supabase tabel materi_pelajaran
       try {
         let url = `${SUPABASE_URL}/rest/v1/materi_pelajaran?kelas=eq.${encodeURIComponent("Kelas " + selectedMateriKelas)}&order=pertemuan.asc,id.desc`;
-        if (selectedPertemuanFilter > 0) {
-          url += `&pertemuan=eq.${selectedPertemuanFilter}`;
-        }
         const res = await fetch(url, {
           headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
         });
@@ -1479,11 +1455,10 @@
       // Bersihkan cache lokal lama agar tidak terjadi duplikasi ganda
       localStorage.removeItem("LOCAL_MATERI");
 
-      // Filter unik materi berdasarkan kelas, pertemuan, judul, dan fileUrl
+      // Filter unik materi berdasarkan kelas, judul, dan fileUrl
       const seen = new Set();
       const filtered = items.filter(m => {
         if (m.kelas !== "Kelas " + selectedMateriKelas) return false;
-        if (selectedPertemuanFilter > 0 && Number(m.pertemuan) !== Number(selectedPertemuanFilter)) return false;
         const key = `${m.kelas}_${m.pertemuan}_${(m.judul || '').trim().toLowerCase()}_${m.fileUrl}`;
         if (seen.has(key)) return false;
         seen.add(key);
@@ -1494,7 +1469,7 @@
         container.innerHTML = `
           <div style="text-align:center;padding:32px 14px;color:var(--text-muted);background:var(--input-bg);border:1px dashed var(--card-border);border-radius:14px;">
             <div style="font-size:2.4rem;margin-bottom:8px;">📐</div>
-            <p style="font-size:0.95rem;font-weight:700;color:#fff;">Belum Ada Materi Matematika untuk Kelas ${selectedMateriKelas} ${selectedPertemuanFilter > 0 ? 'Pertemuan ' + selectedPertemuanFilter : ''}</p>
+            <p style="font-size:0.95rem;font-weight:700;color:#fff;">Belum Ada Materi Matematika untuk Kelas ${selectedMateriKelas}</p>
             <p style="font-size:0.8rem;margin-top:4px;">Bpk. Supianto, S.Pd.,Gr. dapat mengunggah modul/rumus baru dengan menekan tombol Upload Materi.</p>
             <button class="btn-action-sm" style="margin-top:14px;background:var(--primary);color:#fff;padding:8px 16px;font-size:0.85rem;" onclick="openUploadMateriModal()">➕ Upload Materi Matematika</button>
           </div>
