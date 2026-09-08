@@ -671,7 +671,7 @@
           <span style="font-size:0.75rem;color:var(--math-accent);">📐 Tampilan Interaktif Langsung</span>
         </div>
         <div style="display:flex;gap:8px;align-items:center;">
-          <a id="btnViewerOpenExternal" href="#" target="_blank" rel="noopener" class="btn-action-sm" style="text-decoration:none;font-size:0.75rem;padding:5px 10px;">🔗 Tab Penuh</a>
+          <button type="button" class="btn-action-sm" style="text-decoration:none;font-size:0.75rem;padding:5px 10px;cursor:pointer;" onclick="openViewerInFullTab()">🔗 Tab Penuh</button>
           <button type="button" class="modal-close" style="position:static;" onclick="closeMateriViewerModal()">✕</button>
         </div>
       </div>
@@ -1505,9 +1505,9 @@
               <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
                 ${btnDelete}
                 ${viewBtn}
-                <a href="${m.fileUrl}" target="_blank" rel="noopener" class="btn-action-sm" style="text-decoration:none;padding:6px 10px;" title="Buka di Tab Baru / Download File">
+                <button type="button" class="btn-action-sm" style="text-decoration:none;padding:6px 10px;cursor:pointer;" onclick="openMateriTab('${encodeURIComponent(m.fileUrl)}')" title="Buka Halaman Penuh di Tab Baru">
                   🔗 Tab Baru
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -1516,16 +1516,66 @@
       container.innerHTML = html;
     }
 
+    let _currentViewingHtml = "";
+    let _currentViewingUrl = "";
+
+    function openMateriTab(encodedUrl) {
+      const url = decodeURIComponent(encodedUrl);
+      const isHtml = url && (url.toLowerCase().includes('.html') || url.toLowerCase().includes('.htm'));
+      if (!isHtml) {
+        window.open(url, '_blank', 'noopener');
+        return;
+      }
+
+      // Supabase Storage menyajikan file HTML dengan Content-Type: text/plain
+      // Agar tampil sebagai Website penuh dan bukan kode mentah, dokumen difetch lalu dituliskan ke tab baru
+      const win = window.open('about:blank', '_blank');
+      if (!win) {
+        window.location.href = url;
+        return;
+      }
+
+      win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Memuat Materi Matematika...</title><style>body{background:#0b0f19;color:#f8fafc;font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;text-align:center;}.box{padding:28px 20px;border-radius:16px;background:#151d2f;border:1px solid #222f46;box-shadow:0 10px 30px rgba(0,0,0,0.5);}</style></head><body><div class="box"><div style="font-size:2.5rem;margin-bottom:10px;">📐</div><h3 style="margin:0 0 6px 0;">Memuat Materi Matematika...</h3><p style="color:#94a3b8;font-size:0.85rem;margin:0;">Menyiapkan tampilan halaman web interaktif...</p></div></body></html>');
+
+      fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          win.document.open();
+          win.document.write(html);
+          win.document.close();
+        })
+        .catch(err => {
+          console.warn("Gagal fetch materi HTML:", err);
+          win.location.href = url;
+        });
+    }
+
+    function openViewerInFullTab() {
+      if (_currentViewingHtml) {
+        const win = window.open('about:blank', '_blank');
+        if (win) {
+          win.document.open();
+          win.document.write(_currentViewingHtml);
+          win.document.close();
+          return;
+        }
+      }
+      if (_currentViewingUrl) {
+        openMateriTab(encodeURIComponent(_currentViewingUrl));
+      }
+    }
+
     async function viewMateriContent(encodedUrl, encodedTitle) {
       const url = decodeURIComponent(encodedUrl);
       const title = decodeURIComponent(encodedTitle);
+      _currentViewingUrl = url;
+      _currentViewingHtml = "";
+
       const modal = document.getElementById("materiViewerModal");
       const titleEl = document.getElementById("viewerMateriTitle");
       const frame = document.getElementById("materiViewerFrame");
-      const extBtn = document.getElementById("btnViewerOpenExternal");
 
       titleEl.textContent = title;
-      extBtn.href = url;
       modal.style.display = "flex";
 
       // Jika format HTML, fetch isi konten dan render otomatis via srcdoc (langsung render sempurna)
@@ -1535,8 +1585,8 @@
         try {
           const res = await fetch(url);
           if (res.ok) {
-            const htmlText = await res.text();
-            frame.srcdoc = htmlText;
+            _currentViewingHtml = await res.text();
+            frame.srcdoc = _currentViewingHtml;
             return;
           }
         } catch (err) {
