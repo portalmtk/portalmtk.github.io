@@ -32,21 +32,24 @@
     body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px 14px 60px 14px; display: flex; justify-content: center; }
     .container { width: 100%; max-width: 620px; }
 
-    /* Top Navigation Bar with Toggle Menu for Mobile */
+    /* Sticky Navigation Container & Navbar (Mobile Friendly & Always Visible) */
+    .sticky-nav-container {
+      position: sticky;
+      top: 10px;
+      z-index: 300;
+      margin-bottom: 16px;
+    }
     .top-navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: var(--card-bg);
+      background: rgba(21, 29, 47, 0.96);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 10px 14px;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-      position: sticky;
-      top: 10px;
-      z-index: 100;
-      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
     .nav-brand {
       display: flex;
@@ -98,15 +101,17 @@
       background: var(--primary);
     }
 
-    /* Modern Dropdown Drawer Menu */
+    /* Modern Sticky Dropdown Drawer Menu */
     .menu-drawer {
       display: none;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: rgba(21, 29, 47, 0.98);
+      border: 1px solid rgba(79, 70, 229, 0.35);
       border-radius: 18px;
-      padding: 10px;
-      margin-bottom: 18px;
-      box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+      padding: 12px;
+      margin-top: 8px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       animation: fadeInDown 0.25s ease;
     }
     @keyframes fadeInDown {
@@ -346,43 +351,45 @@
 <body>
   <div class="container">
     
-    <!-- TOP NAVBAR WITH MOBILE TOGGLE -->
-    <div class="top-navbar">
-      <div class="nav-brand">
-        <div class="brand-icon">📐</div>
-        <div>
-          <div class="brand-text-title">PORTAL MATEMATIKA</div>
-          <div class="brand-text-sub">SMPN 5 MUARA SIRAM</div>
+    <!-- STICKY NAVBAR & TOGGLE MENU WRAPPER -->
+    <div class="sticky-nav-container">
+      <div class="top-navbar">
+        <div class="nav-brand">
+          <div class="brand-icon">📐</div>
+          <div>
+            <div class="brand-text-title">PORTAL MATEMATIKA</div>
+            <div class="brand-text-sub">SMPN 5 MUARA SIRAM</div>
+          </div>
         </div>
+        <button type="button" class="btn-menu-toggle" id="btnToggleMenu" onclick="toggleMenuDrawer(event)">
+          <span id="menuIcon">☰</span>
+          <span id="menuText">Menu</span>
+        </button>
       </div>
-      <button type="button" class="btn-menu-toggle" id="btnToggleMenu" onclick="toggleMenuDrawer()">
-        <span id="menuIcon">☰</span>
-        <span id="menuText">Menu</span>
-      </button>
-    </div>
 
-    <!-- MODERN TOGGLE MENU DRAWER (NO HORIZONTAL SCROLL) -->
-    <div id="menuDrawer" class="menu-drawer">
-      <div class="menu-drawer-grid">
-        <button type="button" class="menu-item-btn active" id="mItemForm" onclick="selectTabFromMenu('form')">
-          <span>📤</span> Kirim Tugas MTK
-        </button>
-        <button type="button" class="menu-item-btn" id="mItemStatus" onclick="selectTabFromMenu('status')">
-          <span>📊</span> Rekap &amp; Nilai
-        </button>
-        <button type="button" class="menu-item-btn" id="mItemJadwal" onclick="selectTabFromMenu('jadwal')">
-          <span>📅</span> Jadwal Matematika
-        </button>
-        <button type="button" class="menu-item-btn" id="mItemMateri" onclick="selectTabFromMenu('materi')">
-          <span>📚</span> Materi Matematika
-        </button>
+      <!-- MODERN TOGGLE MENU DRAWER (STICKY & SELALU TERLIHAT) -->
+      <div id="menuDrawer" class="menu-drawer">
+        <div class="menu-drawer-grid">
+          <button type="button" class="menu-item-btn active" id="mItemForm" onclick="selectTabFromMenu('form')">
+            <span>📤</span> Kirim Tugas MTK
+          </button>
+          <button type="button" class="menu-item-btn" id="mItemStatus" onclick="selectTabFromMenu('status')">
+            <span>📊</span> Rekap &amp; Nilai
+          </button>
+          <button type="button" class="menu-item-btn" id="mItemJadwal" onclick="selectTabFromMenu('jadwal')">
+            <span>📅</span> Jadwal Matematika
+          </button>
+          <button type="button" class="menu-item-btn" id="mItemMateri" onclick="selectTabFromMenu('materi')">
+            <span>📚</span> Materi Matematika
+          </button>
+        </div>
       </div>
     </div>
 
     <!-- BANNER IDENTITAS GURU & MAPEL -->
     <div class="header">
       <div class="header-badge">GURU PENGAMPU: SUPIANTO, S.Pd.,Gr.</div>
-      <h1>MATEMATIKA MANDIRI</h1>
+      <h1>PORTAL MATEMATIKA</h1>
       <p>Portal Pengumpulan Tugas, Pengecekan Nilai, Jadwal, dan Materi Belajar Matematika (Kelas VII, VIII, IX)</p>
     </div>
 
@@ -552,7 +559,7 @@
 
     <!-- FOOTER -->
     <div class="footer">
-      &copy; 2026 SMP Negeri 5 Muara Siram &bull; Portal Pembelajaran Matematika Mandiri
+      &copy; 2026 SMP Negeri 5 Muara Siram &bull; Portal Matematika
     </div>
 
   </div>
@@ -795,9 +802,10 @@
     let _pendingTeacherAction = null;
 
     // ========================================================
-    // TOGGLE MENU DRAWER LOGIC (NO HORIZONTAL SCROLL)
+    // TOGGLE MENU DRAWER LOGIC (ALWAYS VISIBLE & STICKY)
     // ========================================================
-    function toggleMenuDrawer() {
+    function toggleMenuDrawer(e) {
+      if (e) e.stopPropagation();
       const drawer = document.getElementById("menuDrawer");
       const icon = document.getElementById("menuIcon");
       const text = document.getElementById("menuText");
@@ -811,6 +819,19 @@
         text.textContent = "Tutup";
       }
     }
+
+    // Auto-tutup menu jika mengklik di luar area navbar / menu drawer
+    document.addEventListener("click", function (e) {
+      const drawer = document.getElementById("menuDrawer");
+      const btn = document.getElementById("btnToggleMenu");
+      if (drawer && drawer.style.display === "block") {
+        if (!drawer.contains(e.target) && !btn.contains(e.target)) {
+          drawer.style.display = "none";
+          document.getElementById("menuIcon").textContent = "☰";
+          document.getElementById("menuText").textContent = "Menu";
+        }
+      }
+    });
 
     function selectTabFromMenu(tab) {
       document.querySelectorAll('.menu-item-btn').forEach(b => b.classList.remove('active'));
@@ -846,6 +867,9 @@
         document.getElementById('tab-materi').style.display = 'block';
         loadMateri();
       }
+
+      // Smooth scroll ke atas agar halaman fokus pada konten tab yang dipilih
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // ========================================================
