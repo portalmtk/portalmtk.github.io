@@ -1452,16 +1452,15 @@
         console.log("Memuat materi dari database:", e);
       }
 
-      // 2. Gabungkan dengan materi lokal yang diunggah
-      const localUploaded = JSON.parse(localStorage.getItem("LOCAL_MATERI") || "[]");
-      const combined = [...localUploaded, ...items];
-      
-      // Filter unik berdasarkan kelas & pertemuan
+      // Bersihkan cache lokal lama agar tidak terjadi duplikasi ganda
+      localStorage.removeItem("LOCAL_MATERI");
+
+      // Filter unik materi berdasarkan kelas, pertemuan, judul, dan fileUrl
       const seen = new Set();
-      const filtered = combined.filter(m => {
+      const filtered = items.filter(m => {
         if (m.kelas !== "Kelas " + selectedMateriKelas) return false;
         if (selectedPertemuanFilter > 0 && Number(m.pertemuan) !== Number(selectedPertemuanFilter)) return false;
-        const key = m.id ? ("id_" + m.id) : (`${m.mapel}_${m.pertemuan}_${m.judul}`);
+        const key = `${m.kelas}_${m.pertemuan}_${(m.judul || '').trim().toLowerCase()}_${m.fileUrl}`;
         if (seen.has(key)) return false;
         seen.add(key);
         return true;
@@ -1735,20 +1734,8 @@
           console.warn("DB insert fallback to local:", errDB);
         }
 
-        // Simpan juga ke cache lokal browser
-        const localList = JSON.parse(localStorage.getItem("LOCAL_MATERI") || "[]");
-        localList.unshift({
-          id: Date.now(),
-          kelas: kelas,
-          mapel: mapel,
-          pertemuan: pertemuan,
-          judul: judul,
-          deskripsi: deskripsi,
-          fileUrl: finalFileUrl,
-          guru: guru,
-          tanggal: new Date().toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric'})
-        });
-        localStorage.setItem("LOCAL_MATERI", JSON.stringify(localList));
+        // Bersihkan cache lokal agar Supabase menjadi satu-satunya sumber data resmi tanpa duplikasi
+        localStorage.removeItem("LOCAL_MATERI");
 
         alert("✅ Materi Matematika Berhasil Diterbitkan!");
         document.getElementById("materiModal").style.display = "none";
