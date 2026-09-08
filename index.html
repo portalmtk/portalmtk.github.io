@@ -10,6 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <!-- JSZip untuk Backup Rekap Seluruh Kelas dalam 1 Berkas ZIP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  
   <style>
     :root {
       --primary: #4f46e5;
@@ -482,7 +485,9 @@
         <h3 id="recapTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Rekap Nilai MTK Kelas VII</h3>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
           <button class="btn-action-sm" id="btnTeacherMode" onclick="toggleTeacherMode()">🔒 Mode Guru</button>
+          <button class="btn-action-sm" id="btnBackupZip" onclick="backupZipSemuaKelas()" style="display:none;background:rgba(56,189,248,0.15);color:var(--math-accent);border-color:rgba(56,189,248,0.3);">📦 Backup ZIP Semua Kelas</button>
           <button class="btn-action-sm" id="btnExportCSV" onclick="exportCSV()" style="display:none;">📄 Export CSV</button>
+          <button class="btn-action-sm" id="btnResetNilai" onclick="openResetPenilaianModal()" style="display:none;background:rgba(239,68,68,0.15);color:#fca5a5;border-color:rgba(239,68,68,0.3);">🗑️ Reset Penilaian</button>
           <button class="btn-action-sm" onclick="loadStatus()">🔄 Refresh</button>
         </div>
       </div>
@@ -672,6 +677,53 @@
       </div>
       <div style="flex:1;background:#ffffff;border-radius:10px;overflow:hidden;position:relative;">
         <iframe id="materiViewerFrame" style="width:100%;height:100%;border:none;background:#ffffff;" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: RESET PENILAIAN & TUGAS SISWA                     -->
+  <!-- ======================================================== -->
+  <div id="resetModal" class="modal-backdrop" onclick="closeResetModal(event)">
+    <div class="modal-content" style="max-width:460px;padding:22px;" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeResetModal()">✕</button>
+      <div style="text-align:center;margin-bottom:12px;">
+        <div style="font-size:2.4rem;margin-bottom:4px;">⚠️</div>
+        <h3 style="font-size:1.15rem;font-weight:800;color:#fca5a5;">Reset Penilaian &amp; Tugas Siswa</h3>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">
+          Gunakan fitur ini untuk memulai penilaian sesi baru.
+        </p>
+      </div>
+
+      <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:12px;padding:12px 14px;margin-bottom:14px;">
+        <p style="font-size:0.79rem;color:#fca5a5;margin:0;line-height:1.45;">
+          <strong>💡 Perhatian:</strong> Pastikan Anda sudah menekan tombol <strong>📦 Backup ZIP Semua Kelas</strong> sebelum melakukan reset agar rekap nilai hari ini tersimpan aman di komputer Anda!
+        </p>
+      </div>
+
+      <div class="form-group" style="margin-bottom:14px;">
+        <label style="font-size:0.84rem;font-weight:700;">Pilih Lingkup Reset:</label>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+          <label style="display:flex;align-items:center;gap:10px;font-size:0.84rem;cursor:pointer;background:var(--input-bg);padding:10px 12px;border-radius:10px;border:1px solid var(--card-border);">
+            <input type="radio" name="resetScope" id="resetScopeClass" value="class" checked>
+            <span>Hanya <strong>Kelas <span id="resetCurrentClassLabel">VII</span></strong> saja</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;font-size:0.84rem;cursor:pointer;background:var(--input-bg);padding:10px 12px;border-radius:10px;border:1px solid var(--card-border);">
+            <input type="radio" name="resetScope" id="resetScopeAll" value="all">
+            <span><strong>SEMUA KELAS</strong> (Kelas VII, VIII, &amp; IX)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:16px;">
+        <label style="font-size:0.8rem;color:var(--text-muted);">Ketik kata <strong style="color:#fca5a5;">RESET</strong> untuk konfirmasi:</label>
+        <input type="text" id="confirmResetInput" placeholder="Ketik RESET" style="text-align:center;letter-spacing:2px;font-weight:700;" autocomplete="off">
+        <p id="resetErrorMsg" style="display:none;color:#fca5a5;font-size:0.75rem;margin-top:6px;text-align:center;">Ketik "RESET" dengan huruf kapital untuk mengonfirmasi.</p>
+      </div>
+
+      <div style="display:flex;gap:10px;">
+        <button type="button" class="btn-secondary" style="margin:0;flex:1;" onclick="closeResetModal()">Batal</button>
+        <button type="button" id="btnExecuteReset" class="btn-submit" style="margin:0;flex:1;background:var(--danger);" onclick="executeResetPenilaian()">🔥 Reset Sekarang</button>
       </div>
     </div>
   </div>
@@ -1216,6 +1268,8 @@
         document.getElementById("btnTeacherMode").innerHTML = "🔒 Mode Guru";
         document.getElementById("btnTeacherMode").classList.remove("active");
         document.getElementById("btnExportCSV").style.display = "none";
+        document.getElementById("btnBackupZip").style.display = "none";
+        document.getElementById("btnResetNilai").style.display = "none";
         if (document.getElementById("btnHapusSemuaMateri")) document.getElementById("btnHapusSemuaMateri").style.display = "none";
         loadStatus();
         loadMateri();
@@ -1245,6 +1299,8 @@
         document.getElementById("btnTeacherMode").innerHTML = "🔓 Mode Guru AKTIF";
         document.getElementById("btnTeacherMode").classList.add("active");
         document.getElementById("btnExportCSV").style.display = "inline-flex";
+        document.getElementById("btnBackupZip").style.display = "inline-flex";
+        document.getElementById("btnResetNilai").style.display = "inline-flex";
         if (document.getElementById("btnHapusSemuaMateri")) document.getElementById("btnHapusSemuaMateri").style.display = "inline-flex";
         document.getElementById("pinModal").style.display = "none";
 
@@ -1252,6 +1308,8 @@
           document.getElementById("materiModal").style.display = "flex";
         } else if (_pendingTeacherAction === "clearAllMateri") {
           clearAllMateri();
+        } else if (_pendingTeacherAction === "resetModal") {
+          openResetPenilaianModal();
         } else {
           loadStatus();
           loadMateri();
@@ -1343,6 +1401,211 @@
         URL.revokeObjectURL(url);
       } catch(err) {
         alert("Gagal export CSV: " + err.message);
+      }
+    }
+
+    // ========================================================
+    // BACKUP ZIP SEMUA KELAS (.CSV) & RESET PENILAIAN LOGIC
+    // ========================================================
+    async function backupZipSemuaKelas() {
+      const btn = document.getElementById("btnBackupZip");
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "⏳ Menyiapkan ZIP...";
+      btn.disabled = true;
+
+      try {
+        // 1. Ambil seluruh data tugas_siswa dari Supabase tanpa filter kelas
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?select=*&order=kelas.asc,no_absen.asc`, {
+          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
+        });
+        if (!res.ok) throw new Error("Gagal mengambil data tugas: " + await res.text());
+        const allRecords = await res.json();
+
+        // 2. Buat mapping per kelas
+        const kelasMap = { "VII": {}, "VIII": {}, "IX": {} };
+        (allRecords || []).forEach(item => {
+          if (!item.nama_siswa || !item.kelas) return;
+          const kCode = item.kelas.replace(/Kelas\s*/i, '').trim();
+          if (kelasMap[kCode]) {
+            kelasMap[kCode][item.nama_siswa.toString().trim().toLowerCase()] = item;
+          }
+        });
+
+        // 3. Helper Generator CSV per kelas
+        function generateCSVForClass(kCode) {
+          const list = DATA_KELAS[kCode] || [];
+          const mapS = kelasMap[kCode] || {};
+          const rows = [["No Absen", "Nama Siswa", "Kelas", "Mata Pelajaran", "Status", "Waktu Kirim", "Nilai", "Catatan Guru", "Link Foto"]];
+          let countDone = 0;
+
+          list.forEach(s => {
+            const key = s.nama.toString().trim().toLowerCase();
+            const item = mapS[key];
+            const isDone = !!item;
+            if (isDone) countDone++;
+            const status = isDone ? "Sudah" : "Belum";
+            const waktu = isDone && item && item.waktu_kirim ? ('"' + item.waktu_kirim + '"') : "-";
+            const nilai = isDone && item && item.nilai ? ('"' + item.nilai + '"') : "-";
+            const cat = isDone && item && item.catatan_guru ? ('"' + item.catatan_guru.replace(/"/g, '""') + '"') : "-";
+            const foto = isDone && item && item.image_url ? ('"' + item.image_url + '"') : "-";
+            rows.push([s.no, '"' + s.nama + '"', '"Kelas ' + kCode + '"', "Matematika", status, waktu, nilai, cat, foto]);
+          });
+
+          const csvContent = "\uFEFF" + rows.map(r => r.join(";")).join("\r\n");
+          return { csv: csvContent, done: countDone, total: list.length };
+        }
+
+        const resVII = generateCSVForClass("VII");
+        const resVIII = generateCSVForClass("VIII");
+        const resIX = generateCSVForClass("IX");
+
+        // 4. Combined CSV untuk seluruh 3 kelas
+        const allRows = [["No", "Nama Siswa", "Kelas", "Mata Pelajaran", "Status", "Waktu Kirim", "Nilai", "Catatan Guru", "Link Foto"]];
+        ["VII", "VIII", "IX"].forEach(kCode => {
+          const list = DATA_KELAS[kCode] || [];
+          const mapS = kelasMap[kCode] || {};
+          list.forEach(s => {
+            const key = s.nama.toString().trim().toLowerCase();
+            const item = mapS[key];
+            const isDone = !!item;
+            const status = isDone ? "Sudah" : "Belum";
+            const waktu = isDone && item && item.waktu_kirim ? ('"' + item.waktu_kirim + '"') : "-";
+            const nilai = isDone && item && item.nilai ? ('"' + item.nilai + '"') : "-";
+            const cat = isDone && item && item.catatan_guru ? ('"' + item.catatan_guru.replace(/"/g, '""') + '"') : "-";
+            const foto = isDone && item && item.image_url ? ('"' + item.image_url + '"') : "-";
+            allRows.push([s.no, '"' + s.nama + '"', '"Kelas ' + kCode + '"', "Matematika", status, waktu, nilai, cat, foto]);
+          });
+        });
+        const combinedCSV = "\uFEFF" + allRows.map(r => r.join(";")).join("\r\n");
+
+        // 5. Text Info Summary
+        const now = new Date();
+        const tglStr = now.toISOString().slice(0, 10);
+        const wktStr = now.toLocaleDateString("id-ID", { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }) + " (" + String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0") + " WITA)";
+
+        const summaryText = 
+`======================================================================
+BACKUP REKAP PENILAIAN MATEMATIKA - SMP NEGERI 5 MUARA SIRAM
+======================================================================
+Waktu Backup   : ${wktStr}
+Guru Pengampu  : Supianto, S.Pd.,Gr.
+Mata Pelajaran : Matematika
+
+RINGKASAN STATUS PENGUMPULAN TUGAS:
+- Kelas VII  : ${resVII.done} dari ${resVII.total} Siswa (${Math.round(resVII.done / (resVII.total || 1) * 100)}%)
+- Kelas VIII : ${resVIII.done} dari ${resVIII.total} Siswa (${Math.round(resVIII.done / (resVIII.total || 1) * 100)}%)
+- Kelas IX   : ${resIX.done} dari ${resIX.total} Siswa (${Math.round(resIX.done / (resIX.total || 1) * 100)}%)
+- Total Semua: ${resVII.done + resVIII.done + resIX.done} dari ${resVII.total + resVIII.total + resIX.total} Siswa
+
+FILE DI DALAM ARSIP ZIP INI:
+1. Rekap_Nilai_MTK_Kelas_VII_${tglStr}.csv
+2. Rekap_Nilai_MTK_Kelas_VIII_${tglStr}.csv
+3. Rekap_Nilai_MTK_Kelas_IX_${tglStr}.csv
+4. Rekap_Nilai_MTK_Semua_Kelas_${tglStr}.csv
+5. README_INFO_BACKUP.txt
+======================================================================
+File CSV dapat langsung dibuka di Microsoft Excel, Google Sheets, atau aplikasi spreadsheet lainnya.
+`;
+
+        // 6. Buat ZIP via JSZip
+        if (typeof JSZip === "undefined") {
+          throw new Error("Library JSZip belum termuat. Periksa koneksi internet Anda.");
+        }
+        const zip = new JSZip();
+        const folder = zip.folder(`Backup_Penilaian_MTK_${tglStr}`);
+        folder.file(`Rekap_Nilai_MTK_Kelas_VII_${tglStr}.csv`, resVII.csv);
+        folder.file(`Rekap_Nilai_MTK_Kelas_VIII_${tglStr}.csv`, resVIII.csv);
+        folder.file(`Rekap_Nilai_MTK_Kelas_IX_${tglStr}.csv`, resIX.csv);
+        folder.file(`Rekap_Nilai_MTK_Semua_Kelas_${tglStr}.csv`, combinedCSV);
+        folder.file(`README_INFO_BACKUP.txt`, summaryText);
+
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+        const zipUrl = URL.createObjectURL(zipBlob);
+        const link = document.createElement("a");
+        link.href = zipUrl;
+        link.download = `BACKUP_PENILAIAN_MTK_SEMUA_KELAS_${tglStr}.zip`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(zipUrl);
+
+        alert("✅ Berhasil mendownload arsip Backup ZIP!\nNama file: BACKUP_PENILAIAN_MTK_SEMUA_KELAS_" + tglStr + ".zip");
+      } catch (err) {
+        console.error("Backup ZIP gagal:", err);
+        alert("⚠️ Gagal membuat file Backup ZIP: " + err.message);
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    function openResetPenilaianModal() {
+      if (!isTeacherMode) {
+        _pendingTeacherAction = "resetModal";
+        openPinModal();
+        return;
+      }
+      document.getElementById("resetCurrentClassLabel").textContent = selectedRecapKelas;
+      document.getElementById("confirmResetInput").value = "";
+      document.getElementById("resetErrorMsg").style.display = "none";
+      document.getElementById("resetScopeClass").checked = true;
+      document.getElementById("resetModal").style.display = "flex";
+    }
+
+    function closeResetModal(e) {
+      if (e && e.target !== document.getElementById("resetModal") && !e.target.classList.contains("modal-close")) return;
+      document.getElementById("resetModal").style.display = "none";
+    }
+
+    async function executeResetPenilaian() {
+      const confirmText = document.getElementById("confirmResetInput").value.trim().toUpperCase();
+      const errorMsg = document.getElementById("resetErrorMsg");
+      if (confirmText !== "RESET") {
+        errorMsg.style.display = "block";
+        return;
+      }
+      errorMsg.style.display = "none";
+
+      const isAll = document.getElementById("resetScopeAll").checked;
+      const btn = document.getElementById("btnExecuteReset");
+      btn.disabled = true;
+      btn.textContent = "⏳ Sedang Mereset...";
+
+      try {
+        let deleteUrl = `${SUPABASE_URL}/rest/v1/tugas_siswa`;
+        if (isAll) {
+          deleteUrl += `?id=gt.0`;
+        } else {
+          deleteUrl += `?kelas=eq.${encodeURIComponent("Kelas " + selectedRecapKelas)}`;
+        }
+
+        const res = await fetch(deleteUrl, {
+          method: "DELETE",
+          headers: {
+            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+            "apikey": SUPABASE_ANON_KEY
+          }
+        });
+
+        if (!res.ok) throw new Error(await res.text());
+
+        closeResetModal();
+        alert(isAll 
+          ? "✅ Berhasil! Seluruh data pengumpulan tugas & nilai SEMUA KELAS telah direset."
+          : `✅ Berhasil! Data pengumpulan tugas & nilai Kelas ${selectedRecapKelas} telah direset.`
+        );
+
+        // Bersihkan state lokal dan sinkronkan ulang form & rekap
+        collectedSet.clear();
+        await syncCollectedStatus();
+        renderDropdown();
+        loadStatus();
+      } catch (err) {
+        console.error("Reset penilaian gagal:", err);
+        alert("⚠️ Gagal mereset penilaian: " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "🔥 Reset Sekarang";
       }
     }
 

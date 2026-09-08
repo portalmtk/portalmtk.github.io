@@ -2,9 +2,9 @@
 
 Aplikasi Web Pembelajaran Terpadu berbasis **GitHub Pages** yang terhubung langsung ke database dan storage **Supabase**:
 1. **📤 Kirim Tugas Mandiri**: Multi-foto tugas, nama otomatis terkunci setelah mengumpulkan, dan tanda terima waktu kirim (WITA).
-2. **📊 Rekapitulasi & Nilai**: Mode Guru dengan PIN (`GURUCERDAS` atau `1234`) untuk melihat foto tugas, memberikan nilai, serta Export CSV.
+2. **📊 Rekapitulasi & Nilai**: Mode Guru dengan PIN (`GURUCERDAS` atau `1234`) untuk melihat foto tugas, memberikan nilai, **📦 Backup ZIP Semua Kelas (.csv)**, Export CSV, serta **🗑️ Reset Penilaian** untuk sesi baru.
 3. **📅 Jadwal Pelajaran**: Jadwal interaktif per kelas (VII, VIII, IX) dan per hari (Senin - Jumat).
-4. **📚 Materi Pelajaran per Pertemuan**: Siswa dapat memfilter materi berdasarkan Pertemuan (Pertemuan 1 s/d 8) dan mengunduh modul/file. Guru dapat mengunggah modul materi baru langsung ke Supabase Storage.
+4. **📚 Materi Pelajaran**: Siswa dapat langsung membaca modul/file materi per kelas. Guru dapat mengunggah modul materi baru langsung ke Supabase Storage.
 
 ---
 
