@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Siswa SMP Negeri Muara Siram</title>
-  <meta name="description" content="Portal Pembelajaran Terpadu SMP Negeri Muara Siram: Pengumpulan Tugas, Rekap Nilai, Jadwal Pelajaran, dan Materi Belajar per Pertemuan.">
+  <title>Portal Matematika - SMP Negeri 5 Muara Siram</title>
+  <meta name="description" content="Portal Pembelajaran Matematika SMP Negeri 5 Muara Siram: Pengumpulan Tugas, Rekap Nilai, Jadwal Matematika, dan Materi Belajar per Pertemuan.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,55 +25,133 @@
       --danger: #ef4444;
       --gold: #fbbf24;
       --input-bg: #0c121e;
-      --pill-bg: #1e293b;
+      --math-accent: #38bdf8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 20px 14px 60px 14px; display: flex; justify-content: center; }
-    .container { width: 100%; max-width: 600px; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px 14px 60px 14px; display: flex; justify-content: center; }
+    .container { width: 100%; max-width: 620px; }
 
-    /* Header */
-    .header { text-align: center; margin-bottom: 20px; }
-    .header-badge { display: inline-block; background: rgba(79, 70, 229, 0.15); color: #818cf8; font-size: 0.75rem; font-weight: 700; padding: 5px 16px; border-radius: 999px; margin-bottom: 8px; border: 1px solid rgba(79, 70, 229, 0.3); }
-    .header h1 { font-size: 1.55rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
-    .header p { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; }
-
-    /* Nav Tabs Bar */
-    .nav-tabs {
+    /* Top Navigation Bar with Toggle Menu for Mobile */
+    .top-navbar {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
       background: var(--card-bg);
-      padding: 5px;
-      border-radius: 16px;
       border: 1px solid var(--card-border);
-      margin-bottom: 20px;
-      gap: 4px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+      border-radius: 16px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      backdrop-filter: blur(10px);
     }
-    .nav-tab {
-      flex: 1;
-      min-width: 100px;
-      text-align: center;
-      padding: 10px 8px;
-      border-radius: 12px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      color: var(--text-muted);
-      transition: all 0.2s ease;
-      border: none;
-      background: transparent;
-      white-space: nowrap;
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(79, 70, 229, 0.2);
+      border: 1px solid rgba(79, 70, 229, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      font-size: 1.2rem;
     }
-    .nav-tab.active {
+    .brand-text-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+    .brand-text-sub {
+      font-size: 0.7rem;
+      color: var(--math-accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Menu Toggle Button (Mobile Friendly) */
+    .btn-menu-toggle {
+      background: rgba(79, 70, 229, 0.15);
+      color: #fff;
+      border: 1px solid rgba(79, 70, 229, 0.35);
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-menu-toggle:hover {
       background: var(--primary);
-      color: white;
+    }
+
+    /* Modern Dropdown Drawer Menu */
+    .menu-drawer {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 10px;
+      margin-bottom: 18px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+      animation: fadeInDown 0.25s ease;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .menu-drawer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 440px) {
+      .menu-drawer-grid { grid-template-columns: 1fr; }
+    }
+    .menu-item-btn {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+      text-align: left;
+    }
+    .menu-item-btn:hover {
+      border-color: var(--primary);
+      background: rgba(79, 70, 229, 0.1);
+    }
+    .menu-item-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
       box-shadow: 0 4px 14px var(--primary-glow);
     }
+
+    /* Header Banner */
+    .header { text-align: center; margin-bottom: 18px; }
+    .header-badge { display: inline-block; background: rgba(56, 189, 248, 0.12); color: var(--math-accent); font-size: 0.75rem; font-weight: 800; padding: 4px 14px; border-radius: 999px; margin-bottom: 8px; border: 1px solid rgba(56, 189, 248, 0.25); }
+    .header h1 { font-size: 1.48rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+    .header p { color: var(--text-muted); font-size: 0.82rem; margin-top: 4px; line-height: 1.4; }
 
     /* Cards */
     .card {
@@ -195,7 +273,7 @@
     .badge-pending { background: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
     .badge-grade { font-size: 0.75rem; padding: 3px 10px; border-radius: 8px; font-weight: 800; background: rgba(251, 191, 36, 0.15); color: var(--gold); border: 1px solid rgba(251, 191, 36, 0.4); }
     .badge-no-grade { font-size: 0.7rem; color: var(--text-muted); font-style: italic; }
-    .waktu-kirim-label { font-size: 0.7rem; color: #38bdf8; margin-top: 2px; }
+    .waktu-kirim-label { font-size: 0.7rem; color: var(--math-accent); margin-top: 2px; }
     .btn-view-img { background: rgba(79, 70, 229, 0.15); color: #a5b4fc; border: 1px solid rgba(79, 70, 229, 0.3); border-radius: 6px; font-size: 0.72rem; font-weight: 700; padding: 4px 8px; cursor: pointer; }
     .btn-view-img:hover { background: var(--primary); color: #fff; }
 
@@ -212,18 +290,40 @@
     .pin-input { width: 100%; padding: 12px 14px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 12px; color: #fff; font-size: 1rem; text-align: center; letter-spacing: 4px; font-weight: 700; outline: none; margin-bottom: 12px; }
     .pin-error { color: #f87171; font-size: 0.82rem; display: none; margin-bottom: 8px; }
 
-    /* Jadwal Pelajaran Styles */
-    .day-pills { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 16px; -webkit-overflow-scrolling: touch; }
-    .day-pill { padding: 8px 14px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 10px; color: var(--text-muted); font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
-    .day-pill.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 10px var(--primary-glow); }
-    .schedule-card { background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-    .schedule-left { display: flex; align-items: center; gap: 12px; }
-    .schedule-num { width: 36px; height: 36px; border-radius: 10px; background: rgba(79, 70, 229, 0.15); border: 1px solid rgba(79, 70, 229, 0.3); color: #818cf8; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; }
-    .schedule-mapel { font-size: 0.95rem; font-weight: 700; color: #fff; }
-    .schedule-guru { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
-    .schedule-time { text-align: right; font-size: 0.78rem; font-weight: 700; color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.2); white-space: nowrap; }
+    /* Jadwal Khusus Matematika */
+    .schedule-card-math {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-left: 4px solid var(--primary);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      transition: transform 0.15s, border-color 0.2s;
+    }
+    .schedule-card-math:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+    .schedule-day-badge {
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(79, 70, 229, 0.15);
+      color: #818cf8;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+    .schedule-title-math { font-size: 1rem; font-weight: 800; color: #fff; }
+    .schedule-guru-math { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
+    .schedule-time-box { text-align: right; }
+    .schedule-time-val { font-size: 0.85rem; font-weight: 800; color: var(--math-accent); background: rgba(56, 189, 248, 0.1); padding: 4px 10px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.25); white-space: nowrap; }
 
-    /* Materi Pelajaran Styles */
+    /* Materi Styles */
     .pertemuan-filter-scroll { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 16px; -webkit-overflow-scrolling: touch; }
     .pertemuan-pill { padding: 6px 12px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 10px; color: var(--text-muted); font-size: 0.78rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
     .pertemuan-pill.active { background: #10b981; color: white; border-color: #10b981; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
@@ -232,7 +332,7 @@
     .materi-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 8px; }
     .badge-pertemuan { font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 999px; background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
     .materi-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .materi-mapel-info { font-size: 0.78rem; color: #818cf8; font-weight: 600; margin-bottom: 8px; }
+    .materi-mapel-info { font-size: 0.78rem; color: var(--math-accent); font-weight: 700; margin-bottom: 8px; }
     .materi-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.45; margin-bottom: 12px; }
     .materi-actions { display: flex; justify-content: space-between; align-items: center; pt: 8px; border-top: 1px solid rgba(255,255,255,0.06); }
     .materi-meta { font-size: 0.72rem; color: var(--text-muted); }
@@ -246,23 +346,48 @@
 <body>
   <div class="container">
     
-    <!-- HEADER -->
-    <div class="header">
-      <div class="header-badge">SMP NEGERI 5 MUARA SIRAM</div>
-      <h1>PORTAL SISWA &amp; GURU</h1>
-      <p>Pengumpulan Tugas, Rekap Nilai, Jadwal, dan Materi Belajar</p>
+    <!-- TOP NAVBAR WITH MOBILE TOGGLE -->
+    <div class="top-navbar">
+      <div class="nav-brand">
+        <div class="brand-icon">📐</div>
+        <div>
+          <div class="brand-text-title">PORTAL MATEMATIKA</div>
+          <div class="brand-text-sub">SMPN 5 MUARA SIRAM</div>
+        </div>
+      </div>
+      <button type="button" class="btn-menu-toggle" id="btnToggleMenu" onclick="toggleMenuDrawer()">
+        <span id="menuIcon">☰</span>
+        <span id="menuText">Menu</span>
+      </button>
     </div>
 
-    <!-- MAIN NAVIGATION TABS -->
-    <div class="nav-tabs">
-      <button class="nav-tab active" id="tabBtnForm" onclick="switchMainTab('form')">📤 Kirim Tugas</button>
-      <button class="nav-tab" id="tabBtnStatus" onclick="switchMainTab('status')">📊 Rekap &amp; Nilai</button>
-      <button class="nav-tab" id="tabBtnJadwal" onclick="switchMainTab('jadwal')">📅 Jadwal</button>
-      <button class="nav-tab" id="tabBtnMateri" onclick="switchMainTab('materi')">📚 Materi</button>
+    <!-- MODERN TOGGLE MENU DRAWER (NO HORIZONTAL SCROLL) -->
+    <div id="menuDrawer" class="menu-drawer">
+      <div class="menu-drawer-grid">
+        <button type="button" class="menu-item-btn active" id="mItemForm" onclick="selectTabFromMenu('form')">
+          <span>📤</span> Kirim Tugas MTK
+        </button>
+        <button type="button" class="menu-item-btn" id="mItemStatus" onclick="selectTabFromMenu('status')">
+          <span>📊</span> Rekap &amp; Nilai
+        </button>
+        <button type="button" class="menu-item-btn" id="mItemJadwal" onclick="selectTabFromMenu('jadwal')">
+          <span>📅</span> Jadwal Matematika
+        </button>
+        <button type="button" class="menu-item-btn" id="mItemMateri" onclick="selectTabFromMenu('materi')">
+          <span>📚</span> Materi Matematika
+        </button>
+      </div>
+    </div>
+
+    <!-- BANNER IDENTITAS GURU & MAPEL -->
+    <div class="header">
+      <div class="header-badge">GURU PENGAMPU: SUPIANTO, S.Pd.,Gr.</div>
+      <h1>MATEMATIKA MANDIRI</h1>
+      <p>Portal Pengumpulan Tugas, Pengecekan Nilai, Jadwal, dan Materi Belajar Matematika (Kelas VII, VIII, IX)</p>
     </div>
 
     <!-- ======================================================== -->
-    <!-- TAB 1: FORM PENGUMPULAN TUGAS SISWA                      -->
+    <!-- TAB 1: FORM PENGUMPULAN TUGAS MATEMATIKA                 -->
     <!-- ======================================================== -->
     <div id="tab-form" class="card">
       <form id="taskForm" onsubmit="submitForm(event)">
@@ -284,14 +409,14 @@
           </select>
         </div>
 
-        <!-- 3. MULTI FOTO LEMBAR TUGAS -->
+        <!-- 3. MULTI FOTO LEMBAR TUGAS MTK -->
         <div class="form-group">
-          <label>3. Foto Lembar / Buku Tugas <span style="color:#818cf8;font-size:0.75rem;font-weight:normal;">(Bisa pilih beberapa foto)</span></label>
+          <label>3. Foto Lembar / Buku Tugas Matematika <span style="color:#818cf8;font-size:0.75rem;font-weight:normal;">(Bisa pilih beberapa foto)</span></label>
           <div class="upload-box" id="uploadBox" onclick="document.getElementById('fileInput').click()">
             <div id="uploadPlaceholder">
               <div class="upload-icon">📸</div>
-              <div class="upload-text">Pilih Gambar dari Galeri / Ambil Foto</div>
-              <div class="upload-sub">Ketuk di sini untuk memilih 1 atau beberapa foto lembar tugas</div>
+              <div class="upload-text">Pilih Gambar Tugas Matematika / Ambil Foto</div>
+              <div class="upload-sub">Ketuk di sini untuk memilih 1 atau beberapa foto lembar jawaban tugas</div>
             </div>
           </div>
           <input type="file" id="fileInput" accept="image/*" multiple style="display:none;" onchange="handleFiles(event)">
@@ -308,17 +433,18 @@
 
         <div id="alertBox" class="alert-error"></div>
 
-        <button type="submit" id="btnKirim" class="btn-submit">🚀 KIRIM TUGAS SEKARANG</button>
-        <div id="loading" class="loading-spinner">⏳ Sedang mengunggah foto tugas ke Supabase...</div>
+        <button type="submit" id="btnKirim" class="btn-submit">🚀 KIRIM TUGAS MATEMATIKA</button>
+        <div id="loading" class="loading-spinner">⏳ Sedang mengunggah foto tugas ke database...</div>
       </form>
 
       <!-- LAPORAN TANDA TERIMA PENGIRIMAN -->
       <div id="successCard" class="success-box">
         <div class="success-icon-wrap">✅</div>
-        <h2 class="success-title">Tugas Berhasil Terkirim!</h2>
-        <p class="success-desc">Data dan foto tugas Anda telah tersimpan secara resmi di database Supabase.</p>
+        <h2 class="success-title">Tugas Matematika Berhasil Terkirim!</h2>
+        <p class="success-desc">Data dan lembar tugas Anda telah tersimpan secara resmi untuk dinilai oleh Bpk. Supianto, S.Pd.,Gr.</p>
         
         <div class="receipt-card">
+          <div class="receipt-row"><span class="receipt-label">Mata Pelajaran:</span><span class="receipt-val" style="color:var(--math-accent);">Matematika</span></div>
           <div class="receipt-row"><span class="receipt-label">Kelas:</span><span class="receipt-val" id="recKelas" style="color:#818cf8;">-</span></div>
           <div class="receipt-row"><span class="receipt-label">No. Absen:</span><span class="receipt-val" id="recNo">-</span></div>
           <div class="receipt-row"><span class="receipt-label">Nama Siswa:</span><span class="receipt-val" id="recNama">-</span></div>
@@ -327,17 +453,17 @@
           <div class="receipt-row"><span class="receipt-label">Status:</span><span class="receipt-val" style="color:var(--success);">Tercatat &amp; Terkunci 🔒</span></div>
         </div>
 
-        <button class="btn-submit" onclick="switchMainTab('status')">📊 Lihat Rekap &amp; Nilai</button>
+        <button class="btn-submit" onclick="selectTabFromMenu('status')">📊 Lihat Rekap &amp; Nilai</button>
         <button class="btn-secondary" onclick="resetFormToNew()">➕ Pilih Siswa Lain</button>
       </div>
     </div>
 
     <!-- ======================================================== -->
-    <!-- TAB 2: REKAP STATUS PENGUMPULAN & NILAI GURU             -->
+    <!-- TAB 2: REKAP STATUS PENGUMPULAN & NILAI MATEMATIKA       -->
     <!-- ======================================================== -->
     <div id="tab-status" class="card" style="display:none;">
       <div class="form-group" style="margin-bottom:14px;">
-        <label>Pilih Kelas Rekap:</label>
+        <label>Pilih Kelas Rekap Matematika:</label>
         <div class="class-pills">
           <button type="button" class="class-pill active" onclick="selectRecapClass('VII', this)">Kelas VII</button>
           <button type="button" class="class-pill" onclick="selectRecapClass('VIII', this)">Kelas VIII</button>
@@ -346,7 +472,7 @@
       </div>
 
       <div class="recap-header">
-        <h3 id="recapTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Rekap Kelas VII</h3>
+        <h3 id="recapTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Rekap Nilai MTK Kelas VII</h3>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
           <button class="btn-action-sm" id="btnTeacherMode" onclick="toggleTeacherMode()">🔒 Mode Guru</button>
           <button class="btn-action-sm" id="btnExportCSV" onclick="exportCSV()" style="display:none;">📄 Export CSV</button>
@@ -366,11 +492,11 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- TAB 3: JADWAL PELAJARAN                                  -->
+    <!-- TAB 3: JADWAL PELAJARAN KHUSUS MATEMATIKA                -->
     <!-- ======================================================== -->
     <div id="tab-jadwal" class="card" style="display:none;">
-      <div class="form-group" style="margin-bottom:12px;">
-        <label>Pilih Kelas Jadwal:</label>
+      <div class="form-group" style="margin-bottom:14px;">
+        <label>Pilih Kelas Jadwal Matematika:</label>
         <div class="class-pills">
           <button type="button" class="class-pill active" onclick="selectJadwalClass('VII', this)">Kelas VII</button>
           <button type="button" class="class-pill" onclick="selectJadwalClass('VIII', this)">Kelas VIII</button>
@@ -378,29 +504,20 @@
         </div>
       </div>
 
-      <div class="day-pills">
-        <button type="button" class="day-pill active" onclick="selectJadwalDay('Senin', this)">Senin</button>
-        <button type="button" class="day-pill" onclick="selectJadwalDay('Selasa', this)">Selasa</button>
-        <button type="button" class="day-pill" onclick="selectJadwalDay('Rabu', this)">Rabu</button>
-        <button type="button" class="day-pill" onclick="selectJadwalDay('Kamis', this)">Kamis</button>
-        <button type="button" class="day-pill" onclick="selectJadwalDay('Jumat', this)">Jumat</button>
-        <button type="button" class="day-pill" onclick="selectJadwalDay('Sabtu', this)">Sabtu</button>
+      <div class="recap-header" style="margin-bottom:12px;">
+        <h3 id="jadwalHeaderTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Jadwal Matematika Kelas VII</h3>
+        <span style="font-size:0.75rem; color:var(--math-accent); font-weight:700; background:rgba(56,189,248,0.1); padding:4px 10px; border-radius:999px;">Total: 4 JP / Minggu</span>
       </div>
 
-      <div class="recap-header" style="margin-bottom:10px;">
-        <h3 id="jadwalHeaderTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Jadwal Kelas VII &bull; Hari Senin</h3>
-        <button class="btn-action-sm" onclick="loadJadwal()">🔄 Segarkan</button>
-      </div>
-
-      <div id="jadwalList">Memuat jadwal...</div>
+      <div id="jadwalList">Memuat jadwal matematika...</div>
     </div>
 
     <!-- ======================================================== -->
-    <!-- TAB 4: MATERI PELAJARAN (BERDASARKAN PERTEMUAN)          -->
+    <!-- TAB 4: MATERI PELAJARAN MATEMATIKA (PER PERTEMUAN)       -->
     <!-- ======================================================== -->
     <div id="tab-materi" class="card" style="display:none;">
       <div class="form-group" style="margin-bottom:12px;">
-        <label>Pilih Kelas Materi:</label>
+        <label>Pilih Kelas Materi Matematika:</label>
         <div class="class-pills">
           <button type="button" class="class-pill active" onclick="selectMateriClass('VII', this)">Kelas VII</button>
           <button type="button" class="class-pill" onclick="selectMateriClass('VIII', this)">Kelas VIII</button>
@@ -409,7 +526,7 @@
       </div>
 
       <!-- FILTER PERTEMUAN -->
-      <label style="font-size:0.8rem; color:var(--text-muted); margin-bottom:6px;">Pilih Nomor Pertemuan:</label>
+      <label style="font-size:0.8rem; color:var(--text-muted); margin-bottom:6px;">Pilih Pertemuan Matematika:</label>
       <div class="pertemuan-filter-scroll">
         <button type="button" class="pertemuan-pill active" onclick="filterPertemuan(0, this)">✨ Semua</button>
         <button type="button" class="pertemuan-pill" onclick="filterPertemuan(1, this)">Pertemuan 1</button>
@@ -423,19 +540,19 @@
       </div>
 
       <div class="recap-header" style="margin-bottom:12px;">
-        <h3 id="materiHeaderTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Daftar Materi Kelas VII</h3>
+        <h3 id="materiHeaderTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Materi Matematika Kelas VII</h3>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
           <button class="btn-action-sm" id="btnHapusSemuaMateri" style="display:none;background:rgba(239,68,68,0.15);color:#fca5a5;border-color:rgba(239,68,68,0.3);" onclick="clearAllMateri()">🗑️ Bersihkan Semua</button>
-          <button class="btn-action-sm" style="background:var(--primary);color:#fff;" onclick="openUploadMateriModal()">➕ Upload Materi</button>
+          <button class="btn-action-sm" style="background:var(--primary);color:#fff;" onclick="openUploadMateriModal()">➕ Upload Materi MTK</button>
         </div>
       </div>
 
-      <div id="materiList">Memuat materi pelajaran...</div>
+      <div id="materiList">Memuat materi matematika...</div>
     </div>
 
     <!-- FOOTER -->
     <div class="footer">
-      &copy; 2026 SMP Negeri Muara Siram &bull; Sistem Pembelajaran Terpadu Supabase
+      &copy; 2026 SMP Negeri 5 Muara Siram &bull; Portal Pembelajaran Matematika Mandiri
     </div>
 
   </div>
@@ -445,12 +562,12 @@
   <!-- ======================================================== -->
   <div id="pinModal" class="modal-backdrop" onclick="closePinModal(event)">
     <div class="pin-modal-box" onclick="event.stopPropagation()">
-      <div class="pin-title">🔒 Akses Mode Guru</div>
-      <p class="pin-sub">Masukkan PIN untuk mengakses mode penilaian atau upload materi</p>
+      <div class="pin-title">🔒 Akses Guru Matematika</div>
+      <p class="pin-sub">Masukkan PIN untuk memeriksa tugas, menilai, atau upload materi</p>
       <form onsubmit="verifyTeacherPin(event)">
         <input type="password" id="teacherPinInput" class="pin-input" placeholder="PIN GURU" maxlength="20" autocomplete="off">
         <p id="pinErrorMsg" class="pin-error">PIN salah. Masukkan PIN Guru yang benar.</p>
-        <button type="submit" class="btn-submit" style="padding:10px;">Buka Akses</button>
+        <button type="submit" class="btn-submit" style="padding:10px;">Buka Akses Guru</button>
       </form>
     </div>
   </div>
@@ -463,11 +580,11 @@
       <button class="modal-close" onclick="closeImageModal()">✕</button>
       <h3 id="modalStudentName" style="font-size:1.05rem;font-weight:700;">-</h3>
       <p id="modalStudentMeta" style="font-size:0.78rem;color:var(--text-muted);margin-top:2px;">-</p>
-      <img id="modalImgTag" src="" alt="Foto Tugas" class="modal-img">
+      <img id="modalImgTag" src="" alt="Foto Lembar Tugas" class="modal-img">
       <div style="margin-top:8px;border-top:1px solid var(--card-border);padding-top:12px;">
-        <label style="font-size:0.8rem;">⭐ Beri Nilai &amp; Catatan Guru:</label>
+        <label style="font-size:0.8rem;">⭐ Beri Nilai Tugas Matematika:</label>
         <div class="teacher-input-group">
-          <input type="text" id="inputNilaiGuru" class="teacher-input" placeholder="Nilai (misal: 90)" style="max-width:100px;">
+          <input type="text" id="inputNilaiGuru" class="teacher-input" placeholder="Nilai (misal: 100)" style="max-width:100px;">
           <input type="text" id="inputCatatanGuru" class="teacher-input" placeholder="Catatan / Feedback untuk siswa">
           <button type="button" class="btn-view-img" style="background:var(--primary);color:#fff;" onclick="saveGrade()">Simpan</button>
         </div>
@@ -476,13 +593,13 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- MODAL: UPLOAD MATERI PELAJARAN OLEH GURU                 -->
+  <!-- MODAL: UPLOAD MATERI MATEMATIKA OLEH GURU                -->
   <!-- ======================================================== -->
   <div id="materiModal" class="modal-backdrop" onclick="closeMateriModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeMateriModal()">✕</button>
-      <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:4px;">📚 Upload Materi Pelajaran</h3>
-      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:16px;">Materi akan langsung dapat dipelajari &amp; diunduh siswa sesuai pertemuannya.</p>
+      <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:4px;">📚 Upload Materi Matematika</h3>
+      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:16px;">Materi akan langsung tampil untuk dipelajari &amp; diunduh siswa sesuai pertemuannya.</p>
 
       <form id="uploadMateriForm" onsubmit="submitMateri(event)">
         <div class="form-group">
@@ -497,7 +614,7 @@
         <div style="display:flex; gap:10px;">
           <div class="form-group" style="flex:2;">
             <label>Mata Pelajaran:</label>
-            <input type="text" id="materiInputMapel" placeholder="Contoh: Informatika" required>
+            <input type="text" id="materiInputMapel" value="Matematika" readonly style="background:#1e293b; color:var(--math-accent); font-weight:700;" required>
           </div>
           <div class="form-group" style="flex:1;">
             <label>Pertemuan Ke-:</label>
@@ -515,30 +632,30 @@
         </div>
 
         <div class="form-group">
-          <label>Judul Materi Pokok:</label>
-          <input type="text" id="materiInputJudul" placeholder="Contoh: Jaringan Komputer & Topologi" required>
+          <label>Judul Materi Pokok Matematika:</label>
+          <input type="text" id="materiInputJudul" placeholder="Contoh: Operasi Bilangan Bulat &amp; Pecahan" required>
         </div>
 
         <div class="form-group">
-          <label>Nama Guru Pengampu:</label>
-          <input type="text" id="materiInputGuru" placeholder="Contoh: Bpk. Hendra, S.Kom" required>
+          <label>Guru Pengampu:</label>
+          <input type="text" id="materiInputGuru" value="Supianto, S.Pd.,Gr." readonly style="background:#1e293b; color:#fff;" required>
         </div>
 
         <div class="form-group">
           <label>Ringkasan / Petunjuk Belajar:</label>
-          <textarea id="materiInputDesc" rows="3" placeholder="Tuliskan petunjuk tugas atau ringkasan materi untuk siswa..."></textarea>
+          <textarea id="materiInputDesc" rows="3" placeholder="Tuliskan petunjuk tugas atau ringkasan rumus matematika untuk siswa..."></textarea>
         </div>
 
         <div class="form-group">
           <label>Pilih File Dokumen / Modul (PDF, Word, Gambar) ATAU Masukkan Link:</label>
           <input type="file" id="materiFileInput" accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png">
           <div style="text-align:center; font-size:0.75rem; color:var(--text-muted); margin: 6px 0;">-- ATAU --</div>
-          <input type="text" id="materiLinkInput" placeholder="https://drive.google.com/... atau link referensi YouTube/web">
+          <input type="text" id="materiLinkInput" placeholder="https://drive.google.com/... atau link referensi materi web">
         </div>
 
         <div id="materiAlertBox" class="alert-error"></div>
-        <button type="submit" id="btnUploadMateri" class="btn-submit" style="margin-top:10px;">🚀 Simpan &amp; Terbitkan Materi</button>
-        <div id="materiLoading" class="loading-spinner">⏳ Mengunggah materi ke Supabase...</div>
+        <button type="submit" id="btnUploadMateri" class="btn-submit" style="margin-top:10px;">🚀 Terbitkan Materi Matematika</button>
+        <div id="materiLoading" class="loading-spinner">⏳ Mengunggah materi ke database...</div>
       </form>
     </div>
   </div>
@@ -567,7 +684,7 @@
       "VIII": [
         { no: 1, nama: "Achmad Rifky" }, { no: 2, nama: "Afika Damara Azra" }, { no: 3, nama: "Agustinus Ndara Mone" },
         { no: 4, nama: "Alung Saputra" }, { no: 5, nama: "Andder Stanislaus Ola" }, { no: 6, nama: "Arjuna" },
-        { no: 7, nama: "Dede Efrata Natalius" }, { no: 8, nama: "Diva Putri Rahayu" }, { no: 9, nama: "Ghira Anggara" },
+        { no: 7, nama: "Dede Efrata Natalius" }, { no: 8, nama: "Diva Putri Rahayu" }, { no: 9, lang: "Ghira Anggara", nama: "Ghira Anggara" },
         { no: 10, nama: "Hanan" }, { no: 11, nama: "JAHANI" }, { no: 12, nama: "Jenilya" },
         { no: 13, nama: "Junia Novita Nurjannati" }, { no: 14, nama: "Meisya Faulina" }, { no: 15, nama: "Michkel Arya Putra" },
         { no: 16, nama: "MORGAN SIAS PUNADA" }, { no: 17, nama: "Mutia" }, { no: 18, nama: "Najwa Asyilah" },
@@ -591,11 +708,62 @@
       ]
     };
 
-    // 3. STATE VARIABLES
+    // 3. JADWAL RESMI KHUSUS MATEMATIKA (SMPN 5 MUARA SIRAM)
+    const JADWAL_MATEMATIKA = {
+      "VII": [
+        {
+          hari: "Selasa",
+          jam: "Jam Ke-3 (2 JP)",
+          waktu: "08.50 - 10.10 WITA",
+          ruang: "Ruang Kelas VII",
+          guru: "Supianto, S.Pd.,Gr."
+        },
+        {
+          hari: "Rabu",
+          jam: "Jam Ke-1 (2 JP)",
+          waktu: "07.30 - 08.50 WITA",
+          ruang: "Ruang Kelas VII",
+          guru: "Supianto, S.Pd.,Gr."
+        }
+      ],
+      "VIII": [
+        {
+          hari: "Selasa",
+          jam: "Jam Ke-1 (2 JP)",
+          waktu: "07.30 - 08.50 WITA",
+          ruang: "Ruang Kelas VIII",
+          guru: "Supianto, S.Pd.,Gr."
+        },
+        {
+          hari: "Kamis",
+          jam: "Jam Ke-5 (2 JP)",
+          waktu: "10.40 - 12.00 WITA",
+          ruang: "Ruang Kelas VIII",
+          guru: "Supianto, S.Pd.,Gr."
+        }
+      ],
+      "IX": [
+        {
+          hari: "Senin",
+          jam: "Jam Ke-8 & 9 (2 JP)",
+          waktu: "12.00 - 13.20 WITA",
+          ruang: "Ruang Kelas IX",
+          guru: "Supianto, S.Pd.,Gr."
+        },
+        {
+          hari: "Kamis",
+          jam: "Jam Ke-3 (2 JP)",
+          waktu: "08.50 - 10.10 WITA",
+          ruang: "Ruang Kelas IX",
+          guru: "Supianto, S.Pd.,Gr."
+        }
+      ]
+    };
+
+    // 4. STATE VARIABLES
     let selectedKelas = "VII";
     let selectedRecapKelas = "VII";
     let selectedJadwalKelas = "VII";
-    let selectedJadwalHari = "Senin";
     let selectedMateriKelas = "VII";
     let selectedPertemuanFilter = 0; // 0 = Semua
 
@@ -603,44 +771,64 @@
     let collectedSet = new Set();
     let isTeacherMode = false;
     let _records = [], _currentRecord = null;
-    let _pendingTeacherAction = null; // 'mode' or 'uploadMateri'
+    let _pendingTeacherAction = null;
 
     // ========================================================
-    // TAB SWITCHER
+    // TOGGLE MENU DRAWER LOGIC (NO HORIZONTAL SCROLL)
     // ========================================================
-    function switchMainTab(tab) {
-      document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+    function toggleMenuDrawer() {
+      const drawer = document.getElementById("menuDrawer");
+      const icon = document.getElementById("menuIcon");
+      const text = document.getElementById("menuText");
+      if (drawer.style.display === "block") {
+        drawer.style.display = "none";
+        icon.textContent = "☰";
+        text.textContent = "Menu";
+      } else {
+        drawer.style.display = "block";
+        icon.textContent = "✕";
+        text.textContent = "Tutup";
+      }
+    }
+
+    function selectTabFromMenu(tab) {
+      document.querySelectorAll('.menu-item-btn').forEach(b => b.classList.remove('active'));
       document.getElementById('tab-form').style.display = 'none';
       document.getElementById('tab-status').style.display = 'none';
       document.getElementById('tab-jadwal').style.display = 'none';
       document.getElementById('tab-materi').style.display = 'none';
 
+      // Tutup menu drawer setelah klik agar layar bersih
+      document.getElementById("menuDrawer").style.display = "none";
+      document.getElementById("menuIcon").textContent = "☰";
+      document.getElementById("menuText").textContent = "Menu";
+
       if (tab === 'form') {
-        document.getElementById('tabBtnForm').classList.add('active');
+        document.getElementById('mItemForm').classList.add('active');
         document.getElementById('tab-form').style.display = 'block';
         syncCollectedStatus();
       } else if (tab === 'status') {
-        document.getElementById('tabBtnStatus').classList.add('active');
+        document.getElementById('mItemStatus').classList.add('active');
         document.getElementById('tab-status').style.display = 'block';
         selectedRecapKelas = selectedKelas;
         document.querySelectorAll('#tab-status .class-pill').forEach(b => {
           b.classList.toggle('active', b.textContent.includes(selectedKelas));
         });
-        document.getElementById('recapTitle').textContent = "Rekap Kelas " + selectedKelas;
+        document.getElementById('recapTitle').textContent = "Rekap Nilai MTK Kelas " + selectedKelas;
         loadStatus();
       } else if (tab === 'jadwal') {
-        document.getElementById('tabBtnJadwal').classList.add('active');
+        document.getElementById('mItemJadwal').classList.add('active');
         document.getElementById('tab-jadwal').style.display = 'block';
-        loadJadwal();
+        loadJadwalMatematika();
       } else if (tab === 'materi') {
-        document.getElementById('tabBtnMateri').classList.add('active');
+        document.getElementById('mItemMateri').classList.add('active');
         document.getElementById('tab-materi').style.display = 'block';
         loadMateri();
       }
     }
 
     // ========================================================
-    // TAB 1: KIRIM TUGAS LOGIC
+    // TAB 1: KIRIM TUGAS MATEMATIKA LOGIC
     // ========================================================
     function selectClass(kelas, btn) {
       selectedKelas = kelas;
@@ -842,7 +1030,7 @@
       const loading = document.getElementById("loading");
       btn.disabled = true;
       loading.style.display = "block";
-      loading.textContent = "⏳ Mengunggah foto tugas ke Supabase...";
+      loading.textContent = "⏳ Mengunggah tugas matematika ke database...";
 
       try {
         const finalImage = await getConsolidatedImage();
@@ -852,7 +1040,7 @@
         const wkt = hr + ", " + String(now.getDate()).padStart(2,"0") + " " + bl + " " + now.getFullYear() +
           " (" + String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0") + ":" + String(now.getSeconds()).padStart(2,"0") + " WITA)";
 
-        // 1. Upload foto ke Supabase Storage (bucket: tugas-siswa)
+        // 1. Upload foto ke Supabase Storage
         const cleanName = siswaData.nama.replace(/[^a-zA-Z0-9]/g, "_");
         const fileName = `Kelas_${selectedKelas}/${siswaData.no}_${cleanName}_${Date.now()}.jpg`;
         const b64 = finalImage.includes(",") ? finalImage.split(",")[1] : finalImage;
@@ -913,19 +1101,19 @@
     }
 
     // ========================================================
-    // TAB 2: REKAP STATUS & NILAI LOGIC
+    // TAB 2: REKAP STATUS & NILAI MATEMATIKA LOGIC
     // ========================================================
     function selectRecapClass(kelas, btn) {
       selectedRecapKelas = kelas;
       document.querySelectorAll('#tab-status .class-pill').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.getElementById('recapTitle').textContent = "Rekap Kelas " + kelas;
+      document.getElementById('recapTitle').textContent = "Rekap Nilai MTK Kelas " + kelas;
       loadStatus();
     }
 
     async function loadStatus() {
       const container = document.getElementById("statusList");
-      container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:14px;'>⏳ Mengambil data rekap & nilai Kelas " + selectedRecapKelas + "...</p>";
+      container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:14px;'>⏳ Mengambil data nilai Matematika Kelas " + selectedRecapKelas + "...</p>";
 
       try {
         const kelasParam = encodeURIComponent("Kelas " + selectedRecapKelas);
@@ -983,7 +1171,7 @@
         document.getElementById("recapCountText").textContent = `Sudah: ${doneCount} / ${total} Siswa`;
         document.getElementById("recapPercentText").textContent = pct + "%";
         document.getElementById("progressBarFill").style.width = pct + "%";
-        container.innerHTML = html || "<p style='text-align:center;color:var(--text-muted);padding:16px;'>Belum ada data yang masuk.</p>";
+        container.innerHTML = html || "<p style='text-align:center;color:var(--text-muted);padding:16px;'>Belum ada tugas yang dikumpulkan.</p>";
       } catch(err) {
         container.innerHTML = "<p style='color:var(--danger);text-align:center;padding:12px;'>⚠️ Gagal memuat rekap: " + err.message + "</p>";
       }
@@ -1029,6 +1217,8 @@
 
         if (_pendingTeacherAction === "uploadMateri") {
           document.getElementById("materiModal").style.display = "flex";
+        } else if (_pendingTeacherAction === "clearAllMateri") {
+          clearAllMateri();
         } else {
           loadStatus();
           loadMateri();
@@ -1074,7 +1264,7 @@
         });
         if (!res.ok) throw new Error(await res.text());
 
-        alert("✅ Nilai berhasil disimpan!");
+        alert("✅ Nilai Matematika berhasil disimpan!");
         document.getElementById("imageModal").style.display = "none";
         _currentRecord = null;
         loadStatus();
@@ -1096,7 +1286,7 @@
         });
 
         const list = DATA_KELAS[selectedRecapKelas] || [];
-        const rows = [["No Absen", "Nama Siswa", "Kelas", "Status", "Waktu Kirim", "Nilai", "Catatan Guru", "Link Foto"]];
+        const rows = [["No Absen", "Nama Siswa", "Kelas", "Mata Pelajaran", "Status", "Waktu Kirim", "Nilai", "Catatan Guru", "Link Foto"]];
 
         list.forEach(s => {
           const key = s.nama.toString().trim().toLowerCase(), item = mapS[key], isDone = !!item;
@@ -1105,7 +1295,7 @@
           const nilai = isDone && item && item.nilai ? ('"' + item.nilai + '"') : "-";
           const cat = isDone && item && item.catatan_guru ? ('"' + item.catatan_guru.replace(/"/g,'""') + '"') : "-";
           const foto = isDone && item && item.image_url ? ('"' + item.image_url + '"') : "-";
-          rows.push([s.no, '"' + s.nama + '"', '"Kelas ' + selectedRecapKelas + '"', status, waktu, nilai, cat, foto]);
+          rows.push([s.no, '"' + s.nama + '"', '"Kelas ' + selectedRecapKelas + '"', "Matematika", status, waktu, nilai, cat, foto]);
         });
 
         const csv = String.fromCharCode(65279) + rows.map(r => r.join(";")).join(String.fromCharCode(13, 10));
@@ -1113,7 +1303,7 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "Rekap_Nilai_Kelas_" + selectedRecapKelas + "_" + new Date().toISOString().slice(0,10) + ".csv";
+        link.download = "Rekap_Nilai_Matematika_Kelas_" + selectedRecapKelas + "_" + new Date().toISOString().slice(0,10) + ".csv";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -1124,655 +1314,52 @@
     }
 
     // ========================================================
-    // TAB 3: JADWAL PELAJARAN LOGIC
+    // TAB 3: JADWAL KHUSUS MATEMATIKA LOGIC
     // ========================================================
-    const PIKET_HARIAN = {
-  "Senin": "Hamdani & Dony",
-  "Selasa": "Hetty & Deyby",
-  "Rabu": "Amanda & Dwi",
-  "Kamis": "Ilham & Roi",
-  "Jumat": "Supianto",
-  "Sabtu": "Yanti"
-};
-
-    const DEFAULT_JADWAL = {
-  "VII": {
-    "Senin": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.10",
-        "mapel": "Upacara Bendera",
-        "guru": "Pembina Upacara"
-      },
-      {
-        "jam": 2,
-        "waktu": "08.10 - 09.30",
-        "mapel": "Bahasa Indonesia",
-        "guru": "Roi Martin, S.Pd.,Gr."
-      },
-      {
-        "jam": 3,
-        "waktu": "09.30 - 10.10",
-        "mapel": "Bahasa Indonesia",
-        "guru": "Roi Martin, S.Pd.,Gr."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "PPKn",
-        "guru": "Hetti, S.Pd.,Gr."
-      },
-      {
-        "jam": 8,
-        "waktu": "12.00 - 13.20",
-        "mapel": "Prakarya",
-        "guru": "Dwi Oktaviani S, S.Pd.,Gr."
-      }
-    ],
-    "Selasa": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.50",
-        "mapel": "PJOK",
-        "guru": "Hamdani, S.Pd.,Gr."
-      },
-      {
-        "jam": 3,
-        "waktu": "08.50 - 10.10",
-        "mapel": "Matematika",
-        "guru": "Supianto, S.Pd.,Gr."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "Bahasa Indonesia",
-        "guru": "Roi Martin, S.Pd.,Gr."
-      },
-      {
-        "jam": 8,
-        "waktu": "12.00 - 13.20",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      }
-    ],
-    "Rabu": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.50",
-        "mapel": "Matematika",
-        "guru": "Supianto, S.Pd.,Gr."
-      },
-      {
-        "jam": 3,
-        "waktu": "08.50 - 10.10",
-        "mapel": "Pendidikan Agama (PAI / PAK)",
-        "guru": "M. Dony Wardhana (PAI) / Deyby Taniowas (PAK)"
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "IPA",
-        "guru": "Amanda Kartika, S.Pd.,Gr."
-      },
-      {
-        "jam": 8,
-        "waktu": "12.00 - 13.20",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      }
-    ],
-    "Kamis": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 09.30",
-        "mapel": "Bahasa Inggris",
-        "guru": "M. Ilham, S.Pd.,Gr."
-      },
-      {
-        "jam": 3,
-        "waktu": "09.30 - 10.10",
-        "mapel": "IPS",
-        "guru": "Yanti, S.Pd."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "IPS",
-        "guru": "Yanti, S.Pd."
-      },
-      {
-        "jam": 8,
-        "waktu": "12.00 - 13.20",
-        "mapel": "Jam Guru Wali",
-        "guru": "Wali Kelas VII"
-      }
-    ],
-    "Jumat": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.10",
-        "mapel": "Senam Pagi Bersama",
-        "guru": "Guru PJOK / Wali Kelas"
-      },
-      {
-        "jam": 2,
-        "waktu": "08.10 - 09.30",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "09.30 - 09.50",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 4,
-        "waktu": "09.50 - 11.10",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      }
-    ],
-    "Sabtu": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.50",
-        "mapel": "Pembinaan Keagamaan",
-        "guru": "Guru Keagamaan (Dony / Deyby)"
-      },
-      {
-        "jam": 3,
-        "waktu": "08.50 - 10.10",
-        "mapel": "IPA",
-        "guru": "Amanda Kartika, S.Pd.,Gr."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "TIK / Informatika",
-        "guru": "Hamdani, S.Pd.,Gr."
-      }
-    ]
-  },
-  "VIII": {
-    "Senin": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.10",
-        "mapel": "Upacara Bendera",
-        "guru": "Pembina Upacara"
-      },
-      {
-        "jam": 2,
-        "waktu": "08.10 - 10.10",
-        "mapel": "IPS",
-        "guru": "Yanti, S.Pd."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 11.20",
-        "mapel": "Bahasa Inggris",
-        "guru": "M. Ilham, S.Pd.,Gr."
-      },
-      {
-        "jam": 6,
-        "waktu": "11.20 - 13.20",
-        "mapel": "Bahasa Indonesia",
-        "guru": "Roi Martin, S.Pd.,Gr."
-      }
-    ],
-    "Selasa": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.50",
-        "mapel": "Matematika",
-        "guru": "Supianto, S.Pd.,Gr."
-      },
-      {
-        "jam": 3,
-        "waktu": "08.50 - 10.10",
-        "mapel": "Pendidikan Agama (PAI / PAK)",
-        "guru": "M. Dony Wardhana (PAI) / Deyby Taniowas (PAK)"
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "IPA",
-        "guru": "Amanda Kartika, S.Pd.,Gr."
-      },
-      {
-        "jam": 8,
-        "waktu": "12.00 - 13.20",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      }
-    ],
-    "Rabu": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.50",
-        "mapel": "PJOK",
-        "guru": "Hamdani, S.Pd.,Gr."
-      },
-      {
-        "jam": 3,
-        "waktu": "08.50 - 10.10",
-        "mapel": "PPKn",
-        "guru": "Hetti, S.Pd.,Gr."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "Prakarya",
-        "guru": "Dwi Oktaviani S, S.Pd.,Gr."
-      },
-      {
-        "jam": 8,
-        "waktu": "12.00 - 13.20",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      }
-    ],
-    "Kamis": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.50",
-        "mapel": "Bahasa Indonesia",
-        "guru": "Roi Martin, S.Pd.,Gr."
-      },
-      {
-        "jam": 3,
-        "waktu": "08.50 - 10.10",
-        "mapel": "IPA",
-        "guru": "Amanda Kartika, S.Pd.,Gr."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "Matematika",
-        "guru": "Supianto, S.Pd.,Gr."
-      },
-      {
-        "jam": 8,
-        "waktu": "12.00 - 13.20",
-        "mapel": "Jam Guru Wali",
-        "guru": "Wali Kelas VIII"
-      }
-    ],
-    "Jumat": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.10",
-        "mapel": "Senam Pagi Bersama",
-        "guru": "Guru PJOK / Wali Kelas"
-      },
-      {
-        "jam": 2,
-        "waktu": "08.10 - 09.30",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "09.30 - 09.50",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 4,
-        "waktu": "09.50 - 11.10",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      }
-    ],
-    "Sabtu": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.50",
-        "mapel": "Pembinaan Keagamaan",
-        "guru": "Guru Keagamaan (Dony / Deyby)"
-      },
-      {
-        "jam": 3,
-        "waktu": "08.50 - 10.10",
-        "mapel": "TIK / Informatika",
-        "guru": "Deyby Taniowas, S.Pd.K."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "Bahasa Inggris",
-        "guru": "M. Ilham, S.Pd.,Gr."
-      }
-    ]
-  },
-  "IX": {
-    "Senin": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.10",
-        "mapel": "Upacara Bendera",
-        "guru": "Pembina Upacara"
-      },
-      {
-        "jam": 2,
-        "waktu": "08.10 - 10.10",
-        "mapel": "Bahasa Inggris",
-        "guru": "M. Ilham, S.Pd.,Gr."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "IPA",
-        "guru": "Amanda Kartika, S.Pd.,Gr."
-      },
-      {
-        "jam": 8,
-        "waktu": "12.00 - 13.20",
-        "mapel": "Matematika",
-        "guru": "Supianto, S.Pd.,Gr."
-      }
-    ],
-    "Selasa": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.50",
-        "mapel": "Bahasa Indonesia",
-        "guru": "Roi Martin, S.Pd.,Gr."
-      },
-      {
-        "jam": 3,
-        "waktu": "08.50 - 10.10",
-        "mapel": "IPA",
-        "guru": "Amanda Kartika, S.Pd.,Gr."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "PPKn",
-        "guru": "Hetti, S.Pd.,Gr."
-      },
-      {
-        "jam": 8,
-        "waktu": "12.00 - 13.20",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      }
-    ],
-    "Rabu": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 09.30",
-        "mapel": "Bahasa Indonesia",
-        "guru": "Roi Martin, S.Pd.,Gr."
-      },
-      {
-        "jam": 3,
-        "waktu": "09.30 - 10.10",
-        "mapel": "IPS",
-        "guru": "Yanti, S.Pd."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "IPS",
-        "guru": "Yanti, S.Pd."
-      },
-      {
-        "jam": 8,
-        "waktu": "12.00 - 13.20",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      }
-    ],
-    "Kamis": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.50",
-        "mapel": "PJOK",
-        "guru": "Hamdani, S.Pd.,Gr."
-      },
-      {
-        "jam": 3,
-        "waktu": "08.50 - 10.10",
-        "mapel": "Matematika",
-        "guru": "Supianto, S.Pd.,Gr."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "Pendidikan Agama (PAI / PAK)",
-        "guru": "M. Dony Wardhana (PAI) / Deyby Taniowas (PAK)"
-      },
-      {
-        "jam": 8,
-        "waktu": "12.00 - 13.20",
-        "mapel": "Jam Guru Wali",
-        "guru": "Wali Kelas IX"
-      }
-    ],
-    "Jumat": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.10",
-        "mapel": "Senam Pagi Bersama",
-        "guru": "Guru PJOK / Wali Kelas"
-      },
-      {
-        "jam": 2,
-        "waktu": "08.10 - 09.30",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "09.30 - 09.50",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 4,
-        "waktu": "09.50 - 11.10",
-        "mapel": "Ko-Kurikuler (KOKUR)",
-        "guru": "Guru Pembina KOKUR"
-      }
-    ],
-    "Sabtu": [
-      {
-        "jam": 1,
-        "waktu": "07.30 - 08.50",
-        "mapel": "Pembinaan Keagamaan",
-        "guru": "Guru Keagamaan (Dony / Deyby)"
-      },
-      {
-        "jam": 3,
-        "waktu": "08.50 - 10.10",
-        "mapel": "Prakarya",
-        "guru": "Dwi Oktaviani S, S.Pd.,Gr."
-      },
-      {
-        "jam": "Istirahat",
-        "waktu": "10.10 - 10.40",
-        "mapel": "ISTIRAHAT",
-        "guru": "-"
-      },
-      {
-        "jam": 5,
-        "waktu": "10.40 - 12.00",
-        "mapel": "TIK / Informatika",
-        "guru": "Dwi Oktaviani S, S.Pd.,Gr."
-      }
-    ]
-  }
-};
-
     function selectJadwalClass(kelas, btn) {
       selectedJadwalKelas = kelas;
       document.querySelectorAll('#tab-jadwal .class-pill').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      loadJadwal();
+      loadJadwalMatematika();
     }
 
-    function selectJadwalDay(hari, btn) {
-      selectedJadwalHari = hari;
-      document.querySelectorAll('#tab-jadwal .day-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      loadJadwal();
-    }
-
-    async function loadJadwal() {
+    function loadJadwalMatematika() {
       const container = document.getElementById("jadwalList");
-      document.getElementById("jadwalHeaderTitle").textContent = `Jadwal Kelas ${selectedJadwalKelas} • Hari ${selectedJadwalHari}`;
+      document.getElementById("jadwalHeaderTitle").textContent = `Jadwal Matematika Kelas ${selectedJadwalKelas}`;
 
-      // 1. Coba ambil dari Supabase tabel jadwal_pelajaran
-      try {
-        const kelasParam = encodeURIComponent("Kelas " + selectedJadwalKelas);
-        const hariParam = encodeURIComponent(selectedJadwalHari);
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/jadwal_pelajaran?kelas=eq.${kelasParam}&hari=eq.${hariParam}&order=jam_ke.asc`, {
-          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.length > 0) {
-            renderJadwalCards(data.map(d => ({ jam: d.jam_ke, waktu: d.waktu, mapel: d.mapel, guru: d.guru })));
-            return;
-          }
-        }
-      } catch (e) {
-        console.log("Memuat jadwal default offline/fallback");
-      }
-
-      // 2. Fallback jika tabel Supabase belum ada / belum di-run
-      const fallbackList = (DEFAULT_JADWAL[selectedJadwalKelas] && DEFAULT_JADWAL[selectedJadwalKelas][selectedJadwalHari]) || [];
-      renderJadwalCards(fallbackList);
-    }
-
-    function renderJadwalCards(list) {
-      const container = document.getElementById("jadwalList");
-      if (!list || list.length === 0) {
-        container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:18px;'>Tidak ada jadwal belajar untuk hari ini.</p>";
+      const list = JADWAL_MATEMATIKA[selectedJadwalKelas] || [];
+      if (!list.length) {
+        container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:18px;'>Tidak ada jadwal pelajaran Matematika untuk kelas ini.</p>";
         return;
       }
-      const piket = PIKET_HARIAN[selectedJadwalHari] || "-";
-      let html = `
-        <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(79,70,229,0.12);border:1px solid rgba(79,70,229,0.25);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:0.82rem;">
-          <span style="color:var(--text-muted);">👮 <strong>Guru Piket Hari ${selectedJadwalHari}:</strong></span>
-          <span style="font-weight:800;color:#a5b4fc;background:rgba(79,70,229,0.2);padding:3px 10px;border-radius:999px;">${piket}</span>
+
+      let html = "";
+      list.forEach(item => {
+        html += `
+          <div class="schedule-card-math">
+            <div>
+              <span class="schedule-day-badge">🗓️ Hari ${item.hari}</span>
+              <div class="schedule-title-math">Matematika &bull; ${item.jam}</div>
+              <div class="schedule-guru-math">👨‍🏫 Guru: ${item.guru} &bull; 🏫 ${item.ruang}</div>
+            </div>
+            <div class="schedule-time-box">
+              <div class="schedule-time-val">⏰ ${item.waktu}</div>
+            </div>
+          </div>
+        `;
+      });
+
+      html += `
+        <div style="background:rgba(56,189,248,0.06);border:1px dashed rgba(56,189,248,0.25);border-radius:12px;padding:12px 14px;margin-top:16px;font-size:0.8rem;color:var(--text-muted);">
+          ℹ️ <strong>Catatan Jadwal Matematika:</strong> Sesuai jadwal resmi SMP Negeri 5 Muara Siram T.P 2026/2027, alokasi belajar Matematika adalah <strong>4 Jam Pelajaran (JP)</strong> per minggu untuk setiap tingkat kelas.
         </div>
       `;
 
-      list.forEach(item => {
-        if (item.jam === "Istirahat") {
-          html += `
-            <div style="text-align:center;background:rgba(245,158,11,0.08);border:1px dashed rgba(245,158,11,0.3);border-radius:10px;padding:8px;margin:8px 0;font-size:0.8rem;color:var(--warning);font-weight:700;">
-              ☕ ${item.mapel} (${item.waktu})
-            </div>
-          `;
-        } else {
-          html += `
-            <div class="schedule-card">
-              <div class="schedule-left">
-                <div class="schedule-num">#${item.jam}</div>
-                <div>
-                  <div class="schedule-mapel">${item.mapel}</div>
-                  <div class="schedule-guru">👨‍🏫 ${item.guru}</div>
-                </div>
-              </div>
-              <div class="schedule-time">⏰ ${item.waktu}</div>
-            </div>
-          `;
-        }
-      });
       container.innerHTML = html;
     }
 
     // ========================================================
-    // TAB 4: MATERI PELAJARAN LOGIC (FILTER PER PERTEMUAN)
+    // TAB 4: MATERI MATEMATIKA LOGIC (PER PERTEMUAN)
     // ========================================================
     const DEFAULT_MATERI = [];
 
@@ -1799,6 +1386,8 @@
       document.getElementById("uploadMateriForm").reset();
       document.getElementById("materiAlertBox").style.display = "none";
       document.getElementById("materiInputKelas").value = "Kelas " + selectedMateriKelas;
+      document.getElementById("materiInputMapel").value = "Matematika";
+      document.getElementById("materiInputGuru").value = "Supianto, S.Pd.,Gr.";
       document.getElementById("materiModal").style.display = "flex";
     }
 
@@ -1810,11 +1399,11 @@
     async function loadMateri() {
       const container = document.getElementById("materiList");
       const title = selectedPertemuanFilter === 0 
-        ? `Daftar Materi Kelas ${selectedMateriKelas} • Semua Pertemuan`
-        : `Daftar Materi Kelas ${selectedMateriKelas} • Pertemuan ${selectedPertemuanFilter}`;
+        ? `Materi Matematika Kelas ${selectedMateriKelas} • Semua Pertemuan`
+        : `Materi Matematika Kelas ${selectedMateriKelas} • Pertemuan ${selectedPertemuanFilter}`;
       document.getElementById("materiHeaderTitle").textContent = title;
 
-      container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:14px;'>⏳ Memuat materi pembelajaran...</p>";
+      container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:14px;'>⏳ Memuat materi matematika...</p>";
 
       let items = [];
 
@@ -1831,9 +1420,9 @@
           const dbData = await res.json();
           if (dbData && dbData.length > 0) {
             items = dbData.map(d => ({
-              id: d.id, kelas: d.kelas, mapel: d.mapel, pertemuan: d.pertemuan,
+              id: d.id, kelas: d.kelas, mapel: d.mapel || "Matematika", pertemuan: d.pertemuan,
               judul: d.judul, deskripsi: d.deskripsi, fileUrl: d.file_url,
-              guru: d.nama_guru || "Guru Pengampu",
+              guru: d.nama_guru || "Supianto, S.Pd.,Gr.",
               tanggal: d.created_at ? new Date(d.created_at).toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric'}) : "Tersedia"
             }));
           }
@@ -1846,7 +1435,7 @@
       const localUploaded = JSON.parse(localStorage.getItem("LOCAL_MATERI") || "[]");
       const combined = [...localUploaded, ...items];
       
-      // Filter unik berdasarkan kelas, pertemuan, dan ID/Judul
+      // Filter unik berdasarkan kelas & pertemuan
       const seen = new Set();
       const filtered = combined.filter(m => {
         if (m.kelas !== "Kelas " + selectedMateriKelas) return false;
@@ -1860,10 +1449,10 @@
       if (!filtered.length) {
         container.innerHTML = `
           <div style="text-align:center;padding:32px 14px;color:var(--text-muted);background:var(--input-bg);border:1px dashed var(--card-border);border-radius:14px;">
-            <div style="font-size:2.4rem;margin-bottom:8px;">📚</div>
-            <p style="font-size:0.95rem;font-weight:700;color:#fff;">Belum Ada Materi untuk Kelas ${selectedMateriKelas} ${selectedPertemuanFilter > 0 ? 'Pertemuan ' + selectedPertemuanFilter : ''}</p>
-            <p style="font-size:0.8rem;margin-top:4px;">Guru dapat menambahkan materi pelajaran baru melalui tombol Upload Materi.</p>
-            <button class="btn-action-sm" style="margin-top:14px;background:var(--primary);color:#fff;padding:8px 16px;font-size:0.85rem;" onclick="openUploadMateriModal()">➕ Upload Materi Sekarang</button>
+            <div style="font-size:2.4rem;margin-bottom:8px;">📐</div>
+            <p style="font-size:0.95rem;font-weight:700;color:#fff;">Belum Ada Materi Matematika untuk Kelas ${selectedMateriKelas} ${selectedPertemuanFilter > 0 ? 'Pertemuan ' + selectedPertemuanFilter : ''}</p>
+            <p style="font-size:0.8rem;margin-top:4px;">Bpk. Supianto, S.Pd.,Gr. dapat mengunggah modul/rumus baru dengan menekan tombol Upload Materi.</p>
+            <button class="btn-action-sm" style="margin-top:14px;background:var(--primary);color:#fff;padding:8px 16px;font-size:0.85rem;" onclick="openUploadMateriModal()">➕ Upload Materi Matematika</button>
           </div>
         `;
         return;
@@ -1880,17 +1469,17 @@
             <div class="materi-header">
               <div>
                 <div class="materi-title">${m.judul}</div>
-                <div class="materi-mapel-info">📖 ${m.mapel} &bull; 👨‍🏫 ${m.guru}</div>
+                <div class="materi-mapel-info">📐 Matematika &bull; 👨‍🏫 ${m.guru}</div>
               </div>
               <span class="badge-pertemuan">Pertemuan ${m.pertemuan}</span>
             </div>
-            <div class="materi-desc">${m.deskripsi || 'Silakan unduh dan pelajari materi berikut untuk panduan belajar & tugas.'}</div>
+            <div class="materi-desc">${m.deskripsi || 'Silakan unduh dan pelajari materi modul matematika berikut untuk panduan pengerjaan latihan & tugas.'}</div>
             <div class="materi-actions">
               <span class="materi-meta">🗓️ ${m.tanggal || 'Tersedia'}</span>
               <div style="display:flex;gap:8px;align-items:center;">
                 ${btnDelete}
                 <a href="${m.fileUrl}" target="_blank" rel="noopener" class="btn-download-materi">
-                  📥 Buka / Unduh
+                  📥 Buka / Unduh Modul
                 </a>
               </div>
             </div>
@@ -1906,7 +1495,7 @@
         openPinModal();
         return;
       }
-      if (!confirm("Apakah Anda yakin ingin MENGHAPUS SEMUA materi pelajaran di database?")) return;
+      if (!confirm("Apakah Anda yakin ingin MENGHAPUS SEMUA materi matematika di database?")) return;
 
       try {
         await fetch(`${SUPABASE_URL}/rest/v1/materi_pelajaran?id=gt.0`, {
@@ -1917,7 +1506,7 @@
           }
         });
         localStorage.removeItem("LOCAL_MATERI");
-        alert("✅ Seluruh materi berhasil dibersihkan total!");
+        alert("✅ Seluruh materi matematika berhasil dibersihkan total!");
         loadMateri();
       } catch(err) {
         alert("Gagal membersihkan materi: " + err.message);
@@ -1930,10 +1519,9 @@
         openPinModal();
         return;
       }
-      if (!confirm("Apakah Anda yakin ingin menghapus materi pelajaran ini?")) return;
+      if (!confirm("Apakah Anda yakin ingin menghapus materi matematika ini?")) return;
 
       try {
-        // 1. Hapus dari Supabase DB
         if (id) {
           await fetch(`${SUPABASE_URL}/rest/v1/materi_pelajaran?id=eq.${id}`, {
             method: "DELETE",
@@ -1944,7 +1532,6 @@
           });
         }
 
-        // 2. Hapus dari localStorage
         let localList = JSON.parse(localStorage.getItem("LOCAL_MATERI") || "[]");
         localList = localList.filter(m => String(m.id) !== String(id));
         localStorage.setItem("LOCAL_MATERI", JSON.stringify(localList));
@@ -1962,16 +1549,16 @@
       alertBox.style.display = "none";
 
       const kelas = document.getElementById("materiInputKelas").value;
-      const mapel = document.getElementById("materiInputMapel").value.trim();
+      const mapel = "Matematika";
       const pertemuan = parseInt(document.getElementById("materiInputPertemuan").value);
       const judul = document.getElementById("materiInputJudul").value.trim();
-      const guru = document.getElementById("materiInputGuru").value.trim();
+      const guru = "Supianto, S.Pd.,Gr.";
       const deskripsi = document.getElementById("materiInputDesc").value.trim();
       const fileInput = document.getElementById("materiFileInput");
       const linkInput = document.getElementById("materiLinkInput").value.trim();
 
       if (!fileInput.files.length && !linkInput) {
-        alertBox.textContent = "Harap pilih file modul ATAU masukkan link materi!";
+        alertBox.textContent = "Harap pilih file modul matematika ATAU masukkan link!";
         alertBox.style.display = "block";
         return;
       }
@@ -1989,7 +1576,7 @@
           const file = fileInput.files[0];
           const ext = file.name.split('.').pop();
           const cleanFname = file.name.replace(/[^a-zA-Z0-9]/g, "_");
-          const storagePath = `materi/${kelas.replace(" ","_")}_Pertemuan${pertemuan}_${Date.now()}_${cleanFname}.${ext}`;
+          const storagePath = `materi/Matematika_${kelas.replace(" ","_")}_Pertemuan${pertemuan}_${Date.now()}_${cleanFname}.${ext}`;
 
           const fileBytes = await file.arrayBuffer();
           const upRes = await fetch(`${SUPABASE_URL}/storage/v1/object/tugas-siswa/${storagePath}`, {
@@ -2006,7 +1593,7 @@
           finalFileUrl = `${SUPABASE_URL}/storage/v1/object/public/tugas-siswa/${storagePath}`;
         }
 
-        // Coba insert ke tabel Supabase materi_pelajaran
+        // Simpan ke Supabase tabel materi_pelajaran
         try {
           await fetch(`${SUPABASE_URL}/rest/v1/materi_pelajaran`, {
             method: "POST",
@@ -2046,7 +1633,7 @@
         });
         localStorage.setItem("LOCAL_MATERI", JSON.stringify(localList));
 
-        alert("✅ Materi Berhasil Diterbitkan!");
+        alert("✅ Materi Matematika Berhasil Diterbitkan!");
         document.getElementById("materiModal").style.display = "none";
         loadMateri();
       } catch(err) {
@@ -2072,7 +1659,7 @@
       }
       renderDropdown();
       syncCollectedStatus();
-      loadJadwal();
+      loadJadwalMatematika();
       loadMateri();
     });
   </script>
