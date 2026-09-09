@@ -281,11 +281,70 @@
       background-color: #f1f5f9;
       border: none;
       border-radius: 8px;
-      padding: 12px 18px;
+      padding: 12px 14px;
       margin: 12px 0;
       overflow-x: auto;
       text-align: center;
       color: #0f172a;
+      -webkit-overflow-scrolling: touch;
+    }
+    .math-block mjx-container[jax="CHTML"][display="true"] {
+      margin: 0.3em 0 !important;
+    }
+
+    /* OPTIMASI PENUH VERSI MOBILE (HP) */
+    @media (max-width: 540px) {
+      body {
+        padding: 8px 8px 45px 8px;
+      }
+      .reading-sheet {
+        padding: 20px 14px;
+        border-radius: 12px;
+        font-size: 14px;
+      }
+      .reading-sheet ol, 
+      .reading-sheet ul {
+        padding-left: 18px;
+      }
+      .reading-sheet h1 {
+        font-size: 1.22rem;
+      }
+      .reading-sheet h3 {
+        font-size: 0.92rem;
+      }
+      .math-block {
+        padding: 10px 8px;
+        margin: 10px 0;
+      }
+      .subnav-bar {
+        gap: 8px;
+      }
+      .btn-back, .btn-submit-quick {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.82rem;
+        padding: 8px 12px;
+      }
+      .top-navbar {
+        padding: 8px 12px;
+        border-radius: 14px;
+      }
+      .brand-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1.1rem;
+      }
+      .brand-text-title {
+        font-size: 0.88rem;
+      }
+      .task-notice-box {
+        padding: 16px 12px;
+      }
+      .btn-submit-bottom {
+        width: 100%;
+        justify-content: center;
+      }
     }
 
     /* KOTAK AKSI PENGUMPULAN TUGAS */
@@ -409,13 +468,13 @@
     <div class="reading-sheet">
       
       <!-- JUDUL MATERI -->
-  
+      <h3>JUDUL MATERI</h3>
       <h1>Operasi Aljabar Bentuk Akar: Perkalian Bentuk Akar</h1>
 
       <hr>
 
       <!-- TUJUAN PEMBELAJARAN -->
-      <h3>TUJUAN PEMBELAJARAN</h3>
+      <h3>TUJUAN PEMBELAJARAN (Berdasarkan CP Kemendikbudristek)</h3>
       <p>Setelah mempelajari materi ini, peserta didik diharapkan dapat:</p>
       <ul>
         <li><strong>Menyelesaikan operasi perkalian pada bilangan bentuk akar</strong> dengan tepat dan menggunakannya untuk memecahkan masalah matematika kontekstual.</li>
@@ -431,7 +490,11 @@
           <strong>Konsep Dasar Perkalian Bentuk Akar</strong><br>
           Perkalian bentuk akar dapat dipahami melalui konsep luas bangun datar persegi panjang. Jika sebuah persegi panjang memiliki panjang $\sqrt{5}\text{ cm}$ dan lebar $\sqrt{2}\text{ cm}$, maka luasnya dapat dihitung dengan mengalikan kedua besaran tersebut:
           <div class="math-block">
-            $$\text{Luas} = \text{panjang} \times \text{lebar} = \sqrt{5} \times \sqrt{2} = \sqrt{10}\text{ cm}^2$$
+            $$\begin{aligned}
+            \text{Luas} &= \text{panjang} \times \text{lebar} \\
+            &= \sqrt{5} \times \sqrt{2} \\
+            &= \sqrt{10}\text{ cm}^2
+            \end{aligned}$$
           </div>
         </li>
 
@@ -463,7 +526,10 @@
             <li>
               <strong>Alternatif Penyelesaian:</strong>
               <div class="math-block">
-                $$\sqrt{3} \times \sqrt{7} = \sqrt{3 \times 7} = \sqrt{21}$$
+                $$\begin{aligned}
+                \sqrt{3} \times \sqrt{7} &= \sqrt{3 \times 7} \\
+                &= \sqrt{21}
+                \end{aligned}$$
               </div>
             </li>
           </ul>
@@ -476,7 +542,10 @@
             <li>
               <strong>Alternatif Penyelesaian:</strong>
               <div class="math-block">
-                $$2\sqrt{2} \times 2\sqrt{3} = (2 \times 2)\sqrt{2 \times 3} = 4\sqrt{6}$$
+                $$\begin{aligned}
+                2\sqrt{2} \times 2\sqrt{3} &= (2 \times 2)\sqrt{2 \times 3} \\
+                &= 4\sqrt{6}
+                \end{aligned}$$
               </div>
             </li>
           </ul>
@@ -489,11 +558,13 @@
             <li>
               <strong>Alternatif Penyelesaian:</strong>
               <div class="math-block">
-                $$3\sqrt{5} \times 5\sqrt{10} = (3 \times 5)\sqrt{5 \times 10} = 15\sqrt{50}$$
-              </div>
-              <p>Karena $\sqrt{50} = \sqrt{25 \times 2} = 5\sqrt{2}$, maka:</p>
-              <div class="math-block">
-                $$15\sqrt{50} = 15 \times 5\sqrt{2} = 75\sqrt{2}$$
+                $$\begin{aligned}
+                3\sqrt{5} \times 5\sqrt{10} &= (3 \times 5)\sqrt{5 \times 10} \\
+                &= 15\sqrt{50} \\
+                &= 15 \times \sqrt{25 \times 2} \\
+                &= 15 \times 5\sqrt{2} \\
+                &= 75\sqrt{2}
+                \end{aligned}$$
               </div>
             </li>
           </ul>
@@ -507,30 +578,29 @@
       <p><em>(Kerjakan soal-soal berikut dengan menyesuaikan langkah pada contoh di atas)</em></p>
 
       <ol>
-  <li>
-    Tentukan hasil perkalian bentuk akar sederhana berikut:
-    <ol class="sub-list">
-      <li>$\sqrt{7} \times \sqrt{11}$</li>
-    </ol>
-  </li>
-  <li>
-    Hitunglah hasil perkalian koefisien dan bentuk akar berikut:
-    <ol class="sub-list">
-      <li>$3\sqrt{5} \times 8\sqrt{2}$</li>
-    </ol>
-  </li>
-  <li>
-    Sederhanakan bentuk perkalian berikut hingga bentuk yang paling sederhana:
-    <ol class="sub-list">
-      <li>$5\sqrt{6} \times 7\sqrt{8}$</li>
-    </ol>
-  </li>
-  <li>
-    <strong>Soal Kontekstual:</strong><br>
-    Sebuah persegi panjang memiliki panjang $10\sqrt{72}\text{ cm}$ dan lebar $4\sqrt{8}\text{ cm}$. Hitunglah luas persegi panjang tersebut dan tuliskan jawaban dalam bentuk akar yang paling sederhana.
-  </li>
-</ol>
-
+        <li>
+          Tentukan hasil perkalian bentuk akar sederhana berikut:
+          <ol class="sub-list">
+            <li>$\sqrt{7} \times \sqrt{11}$</li>
+          </ol>
+        </li>
+        <li>
+          Hitunglah hasil perkalian koefisien dan bentuk akar berikut:
+          <ol class="sub-list">
+            <li>$3\sqrt{5} \times 8\sqrt{2}$</li>
+          </ol>
+        </li>
+        <li>
+          Sederhanakan bentuk perkalian berikut hingga bentuk yang paling sederhana:
+          <ol class="sub-list">
+            <li>$5\sqrt{6} \times 7\sqrt{8}$</li>
+          </ol>
+        </li>
+        <li>
+          <strong>Soal Kontekstual:</strong><br>
+          Sebuah persegi panjang memiliki panjang $10\sqrt{72}\text{ cm}$ dan lebar $4\sqrt{8}\text{ cm}$. Hitunglah luas persegi panjang tersebut dan tuliskan jawaban dalam bentuk akar yang paling sederhana.
+        </li>
+      </ol>
 
       <!-- KOTAK PENGUMPULAN TUGAS -->
       <div class="task-notice-box">
