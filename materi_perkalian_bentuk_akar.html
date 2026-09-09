@@ -11,17 +11,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Script MathJax 3 untuk Render Notasi Matematika LaTeX Murni -->
+  <!-- Script MathJax untuk Render Notasi Matematika LaTeX -->
   <script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
-      },
-      options: { enableMenu: false },
-      chtml: {
-        scale: 1.05
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
       }
     };
   </script>
@@ -40,7 +35,7 @@
       --text-muted: #94a3b8;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: radial-gradient(circle at top, #16203a 0%, var(--bg) 100%);
       color: #ffffff;
@@ -49,6 +44,7 @@
       display: flex;
       justify-content: center;
       line-height: 1.65;
+      font-family: 'Segoe UI', Arial, sans-serif;
     }
     .container { width: 100%; max-width: 760px; }
 
@@ -227,17 +223,8 @@
     @media (max-width: 600px) {
       .reading-sheet { padding: 22px 16px; border-radius: 12px; }
     }
-
-    .reading-sheet,
-    .reading-sheet p,
-    .reading-sheet li,
-    .reading-sheet h1,
-    .reading-sheet h2,
-    .reading-sheet h3,
-    .reading-sheet strong,
-    .reading-sheet em,
-    .reading-sheet span {
-      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+    .top-navbar, .menu-drawer, .btn-submit-quick, .btn-back, .btn-submit-bottom, .portal-footer {
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     .reading-sheet h1 {
