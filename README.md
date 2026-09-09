@@ -21,7 +21,8 @@ Aplikasi Web Pembelajaran Terpadu berbasis **GitHub Pages** yang terhubung langs
 
 1. Buka link upload: 👉 **[Upload ke Repository](https://github.com/portalmtk/portalmtk.github.io/upload/main)**
 2. Buka folder `PORTAL_GITHUB_PAGES` di komputer Anda, lalu tarik (*drag & drop*) seluruh file ke GitHub:
-   - `index.html` (Kirim Tugas)
+   - `index.html` (Beranda Portal & Menu Utama & Materi Siap Baca)
+   - `tugas.html` (Formulir Khusus Kirim Tugas Siswa)
    - `nilai.html` (Rekapitulasi & Cek Nilai)
    - `jadwal.html` (Jadwal Pelajaran MTK)
    - `materi.html` (Pusat Materi Belajar)
@@ -31,11 +32,12 @@ Aplikasi Web Pembelajaran Terpadu berbasis **GitHub Pages** yang terhubung langs
    - `README.md`
 3. Gulir ke bawah dan klik tombol hijau **Commit changes**.
 4. Selesai! Halaman mandiri dapat langsung diakses publik di:
-   - 📤 Kirim Tugas: 👉 **[https://portalmtk.github.io/](https://portalmtk.github.io/)**
+   - 🏠 Beranda Portal: 👉 **[https://portalmtk.github.io/](https://portalmtk.github.io/)**
+   - 📤 Kirim Tugas: 👉 **[https://portalmtk.github.io/tugas.html](https://portalmtk.github.io/tugas.html)**
    - 📊 Cek Nilai: 👉 **[https://portalmtk.github.io/nilai.html](https://portalmtk.github.io/nilai.html)**
    - 📅 Jadwal: 👉 **[https://portalmtk.github.io/jadwal.html](https://portalmtk.github.io/jadwal.html)**
-   - 📚 Materi: 👉 **[https://portalmtk.github.io/materi.html](https://portalmtk.github.io/materi.html)**
-   - 📖 Modul Akar: 👉 **[https://portalmtk.github.io/materi_perkalian_bentuk_akar.html](https://portalmtk.github.io/materi_perkalian_bentuk_akar.html)**
+   - 📚 Pusat Materi: 👉 **[https://portalmtk.github.io/materi.html](https://portalmtk.github.io/materi.html)**
+   - 📖 Modul Perkalian Akar: 👉 **[https://portalmtk.github.io/materi_perkalian_bentuk_akar.html](https://portalmtk.github.io/materi_perkalian_bentuk_akar.html)**
 
 ---
 

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Matematika - Pengumpulan Tugas Siswa</title>
-  <meta name="description" content="Portal Pengumpulan Tugas Mandiri Matematika SMP Negeri 5 Muara Siram.">
+  <title>Portal Belajar Matematika - SMP Negeri 5 Muara Siram</title>
+  <meta name="description" content="Portal Pembelajaran Matematika SMP Negeri 5 Muara Siram: Menu Belajar, Materi Siap Baca, Kirim Tugas, dan Rekap Nilai.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,14 +30,14 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
     body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px 14px 60px 14px; display: flex; justify-content: center; }
-    .container { width: 100%; max-width: 620px; }
+    .container { width: 100%; max-width: 640px; }
 
     /* Sticky Navigation Container & Navbar */
     .sticky-nav-container {
       position: sticky;
       top: 10px;
       z-index: 300;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     .top-navbar {
       display: flex;
@@ -155,116 +155,200 @@
       box-shadow: 0 4px 14px var(--primary-glow);
     }
 
-    /* Header Banner */
-    .header { text-align: center; margin-bottom: 18px; }
-    .header-badge { display: inline-block; background: rgba(56, 189, 248, 0.12); color: var(--math-accent); font-size: 0.75rem; font-weight: 800; padding: 4px 14px; border-radius: 999px; margin-bottom: 8px; border: 1px solid rgba(56, 189, 248, 0.25); }
-    .header h1 { font-size: 1.48rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
-    .header p { color: var(--text-muted); font-size: 0.82rem; margin-top: 4px; line-height: 1.4; }
+    /* Hero Banner */
+    .hero-box {
+      text-align: center;
+      background: linear-gradient(180deg, rgba(79, 70, 229, 0.12) 0%, rgba(21, 29, 47, 0.8) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 24px 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--math-accent);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .hero-box h1 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+    .hero-guru {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      margin-top: 8px;
+      line-height: 1.45;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-    /* Card */
-    .card {
+    /* Section Title */
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title span {
+      font-size: 1.2rem;
+    }
+
+    /* Quick Menu Grid */
+    .portal-menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+    @media (max-width: 440px) {
+      .portal-menu-grid { grid-template-columns: 1fr; }
+    }
+
+    .menu-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 18px 16px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 24px rgba(79, 70, 229, 0.25);
+    }
+    .menu-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+    .menu-card-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .menu-card-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .menu-card-action {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--math-accent);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Cards Warna Khusus */
+    .mc-tugas .menu-card-icon { background: rgba(79, 70, 229, 0.2); border: 1px solid rgba(79, 70, 229, 0.4); }
+    .mc-nilai .menu-card-icon { background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); }
+    .mc-jadwal .menu-card-icon { background: rgba(56, 189, 248, 0.2); border: 1px solid rgba(56, 189, 248, 0.4); }
+    .mc-materi .menu-card-icon { background: rgba(245, 158, 11, 0.2); border: 1px solid rgba(245, 158, 11, 0.4); }
+
+    /* Featured Materi Box */
+    .featured-materi-box {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 20px;
       padding: 22px;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
-    .form-group { margin-bottom: 18px; }
-    label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-
-    /* Class Pills Selector */
-    .class-pills { display: flex; gap: 8px; margin-bottom: 4px; }
-    .class-pill {
-      flex: 1;
-      text-align: center;
-      padding: 10px 6px;
-      border-radius: 12px;
+    .materi-featured-card {
       background: var(--input-bg);
       border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .class-pill.active {
-      background: rgba(79, 70, 229, 0.2);
-      border-color: var(--primary);
-      color: #fff;
-      box-shadow: 0 0 0 1px var(--primary);
-    }
-
-    select, input[type="text"] {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: var(--input-bg);
-      border: 1px solid var(--card-border);
-      color: #fff;
-      font-size: 0.92rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    select:focus, input:focus { border-color: var(--primary); }
-    option:disabled { color: #64748b; }
-
-    /* Upload Box & Multi Photo Gallery */
-    .upload-box {
-      border: 2px dashed var(--card-border);
+      border-left: 4px solid var(--success);
       border-radius: 14px;
-      padding: 22px 16px;
-      text-align: center;
-      cursor: pointer;
+      padding: 18px;
+      margin-bottom: 12px;
       transition: all 0.2s;
-      background: rgba(12, 18, 30, 0.5);
     }
-    .upload-box:hover { border-color: var(--primary); background: rgba(79, 70, 229, 0.06); }
-    .upload-icon { font-size: 2.2rem; margin-bottom: 6px; }
-    .upload-text { font-size: 0.88rem; color: var(--text); font-weight: 600; }
-    .upload-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
-
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 10px; }
-    .gallery-item { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--card-border); background: var(--input-bg); aspect-ratio: 1; }
-    .gallery-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .gallery-item-badge { position: absolute; bottom: 6px; left: 6px; background: rgba(0,0,0,0.75); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
-    .gallery-item-del { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; background: rgba(239, 68, 68, 0.85); color: white; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; cursor: pointer; }
-    .gallery-item-del:hover { transform: scale(1.1); background: var(--danger); }
-
-    /* Buttons */
-    .btn-submit {
-      width: 100%;
-      padding: 14px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 0.98rem;
+    .materi-featured-card:hover {
+      border-color: rgba(16, 185, 129, 0.6);
+      transform: translateY(-2px);
+    }
+    .materi-tag-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      margin-bottom: 8px;
+    }
+    .materi-item-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .materi-item-meta {
+      font-size: 0.78rem;
+      color: var(--math-accent);
       font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 4px 16px var(--primary-glow);
+      margin-bottom: 10px;
     }
-    .btn-submit:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-1px); }
-    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .btn-secondary { width: 100%; padding: 12px; background: #1e293b; color: var(--text); border: 1px solid var(--card-border); border-radius: 12px; font-size: 0.875rem; font-weight: 600; cursor: pointer; margin-top: 8px; }
-    .btn-secondary:hover { background: #283548; }
-    .btn-action-sm { background: #1e293b; color: #a5b4fc; border: 1px solid var(--card-border); border-radius: 8px; padding: 6px 12px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
-
-    /* Alerts and spinners */
-    .alert-error { display: none; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-top: 12px; }
-    .loading-spinner { display: none; text-align: center; margin-top: 14px; font-size: 0.85rem; color: var(--text-muted); }
-
-    /* Success Receipt */
-    .success-box { display: none; text-align: center; padding: 10px 4px; }
-    .success-icon-wrap { width: 64px; height: 64px; background: rgba(16, 185, 129, 0.15); border: 2px solid rgba(16, 185, 129, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 14px auto; }
-    .success-title { font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
-    .success-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px; }
-    .receipt-card { background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px; text-align: left; margin-bottom: 18px; }
-    .receipt-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.85rem; }
-    .receipt-row:last-child { border-bottom: none; }
-    .receipt-label { color: var(--text-muted); }
-    .receipt-val { font-weight: 700; color: #fff; }
+    .materi-item-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+    .btn-open-materi {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      box-shadow: 0 4px 14px var(--primary-glow);
+      transition: all 0.2s;
+    }
+    .btn-open-materi:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
 
     /* Footer */
     .footer { text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 24px; }
@@ -273,7 +357,7 @@
 <body>
   <div class="container">
     
-    <!-- STICKY NAVBAR & TOGGLE MENU WRAPPER -->
+    <!-- STICKY NAVBAR -->
     <div class="sticky-nav-container">
       <div class="top-navbar">
         <a href="index.html" class="nav-brand">
@@ -293,6 +377,9 @@
       <div id="menuDrawer" class="menu-drawer">
         <div class="menu-drawer-grid">
           <a href="index.html" class="menu-item-btn active">
+            <span>🏠</span> Beranda Portal
+          </a>
+          <a href="tugas.html" class="menu-item-btn">
             <span>📤</span> Kirim Tugas MTK
           </a>
           <a href="nilai.html" class="menu-item-btn">
@@ -308,138 +395,100 @@
       </div>
     </div>
 
-    <!-- BANNER IDENTITAS GURU & MAPEL -->
-    <div class="header">
-      <div class="header-badge">GURU PENGAMPU: SUPIANTO, S.Pd.,Gr.</div>
-      <h1>PENGUMPULAN TUGAS</h1>
-      <p>Kirim lembar tugas Matematika mandiri Kelas VII, VIII, dan IX</p>
+    <!-- HERO PROFILE GURU & PORTAL -->
+    <div class="hero-box">
+      <div class="header-badge">SMP NEGERI 5 MUARA SIRAM</div>
+      <h1>PORTAL BELAJAR MATEMATIKA</h1>
+      <div class="hero-guru">👨‍🏫 Guru Pengampu: Bpk. Supianto, S.Pd.,Gr.</div>
+      <p class="hero-desc">
+        Pusat pembelajaran digital terpadu untuk pengumpulan tugas, pengecekan nilai transparan, jadwal pelajaran, dan modul materi siap belajar.
+      </p>
     </div>
 
-    <!-- CARD FORM PENGUMPULAN TUGAS -->
-    <div class="card">
-      <form id="taskForm" onsubmit="submitForm(event)">
-        <!-- 1. PILIH KELAS -->
-        <div class="form-group">
-          <label>1. Pilih Kelas Anda:</label>
-          <div class="class-pills">
-            <button type="button" class="class-pill active" onclick="selectClass('VII', this)">Kelas VII</button>
-            <button type="button" class="class-pill" onclick="selectClass('VIII', this)">Kelas VIII</button>
-            <button type="button" class="class-pill" onclick="selectClass('IX', this)">Kelas IX</button>
-          </div>
+    <!-- SECTION: MENU UTAMA PORTAL -->
+    <div class="section-title">
+      <span>🧭</span> Menu Navigasi Portal
+    </div>
+
+    <div class="portal-menu-grid">
+      <!-- 1. KIRIM TUGAS -->
+      <a href="tugas.html" class="menu-card mc-tugas">
+        <div>
+          <div class="menu-card-icon">📤</div>
+          <div class="menu-card-title">Kirim Tugas MTK</div>
+          <div class="menu-card-desc">Unggah foto lembar jawaban tugas mandiri Kelas VII, VIII, dan IX.</div>
         </div>
+        <div class="menu-card-action">Buka Form Tugas &rarr;</div>
+      </a>
 
-        <!-- 2. PILIH NAMA SISWA -->
-        <div class="form-group">
-          <label for="siswaSelect">2. Nama Siswa: <span id="selectLoading" style="font-size:0.75rem;color:var(--text-muted);font-weight:normal;"></span></label>
-          <select id="siswaSelect" required>
-            <option value="">-- Pilih Nama Anda --</option>
-          </select>
+      <!-- 2. REKAP & NILAI -->
+      <a href="nilai.html" class="menu-card mc-nilai">
+        <div>
+          <div class="menu-card-icon">📊</div>
+          <div class="menu-card-title">Rekap &amp; Cek Nilai</div>
+          <div class="menu-card-desc">Cek status tugas terkumpul dan nilai hasil koreksi guru.</div>
         </div>
+        <div class="menu-card-action">Lihat Rekap Nilai &rarr;</div>
+      </a>
 
-        <!-- 3. MULTI FOTO LEMBAR TUGAS MTK -->
-        <div class="form-group">
-          <label>3. Foto Lembar / Buku Tugas Matematika: <span style="color:#818cf8;font-size:0.75rem;font-weight:normal;">(Bisa pilih beberapa foto)</span></label>
-          <div class="upload-box" id="uploadBox" onclick="document.getElementById('fileInput').click()">
-            <div id="uploadPlaceholder">
-              <div class="upload-icon">📸</div>
-              <div class="upload-text">Pilih Gambar Tugas Matematika / Ambil Foto</div>
-              <div class="upload-sub">Ketuk di sini untuk memilih 1 atau beberapa foto lembar jawaban tugas</div>
-            </div>
-          </div>
-          <input type="file" id="fileInput" accept="image/*" multiple style="display:none;" onchange="handleFiles(event)">
-
-          <!-- PREVIEW GALERI MULTI FOTO -->
-          <div id="galleryContainer" style="display:none;margin-top:14px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-              <span id="photoCountBadge" style="font-size:0.8rem;font-weight:700;color:#818cf8;background:rgba(79,70,229,0.15);padding:4px 10px;border-radius:999px;border:1px solid rgba(79,70,229,0.3);">0 Foto</span>
-              <button type="button" class="btn-action-sm" onclick="document.getElementById('fileInput').click()">➕ Tambah Foto Lain</button>
-            </div>
-            <div id="galleryGrid" class="gallery-grid"></div>
-          </div>
+      <!-- 3. JADWAL -->
+      <a href="jadwal.html" class="menu-card mc-jadwal">
+        <div>
+          <div class="menu-card-icon">📅</div>
+          <div class="menu-card-title">Jadwal Pelajaran</div>
+          <div class="menu-card-desc">Jadwal tatap muka resmi matematika 4 JP per minggu setiap kelas.</div>
         </div>
+        <div class="menu-card-action">Cek Jadwal &rarr;</div>
+      </a>
 
-        <div id="alertBox" class="alert-error"></div>
-
-        <button type="submit" id="btnKirim" class="btn-submit">🚀 KIRIM TUGAS MATEMATIKA</button>
-        <div id="loading" class="loading-spinner">⏳ Sedang mengunggah foto tugas ke database...</div>
-      </form>
-
-      <!-- LAPORAN TANDA TERIMA PENGIRIMAN -->
-      <div id="successCard" class="success-box">
-        <div class="success-icon-wrap">✅</div>
-        <h2 class="success-title">Tugas Matematika Berhasil Terkirim!</h2>
-        <p class="success-desc">Data dan lembar tugas Anda telah tersimpan secara resmi untuk dinilai oleh Bpk. Supianto, S.Pd.,Gr.</p>
-        
-        <div class="receipt-card">
-          <div class="receipt-row"><span class="receipt-label">Mata Pelajaran:</span><span class="receipt-val" style="color:var(--math-accent);">Matematika</span></div>
-          <div class="receipt-row"><span class="receipt-label">Kelas:</span><span class="receipt-val" id="recKelas" style="color:#818cf8;">-</span></div>
-          <div class="receipt-row"><span class="receipt-label">No. Absen:</span><span class="receipt-val" id="recNo">-</span></div>
-          <div class="receipt-row"><span class="receipt-label">Nama Siswa:</span><span class="receipt-val" id="recNama">-</span></div>
-          <div class="receipt-row"><span class="receipt-label">Foto Tugas:</span><span class="receipt-val" id="recFoto" style="color:#818cf8;">-</span></div>
-          <div class="receipt-row"><span class="receipt-label">Waktu Kirim:</span><span class="receipt-val" id="recWaktu" style="color:var(--success);">-</span></div>
-          <div class="receipt-row"><span class="receipt-label">Status:</span><span class="receipt-val" style="color:var(--success);">Tercatat &amp; Terkunci 🔒</span></div>
+      <!-- 4. PUSAT MATERI -->
+      <a href="materi.html" class="menu-card mc-materi">
+        <div>
+          <div class="menu-card-icon">📚</div>
+          <div class="menu-card-title">Pusat Semua Materi</div>
+          <div class="menu-card-desc">Daftar lengkap modul, LKS, dan bahan ajar matematika per pertemuan.</div>
         </div>
+        <div class="menu-card-action">Buka Pusat Materi &rarr;</div>
+      </a>
+    </div>
 
-        <a href="nilai.html" class="btn-submit" style="display:block;text-align:center;text-decoration:none;margin-bottom:8px;">📊 Buka Halaman Rekap &amp; Nilai</a>
-        <button class="btn-secondary" onclick="resetFormToNew()">➕ Pilih Siswa Lain</button>
+    <!-- SECTION: MATERI SIAP DIBACA -->
+    <div class="section-title">
+      <span>📖</span> Materi Pembelajaran Siap Dibuka
+    </div>
+
+    <div class="featured-materi-box">
+      <!-- KARTU 1: PERKALIAN BENTUK AKAR (KELAS VIII) -->
+      <div class="materi-featured-card">
+        <span class="materi-tag-badge">🔥 Materi Aktif • Kelas VIII</span>
+        <div class="materi-item-title">Operasi Aljabar Bentuk Akar: Perkalian Bentuk Akar</div>
+        <div class="materi-item-meta">Matematika Kelas VIII &bull; Bab Bentuk Akar &bull; Kurikulum Merdeka</div>
+        <p class="materi-item-desc">
+          Pelajari konsep perkalian bentuk akar melalui luas bangun persegi panjang, sifat umum perkalian koefisien, teknik penyederhanaan hasil perkalian, contoh soal bertahap, dan soal kontekstual.
+        </p>
+        <a href="materi_perkalian_bentuk_akar.html" class="btn-open-materi">
+          📖 Baca &amp; Pelajari Materi Sekarang &rarr;
+        </a>
+      </div>
+
+      <!-- KARTU 2: LINK PUSAT MODUL MATERI LENGKAP -->
+      <div style="background:var(--input-bg);border:1px dashed var(--card-border);border-radius:14px;padding:16px;text-align:center;margin-top:10px;">
+        <div style="font-size:0.88rem;font-weight:700;color:#fff;">Mencari modul atau materi pertemuan lainnya?</div>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin:4px 0 12px 0;">Modul pembelajaran Kelas VII, VIII, dan IX dapat dilihat langsung di pusat materi.</p>
+        <a href="materi.html" style="color:var(--math-accent);text-decoration:none;font-size:0.82rem;font-weight:700;">
+          📚 Lihat Semua Modul Pembelajaran &rarr;
+        </a>
       </div>
     </div>
 
     <!-- FOOTER -->
     <div class="footer">
-      &copy; 2026 SMP Negeri 5 Muara Siram &bull; Portal Matematika
+      &copy; 2026 SMP Negeri 5 Muara Siram &bull; Portal Belajar Matematika
     </div>
 
   </div>
 
   <script>
-    const SUPABASE_URL = "https://cldnjygghcpifxokvnpq.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsZG5qeWdnaGNwaWZ4b2t2bnBxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3OTAyODUsImV4cCI6MjEwNDM2NjI4NX0.Qthz2f9OboB_bDSBU78In3fa-j4RvsU2aS4hamW_Zoc";
-
-    const DATA_KELAS = {
-      "VII": [
-        { no: 1, nama: "ACHMAD GOZALI" }, { no: 2, nama: "AGUSTINA" }, { no: 3, nama: "ALIF RAMADANI" },
-        { no: 4, nama: "Chica Putri Icih" }, { no: 5, nama: "Dea Carollin Luck" }, { no: 6, nama: "HELYSA RAMADANI" },
-        { no: 7, nama: "Hengky Saputra" }, { no: 8, nama: "Junita varaswati" }, { no: 9, nama: "Juwandi" },
-        { no: 10, nama: "Luna Syaira" }, { no: 11, nama: "Malika" }, { no: 12, nama: "MANUEL MANOAH MATTHEW MOKALU" },
-        { no: 13, nama: "Merliya Syahna" }, { no: 14, nama: "MUHAMAD FATIR" }, { no: 15, nama: "Muhammad Aldi" },
-        { no: 16, nama: "NABILA" }, { no: 17, nama: "NAFISATUN NIDA" }, { no: 18, nama: "NUR AFNI FEBRYANTI" },
-        { no: 19, nama: "NUR ALIFAH (1)" }, { no: 20, nama: "NUR ALIFAH (2)" }, { no: 21, nama: "Nur Failatul Istifada" },
-        { no: 22, nama: "RAMA YOSUA RENSKI" }, { no: 23, nama: "RAMADHAN" }, { no: 24, nama: "RICHKARDO SILVA DARMA" },
-        { no: 25, nama: "Sohib Alsafa" }, { no: 26, nama: "SYABIL MUHAMMAD RIFKI" }, { no: 27, nama: "VICKY RENALDI" },
-        { no: 28, nama: "Winda Aulia" }
-      ],
-      "VIII": [
-        { no: 1, nama: "Achmad Rifky" }, { no: 2, nama: "Afika Damara Azra" }, { no: 3, nama: "Agustinus Ndara Mone" },
-        { no: 4, nama: "Alung Saputra" }, { no: 5, nama: "Andder Stanislaus Ola" }, { no: 6, nama: "Arjuna" },
-        { no: 7, nama: "Dede Efrata Natalius" }, { no: 8, nama: "Diva Putri Rahayu" }, { no: 9, nama: "Ghira Anggara" },
-        { no: 10, nama: "Hanan" }, { no: 11, nama: "JAHANI" }, { no: 12, nama: "Jenilya" },
-        { no: 13, nama: "Junia Novita Nurjannati" }, { no: 14, nama: "Meisya Faulina" }, { no: 15, nama: "Michkel Arya Putra" },
-        { no: 16, nama: "MORGAN SIAS PUNADA" }, { no: 17, nama: "Mutia" }, { no: 18, nama: "Najwa Asyilah" },
-        { no: 19, nama: "Natali Quin" }, { no: 20, nama: "PASKALIS MARIANUS" }, { no: 21, nama: "Randy" },
-        { no: 22, nama: "Rasiya Sifa Kurnia" }, { no: 23, nama: "Rezky Abiyan" }, { no: 24, nama: "Sa'id Saputra" },
-        { no: 25, nama: "SASMITA HASNA" }, { no: 26, nama: "Sera" }, { no: 27, nama: "Silvia Nur" },
-        { no: 28, nama: "Yahova Rani Arzani" }, { no: 29, nama: "Yohanes Albi" }
-      ],
-      "IX": [
-        { no: 1, nama: "Aidil Adha" }, { no: 2, nama: "Aidil Putra Pratama" }, { no: 3, nama: "Andini" },
-        { no: 4, nama: "Apliana Ambu Kaka" }, { no: 5, nama: "Avika Aulya Putri" }, { no: 6, nama: "Deswita Utari" },
-        { no: 7, nama: "Dhafa Septianka" }, { no: 8, nama: "Elsa Oktaviana" }, { no: 9, nama: "Emmanuel Valentino Adjat Pungus" },
-        { no: 10, nama: "Erni" }, { no: 11, nama: "Hafizah" }, { no: 12, nama: "Haykel Alfri Alwi Frans" },
-        { no: 13, nama: "HELMALIA PUTRI PRATAMA" }, { no: 14, nama: "HELQ FIBRIANSYAH" }, { no: 15, nama: "Jahirah" },
-        { no: 16, nama: "Julio Putra Madaku" }, { no: 17, nama: "Margareta Irena" }, { no: 18, nama: "MUHAMMAD ALDY ANGGARA" },
-        { no: 19, nama: "Muhammad Raffa Ramadhan" }, { no: 20, nama: "Muhammad Ramli Al Fatah" }, { no: 21, nama: "Muhammad Restu" },
-        { no: 22, nama: "Muhammad Sahrul" }, { no: 23, nama: "Muhammad Zidan" }, { no: 24, nama: "Nayra" },
-        { no: 25, nama: "Nur Alisa" }, { no: 26, nama: "Peli" }, { no: 27, nama: "Putri Handayani" },
-        { no: 28, nama: "Rahmat Zaini" }, { no: 29, nama: "Selvi" }, { no: 30, nama: "Siren" },
-        { no: 31, nama: "Violla Teodora" }, { no: 32, nama: "Yumna Putri" }, { no: 33, nama: "Yusuf" }
-      ]
-    };
-
-    let selectedKelas = "VII";
-    let selectedImages = [];
-    let collectedSet = new Set();
-
     function toggleMenuDrawer(e) {
       if (e) e.stopPropagation();
       const drawer = document.getElementById("menuDrawer");
@@ -460,283 +509,6 @@
         drawer.style.display = "none";
         document.getElementById("menuIcon").textContent = "☰";
       }
-    });
-
-    async function syncCollectedStatus() {
-      const selectLoading = document.getElementById("selectLoading");
-      selectLoading.textContent = "(Memeriksa status terkunci...)";
-      try {
-        const kelasParam = encodeURIComponent("Kelas " + selectedKelas);
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?kelas=eq.${kelasParam}&select=nama_siswa`, {
-          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
-        });
-        const rows = await res.json();
-        collectedSet.clear();
-        (rows || []).forEach(r => {
-          if (r.nama_siswa) collectedSet.add(r.nama_siswa.toString().trim().toLowerCase());
-        });
-      } catch(err) {
-        console.error("Gagal sync status Supabase:", err);
-      } finally {
-        selectLoading.textContent = "";
-      }
-    }
-
-    function selectClass(kelas, btn) {
-      selectedKelas = kelas;
-      document.querySelectorAll('.class-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      syncCollectedStatus().then(() => renderDropdown());
-    }
-
-    function renderDropdown() {
-      const select = document.getElementById("siswaSelect");
-      select.innerHTML = '<option value="">-- Pilih Nama Anda --</option>';
-      const daftar = DATA_KELAS[selectedKelas] || [];
-
-      daftar.forEach(s => {
-        const opt = document.createElement("option");
-        opt.value = JSON.stringify(s);
-        const isLocked = collectedSet.has(s.nama.toString().trim().toLowerCase());
-        opt.textContent = `${s.no}. ${s.nama}${isLocked ? ' (Sudah Mengumpulkan)' : ''}`;
-        if (isLocked) opt.disabled = true;
-        select.appendChild(opt);
-      });
-    }
-
-    async function handleFiles(event) {
-      const files = event.target.files;
-      if (!files || !files.length) return;
-      const loading = document.getElementById("loading");
-      loading.style.display = "block";
-      loading.textContent = "⏳ Memproses foto...";
-
-      for (const file of files) {
-        try {
-          const b64 = await processImageFile(file);
-          selectedImages.push(b64);
-        } catch(err) {
-          console.error("Gagal proses gambar:", err);
-        }
-      }
-
-      event.target.value = "";
-      loading.style.display = "none";
-      renderGallery();
-    }
-
-    function processImageFile(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onerror = reject;
-        reader.onload = function(e) {
-          const img = new Image();
-          img.onerror = reject;
-          img.onload = function() {
-            const canvas = document.createElement('canvas');
-            const maxDim = 960;
-            let w = img.width, h = img.height;
-            if (w > h && w > maxDim) {
-              h = Math.round((h * maxDim) / w);
-              w = maxDim;
-            } else if (h > maxDim) {
-              w = Math.round((w * maxDim) / h);
-              h = maxDim;
-            }
-            canvas.width = w;
-            canvas.height = h;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, w, h);
-            resolve(canvas.toDataURL('image/jpeg', 0.82));
-          };
-          img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-
-    function renderGallery() {
-      const grid = document.getElementById("galleryGrid");
-      const cont = document.getElementById("galleryContainer");
-      const badge = document.getElementById("photoCountBadge");
-      grid.innerHTML = "";
-
-      if (!selectedImages.length) {
-        cont.style.display = "none";
-        return;
-      }
-
-      cont.style.display = "block";
-      badge.textContent = `${selectedImages.length} Foto Siap Dikirim`;
-
-      selectedImages.forEach((imgSrc, idx) => {
-        const item = document.createElement("div");
-        item.className = "gallery-item";
-        item.innerHTML = `
-          <img src="${imgSrc}" class="gallery-thumb" alt="Foto ${idx + 1}">
-          <span class="gallery-item-badge">Foto ${idx + 1}</span>
-          <button type="button" class="gallery-item-del" onclick="removeImage(${idx})" title="Hapus foto ini">✕</button>
-        `;
-        grid.appendChild(item);
-      });
-    }
-
-    function removeImage(idx) {
-      selectedImages.splice(idx, 1);
-      renderGallery();
-    }
-
-    async function getConsolidatedImage() {
-      if (selectedImages.length === 1) return selectedImages[0];
-      const imgs = await Promise.all(selectedImages.map(src => new Promise(r => {
-        const im = new Image();
-        im.onload = () => r(im);
-        im.src = src;
-      })));
-
-      const maxW = Math.min(1200, Math.max(...imgs.map(im => im.width)));
-      const divH = 28;
-      let totalH = 0;
-      imgs.forEach((im, i) => {
-        totalH += Math.round(im.height * maxW / im.width);
-        if (i > 0) totalH += divH;
-      });
-
-      const canvas = document.createElement('canvas');
-      canvas.width = maxW;
-      canvas.height = totalH;
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = "#0c121e";
-      ctx.fillRect(0, 0, maxW, totalH);
-
-      let y = 0;
-      imgs.forEach((im, i) => {
-        if (i > 0) {
-          ctx.fillStyle = "#1e293b";
-          ctx.fillRect(0, y, maxW, divH);
-          ctx.fillStyle = "#94a3b8";
-          ctx.font = "bold 14px sans-serif";
-          ctx.fillText("--- Halaman / Foto " + (i + 1) + " ---", 16, y + 18);
-          y += divH;
-        }
-        const dh = Math.round(im.height * maxW / im.width);
-        ctx.drawImage(im, 0, y, maxW, dh);
-        y += dh;
-      });
-
-      return canvas.toDataURL('image/jpeg', 0.78);
-    }
-
-    async function submitForm(e) {
-      e.preventDefault();
-      const alertBox = document.getElementById("alertBox");
-      alertBox.style.display = "none";
-
-      const selectVal = document.getElementById("siswaSelect").value;
-      if (!selectVal) {
-        alertBox.textContent = "Silakan pilih nama siswa terlebih dahulu!";
-        alertBox.style.display = "block";
-        return;
-      }
-
-      const siswaData = JSON.parse(selectVal);
-      const studentKey = siswaData.nama.toString().trim().toLowerCase();
-      if (collectedSet.has(studentKey)) {
-        alertBox.textContent = "Nama " + siswaData.nama + " sudah tercatat dan dikunci!";
-        alertBox.style.display = "block";
-        return;
-      }
-
-      if (!selectedImages.length) {
-        alertBox.textContent = "Silakan pilih foto lembar tugas terlebih dahulu!";
-        alertBox.style.display = "block";
-        return;
-      }
-
-      const btn = document.getElementById("btnKirim");
-      const loading = document.getElementById("loading");
-      btn.disabled = true;
-      loading.style.display = "block";
-      loading.textContent = "⏳ Mengunggah tugas matematika ke database...";
-
-      try {
-        const finalImage = await getConsolidatedImage();
-        const now = new Date();
-        const hr = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"][now.getDay()];
-        const bl = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"][now.getMonth()];
-        const wkt = hr + ", " + String(now.getDate()).padStart(2,"0") + " " + bl + " " + now.getFullYear() +
-          " (" + String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0") + ":" + String(now.getSeconds()).padStart(2,"0") + " WITA)";
-
-        const cleanName = siswaData.nama.replace(/[^a-zA-Z0-9]/g, "_");
-        const fileName = `Kelas_${selectedKelas}/${siswaData.no}_${cleanName}_${Date.now()}.jpg`;
-        const b64 = finalImage.includes(",") ? finalImage.split(",")[1] : finalImage;
-        const imageBytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-
-        const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/tugas-siswa/${fileName}`, {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-            "Content-Type": "image/jpeg",
-            "x-upsert": "true"
-          },
-          body: imageBytes
-        });
-        if (!uploadRes.ok) throw new Error("Upload foto gagal: " + await uploadRes.text());
-
-        const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/tugas-siswa/${fileName}`;
-
-        const dbRes = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa`, {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-            "apikey": SUPABASE_ANON_KEY,
-            "Content-Type": "application/json",
-            "Prefer": "return=representation"
-          },
-          body: JSON.stringify({
-            kelas: "Kelas " + selectedKelas,
-            no_absen: siswaData.no,
-            nama_siswa: siswaData.nama,
-            image_url: publicUrl,
-            waktu_kirim: wkt,
-            updated_at: new Date().toISOString()
-          })
-        });
-        if (!dbRes.ok) throw new Error("Gagal simpan database: " + await dbRes.text());
-
-        collectedSet.add(studentKey);
-        renderDropdown();
-
-        document.getElementById("recKelas").textContent = "Kelas " + selectedKelas;
-        document.getElementById("recNo").textContent = siswaData.no;
-        document.getElementById("recNama").textContent = siswaData.nama;
-        document.getElementById("recFoto").textContent = selectedImages.length + " Foto";
-        document.getElementById("recWaktu").textContent = wkt;
-
-        document.getElementById("taskForm").style.display = "none";
-        document.getElementById("successCard").style.display = "block";
-      } catch(err) {
-        alertBox.textContent = "Gangguan koneksi: " + err.message;
-        alertBox.style.display = "block";
-      } finally {
-        btn.disabled = false;
-        loading.style.display = "none";
-      }
-    }
-
-    function resetFormToNew() {
-      selectedImages = [];
-      document.getElementById("galleryGrid").innerHTML = "";
-      document.getElementById("galleryContainer").style.display = "none";
-      document.getElementById("fileInput").value = "";
-      document.getElementById("taskForm").reset();
-      document.getElementById("taskForm").style.display = "block";
-      document.getElementById("successCard").style.display = "none";
-      renderDropdown();
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      syncCollectedStatus().then(() => renderDropdown());
     });
   </script>
 </body>
