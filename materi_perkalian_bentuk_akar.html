@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operasi Aljabar Bentuk Akar: Perkalian Bentuk Akar</title>
+
+  <!-- Script MathJax untuk Render Notasi Matematika LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      line-height: 1.6;
+      color: #1e293b;
+      background-color: #f8fafc;
+      margin: 0;
+      padding: 24px 16px;
+    }
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 32px 28px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e2e8f0;
+    }
+    h1, h2, h3 {
+      color: #0f172a;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 1.4rem;
+      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 8px;
+    }
+    h2 {
+      font-size: 1.15rem;
+      margin-top: 28px;
+    }
+    h3 {
+      font-size: 1.02rem;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 24px 0;
+    }
+    ol, ul {
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .math-block {
+      background-color: #f1f5f9;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin: 10px 0;
+      overflow-x: auto;
+    }
+    .sub-list {
+      list-style-type: lower-alpha;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- NAVIGASI KEMBALI KE PORTAL -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;background:#f1f5f9;padding:10px 14px;border-radius:10px;border:1px solid #e2e8f0;flex-wrap:wrap;gap:8px;">
+      <a href="materi.html" style="color:#2563eb;text-decoration:none;font-weight:700;font-size:0.9rem;display:inline-flex;align-items:center;gap:6px;">
+        ⬅ Kembali ke Daftar Materi
+      </a>
+      <div style="display:flex;gap:12px;font-size:0.85rem;">
+        <a href="index.html" style="color:#64748b;text-decoration:none;font-weight:600;">🏠 Portal Tugas</a>
+        <a href="nilai.html" style="color:#64748b;text-decoration:none;font-weight:600;">📊 Cek Nilai</a>
+        <a href="jadwal.html" style="color:#64748b;text-decoration:none;font-weight:600;">📅 Jadwal</a>
+      </div>
+    </div>
+
+    <!-- JUDUL MATERI -->
+    <h3>JUDUL MATERI</h3>
+    <h1>Operasi Aljabar Bentuk Akar: Perkalian Bentuk Akar</h1>
+
+    <hr>
+
+    <!-- TUJUAN PEMBELAJARAN -->
+    <h3>TUJUAN PEMBELAJARAN (Berdasarkan CP Kemendikbudristek)</h3>
+    <p>Setelah mempelajari materi ini, peserta didik diharapkan dapat:</p>
+    <ul>
+      <li><strong>Menyelesaikan operasi perkalian pada bilangan bentuk akar</strong> dengan tepat dan menggunakannya untuk memecahkan masalah matematika kontekstual.</li>
+    </ul>
+
+    <hr>
+
+    <!-- MATERI -->
+    <h3>MATERI OPERASI PERKALIAN BENTUK AKAR</h3>
+
+    <ol>
+      <li>
+        <strong>Konsep Dasar Perkalian Bentuk Akar</strong><br>
+        Perkalian bentuk akar dapat dipahami melalui konsep luas bangun datar persegi panjang. Jika sebuah persegi panjang memiliki panjang $\sqrt{5}\text{ cm}$ dan lebar $\sqrt{2}\text{ cm}$, maka luasnya dapat dihitung dengan mengalikan kedua besaran tersebut:
+        <div class="math-block">
+          $$\text{Luas} = \text{panjang} \times \text{lebar} = \sqrt{5} \times \sqrt{2} = \sqrt{10}\text{ cm}^2$$
+        </div>
+      </li>
+
+      <li>
+        <strong>Bentuk Umum Perkalian Bentuk Akar</strong><br>
+        Secara umum, perkalian dua bilangan bentuk akar memenuhi sifat berikut:
+        <div class="math-block">
+          $$a\sqrt{p} \times b\sqrt{q} = (a \times b)\sqrt{p \times q}$$
+        </div>
+        <p><em>Dengan syarat $a, b, p, q$ adalah bilangan bulat, serta $p$ dan $q$ bernilai positif ($p > 0, q > 0$).</em></p>
+      </li>
+
+      <li>
+        <strong>Penyederhanaan Hasil Perkalian</strong><br>
+        Jika hasil perkalian di dalam tanda akar ($\sqrt{p \times q}$) masih mengandung faktor bilangan kuadrat sempurna, maka bentuk akar tersebut harus disederhanakan terlebih dahulu.
+      </li>
+    </ol>
+
+    <hr>
+
+    <!-- CONTOH SOAL DAN PEMBAHASAN -->
+    <h3>CONTOH SOAL DAN PEMBAHASAN</h3>
+
+    <ul>
+      <li>
+        <strong>Contoh 1 (Perkalian Bentuk Akar Sederhana):</strong><br>
+        Hitunglah hasil dari $\sqrt{3} \times \sqrt{7}$.
+        <ul>
+          <li>
+            <strong>Alternatif Penyelesaian:</strong>
+            <div class="math-block">
+              $$\sqrt{3} \times \sqrt{7} = \sqrt{3 \times 7} = \sqrt{21}$$
+            </div>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Contoh 2 (Perkalian Koefisien dan Bentuk Akar):</strong><br>
+        Tentukan hasil dari $2\sqrt{2} \times 2\sqrt{3}$.
+        <ul>
+          <li>
+            <strong>Alternatif Penyelesaian:</strong>
+            <div class="math-block">
+              $$2\sqrt{2} \times 2\sqrt{3} = (2 \times 2)\sqrt{2 \times 3} = 4\sqrt{6}$$
+            </div>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Contoh 3 (Perkalian Bentuk Akar yang Perlu Disederhanakan):</strong><br>
+        Sederhanakan bentuk perkalian $3\sqrt{5} \times 5\sqrt{10}$.
+        <ul>
+          <li>
+            <strong>Alternatif Penyelesaian:</strong>
+            <div class="math-block">
+              $$3\sqrt{5} \times 5\sqrt{10} = (3 \times 5)\sqrt{5 \times 10} = 15\sqrt{50}$$
+            </div>
+            Karena $\sqrt{50} = \sqrt{25 \times 2} = 5\sqrt{2}$, maka:
+            <div class="math-block">
+              $$15\sqrt{50} = 15 \times 5\sqrt{2} = 75\sqrt{2}$$
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <hr>
+
+    <!-- SOAL LATIHAN -->
+    <h3>SOAL LATIHAN</h3>
+    <p><em>(Kerjakan soal-soal berikut dengan menyesuaikan langkah pada contoh di atas)</em></p>
+
+    <ol>
+      <li>
+        Tentukan hasil perkalian bentuk akar sederhana berikut:
+        <ol class="sub-list">
+          <li>$\sqrt{5} \times \sqrt{6}$</li>
+          <li>$\sqrt{7} \times \sqrt{11}$</li>
+        </ol>
+      </li>
+      <li>
+        Hitunglah hasil perkalian koefisien dan bentuk akar berikut:
+        <ol class="sub-list">
+          <li>$4\sqrt{3} \times 5\sqrt{2}$</li>
+          <li>$3\sqrt{5} \times 8\sqrt{2}$</li>
+        </ol>
+      </li>
+      <li>
+        Sederhanakan bentuk perkalian berikut hingga bentuk yang paling sederhana:
+        <ol class="sub-list">
+          <li>$3\sqrt{2} \times 6\sqrt{6}$</li>
+          <li>$5\sqrt{6} \times 7\sqrt{8}$</li>
+        </ol>
+      </li>
+      <li>
+        <strong>Soal Kontekstual:</strong><br>
+        Sebuah persegi panjang memiliki panjang $10\sqrt{72}\text{ cm}$ dan lebar $4\sqrt{8}\text{ cm}$. Hitunglah luas persegi panjang tersebut dan tuliskan jawaban dalam bentuk akar yang paling sederhana.
+      </li>
+    </ol>
+
+  </div>
+
+</body>
+</html>

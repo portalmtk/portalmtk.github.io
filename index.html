@@ -3,15 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Matematika - SMP Negeri 5 Muara Siram</title>
-  <meta name="description" content="Portal Pembelajaran Matematika SMP Negeri 5 Muara Siram: Pengumpulan Tugas, Rekap Nilai, Jadwal Matematika, dan Materi Belajar per Pertemuan.">
+  <title>Portal Matematika - Pengumpulan Tugas Siswa</title>
+  <meta name="description" content="Portal Pengumpulan Tugas Mandiri Matematika SMP Negeri 5 Muara Siram.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- JSZip untuk Backup Rekap Seluruh Kelas dalam 1 Berkas ZIP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   
   <style>
     :root {
@@ -35,7 +32,7 @@
     body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px 14px 60px 14px; display: flex; justify-content: center; }
     .container { width: 100%; max-width: 620px; }
 
-    /* Sticky Navigation Container & Navbar (Mobile Friendly & Always Visible) */
+    /* Sticky Navigation Container & Navbar */
     .sticky-nav-container {
       position: sticky;
       top: 10px;
@@ -58,6 +55,8 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
+      color: inherit;
     }
     .brand-icon {
       width: 36px;
@@ -85,7 +84,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* Menu Toggle Button (Mobile Friendly) */
+    /* Menu Toggle Button */
     .btn-menu-toggle {
       background: rgba(79, 70, 229, 0.15);
       color: #fff;
@@ -143,6 +142,7 @@
       gap: 10px;
       transition: all 0.2s;
       text-align: left;
+      text-decoration: none;
     }
     .menu-item-btn:hover {
       border-color: var(--primary);
@@ -161,7 +161,7 @@
     .header h1 { font-size: 1.48rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
     .header p { color: var(--text-muted); font-size: 0.82rem; margin-top: 4px; line-height: 1.4; }
 
-    /* Cards */
+    /* Card */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -195,7 +195,7 @@
       box-shadow: 0 0 0 1px var(--primary);
     }
 
-    select, input[type="text"], input[type="password"], textarea {
+    select, input[type="text"] {
       width: 100%;
       padding: 12px 14px;
       border-radius: 12px;
@@ -206,7 +206,7 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    select:focus, input:focus, textarea:focus { border-color: var(--primary); }
+    select:focus, input:focus { border-color: var(--primary); }
     option:disabled { color: #64748b; }
 
     /* Upload Box & Multi Photo Gallery */
@@ -249,9 +249,7 @@
     .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .btn-secondary { width: 100%; padding: 12px; background: #1e293b; color: var(--text); border: 1px solid var(--card-border); border-radius: 12px; font-size: 0.875rem; font-weight: 600; cursor: pointer; margin-top: 8px; }
     .btn-secondary:hover { background: #283548; }
-    .btn-action-sm { background: #1e293b; color: #a5b4fc; border: 1px solid var(--card-border); border-radius: 8px; padding: 6px 12px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; transition: all 0.15s; }
-    .btn-action-sm:hover { background: #2b3952; color: #fff; }
-    .btn-action-sm.active { background: #10b981; color: white; border-color: #10b981; }
+    .btn-action-sm { background: #1e293b; color: #a5b4fc; border: 1px solid var(--card-border); border-radius: 8px; padding: 6px 12px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
 
     /* Alerts and spinners */
     .alert-error { display: none; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-top: 12px; }
@@ -268,85 +266,6 @@
     .receipt-label { color: var(--text-muted); }
     .receipt-val { font-weight: 700; color: #fff; }
 
-    /* Recap Items */
-    .recap-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; flex-wrap: wrap; }
-    .progress-box { background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; }
-    .progress-bar-bg { background: #1e293b; height: 8px; border-radius: 999px; overflow: hidden; margin-top: 6px; }
-    .progress-bar-fill { background: linear-gradient(90deg, #4f46e5, #10b981); height: 100%; width: 0%; transition: width 0.4s ease; }
-    .status-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 12px; margin-bottom: 8px; gap: 8px; }
-    .status-item-left { display: flex; flex-direction: column; gap: 3px; }
-    .status-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-    .badge-status { font-size: 0.72rem; padding: 3px 8px; border-radius: 999px; font-weight: 700; }
-    .badge-done { background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
-    .badge-pending { background: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
-    .badge-grade { font-size: 0.75rem; padding: 3px 10px; border-radius: 8px; font-weight: 800; background: rgba(251, 191, 36, 0.15); color: var(--gold); border: 1px solid rgba(251, 191, 36, 0.4); }
-    .badge-no-grade { font-size: 0.7rem; color: var(--text-muted); font-style: italic; }
-    .waktu-kirim-label { font-size: 0.7rem; color: var(--math-accent); margin-top: 2px; }
-    .btn-view-img { background: rgba(79, 70, 229, 0.15); color: #a5b4fc; border: 1px solid rgba(79, 70, 229, 0.3); border-radius: 6px; font-size: 0.72rem; font-weight: 700; padding: 4px 8px; cursor: pointer; }
-    .btn-view-img:hover { background: var(--primary); color: #fff; }
-
-    /* Modals */
-    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); z-index: 999; justify-content: center; align-items: center; padding: 14px; }
-    .modal-content { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 20px; position: relative; }
-    .modal-close { position: absolute; top: 14px; right: 14px; background: #1e293b; color: #fff; border: none; font-size: 1.1rem; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .modal-img { width: 100%; max-height: 55vh; object-fit: contain; border-radius: 10px; margin: 12px 0; background: #000; }
-    .teacher-input-group { display: flex; gap: 8px; margin-top: 10px; }
-    .teacher-input { flex: 1; padding: 8px 12px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 8px; color: #fff; font-size: 0.85rem; }
-    .pin-modal-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; max-width: 320px; width: 100%; padding: 24px; text-align: center; }
-    .pin-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
-    .pin-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; }
-    .pin-input { width: 100%; padding: 12px 14px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 12px; color: #fff; font-size: 1rem; text-align: center; letter-spacing: 4px; font-weight: 700; outline: none; margin-bottom: 12px; }
-    .pin-error { color: #f87171; font-size: 0.82rem; display: none; margin-bottom: 8px; }
-
-    /* Jadwal Khusus Matematika */
-    .schedule-card-math {
-      background: var(--input-bg);
-      border: 1px solid var(--card-border);
-      border-left: 4px solid var(--primary);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      transition: transform 0.15s, border-color 0.2s;
-    }
-    .schedule-card-math:hover {
-      transform: translateY(-2px);
-      border-color: var(--primary);
-    }
-    .schedule-day-badge {
-      font-size: 0.78rem;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 8px;
-      background: rgba(79, 70, 229, 0.15);
-      color: #818cf8;
-      display: inline-block;
-      margin-bottom: 4px;
-    }
-    .schedule-title-math { font-size: 1rem; font-weight: 800; color: #fff; }
-    .schedule-guru-math { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
-    .schedule-time-box { text-align: right; }
-    .schedule-time-val { font-size: 0.85rem; font-weight: 800; color: var(--math-accent); background: rgba(56, 189, 248, 0.1); padding: 4px 10px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.25); white-space: nowrap; }
-
-    /* Materi Styles */
-    .pertemuan-filter-scroll { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 16px; -webkit-overflow-scrolling: touch; }
-    .pertemuan-pill { padding: 6px 12px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 10px; color: var(--text-muted); font-size: 0.78rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
-    .pertemuan-pill.active { background: #10b981; color: white; border-color: #10b981; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
-    .materi-card { background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px; margin-bottom: 12px; transition: border-color 0.2s; }
-    .materi-card:hover { border-color: rgba(79, 70, 229, 0.4); }
-    .materi-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 8px; }
-    .badge-pertemuan { font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 999px; background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
-    .materi-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .materi-mapel-info { font-size: 0.78rem; color: var(--math-accent); font-weight: 700; margin-bottom: 8px; }
-    .materi-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.45; margin-bottom: 12px; }
-    .materi-actions { display: flex; justify-content: space-between; align-items: center; pt: 8px; border-top: 1px solid rgba(255,255,255,0.06); }
-    .materi-meta { font-size: 0.72rem; color: var(--text-muted); }
-    .btn-download-materi { padding: 6px 14px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-    .btn-download-materi:hover { background: var(--primary-hover); }
-
     /* Footer */
     .footer { text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 24px; }
   </style>
@@ -357,34 +276,34 @@
     <!-- STICKY NAVBAR & TOGGLE MENU WRAPPER -->
     <div class="sticky-nav-container">
       <div class="top-navbar">
-        <div class="nav-brand">
+        <a href="index.html" class="nav-brand">
           <div class="brand-icon">📐</div>
           <div>
             <div class="brand-text-title">PORTAL MATEMATIKA</div>
             <div class="brand-text-sub">SMPN 5 MUARA SIRAM</div>
           </div>
-        </div>
+        </a>
         <button type="button" class="btn-menu-toggle" id="btnToggleMenu" onclick="toggleMenuDrawer(event)">
           <span id="menuIcon">☰</span>
           <span id="menuText">Menu</span>
         </button>
       </div>
 
-      <!-- MODERN TOGGLE MENU DRAWER (STICKY & SELALU TERLIHAT) -->
+      <!-- MODERN TOGGLE MENU DRAWER -->
       <div id="menuDrawer" class="menu-drawer">
         <div class="menu-drawer-grid">
-          <button type="button" class="menu-item-btn active" id="mItemForm" onclick="selectTabFromMenu('form')">
+          <a href="index.html" class="menu-item-btn active">
             <span>📤</span> Kirim Tugas MTK
-          </button>
-          <button type="button" class="menu-item-btn" id="mItemStatus" onclick="selectTabFromMenu('status')">
+          </a>
+          <a href="nilai.html" class="menu-item-btn">
             <span>📊</span> Rekap &amp; Nilai
-          </button>
-          <button type="button" class="menu-item-btn" id="mItemJadwal" onclick="selectTabFromMenu('jadwal')">
+          </a>
+          <a href="jadwal.html" class="menu-item-btn">
             <span>📅</span> Jadwal Matematika
-          </button>
-          <button type="button" class="menu-item-btn" id="mItemMateri" onclick="selectTabFromMenu('materi')">
+          </a>
+          <a href="materi.html" class="menu-item-btn">
             <span>📚</span> Materi Matematika
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -392,18 +311,16 @@
     <!-- BANNER IDENTITAS GURU & MAPEL -->
     <div class="header">
       <div class="header-badge">GURU PENGAMPU: SUPIANTO, S.Pd.,Gr.</div>
-      <h1>PORTAL MATEMATIKA</h1>
-      <p>Portal Pengumpulan Tugas, Pengecekan Nilai, Jadwal, dan Materi Belajar Matematika (Kelas VII, VIII, IX)</p>
+      <h1>PENGUMPULAN TUGAS</h1>
+      <p>Kirim lembar tugas Matematika mandiri Kelas VII, VIII, dan IX</p>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- TAB 1: FORM PENGUMPULAN TUGAS MATEMATIKA                 -->
-    <!-- ======================================================== -->
-    <div id="tab-form" class="card">
+    <!-- CARD FORM PENGUMPULAN TUGAS -->
+    <div class="card">
       <form id="taskForm" onsubmit="submitForm(event)">
         <!-- 1. PILIH KELAS -->
         <div class="form-group">
-          <label>1. Pilih Kelas Anda</label>
+          <label>1. Pilih Kelas Anda:</label>
           <div class="class-pills">
             <button type="button" class="class-pill active" onclick="selectClass('VII', this)">Kelas VII</button>
             <button type="button" class="class-pill" onclick="selectClass('VIII', this)">Kelas VIII</button>
@@ -413,7 +330,7 @@
 
         <!-- 2. PILIH NAMA SISWA -->
         <div class="form-group">
-          <label for="siswaSelect">2. Nama Siswa <span id="selectLoading" style="font-size:0.75rem;color:var(--text-muted);font-weight:normal;"></span></label>
+          <label for="siswaSelect">2. Nama Siswa: <span id="selectLoading" style="font-size:0.75rem;color:var(--text-muted);font-weight:normal;"></span></label>
           <select id="siswaSelect" required>
             <option value="">-- Pilih Nama Anda --</option>
           </select>
@@ -421,7 +338,7 @@
 
         <!-- 3. MULTI FOTO LEMBAR TUGAS MTK -->
         <div class="form-group">
-          <label>3. Foto Lembar / Buku Tugas Matematika <span style="color:#818cf8;font-size:0.75rem;font-weight:normal;">(Bisa pilih beberapa foto)</span></label>
+          <label>3. Foto Lembar / Buku Tugas Matematika: <span style="color:#818cf8;font-size:0.75rem;font-weight:normal;">(Bisa pilih beberapa foto)</span></label>
           <div class="upload-box" id="uploadBox" onclick="document.getElementById('fileInput').click()">
             <div id="uploadPlaceholder">
               <div class="upload-icon">📸</div>
@@ -463,91 +380,9 @@
           <div class="receipt-row"><span class="receipt-label">Status:</span><span class="receipt-val" style="color:var(--success);">Tercatat &amp; Terkunci 🔒</span></div>
         </div>
 
-        <button class="btn-submit" onclick="selectTabFromMenu('status')">📊 Lihat Rekap &amp; Nilai</button>
+        <a href="nilai.html" class="btn-submit" style="display:block;text-align:center;text-decoration:none;margin-bottom:8px;">📊 Buka Halaman Rekap &amp; Nilai</a>
         <button class="btn-secondary" onclick="resetFormToNew()">➕ Pilih Siswa Lain</button>
       </div>
-    </div>
-
-    <!-- ======================================================== -->
-    <!-- TAB 2: REKAP STATUS PENGUMPULAN & NILAI MATEMATIKA       -->
-    <!-- ======================================================== -->
-    <div id="tab-status" class="card" style="display:none;">
-      <div class="form-group" style="margin-bottom:14px;">
-        <label>Pilih Kelas Rekap Matematika:</label>
-        <div class="class-pills">
-          <button type="button" class="class-pill active" onclick="selectRecapClass('VII', this)">Kelas VII</button>
-          <button type="button" class="class-pill" onclick="selectRecapClass('VIII', this)">Kelas VIII</button>
-          <button type="button" class="class-pill" onclick="selectRecapClass('IX', this)">Kelas IX</button>
-        </div>
-      </div>
-
-      <div class="recap-header">
-        <h3 id="recapTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Rekap Nilai MTK Kelas VII</h3>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;">
-          <button class="btn-action-sm" id="btnTeacherMode" onclick="toggleTeacherMode()">🔒 Mode Guru</button>
-          <button class="btn-action-sm" id="btnBackupZip" onclick="backupZipSemuaKelas()" style="display:none;background:rgba(56,189,248,0.15);color:var(--math-accent);border-color:rgba(56,189,248,0.3);">📦 Backup ZIP Semua Kelas</button>
-          <button class="btn-action-sm" id="btnExportCSV" onclick="exportCSV()" style="display:none;">📄 Export CSV</button>
-          <button class="btn-action-sm" id="btnResetNilai" onclick="openResetPenilaianModal()" style="display:none;background:rgba(239,68,68,0.15);color:#fca5a5;border-color:rgba(239,68,68,0.3);">🗑️ Reset Penilaian</button>
-          <button class="btn-action-sm" onclick="loadStatus()">🔄 Refresh</button>
-        </div>
-      </div>
-
-      <div class="progress-box">
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;font-weight:600;">
-          <span id="recapCountText">Sudah: 0 / 0 Siswa</span>
-          <span id="recapPercentText" style="color:var(--success);">0%</span>
-        </div>
-        <div class="progress-bar-bg"><div id="progressBarFill" class="progress-bar-fill"></div></div>
-      </div>
-
-      <div id="statusList">Klik Refresh untuk memuat data...</div>
-    </div>
-
-    <!-- ======================================================== -->
-    <!-- TAB 3: JADWAL PELAJARAN KHUSUS MATEMATIKA                -->
-    <!-- ======================================================== -->
-    <div id="tab-jadwal" class="card" style="display:none;">
-      <div class="form-group" style="margin-bottom:14px;">
-        <label>Pilih Kelas Jadwal Matematika:</label>
-        <div class="class-pills">
-          <button type="button" class="class-pill active" onclick="selectJadwalClass('VII', this)">Kelas VII</button>
-          <button type="button" class="class-pill" onclick="selectJadwalClass('VIII', this)">Kelas VIII</button>
-          <button type="button" class="class-pill" onclick="selectJadwalClass('IX', this)">Kelas IX</button>
-        </div>
-      </div>
-
-      <div class="recap-header" style="margin-bottom:12px;">
-        <h3 id="jadwalHeaderTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Jadwal Matematika Kelas VII</h3>
-        <span style="font-size:0.75rem; color:var(--math-accent); font-weight:700; background:rgba(56,189,248,0.1); padding:4px 10px; border-radius:999px;">Total: 4 JP / Minggu</span>
-      </div>
-
-      <div id="jadwalList">Memuat jadwal matematika...</div>
-    </div>
-
-    <!-- ======================================================== -->
-    <!-- TAB 4: MATERI PELAJARAN MATEMATIKA (PER PERTEMUAN)       -->
-    <!-- ======================================================== -->
-    <div id="tab-materi" class="card" style="display:none;">
-      <div class="form-group" style="margin-bottom:12px;">
-        <label>Pilih Kelas Materi Matematika:</label>
-        <div class="class-pills">
-          <button type="button" class="class-pill active" onclick="selectMateriClass('VII', this)">Kelas VII</button>
-          <button type="button" class="class-pill" onclick="selectMateriClass('VIII', this)">Kelas VIII</button>
-          <button type="button" class="class-pill" onclick="selectMateriClass('IX', this)">Kelas IX</button>
-        </div>
-      </div>
-
-      <!-- DAFTAR MATERI PER KELAS -->
-
-      <div class="recap-header" style="margin-bottom:12px;">
-        <h3 id="materiHeaderTitle" style="font-size:0.95rem;color:var(--text);font-weight:700;">Materi Matematika Kelas VII</h3>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;">
-          <button class="btn-action-sm" id="btnHapusSemuaMateri" style="display:none;background:rgba(239,68,68,0.15);color:#fca5a5;border-color:rgba(239,68,68,0.3);" onclick="clearAllMateri()">🗑️ Bersihkan Semua</button>
-          <button class="btn-action-sm" style="background:var(--primary);color:#fff;" onclick="openUploadMateriModal()">➕ Upload Materi MTK</button>
-        </div>
-      </div>
-
-      <div id="materiList">Memuat materi matematika...</div>
     </div>
 
     <!-- FOOTER -->
@@ -557,185 +392,10 @@
 
   </div>
 
-  <!-- ======================================================== -->
-  <!-- MODAL: VERIFIKASI PIN GURU                               -->
-  <!-- ======================================================== -->
-  <div id="pinModal" class="modal-backdrop" onclick="closePinModal(event)">
-    <div class="pin-modal-box" onclick="event.stopPropagation()">
-      <div class="pin-title">🔒 Akses Guru Matematika</div>
-      <p class="pin-sub">Masukkan PIN untuk memeriksa tugas, menilai, atau upload materi</p>
-      <form onsubmit="verifyTeacherPin(event)">
-        <input type="password" id="teacherPinInput" class="pin-input" placeholder="PIN GURU" maxlength="20" autocomplete="off">
-        <p id="pinErrorMsg" class="pin-error">PIN salah. Masukkan PIN Guru yang benar.</p>
-        <button type="submit" class="btn-submit" style="padding:10px;">Buka Akses Guru</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ======================================================== -->
-  <!-- MODAL: PERIKSA FOTO TUGAS & INPUT NILAI GURU             -->
-  <!-- ======================================================== -->
-  <div id="imageModal" class="modal-backdrop" onclick="closeImageModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeImageModal()">✕</button>
-      <h3 id="modalStudentName" style="font-size:1.05rem;font-weight:700;">-</h3>
-      <p id="modalStudentMeta" style="font-size:0.78rem;color:var(--text-muted);margin-top:2px;">-</p>
-      <img id="modalImgTag" src="" alt="Foto Lembar Tugas" class="modal-img">
-      <div style="margin-top:8px;border-top:1px solid var(--card-border);padding-top:12px;">
-        <label style="font-size:0.8rem;">⭐ Beri Nilai Tugas Matematika:</label>
-        <div class="teacher-input-group">
-          <input type="text" id="inputNilaiGuru" class="teacher-input" placeholder="Nilai (misal: 100)" style="max-width:100px;">
-          <input type="text" id="inputCatatanGuru" class="teacher-input" placeholder="Catatan / Feedback untuk siswa">
-          <button type="button" class="btn-view-img" style="background:var(--primary);color:#fff;" onclick="saveGrade()">Simpan</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ======================================================== -->
-  <!-- MODAL: UPLOAD MATERI MATEMATIKA OLEH GURU                -->
-  <!-- ======================================================== -->
-  <div id="materiModal" class="modal-backdrop" onclick="closeMateriModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeMateriModal()">✕</button>
-      <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:4px;">📚 Upload Materi Matematika</h3>
-      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:16px;">Materi akan langsung tampil untuk dipelajari &amp; diunduh siswa sesuai pertemuannya.</p>
-
-      <form id="uploadMateriForm" onsubmit="submitMateri(event)">
-        <div class="form-group">
-          <label>Kelas Target:</label>
-          <select id="materiInputKelas" required>
-            <option value="Kelas VII">Kelas VII</option>
-            <option value="Kelas VIII">Kelas VIII</option>
-            <option value="Kelas IX">Kelas IX</option>
-          </select>
-        </div>
-
-        <div style="display:flex; gap:10px;">
-          <div class="form-group" style="flex:2;">
-            <label>Mata Pelajaran:</label>
-            <input type="text" id="materiInputMapel" value="Matematika" readonly style="background:#1e293b; color:var(--math-accent); font-weight:700;" required>
-          </div>
-          <div class="form-group" style="flex:1;">
-            <label>Pertemuan Ke-:</label>
-            <select id="materiInputPertemuan" required>
-              <option value="1">Pertemuan 1</option>
-              <option value="2">Pertemuan 2</option>
-              <option value="3">Pertemuan 3</option>
-              <option value="4">Pertemuan 4</option>
-              <option value="5">Pertemuan 5</option>
-              <option value="6">Pertemuan 6</option>
-              <option value="7">Pertemuan 7</option>
-              <option value="8">Pertemuan 8</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Judul Materi Pokok Matematika:</label>
-          <input type="text" id="materiInputJudul" placeholder="Contoh: Operasi Bilangan Bulat &amp; Pecahan" required>
-        </div>
-
-        <div class="form-group">
-          <label>Guru Pengampu:</label>
-          <input type="text" id="materiInputGuru" value="Supianto, S.Pd.,Gr." readonly style="background:#1e293b; color:#fff;" required>
-        </div>
-
-        <div class="form-group">
-          <label>Ringkasan / Petunjuk Belajar:</label>
-          <textarea id="materiInputDesc" rows="3" placeholder="Tuliskan petunjuk tugas atau ringkasan rumus matematika untuk siswa..."></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Pilih File Modul (HTML Web Interaktif, PDF, Word, PPT, Gambar) ATAU Masukkan Link:</label>
-          <input type="file" id="materiFileInput" accept=".html,.htm,.pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png">
-          <div style="text-align:center; font-size:0.75rem; color:var(--text-muted); margin: 6px 0;">-- ATAU --</div>
-          <input type="text" id="materiLinkInput" placeholder="https://... atau link referensi materi / simulasi web">
-        </div>
-
-        <div id="materiAlertBox" class="alert-error"></div>
-        <button type="submit" id="btnUploadMateri" class="btn-submit" style="margin-top:10px;">🚀 Terbitkan Materi Matematika</button>
-        <div id="materiLoading" class="loading-spinner">⏳ Mengunggah materi ke database...</div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ======================================================== -->
-  <!-- MODAL: PREVIEW & BACA MATERI INTERAKTIF (HTML & DOKUMEN) -->
-  <!-- ======================================================== -->
-  <div id="materiViewerModal" class="modal-backdrop" onclick="closeMateriViewerModal(event)" style="display:none;z-index:1100;">
-    <div class="modal-content" style="max-width:850px;width:95%;height:90vh;display:flex;flex-direction:column;padding:16px;" onclick="event.stopPropagation()">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid var(--card-border);padding-bottom:8px;">
-        <div>
-          <h3 id="viewerMateriTitle" style="font-size:1.05rem;font-weight:700;color:#fff;">Materi Matematika</h3>
-          <span style="font-size:0.75rem;color:var(--math-accent);">📐 Tampilan Interaktif Langsung</span>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <button type="button" class="btn-action-sm" style="text-decoration:none;font-size:0.75rem;padding:5px 10px;cursor:pointer;" onclick="openViewerInFullTab()">🔗 Tab Penuh</button>
-          <button type="button" class="modal-close" style="position:static;" onclick="closeMateriViewerModal()">✕</button>
-        </div>
-      </div>
-      <div style="flex:1;background:#ffffff;border-radius:10px;overflow:hidden;position:relative;">
-        <iframe id="materiViewerFrame" style="width:100%;height:100%;border:none;background:#ffffff;" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <!-- ======================================================== -->
-  <!-- MODAL: RESET PENILAIAN & TUGAS SISWA                     -->
-  <!-- ======================================================== -->
-  <div id="resetModal" class="modal-backdrop" onclick="closeResetModal(event)">
-    <div class="modal-content" style="max-width:460px;padding:22px;" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeResetModal()">✕</button>
-      <div style="text-align:center;margin-bottom:12px;">
-        <div style="font-size:2.4rem;margin-bottom:4px;">⚠️</div>
-        <h3 style="font-size:1.15rem;font-weight:800;color:#fca5a5;">Reset Penilaian &amp; Tugas Siswa</h3>
-        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">
-          Gunakan fitur ini untuk memulai penilaian sesi baru.
-        </p>
-      </div>
-
-      <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:12px;padding:12px 14px;margin-bottom:14px;">
-        <p style="font-size:0.79rem;color:#fca5a5;margin:0;line-height:1.45;">
-          <strong>💡 Perhatian:</strong> Pastikan Anda sudah menekan tombol <strong>📦 Backup ZIP Semua Kelas</strong> sebelum melakukan reset agar rekap nilai hari ini tersimpan aman di komputer Anda!
-        </p>
-      </div>
-
-      <div class="form-group" style="margin-bottom:14px;">
-        <label style="font-size:0.84rem;font-weight:700;">Pilih Lingkup Reset:</label>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
-          <label style="display:flex;align-items:center;gap:10px;font-size:0.84rem;cursor:pointer;background:var(--input-bg);padding:10px 12px;border-radius:10px;border:1px solid var(--card-border);">
-            <input type="radio" name="resetScope" id="resetScopeClass" value="class" checked>
-            <span>Hanya <strong>Kelas <span id="resetCurrentClassLabel">VII</span></strong> saja</span>
-          </label>
-          <label style="display:flex;align-items:center;gap:10px;font-size:0.84rem;cursor:pointer;background:var(--input-bg);padding:10px 12px;border-radius:10px;border:1px solid var(--card-border);">
-            <input type="radio" name="resetScope" id="resetScopeAll" value="all">
-            <span><strong>SEMUA KELAS</strong> (Kelas VII, VIII, &amp; IX)</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-bottom:16px;">
-        <label style="font-size:0.8rem;color:var(--text-muted);">Ketik kata <strong style="color:#fca5a5;">RESET</strong> untuk konfirmasi:</label>
-        <input type="text" id="confirmResetInput" placeholder="Ketik RESET" style="text-align:center;letter-spacing:2px;font-weight:700;" autocomplete="off">
-        <p id="resetErrorMsg" style="display:none;color:#fca5a5;font-size:0.75rem;margin-top:6px;text-align:center;">Ketik "RESET" dengan huruf kapital untuk mengonfirmasi.</p>
-      </div>
-
-      <div style="display:flex;gap:10px;">
-        <button type="button" class="btn-secondary" style="margin:0;flex:1;" onclick="closeResetModal()">Batal</button>
-        <button type="button" id="btnExecuteReset" class="btn-submit" style="margin:0;flex:1;background:var(--danger);" onclick="executeResetPenilaian()">🔥 Reset Sekarang</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- JAVASCRIPT LOGIC -->
   <script>
-    // 1. SUPABASE CONFIGURATION
     const SUPABASE_URL = "https://cldnjygghcpifxokvnpq.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsZG5qeWdnaGNwaWZ4b2t2bnBxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3OTAyODUsImV4cCI6MjEwNDM2NjI4NX0.Qthz2f9OboB_bDSBU78In3fa-j4RvsU2aS4hamW_Zoc";
-    const TEACHER_PIN = "GURUCERDAS";
 
-    // 2. DATA SISWA LENGKAP 3 KELAS
     const DATA_KELAS = {
       "VII": [
         { no: 1, nama: "ACHMAD GOZALI" }, { no: 2, nama: "AGUSTINA" }, { no: 3, nama: "ALIF RAMADANI" },
@@ -752,7 +412,7 @@
       "VIII": [
         { no: 1, nama: "Achmad Rifky" }, { no: 2, nama: "Afika Damara Azra" }, { no: 3, nama: "Agustinus Ndara Mone" },
         { no: 4, nama: "Alung Saputra" }, { no: 5, nama: "Andder Stanislaus Ola" }, { no: 6, nama: "Arjuna" },
-        { no: 7, nama: "Dede Efrata Natalius" }, { no: 8, nama: "Diva Putri Rahayu" }, { no: 9, lang: "Ghira Anggara", nama: "Ghira Anggara" },
+        { no: 7, nama: "Dede Efrata Natalius" }, { no: 8, nama: "Diva Putri Rahayu" }, { no: 9, nama: "Ghira Anggara" },
         { no: 10, nama: "Hanan" }, { no: 11, nama: "JAHANI" }, { no: 12, nama: "Jenilya" },
         { no: 13, nama: "Junia Novita Nurjannati" }, { no: 14, nama: "Meisya Faulina" }, { no: 15, nama: "Michkel Arya Putra" },
         { no: 16, nama: "MORGAN SIAS PUNADA" }, { no: 17, nama: "Mutia" }, { no: 18, nama: "Najwa Asyilah" },
@@ -776,170 +436,35 @@
       ]
     };
 
-    // 3. JADWAL RESMI KHUSUS MATEMATIKA (SMPN 5 MUARA SIRAM)
-    const JADWAL_MATEMATIKA = {
-      "VII": [
-        {
-          hari: "Selasa",
-          jam: "Jam Ke-3 (2 JP)",
-          waktu: "08.50 - 10.10 WITA",
-          ruang: "Ruang Kelas VII",
-          guru: "Supianto, S.Pd.,Gr."
-        },
-        {
-          hari: "Rabu",
-          jam: "Jam Ke-1 (2 JP)",
-          waktu: "07.30 - 08.50 WITA",
-          ruang: "Ruang Kelas VII",
-          guru: "Supianto, S.Pd.,Gr."
-        }
-      ],
-      "VIII": [
-        {
-          hari: "Selasa",
-          jam: "Jam Ke-1 (2 JP)",
-          waktu: "07.30 - 08.50 WITA",
-          ruang: "Ruang Kelas VIII",
-          guru: "Supianto, S.Pd.,Gr."
-        },
-        {
-          hari: "Kamis",
-          jam: "Jam Ke-5 (2 JP)",
-          waktu: "10.40 - 12.00 WITA",
-          ruang: "Ruang Kelas VIII",
-          guru: "Supianto, S.Pd.,Gr."
-        }
-      ],
-      "IX": [
-        {
-          hari: "Senin",
-          jam: "Jam Ke-8 & 9 (2 JP)",
-          waktu: "12.00 - 13.20 WITA",
-          ruang: "Ruang Kelas IX",
-          guru: "Supianto, S.Pd.,Gr."
-        },
-        {
-          hari: "Kamis",
-          jam: "Jam Ke-3 (2 JP)",
-          waktu: "08.50 - 10.10 WITA",
-          ruang: "Ruang Kelas IX",
-          guru: "Supianto, S.Pd.,Gr."
-        }
-      ]
-    };
-
-    // 4. STATE VARIABLES
     let selectedKelas = "VII";
-    let selectedRecapKelas = "VII";
-    let selectedJadwalKelas = "VII";
-    let selectedMateriKelas = "VII";
-    let selectedPertemuanFilter = 0; // 0 = Semua
-
     let selectedImages = [];
     let collectedSet = new Set();
-    let isTeacherMode = false;
-    let _records = [], _currentRecord = null;
-    let _pendingTeacherAction = null;
 
-    // ========================================================
-    // TOGGLE MENU DRAWER LOGIC (ALWAYS VISIBLE & STICKY)
-    // ========================================================
     function toggleMenuDrawer(e) {
       if (e) e.stopPropagation();
       const drawer = document.getElementById("menuDrawer");
       const icon = document.getElementById("menuIcon");
-      const text = document.getElementById("menuText");
       if (drawer.style.display === "block") {
         drawer.style.display = "none";
         icon.textContent = "☰";
-        text.textContent = "Menu";
       } else {
         drawer.style.display = "block";
         icon.textContent = "✕";
-        text.textContent = "Tutup";
       }
     }
 
-    // Auto-tutup menu jika mengklik di luar area navbar / menu drawer
-    document.addEventListener("click", function (e) {
+    document.addEventListener("click", function(e) {
       const drawer = document.getElementById("menuDrawer");
       const btn = document.getElementById("btnToggleMenu");
-      if (drawer && drawer.style.display === "block") {
-        if (!drawer.contains(e.target) && !btn.contains(e.target)) {
-          drawer.style.display = "none";
-          document.getElementById("menuIcon").textContent = "☰";
-          document.getElementById("menuText").textContent = "Menu";
-        }
+      if (drawer && drawer.style.display === "block" && !drawer.contains(e.target) && !btn.contains(e.target)) {
+        drawer.style.display = "none";
+        document.getElementById("menuIcon").textContent = "☰";
       }
     });
 
-    function selectTabFromMenu(tab) {
-      document.querySelectorAll('.menu-item-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('tab-form').style.display = 'none';
-      document.getElementById('tab-status').style.display = 'none';
-      document.getElementById('tab-jadwal').style.display = 'none';
-      document.getElementById('tab-materi').style.display = 'none';
-
-      // Tutup menu drawer setelah klik agar layar bersih
-      document.getElementById("menuDrawer").style.display = "none";
-      document.getElementById("menuIcon").textContent = "☰";
-      document.getElementById("menuText").textContent = "Menu";
-
-      if (tab === 'form') {
-        document.getElementById('mItemForm').classList.add('active');
-        document.getElementById('tab-form').style.display = 'block';
-        syncCollectedStatus();
-      } else if (tab === 'status') {
-        document.getElementById('mItemStatus').classList.add('active');
-        document.getElementById('tab-status').style.display = 'block';
-        selectedRecapKelas = selectedKelas;
-        document.querySelectorAll('#tab-status .class-pill').forEach(b => {
-          b.classList.toggle('active', b.textContent.includes(selectedKelas));
-        });
-        document.getElementById('recapTitle').textContent = "Rekap Nilai MTK Kelas " + selectedKelas;
-        loadStatus();
-      } else if (tab === 'jadwal') {
-        document.getElementById('mItemJadwal').classList.add('active');
-        document.getElementById('tab-jadwal').style.display = 'block';
-        loadJadwalMatematika();
-      } else if (tab === 'materi') {
-        document.getElementById('mItemMateri').classList.add('active');
-        document.getElementById('tab-materi').style.display = 'block';
-        loadMateri();
-      }
-
-      // Smooth scroll ke atas agar halaman fokus pada konten tab yang dipilih
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // ========================================================
-    // TAB 1: KIRIM TUGAS MATEMATIKA LOGIC
-    // ========================================================
-    function selectClass(kelas, btn) {
-      selectedKelas = kelas;
-      document.querySelectorAll('#tab-form .class-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderDropdown();
-      syncCollectedStatus();
-    }
-
-    function renderDropdown() {
-      const sel = document.getElementById("siswaSelect");
-      const cur = sel.value;
-      sel.innerHTML = '<option value="">-- Pilih Nama Anda --</option>';
-      (DATA_KELAS[selectedKelas] || []).forEach(s => {
-        const isDone = collectedSet.has(s.nama.toString().trim().toLowerCase());
-        const opt = document.createElement("option");
-        opt.value = JSON.stringify(s);
-        opt.textContent = s.no + ". " + s.nama + (isDone ? " (🔒 Sudah Mengumpulkan)" : "");
-        opt.disabled = isDone;
-        sel.appendChild(opt);
-      });
-      if (cur) sel.value = cur;
-    }
-
     async function syncCollectedStatus() {
-      const lbl = document.getElementById("selectLoading");
+      const selectLoading = document.getElementById("selectLoading");
+      selectLoading.textContent = "(Memeriksa status terkunci...)";
       try {
         const kelasParam = encodeURIComponent("Kelas " + selectedKelas);
         const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?kelas=eq.${kelasParam}&select=nama_siswa`, {
@@ -950,36 +475,51 @@
         (rows || []).forEach(r => {
           if (r.nama_siswa) collectedSet.add(r.nama_siswa.toString().trim().toLowerCase());
         });
-        renderDropdown();
-        if (lbl) lbl.textContent = "(Terkunci otomatis)";
-      } catch(e) {
-        renderDropdown();
+      } catch(err) {
+        console.error("Gagal sync status Supabase:", err);
+      } finally {
+        selectLoading.textContent = "";
       }
     }
 
-    function resetFormToNew() {
-      document.getElementById("taskForm").reset();
-      selectedImages = [];
-      renderGallery();
-      document.getElementById("alertBox").style.display = "none";
-      document.getElementById("taskForm").style.display = "block";
-      document.getElementById("successCard").style.display = "none";
-      syncCollectedStatus();
+    function selectClass(kelas, btn) {
+      selectedKelas = kelas;
+      document.querySelectorAll('.class-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      syncCollectedStatus().then(() => renderDropdown());
+    }
+
+    function renderDropdown() {
+      const select = document.getElementById("siswaSelect");
+      select.innerHTML = '<option value="">-- Pilih Nama Anda --</option>';
+      const daftar = DATA_KELAS[selectedKelas] || [];
+
+      daftar.forEach(s => {
+        const opt = document.createElement("option");
+        opt.value = JSON.stringify(s);
+        const isLocked = collectedSet.has(s.nama.toString().trim().toLowerCase());
+        opt.textContent = `${s.no}. ${s.nama}${isLocked ? ' (Sudah Mengumpulkan)' : ''}`;
+        if (isLocked) opt.disabled = true;
+        select.appendChild(opt);
+      });
     }
 
     async function handleFiles(event) {
-      const files = Array.from(event.target.files);
-      if (!files.length) return;
+      const files = event.target.files;
+      if (!files || !files.length) return;
       const loading = document.getElementById("loading");
-      loading.textContent = "⏳ Memproses & mengompres foto...";
       loading.style.display = "block";
+      loading.textContent = "⏳ Memproses foto...";
+
       for (const file of files) {
         try {
-          selectedImages.push(await processImageFile(file));
-        } catch(e) {
-          console.error("Gagal proses gambar:", e);
+          const b64 = await processImageFile(file);
+          selectedImages.push(b64);
+        } catch(err) {
+          console.error("Gagal proses gambar:", err);
         }
       }
+
       event.target.value = "";
       loading.style.display = "none";
       renderGallery();
@@ -989,18 +529,25 @@
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onerror = reject;
-        reader.onload = e => {
+        reader.onload = function(e) {
           const img = new Image();
           img.onerror = reject;
-          img.onload = () => {
+          img.onload = function() {
             const canvas = document.createElement('canvas');
-            const maxDim = 1200;
+            const maxDim = 960;
             let w = img.width, h = img.height;
-            if (w > h && w > maxDim) { h = Math.round(h * maxDim / w); w = maxDim; }
-            else if (h > maxDim) { w = Math.round(w * maxDim / h); h = maxDim; }
-            canvas.width = w; canvas.height = h;
-            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-            resolve(canvas.toDataURL('image/jpeg', 0.78));
+            if (w > h && w > maxDim) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else if (h > maxDim) {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', 0.82));
           };
           img.src = e.target.result;
         };
@@ -1008,44 +555,39 @@
       });
     }
 
-    function removeImage(index) {
-      selectedImages.splice(index, 1);
-      renderGallery();
-    }
-
     function renderGallery() {
-      const container = document.getElementById("galleryContainer");
       const grid = document.getElementById("galleryGrid");
-      const placeholder = document.getElementById("uploadPlaceholder");
-      const alertBox = document.getElementById("alertBox");
+      const cont = document.getElementById("galleryContainer");
+      const badge = document.getElementById("photoCountBadge");
+      grid.innerHTML = "";
 
       if (!selectedImages.length) {
-        container.style.display = "none";
-        placeholder.style.display = "block";
+        cont.style.display = "none";
         return;
       }
-      placeholder.style.display = "none";
-      container.style.display = "block";
-      document.getElementById("photoCountBadge").textContent = selectedImages.length + " Foto Terpilih";
-      if (alertBox) alertBox.style.display = "none";
 
-      grid.innerHTML = "";
-      selectedImages.forEach((imgData, idx) => {
+      cont.style.display = "block";
+      badge.textContent = `${selectedImages.length} Foto Siap Dikirim`;
+
+      selectedImages.forEach((imgSrc, idx) => {
         const item = document.createElement("div");
         item.className = "gallery-item";
         item.innerHTML = `
-          <img src="${imgData}" class="gallery-thumb" alt="Foto ${idx + 1}">
-          <span class="gallery-item-badge">Foto #${idx + 1}</span>
-          <button type="button" class="gallery-item-del" onclick="removeImage(${idx})" title="Hapus">✕</button>
+          <img src="${imgSrc}" class="gallery-thumb" alt="Foto ${idx + 1}">
+          <span class="gallery-item-badge">Foto ${idx + 1}</span>
+          <button type="button" class="gallery-item-del" onclick="removeImage(${idx})" title="Hapus foto ini">✕</button>
         `;
         grid.appendChild(item);
       });
     }
 
-    async function getConsolidatedImage() {
-      if (!selectedImages.length) return "";
-      if (selectedImages.length === 1) return selectedImages[0];
+    function removeImage(idx) {
+      selectedImages.splice(idx, 1);
+      renderGallery();
+    }
 
+    async function getConsolidatedImage() {
+      if (selectedImages.length === 1) return selectedImages[0];
       const imgs = await Promise.all(selectedImages.map(src => new Promise(r => {
         const im = new Image();
         im.onload = () => r(im);
@@ -1125,7 +667,6 @@
         const wkt = hr + ", " + String(now.getDate()).padStart(2,"0") + " " + bl + " " + now.getFullYear() +
           " (" + String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0") + ":" + String(now.getSeconds()).padStart(2,"0") + " WITA)";
 
-        // 1. Upload foto ke Supabase Storage
         const cleanName = siswaData.nama.replace(/[^a-zA-Z0-9]/g, "_");
         const fileName = `Kelas_${selectedKelas}/${siswaData.no}_${cleanName}_${Date.now()}.jpg`;
         const b64 = finalImage.includes(",") ? finalImage.split(",")[1] : finalImage;
@@ -1144,7 +685,6 @@
 
         const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/tugas-siswa/${fileName}`;
 
-        // 2. Simpan record ke tabel tugas_siswa di Supabase
         const dbRes = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa`, {
           method: "POST",
           headers: {
@@ -1164,7 +704,6 @@
         });
         if (!dbRes.ok) throw new Error("Gagal simpan database: " + await dbRes.text());
 
-        // Sukses
         collectedSet.add(studentKey);
         renderDropdown();
 
@@ -1185,848 +724,19 @@
       }
     }
 
-    // ========================================================
-    // TAB 2: REKAP STATUS & NILAI MATEMATIKA LOGIC
-    // ========================================================
-    function selectRecapClass(kelas, btn) {
-      selectedRecapKelas = kelas;
-      document.querySelectorAll('#tab-status .class-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('recapTitle').textContent = "Rekap Nilai MTK Kelas " + kelas;
-      loadStatus();
-    }
-
-    async function loadStatus() {
-      const container = document.getElementById("statusList");
-      container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:14px;'>⏳ Mengambil data nilai Matematika Kelas " + selectedRecapKelas + "...</p>";
-
-      try {
-        const kelasParam = encodeURIComponent("Kelas " + selectedRecapKelas);
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?kelas=eq.${kelasParam}&select=*&order=no_absen.asc`, {
-          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
-        });
-        const rows = await res.json();
-        _records = (rows || []).map(r => ({
-          id: r.id, nama: r.nama_siswa, no: r.no_absen,
-          nilai: r.nilai || "", catatan: r.catatan_guru || "",
-          waktuKirim: r.waktu_kirim || "", imageUrl: r.image_url || ""
-        }));
-
-        const map = {};
-        _records.forEach(item => { if (item.nama) map[item.nama.toString().trim().toLowerCase()] = item; });
-
-        const daftarSiswa = DATA_KELAS[selectedRecapKelas] || [];
-        let doneCount = 0, html = "";
-
-        daftarSiswa.forEach(s => {
-          const key = s.nama.toString().trim().toLowerCase();
-          const item = map[key], isDone = !!item;
-          if (isDone) doneCount++;
-
-          let nilaiBadge = "", btnFoto = "", waktuHtml = "";
-          if (isDone && item) {
-            nilaiBadge = (item.nilai && item.nilai.toString().trim() !== "")
-              ? `<span class="badge-grade">⭐ Nilai: ${item.nilai}</span>`
-              : '<span class="badge-no-grade">⏳ Belum dinilai</span>';
-
-            if (item.waktuKirim) waktuHtml = `<div class="waktu-kirim-label">🕒 ${item.waktuKirim}</div>`;
-
-            if (item.imageUrl && isTeacherMode) {
-              const idx = _records.indexOf(item);
-              btnFoto = `<button type="button" class="btn-view-img" onclick="openImageModal(${idx})">📷 Periksa &amp; Nilai</button>`;
-            }
-          }
-
-          html += `
-            <div class="status-item">
-              <div class="status-item-left">
-                <strong>${s.no}. ${s.nama}</strong>
-                ${waktuHtml}
-              </div>
-              <div class="status-badges">
-                <span class="badge-status ${isDone ? 'badge-done' : 'badge-pending'}">${isDone ? '✅ Sudah' : '❌ Belum'}</span>
-                ${nilaiBadge}${btnFoto}
-              </div>
-            </div>
-          `;
-        });
-
-        const total = daftarSiswa.length;
-        const pct = total > 0 ? Math.round(doneCount / total * 100) : 0;
-        document.getElementById("recapCountText").textContent = `Sudah: ${doneCount} / ${total} Siswa`;
-        document.getElementById("recapPercentText").textContent = pct + "%";
-        document.getElementById("progressBarFill").style.width = pct + "%";
-        container.innerHTML = html || "<p style='text-align:center;color:var(--text-muted);padding:16px;'>Belum ada tugas yang dikumpulkan.</p>";
-      } catch(err) {
-        container.innerHTML = "<p style='color:var(--danger);text-align:center;padding:12px;'>⚠️ Gagal memuat rekap: " + err.message + "</p>";
-      }
-    }
-
-    function toggleTeacherMode() {
-      if (isTeacherMode) {
-        isTeacherMode = false;
-        document.getElementById("btnTeacherMode").innerHTML = "🔒 Mode Guru";
-        document.getElementById("btnTeacherMode").classList.remove("active");
-        document.getElementById("btnExportCSV").style.display = "none";
-        document.getElementById("btnBackupZip").style.display = "none";
-        document.getElementById("btnResetNilai").style.display = "none";
-        if (document.getElementById("btnHapusSemuaMateri")) document.getElementById("btnHapusSemuaMateri").style.display = "none";
-        loadStatus();
-        loadMateri();
-        return;
-      }
-      _pendingTeacherAction = "mode";
-      openPinModal();
-    }
-
-    function openPinModal() {
-      document.getElementById("teacherPinInput").value = "";
-      document.getElementById("pinErrorMsg").style.display = "none";
-      document.getElementById("pinModal").style.display = "flex";
-      setTimeout(() => document.getElementById("teacherPinInput").focus(), 100);
-    }
-
-    function closePinModal(e) {
-      if (e && e.target !== document.getElementById("pinModal")) return;
-      document.getElementById("pinModal").style.display = "none";
-    }
-
-    function verifyTeacherPin(e) {
-      e.preventDefault();
-      const input = document.getElementById("teacherPinInput").value.trim().toUpperCase();
-      if (input === TEACHER_PIN || input === "1234") {
-        isTeacherMode = true;
-        document.getElementById("btnTeacherMode").innerHTML = "🔓 Mode Guru AKTIF";
-        document.getElementById("btnTeacherMode").classList.add("active");
-        document.getElementById("btnExportCSV").style.display = "inline-flex";
-        document.getElementById("btnBackupZip").style.display = "inline-flex";
-        document.getElementById("btnResetNilai").style.display = "inline-flex";
-        if (document.getElementById("btnHapusSemuaMateri")) document.getElementById("btnHapusSemuaMateri").style.display = "inline-flex";
-        document.getElementById("pinModal").style.display = "none";
-
-        if (_pendingTeacherAction === "uploadMateri") {
-          document.getElementById("materiModal").style.display = "flex";
-        } else if (_pendingTeacherAction === "clearAllMateri") {
-          clearAllMateri();
-        } else if (_pendingTeacherAction === "resetModal") {
-          openResetPenilaianModal();
-        } else {
-          loadStatus();
-          loadMateri();
-        }
-        _pendingTeacherAction = null;
-      } else {
-        document.getElementById("pinErrorMsg").style.display = "block";
-      }
-    }
-
-    function openImageModal(idx) {
-      const record = _records[idx];
-      if (!record) return;
-      _currentRecord = record;
-      document.getElementById("modalStudentName").textContent = (record.no || "") + ". " + record.nama;
-      document.getElementById("modalStudentMeta").textContent = "🕒 Terkirim: " + (record.waktuKirim || "Tercatat di sistem");
-      document.getElementById("modalImgTag").src = record.imageUrl;
-      document.getElementById("inputNilaiGuru").value = record.nilai || "";
-      document.getElementById("inputCatatanGuru").value = record.catatan || "";
-      document.getElementById("imageModal").style.display = "flex";
-    }
-
-    function closeImageModal(e) {
-      if (e && e.target !== document.getElementById("imageModal") && !e.target.classList.contains("modal-close")) return;
-      document.getElementById("imageModal").style.display = "none";
-      _currentRecord = null;
-    }
-
-    async function saveGrade() {
-      if (!_currentRecord) return;
-      const nilai = document.getElementById("inputNilaiGuru").value.trim();
-      const catatan = document.getElementById("inputCatatanGuru").value.trim();
-
-      try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?id=eq.${_currentRecord.id}`, {
-          method: "PATCH",
-          headers: {
-            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-            "apikey": SUPABASE_ANON_KEY,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ nilai, catatan_guru: catatan, updated_at: new Date().toISOString() })
-        });
-        if (!res.ok) throw new Error(await res.text());
-
-        alert("✅ Nilai Matematika berhasil disimpan!");
-        document.getElementById("imageModal").style.display = "none";
-        _currentRecord = null;
-        loadStatus();
-      } catch(err) {
-        alert("Gagal simpan nilai: " + err.message);
-      }
-    }
-
-    async function exportCSV() {
-      try {
-        const kelasParam = encodeURIComponent("Kelas " + selectedRecapKelas);
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?kelas=eq.${kelasParam}&select=*`, {
-          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
-        });
-        const rowsDB = await res.json();
-        const mapS = {};
-        (rowsDB || []).forEach(item => {
-          if (item.nama_siswa) mapS[item.nama_siswa.toString().trim().toLowerCase()] = item;
-        });
-
-        const list = DATA_KELAS[selectedRecapKelas] || [];
-        const rows = [["No Absen", "Nama Siswa", "Kelas", "Mata Pelajaran", "Status", "Waktu Kirim", "Nilai", "Catatan Guru", "Link Foto"]];
-
-        list.forEach(s => {
-          const key = s.nama.toString().trim().toLowerCase(), item = mapS[key], isDone = !!item;
-          const status = isDone ? "Sudah" : "Belum";
-          const waktu = isDone && item && item.waktu_kirim ? ('"' + item.waktu_kirim + '"') : "-";
-          const nilai = isDone && item && item.nilai ? ('"' + item.nilai + '"') : "-";
-          const cat = isDone && item && item.catatan_guru ? ('"' + item.catatan_guru.replace(/"/g,'""') + '"') : "-";
-          const foto = isDone && item && item.image_url ? ('"' + item.image_url + '"') : "-";
-          rows.push([s.no, '"' + s.nama + '"', '"Kelas ' + selectedRecapKelas + '"', "Matematika", status, waktu, nilai, cat, foto]);
-        });
-
-        const csv = String.fromCharCode(65279) + rows.map(r => r.join(";")).join(String.fromCharCode(13, 10));
-        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "Rekap_Nilai_Matematika_Kelas_" + selectedRecapKelas + "_" + new Date().toISOString().slice(0,10) + ".csv";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-      } catch(err) {
-        alert("Gagal export CSV: " + err.message);
-      }
-    }
-
-    // ========================================================
-    // BACKUP ZIP SEMUA KELAS (.CSV) & RESET PENILAIAN LOGIC
-    // ========================================================
-    async function backupZipSemuaKelas() {
-      const btn = document.getElementById("btnBackupZip");
-      const originalText = btn.innerHTML;
-      btn.innerHTML = "⏳ Menyiapkan ZIP...";
-      btn.disabled = true;
-
-      try {
-        // 1. Ambil seluruh data tugas_siswa dari Supabase tanpa filter kelas
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?select=*&order=kelas.asc,no_absen.asc`, {
-          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
-        });
-        if (!res.ok) throw new Error("Gagal mengambil data tugas: " + await res.text());
-        const allRecords = await res.json();
-
-        // 2. Buat mapping per kelas
-        const kelasMap = { "VII": {}, "VIII": {}, "IX": {} };
-        (allRecords || []).forEach(item => {
-          if (!item.nama_siswa || !item.kelas) return;
-          const kCode = item.kelas.replace(/Kelas\s*/i, '').trim();
-          if (kelasMap[kCode]) {
-            kelasMap[kCode][item.nama_siswa.toString().trim().toLowerCase()] = item;
-          }
-        });
-
-        // 3. Helper Generator CSV per kelas
-        function generateCSVForClass(kCode) {
-          const list = DATA_KELAS[kCode] || [];
-          const mapS = kelasMap[kCode] || {};
-          const rows = [["No Absen", "Nama Siswa", "Kelas", "Mata Pelajaran", "Status", "Waktu Kirim", "Nilai", "Catatan Guru", "Link Foto"]];
-          let countDone = 0;
-
-          list.forEach(s => {
-            const key = s.nama.toString().trim().toLowerCase();
-            const item = mapS[key];
-            const isDone = !!item;
-            if (isDone) countDone++;
-            const status = isDone ? "Sudah" : "Belum";
-            const waktu = isDone && item && item.waktu_kirim ? ('"' + item.waktu_kirim + '"') : "-";
-            const nilai = isDone && item && item.nilai ? ('"' + item.nilai + '"') : "-";
-            const cat = isDone && item && item.catatan_guru ? ('"' + item.catatan_guru.replace(/"/g, '""') + '"') : "-";
-            const foto = isDone && item && item.image_url ? ('"' + item.image_url + '"') : "-";
-            rows.push([s.no, '"' + s.nama + '"', '"Kelas ' + kCode + '"', "Matematika", status, waktu, nilai, cat, foto]);
-          });
-
-          const csvContent = "\uFEFF" + rows.map(r => r.join(";")).join("\r\n");
-          return { csv: csvContent, done: countDone, total: list.length };
-        }
-
-        const resVII = generateCSVForClass("VII");
-        const resVIII = generateCSVForClass("VIII");
-        const resIX = generateCSVForClass("IX");
-
-        // 4. Combined CSV untuk seluruh 3 kelas
-        const allRows = [["No", "Nama Siswa", "Kelas", "Mata Pelajaran", "Status", "Waktu Kirim", "Nilai", "Catatan Guru", "Link Foto"]];
-        ["VII", "VIII", "IX"].forEach(kCode => {
-          const list = DATA_KELAS[kCode] || [];
-          const mapS = kelasMap[kCode] || {};
-          list.forEach(s => {
-            const key = s.nama.toString().trim().toLowerCase();
-            const item = mapS[key];
-            const isDone = !!item;
-            const status = isDone ? "Sudah" : "Belum";
-            const waktu = isDone && item && item.waktu_kirim ? ('"' + item.waktu_kirim + '"') : "-";
-            const nilai = isDone && item && item.nilai ? ('"' + item.nilai + '"') : "-";
-            const cat = isDone && item && item.catatan_guru ? ('"' + item.catatan_guru.replace(/"/g, '""') + '"') : "-";
-            const foto = isDone && item && item.image_url ? ('"' + item.image_url + '"') : "-";
-            allRows.push([s.no, '"' + s.nama + '"', '"Kelas ' + kCode + '"', "Matematika", status, waktu, nilai, cat, foto]);
-          });
-        });
-        const combinedCSV = "\uFEFF" + allRows.map(r => r.join(";")).join("\r\n");
-
-        // 5. Text Info Summary
-        const now = new Date();
-        const tglStr = now.toISOString().slice(0, 10);
-        const wktStr = now.toLocaleDateString("id-ID", { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }) + " (" + String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0") + " WITA)";
-
-        const summaryText = 
-`======================================================================
-BACKUP REKAP PENILAIAN MATEMATIKA - SMP NEGERI 5 MUARA SIRAM
-======================================================================
-Waktu Backup   : ${wktStr}
-Guru Pengampu  : Supianto, S.Pd.,Gr.
-Mata Pelajaran : Matematika
-
-RINGKASAN STATUS PENGUMPULAN TUGAS:
-- Kelas VII  : ${resVII.done} dari ${resVII.total} Siswa (${Math.round(resVII.done / (resVII.total || 1) * 100)}%)
-- Kelas VIII : ${resVIII.done} dari ${resVIII.total} Siswa (${Math.round(resVIII.done / (resVIII.total || 1) * 100)}%)
-- Kelas IX   : ${resIX.done} dari ${resIX.total} Siswa (${Math.round(resIX.done / (resIX.total || 1) * 100)}%)
-- Total Semua: ${resVII.done + resVIII.done + resIX.done} dari ${resVII.total + resVIII.total + resIX.total} Siswa
-
-FILE DI DALAM ARSIP ZIP INI:
-1. Rekap_Nilai_MTK_Kelas_VII_${tglStr}.csv
-2. Rekap_Nilai_MTK_Kelas_VIII_${tglStr}.csv
-3. Rekap_Nilai_MTK_Kelas_IX_${tglStr}.csv
-4. Rekap_Nilai_MTK_Semua_Kelas_${tglStr}.csv
-5. README_INFO_BACKUP.txt
-======================================================================
-File CSV dapat langsung dibuka di Microsoft Excel, Google Sheets, atau aplikasi spreadsheet lainnya.
-`;
-
-        // 6. Buat ZIP via JSZip
-        if (typeof JSZip === "undefined") {
-          throw new Error("Library JSZip belum termuat. Periksa koneksi internet Anda.");
-        }
-        const zip = new JSZip();
-        const folder = zip.folder(`Backup_Penilaian_MTK_${tglStr}`);
-        folder.file(`Rekap_Nilai_MTK_Kelas_VII_${tglStr}.csv`, resVII.csv);
-        folder.file(`Rekap_Nilai_MTK_Kelas_VIII_${tglStr}.csv`, resVIII.csv);
-        folder.file(`Rekap_Nilai_MTK_Kelas_IX_${tglStr}.csv`, resIX.csv);
-        folder.file(`Rekap_Nilai_MTK_Semua_Kelas_${tglStr}.csv`, combinedCSV);
-        folder.file(`README_INFO_BACKUP.txt`, summaryText);
-
-        const zipBlob = await zip.generateAsync({ type: "blob" });
-        const zipUrl = URL.createObjectURL(zipBlob);
-        const link = document.createElement("a");
-        link.href = zipUrl;
-        link.download = `BACKUP_PENILAIAN_MTK_SEMUA_KELAS_${tglStr}.zip`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(zipUrl);
-
-        alert("✅ Berhasil mendownload arsip Backup ZIP!\nNama file: BACKUP_PENILAIAN_MTK_SEMUA_KELAS_" + tglStr + ".zip");
-      } catch (err) {
-        console.error("Backup ZIP gagal:", err);
-        alert("⚠️ Gagal membuat file Backup ZIP: " + err.message);
-      } finally {
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-      }
-    }
-
-    function openResetPenilaianModal() {
-      if (!isTeacherMode) {
-        _pendingTeacherAction = "resetModal";
-        openPinModal();
-        return;
-      }
-      document.getElementById("resetCurrentClassLabel").textContent = selectedRecapKelas;
-      document.getElementById("confirmResetInput").value = "";
-      document.getElementById("resetErrorMsg").style.display = "none";
-      document.getElementById("resetScopeClass").checked = true;
-      document.getElementById("resetModal").style.display = "flex";
-    }
-
-    function closeResetModal(e) {
-      if (e && e.target !== document.getElementById("resetModal") && !e.target.classList.contains("modal-close")) return;
-      document.getElementById("resetModal").style.display = "none";
-    }
-
-    async function executeResetPenilaian() {
-      const confirmText = document.getElementById("confirmResetInput").value.trim().toUpperCase();
-      const errorMsg = document.getElementById("resetErrorMsg");
-      if (confirmText !== "RESET") {
-        errorMsg.style.display = "block";
-        return;
-      }
-      errorMsg.style.display = "none";
-
-      const isAll = document.getElementById("resetScopeAll").checked;
-      const btn = document.getElementById("btnExecuteReset");
-      btn.disabled = true;
-      btn.textContent = "⏳ Sedang Mereset...";
-
-      try {
-        let deleteUrl = `${SUPABASE_URL}/rest/v1/tugas_siswa`;
-        if (isAll) {
-          deleteUrl += `?id=gt.0`;
-        } else {
-          deleteUrl += `?kelas=eq.${encodeURIComponent("Kelas " + selectedRecapKelas)}`;
-        }
-
-        const res = await fetch(deleteUrl, {
-          method: "DELETE",
-          headers: {
-            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-            "apikey": SUPABASE_ANON_KEY
-          }
-        });
-
-        if (!res.ok) throw new Error(await res.text());
-
-        closeResetModal();
-        alert(isAll 
-          ? "✅ Berhasil! Seluruh data pengumpulan tugas & nilai SEMUA KELAS telah direset."
-          : `✅ Berhasil! Data pengumpulan tugas & nilai Kelas ${selectedRecapKelas} telah direset.`
-        );
-
-        // Bersihkan state lokal dan sinkronkan ulang form & rekap
-        collectedSet.clear();
-        await syncCollectedStatus();
-        renderDropdown();
-        loadStatus();
-      } catch (err) {
-        console.error("Reset penilaian gagal:", err);
-        alert("⚠️ Gagal mereset penilaian: " + err.message);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = "🔥 Reset Sekarang";
-      }
-    }
-
-    // ========================================================
-    // TAB 3: JADWAL KHUSUS MATEMATIKA LOGIC
-    // ========================================================
-    function selectJadwalClass(kelas, btn) {
-      selectedJadwalKelas = kelas;
-      document.querySelectorAll('#tab-jadwal .class-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      loadJadwalMatematika();
-    }
-
-    function loadJadwalMatematika() {
-      const container = document.getElementById("jadwalList");
-      document.getElementById("jadwalHeaderTitle").textContent = `Jadwal Matematika Kelas ${selectedJadwalKelas}`;
-
-      const list = JADWAL_MATEMATIKA[selectedJadwalKelas] || [];
-      if (!list.length) {
-        container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:18px;'>Tidak ada jadwal pelajaran Matematika untuk kelas ini.</p>";
-        return;
-      }
-
-      let html = "";
-      list.forEach(item => {
-        html += `
-          <div class="schedule-card-math">
-            <div>
-              <span class="schedule-day-badge">🗓️ Hari ${item.hari}</span>
-              <div class="schedule-title-math">Matematika &bull; ${item.jam}</div>
-              <div class="schedule-guru-math">👨‍🏫 Guru: ${item.guru} &bull; 🏫 ${item.ruang}</div>
-            </div>
-            <div class="schedule-time-box">
-              <div class="schedule-time-val">⏰ ${item.waktu}</div>
-            </div>
-          </div>
-        `;
-      });
-
-      html += `
-        <div style="background:rgba(56,189,248,0.06);border:1px dashed rgba(56,189,248,0.25);border-radius:12px;padding:12px 14px;margin-top:16px;font-size:0.8rem;color:var(--text-muted);">
-          ℹ️ <strong>Catatan Jadwal Matematika:</strong> Sesuai jadwal resmi SMP Negeri 5 Muara Siram T.P 2026/2027, alokasi belajar Matematika adalah <strong>4 Jam Pelajaran (JP)</strong> per minggu untuk setiap tingkat kelas.
-        </div>
-      `;
-
-      container.innerHTML = html;
-    }
-
-    // ========================================================
-    // TAB 4: MATERI MATEMATIKA LOGIC (PER PERTEMUAN)
-    // ========================================================
-    const DEFAULT_MATERI = [];
-
-    function selectMateriClass(kelas, btn) {
-      selectedMateriKelas = kelas;
-      document.querySelectorAll('#tab-materi .class-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      loadMateri();
-    }
-
-
-    function openUploadMateriModal() {
-      if (!isTeacherMode) {
-        _pendingTeacherAction = "uploadMateri";
-        openPinModal();
-        return;
-      }
-      document.getElementById("uploadMateriForm").reset();
-      document.getElementById("materiAlertBox").style.display = "none";
-      document.getElementById("materiInputKelas").value = "Kelas " + selectedMateriKelas;
-      document.getElementById("materiInputMapel").value = "Matematika";
-      document.getElementById("materiInputGuru").value = "Supianto, S.Pd.,Gr.";
-      document.getElementById("materiModal").style.display = "flex";
-    }
-
-    function closeMateriModal(e) {
-      if (e && e.target !== document.getElementById("materiModal") && !e.target.classList.contains("modal-close")) return;
-      document.getElementById("materiModal").style.display = "none";
-    }
-
-    async function loadMateri() {
-      const container = document.getElementById("materiList");
-      document.getElementById("materiHeaderTitle").textContent = `Materi Matematika Kelas ${selectedMateriKelas}`;
-
-      container.innerHTML = "<p style='text-align:center;color:var(--text-muted);padding:14px;'>⏳ Memuat materi matematika...</p>";
-
-      let items = [];
-
-      // 1. Fetch dari Supabase tabel materi_pelajaran
-      try {
-        let url = `${SUPABASE_URL}/rest/v1/materi_pelajaran?kelas=eq.${encodeURIComponent("Kelas " + selectedMateriKelas)}&order=pertemuan.asc,id.desc`;
-        const res = await fetch(url, {
-          headers: { "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "apikey": SUPABASE_ANON_KEY }
-        });
-        if (res.ok) {
-          const dbData = await res.json();
-          if (dbData && dbData.length > 0) {
-            items = dbData.map(d => ({
-              id: d.id, kelas: d.kelas, mapel: d.mapel || "Matematika", pertemuan: d.pertemuan,
-              judul: d.judul, deskripsi: d.deskripsi, fileUrl: d.file_url,
-              guru: d.nama_guru || "Supianto, S.Pd.,Gr.",
-              tanggal: d.created_at ? new Date(d.created_at).toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric'}) : "Tersedia"
-            }));
-          }
-        }
-      } catch (e) {
-        console.log("Memuat materi dari database:", e);
-      }
-
-      // Bersihkan cache lokal lama agar tidak terjadi duplikasi ganda
-      localStorage.removeItem("LOCAL_MATERI");
-
-      // Filter unik materi berdasarkan kelas, judul, dan fileUrl
-      const seen = new Set();
-      const filtered = items.filter(m => {
-        if (m.kelas !== "Kelas " + selectedMateriKelas) return false;
-        const key = `${m.kelas}_${m.pertemuan}_${(m.judul || '').trim().toLowerCase()}_${m.fileUrl}`;
-        if (seen.has(key)) return false;
-        seen.add(key);
-        return true;
-      });
-
-      if (!filtered.length) {
-        container.innerHTML = `
-          <div style="text-align:center;padding:32px 14px;color:var(--text-muted);background:var(--input-bg);border:1px dashed var(--card-border);border-radius:14px;">
-            <div style="font-size:2.4rem;margin-bottom:8px;">📐</div>
-            <p style="font-size:0.95rem;font-weight:700;color:#fff;">Belum Ada Materi Matematika untuk Kelas ${selectedMateriKelas}</p>
-            <p style="font-size:0.8rem;margin-top:4px;">Bpk. Supianto, S.Pd.,Gr. dapat mengunggah modul/rumus baru dengan menekan tombol Upload Materi.</p>
-            <button class="btn-action-sm" style="margin-top:14px;background:var(--primary);color:#fff;padding:8px 16px;font-size:0.85rem;" onclick="openUploadMateriModal()">➕ Upload Materi Matematika</button>
-          </div>
-        `;
-        return;
-      }
-
-      let html = "";
-      filtered.forEach(m => {
-        const btnDelete = isTeacherMode
-          ? `<button type="button" class="btn-action-sm" style="background:rgba(239,68,68,0.15);color:#fca5a5;border-color:rgba(239,68,68,0.3);padding:5px 10px;font-size:0.75rem;" onclick="deleteMateri(${m.id})" title="Hapus Materi Ini">🗑️ Hapus</button>`
-          : "";
-
-        const isHtml = m.fileUrl && (m.fileUrl.toLowerCase().includes('.html') || m.fileUrl.toLowerCase().includes('.htm'));
-        const viewBtn = isHtml
-          ? `<button type="button" class="btn-download-materi" style="background:#059669;" onclick="viewMateriContent('${encodeURIComponent(m.fileUrl)}', '${encodeURIComponent(m.judul)}')">📖 Buka &amp; Baca Langsung</button>`
-          : `<button type="button" class="btn-download-materi" style="background:#059669;" onclick="viewMateriContent('${encodeURIComponent(m.fileUrl)}', '${encodeURIComponent(m.judul)}')">📖 Buka Modul</button>`;
-
-        html += `
-          <div class="materi-card">
-            <div class="materi-header">
-              <div>
-                <div class="materi-title">${m.judul}</div>
-                <div class="materi-mapel-info">📐 Matematika &bull; 👨‍🏫 ${m.guru}</div>
-              </div>
-              <span class="badge-pertemuan">Pertemuan ${m.pertemuan}</span>
-            </div>
-            <div class="materi-desc">${m.deskripsi || 'Silakan pelajari materi modul matematika berikut untuk panduan pengerjaan latihan &amp; tugas.'}</div>
-            <div class="materi-actions">
-              <span class="materi-meta">🗓️ ${m.tanggal || 'Tersedia'}</span>
-              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-                ${btnDelete}
-                ${viewBtn}
-                <button type="button" class="btn-action-sm" style="text-decoration:none;padding:6px 10px;cursor:pointer;" onclick="openMateriTab('${encodeURIComponent(m.fileUrl)}')" title="Buka Halaman Penuh di Tab Baru">
-                  🔗 Tab Baru
-                </button>
-              </div>
-            </div>
-          </div>
-        `;
-      });
-      container.innerHTML = html;
-    }
-
-    let _currentViewingHtml = "";
-    let _currentViewingUrl = "";
-
-    function openMateriTab(encodedUrl) {
-      const url = decodeURIComponent(encodedUrl);
-      const isHtml = url && (url.toLowerCase().includes('.html') || url.toLowerCase().includes('.htm'));
-      if (!isHtml) {
-        window.open(url, '_blank', 'noopener');
-        return;
-      }
-
-      // Supabase Storage menyajikan file HTML dengan Content-Type: text/plain
-      // Agar tampil sebagai Website penuh dan bukan kode mentah, dokumen difetch lalu dituliskan ke tab baru
-      const win = window.open('about:blank', '_blank');
-      if (!win) {
-        window.location.href = url;
-        return;
-      }
-
-      win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Memuat Materi Matematika...</title><style>body{background:#0b0f19;color:#f8fafc;font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;text-align:center;}.box{padding:28px 20px;border-radius:16px;background:#151d2f;border:1px solid #222f46;box-shadow:0 10px 30px rgba(0,0,0,0.5);}</style></head><body><div class="box"><div style="font-size:2.5rem;margin-bottom:10px;">📐</div><h3 style="margin:0 0 6px 0;">Memuat Materi Matematika...</h3><p style="color:#94a3b8;font-size:0.85rem;margin:0;">Menyiapkan tampilan halaman web interaktif...</p></div></body></html>');
-
-      fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          win.document.open();
-          win.document.write(html);
-          win.document.close();
-        })
-        .catch(err => {
-          console.warn("Gagal fetch materi HTML:", err);
-          win.location.href = url;
-        });
-    }
-
-    function openViewerInFullTab() {
-      if (_currentViewingHtml) {
-        const win = window.open('about:blank', '_blank');
-        if (win) {
-          win.document.open();
-          win.document.write(_currentViewingHtml);
-          win.document.close();
-          return;
-        }
-      }
-      if (_currentViewingUrl) {
-        openMateriTab(encodeURIComponent(_currentViewingUrl));
-      }
-    }
-
-    async function viewMateriContent(encodedUrl, encodedTitle) {
-      const url = decodeURIComponent(encodedUrl);
-      const title = decodeURIComponent(encodedTitle);
-      _currentViewingUrl = url;
-      _currentViewingHtml = "";
-
-      const modal = document.getElementById("materiViewerModal");
-      const titleEl = document.getElementById("viewerMateriTitle");
-      const frame = document.getElementById("materiViewerFrame");
-
-      titleEl.textContent = title;
-      modal.style.display = "flex";
-
-      // Jika format HTML, fetch isi konten dan render otomatis via srcdoc (langsung render sempurna)
-      const isHtml = url.toLowerCase().includes(".html") || url.toLowerCase().includes(".htm");
-      if (isHtml) {
-        frame.srcdoc = "<div style='font-family:sans-serif;text-align:center;padding:40px;color:#64748b;font-size:1.1rem;'>⏳ Sedang memuat materi matematika interaktif...</div>";
-        try {
-          const res = await fetch(url);
-          if (res.ok) {
-            _currentViewingHtml = await res.text();
-            frame.srcdoc = _currentViewingHtml;
-            return;
-          }
-        } catch (err) {
-          console.warn("Fetch html failed:", err);
-        }
-      }
-      frame.removeAttribute("srcdoc");
-      frame.src = url;
-    }
-
-    function closeMateriViewerModal(e) {
-      if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('modal-close')) return;
-      const modal = document.getElementById("materiViewerModal");
-      modal.style.display = "none";
-      const frame = document.getElementById("materiViewerFrame");
-      frame.src = "about:blank";
-      frame.removeAttribute("srcdoc");
-    }
-
-    async function clearAllMateri() {
-      if (!isTeacherMode) {
-        _pendingTeacherAction = "clearAllMateri";
-        openPinModal();
-        return;
-      }
-      if (!confirm("Apakah Anda yakin ingin MENGHAPUS SEMUA materi matematika di database?")) return;
-
-      try {
-        await fetch(`${SUPABASE_URL}/rest/v1/materi_pelajaran?id=gt.0`, {
-          method: "DELETE",
-          headers: {
-            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-            "apikey": SUPABASE_ANON_KEY
-          }
-        });
-        localStorage.removeItem("LOCAL_MATERI");
-        alert("✅ Seluruh materi matematika berhasil dibersihkan total!");
-        loadMateri();
-      } catch(err) {
-        alert("Gagal membersihkan materi: " + err.message);
-      }
-    }
-
-    async function deleteMateri(id) {
-      if (!isTeacherMode) {
-        _pendingTeacherAction = "deleteMateri";
-        openPinModal();
-        return;
-      }
-      if (!confirm("Apakah Anda yakin ingin menghapus materi matematika ini?")) return;
-
-      try {
-        if (id) {
-          await fetch(`${SUPABASE_URL}/rest/v1/materi_pelajaran?id=eq.${id}`, {
-            method: "DELETE",
-            headers: {
-              "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-              "apikey": SUPABASE_ANON_KEY
-            }
-          });
-        }
-
-        let localList = JSON.parse(localStorage.getItem("LOCAL_MATERI") || "[]");
-        localList = localList.filter(m => String(m.id) !== String(id));
-        localStorage.setItem("LOCAL_MATERI", JSON.stringify(localList));
-
-        alert("🗑️ Materi berhasil dihapus!");
-        loadMateri();
-      } catch(err) {
-        alert("Gagal menghapus materi: " + err.message);
-      }
-    }
-
-    async function submitMateri(e) {
-      e.preventDefault();
-      const alertBox = document.getElementById("materiAlertBox");
-      alertBox.style.display = "none";
-
-      const kelas = document.getElementById("materiInputKelas").value;
-      const mapel = "Matematika";
-      const pertemuan = parseInt(document.getElementById("materiInputPertemuan").value);
-      const judul = document.getElementById("materiInputJudul").value.trim();
-      const guru = "Supianto, S.Pd.,Gr.";
-      const deskripsi = document.getElementById("materiInputDesc").value.trim();
-      const fileInput = document.getElementById("materiFileInput");
-      const linkInput = document.getElementById("materiLinkInput").value.trim();
-
-      if (!fileInput.files.length && !linkInput) {
-        alertBox.textContent = "Harap pilih file modul matematika ATAU masukkan link!";
-        alertBox.style.display = "block";
-        return;
-      }
-
-      const btn = document.getElementById("btnUploadMateri");
-      const loading = document.getElementById("materiLoading");
-      btn.disabled = true;
-      loading.style.display = "block";
-
-      try {
-        let finalFileUrl = linkInput;
-
-        // Jika upload file lokal, kirim ke Supabase Storage (bucket: tugas-siswa/materi/)
-        if (fileInput.files.length > 0) {
-          const file = fileInput.files[0];
-          const ext = file.name.split('.').pop();
-          const cleanFname = file.name.replace(/[^a-zA-Z0-9]/g, "_");
-          const storagePath = `materi/Matematika_${kelas.replace(" ","_")}_Pertemuan${pertemuan}_${Date.now()}_${cleanFname}.${ext}`;
-
-          const fileBytes = await file.arrayBuffer();
-          const upRes = await fetch(`${SUPABASE_URL}/storage/v1/object/tugas-siswa/${storagePath}`, {
-            method: "POST",
-            headers: {
-              "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-              "Content-Type": file.type || "application/octet-stream",
-              "x-upsert": "true"
-            },
-            body: fileBytes
-          });
-
-          if (!upRes.ok) throw new Error("Gagal upload file materi: " + await upRes.text());
-          finalFileUrl = `${SUPABASE_URL}/storage/v1/object/public/tugas-siswa/${storagePath}`;
-        }
-
-        // Simpan ke Supabase tabel materi_pelajaran
-        try {
-          await fetch(`${SUPABASE_URL}/rest/v1/materi_pelajaran`, {
-            method: "POST",
-            headers: {
-              "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-              "apikey": SUPABASE_ANON_KEY,
-              "Content-Type": "application/json",
-              "Prefer": "return=representation"
-            },
-            body: JSON.stringify({
-              kelas: kelas,
-              mapel: mapel,
-              pertemuan: pertemuan,
-              judul: judul,
-              deskripsi: deskripsi,
-              file_url: finalFileUrl,
-              nama_guru: guru,
-              updated_at: new Date().toISOString()
-            })
-          });
-        } catch(errDB) {
-          console.warn("DB insert fallback to local:", errDB);
-        }
-
-        // Bersihkan cache lokal agar Supabase menjadi satu-satunya sumber data resmi tanpa duplikasi
-        localStorage.removeItem("LOCAL_MATERI");
-
-        alert("✅ Materi Matematika Berhasil Diterbitkan!");
-        document.getElementById("materiModal").style.display = "none";
-        loadMateri();
-      } catch(err) {
-        alertBox.textContent = "Gagal menerbitkan materi: " + err.message;
-        alertBox.style.display = "block";
-      } finally {
-        btn.disabled = false;
-        loading.style.display = "none";
-      }
-    }
-
-    // ========================================================
-    // INISIALISASI HALAMAN SAAT PERTAMA KALI DIBUKA
-    // ========================================================
-    window.addEventListener("DOMContentLoaded", () => {
-      // Pembersihan otomatis cache materi lama
-      if (!localStorage.getItem("MATERI_CLEANED_FINAL")) {
-        localStorage.removeItem("LOCAL_MATERI");
-        localStorage.setItem("MATERI_CLEANED_FINAL", "true");
-      }
-      if (isTeacherMode && document.getElementById("btnHapusSemuaMateri")) {
-        document.getElementById("btnHapusSemuaMateri").style.display = "inline-flex";
-      }
+    function resetFormToNew() {
+      selectedImages = [];
+      document.getElementById("galleryGrid").innerHTML = "";
+      document.getElementById("galleryContainer").style.display = "none";
+      document.getElementById("fileInput").value = "";
+      document.getElementById("taskForm").reset();
+      document.getElementById("taskForm").style.display = "block";
+      document.getElementById("successCard").style.display = "none";
       renderDropdown();
-      syncCollectedStatus();
-      loadJadwalMatematika();
-      loadMateri();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      syncCollectedStatus().then(() => renderDropdown());
     });
   </script>
 </body>

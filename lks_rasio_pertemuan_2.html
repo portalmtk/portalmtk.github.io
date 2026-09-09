@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LKPD Matematika Kelas VII - Perbandingan Senilai (Pertemuan 2)</title>
+  <!-- MATHJAX 3 UNTUK FORMULA LATEX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: { enableMenu: false },
+      chtml: { scale: 1 }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    @page {
+      size: A4;
+      margin: 14mm 14mm 14mm 14mm;
+    }
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      color: #1e293b;
+      line-height: 1.55;
+      font-size: 13.5px;
+      background: #fff;
+      margin: 0;
+      padding: 12px;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow-x: hidden;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    /* KOP / HEADER RESMI */
+    .header-table {
+      width: 100%;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+    .header-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      line-height: 1.25;
+    }
+    .header-sub {
+      font-size: 11.5px;
+      color: #475569;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+    .badge-pertemuan {
+      background: #1e3a8a;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 11px;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    /* IDENTITAS SISWA (RESPONSIF MOBILE & DESKTOP) */
+    .student-info-box {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #f8fafc;
+      font-size: 12px;
+      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 14px;
+    }
+    @media (max-width: 520px) {
+      .student-info-box {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+    .info-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .info-label {
+      font-weight: 700;
+      white-space: nowrap;
+      color: #334155;
+    }
+    .info-line {
+      flex: 1;
+      border-bottom: 1.5px dotted #94a3b8;
+      min-height: 16px;
+    }
+
+    /* KOTAK MATERI / SECTIONS */
+    .section-card {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 11px 14px;
+      margin-bottom: 13px;
+      background: #ffffff;
+      page-break-inside: avoid;
+    }
+    .section-header {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #1e3a8a;
+      border-bottom: 1.5px solid #e2e8f0;
+      padding-bottom: 5px;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* KOTAK KHUSUS */
+    .highlight-box {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 9px 12px;
+      border-radius: 0 6px 6px 0;
+      margin: 8px 0;
+      font-size: 13px;
+    }
+    .formula-badge {
+      background: #fdf4ff;
+      border: 1.5px solid #f0abfc;
+      border-radius: 6px;
+      padding: 8px 10px;
+      text-align: center;
+      margin: 10px 0;
+      font-weight: 700;
+      color: #86198f;
+      font-size: 13px;
+      overflow-x: auto;
+    }
+
+    .contoh-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-left: 4px solid #16a34a;
+      border-radius: 0 6px 6px 0;
+      padding: 10px 12px;
+      margin-bottom: 11px;
+    }
+    .contoh-title {
+      font-weight: 800;
+      color: #15803d;
+      margin-bottom: 5px;
+      font-size: 13.5px;
+    }
+
+    .soal-box {
+      background: #faf5ff;
+      border: 1.5px solid #d8b4fe;
+      border-left: 4px solid #9333ea;
+      border-radius: 0 6px 6px 0;
+      padding: 11px 13px;
+      margin-bottom: 13px;
+      page-break-inside: avoid;
+    }
+    .soal-title {
+      font-weight: 800;
+      color: #6b21a8;
+      margin-bottom: 6px;
+      font-size: 13.5px;
+    }
+
+    /* RUANG JAWABAN (RESPONSIF BERGARIS RAPI, BEBAS OVERFLOW) */
+    .answer-space {
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      background: #ffffff;
+      margin-top: 10px;
+      padding: 12px 14px;
+      font-size: 12.5px;
+    }
+    .ans-guide-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .ans-guide-label {
+      font-weight: 700;
+      color: #475569;
+      white-space: nowrap;
+    }
+    .ans-guide-line {
+      flex: 1;
+      border-bottom: 1.5px dotted #94a3b8;
+      height: 18px;
+    }
+    .ans-work-lines {
+      margin: 8px 0;
+    }
+    .work-line {
+      border-bottom: 1px dotted #cbd5e1;
+      height: 24px;
+      width: 100%;
+    }
+
+    ul, ol {
+      margin: 4px 0 6px 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 11.5px;
+      color: #64748b;
+      margin-top: 14px;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- KOP LEMBAR KERJA PESERTA DIDIK -->
+  <table class="header-table">
+    <tr>
+      <td>
+        <div class="header-title">LEMBAR KERJA PESERTA DIDIK (LKPD) &bull; MATEMATIKA</div>
+        <div class="header-sub">SMP Negeri 5 Muara Siram &bull; Kelas VII (Fase D) &bull; Guru Pengampu: Supianto, S.Pd.,Gr.</div>
+      </td>
+      <td style="text-align: right; vertical-align: middle;">
+        <span class="badge-pertemuan">PERTEMUAN 2</span>
+      </td>
+    </tr>
+  </table>
+
+  <!-- KOTAK IDENTITAS SISWA (RESPONSIF MOBILE) -->
+  <div class="student-info-box">
+    <div class="info-row">
+      <span class="info-label">Nama Siswa:</span>
+      <span class="info-line"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Kelas / Absen:</span>
+      <span class="info-line" style="font-weight:600;color:#1e3a8a;">VII / ......</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Hari / Tanggal:</span>
+      <span class="info-line"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Mata Pelajaran:</span>
+      <span class="info-line" style="border-bottom:none;font-weight:600;color:#1e3a8a;">Matematika</span>
+    </div>
+  </div>
+
+  <!-- 1. TOPIK PEMBELAJARAN -->
+  <div class="section-card">
+    <div class="section-header">📌 1. TOPIK PEMBELAJARAN</div>
+    <div style="font-size: 15px; font-weight: 800; color: #0f172a;">
+      Perbandingan Senilai
+    </div>
+  </div>
+
+  <!-- 2. TUJUAN PEMBELAJARAN -->
+  <div class="section-card">
+    <div class="section-header">🎯 2. TUJUAN PEMBELAJARAN</div>
+    <ol>
+      <li>Peserta didik dapat memahami dan menjelaskan konsep perbandingan senilai dengan benar.</li>
+      <li>Peserta didik dapat menentukan nilai besaran yang belum diketahui menggunakan prinsip perbandingan senilai.</li>
+      <li>Peserta didik dapat menyelesaikan permasalahan kontekstual dalam kehidupan sehari-hari yang berkaitan dengan perbandingan senilai secara mandiri dan cermat.</li>
+    </ol>
+  </div>
+
+  <!-- 3. MATERI & KONSEP DASAR -->
+  <div class="section-card">
+    <div class="section-header">💡 3. MATERI &amp; KONSEP DASAR</div>
+    
+    <div class="highlight-box">
+      <strong>Pengertian Perbandingan Senilai:</strong><br>
+      Perbandingan senilai adalah perbandingan antara dua besaran di mana jika nilai salah satu besaran bertambah (atau berkurang), maka nilai besaran lainnya juga akan bertambah (atau berkurang) secara seimbang dengan kelipatan pengali yang sama.<br><br>
+      <em>Ilustrasi Nyata:</em><br>
+      Untuk membuat 1 gelas racikan minuman sirup, dibutuhkan <strong>$1$ takar sirup dan $3$ takar air</strong> $\left(\frac{1}{3}\right)$.<br>
+      Jika ingin membuat racikan yang sama sebanyak 2 kali lipat, maka takaran sirup dan air masing-masing dikalikan $2$, yaitu menjadi <strong>$2$ takar sirup dan $6$ takar air</strong> $\left(\frac{2}{6}\right)$. Rasa minuman tetap seimbang dan sama persis karena nilai perbandingannya senilai.
+    </div>
+
+    <div class="formula-badge">
+      Bentuk Persamaan Perbandingan Senilai: &nbsp; 
+      $\dfrac{a_1}{b_1} = \dfrac{a_2}{b_2}$ &nbsp; atau &nbsp; $\dfrac{a}{b} = \dfrac{a \times k}{b \times k}$ &nbsp; $(k \neq 0)$
+    </div>
+
+    <div style="font-size: 13px; color: #334155; margin-top: 6px;">
+      📌 <strong>Prinsip Penyelesaian:</strong><br>
+      &bull; Jika nilai besaran pertama <strong>dikalikan</strong> suatu bilangan, maka nilai besaran kedua <strong>wajib dikalikan</strong> bilangan yang sama.<br>
+      &bull; Jika nilai besaran pertama <strong>dibagi</strong> suatu bilangan, maka nilai besaran kedua <strong>wajib dibagi</strong> bilangan yang sama.
+    </div>
+  </div>
+
+  <!-- 4. CONTOH SOAL & PEMBAHASAN -->
+  <div class="section-card">
+    <div class="section-header">📝 4. CONTOH SOAL DAN PEMBAHASAN</div>
+
+    <!-- CONTOH 1 -->
+    <div class="contoh-box">
+      <div class="contoh-title">Contoh 1:</div>
+      <div>
+        Untuk membuat takaran minuman, perbandingan antara <strong>takar sirup</strong> dan <strong>gelas air</strong> adalah $2 : 5$ (dapat ditulis $\frac{2}{5}$).<br>
+        Jika digunakan <strong>$6$ takar sirup</strong>, berapakah banyak gelas air yang harus ditambahkan agar rasanya tetap seimbang?
+      </div>
+      <div style="margin-top: 8px; padding-top: 7px; border-top: 1px dashed #86efac; font-size: 13px; line-height: 1.6;">
+        <strong>Pembahasan:</strong><br>
+        Tuliskan hubungan kedua besaran dalam bentuk pecahan senilai:<br>
+        $$\frac{\text{Sirup}}{\text{Air}} = \frac{2}{5} = \frac{6}{\text{Air}}$$
+        Perhatikan perubahan pada pembilang: angka $2$ menjadi $6$ diperoleh dari hasil perkalian dengan $3$ ($2 \times 3 = 6$).<br>
+        Dengan demikian, penyebut juga harus dikalikan dengan bilangan yang sama ($3$):<br>
+        $$\text{Air} = 5 \times 3 = 15\text{ gelas}$$
+        <strong>Kesimpulan:</strong> Banyak air yang dibutuhkan adalah <strong>$15$ gelas</strong>.
+      </div>
+    </div>
+
+    <!-- CONTOH 2 -->
+    <div class="contoh-box">
+      <div class="contoh-title">Contoh 2:</div>
+      <div>
+        Perbandingan uang saku <strong>Alif</strong> dan <strong>Budi</strong> adalah $3 : 4$ (dapat ditulis $\frac{3}{4}$).<br>
+        Jika uang saku Alif berjumlah <strong>Rp6.000,00</strong>, berapakah jumlah uang saku Budi?
+      </div>
+      <div style="margin-top: 8px; padding-top: 7px; border-top: 1px dashed #86efac; font-size: 13px; line-height: 1.6;">
+        <strong>Pembahasan:</strong><br>
+        Tuliskan perbandingan uang dalam bentuk persamaan perbandingan senilai:<br>
+        $$\frac{\text{Uang Alif}}{\text{Uang Budi}} = \frac{3}{4} = \frac{6.000}{\text{Uang Budi}}$$
+        Perhatikan perubahan pada pembilang: angka $3$ menjadi $6.000$ diperoleh dari hasil perkalian dengan $2.000$ ($3 \times 2.000 = 6.000$).<br>
+        Oleh karena itu, penyebut juga dikalikan dengan bilangan yang sama ($2.000$):<br>
+        $$\text{Uang Budi} = 4 \times 2.000 = 8.000$$
+        <strong>Kesimpulan:</strong> Uang saku Budi adalah sebesar <strong>Rp8.000,00</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. SOAL LATIHAN MANDIRI -->
+  <div class="section-card">
+    <div class="section-header">✍️ 5. SOAL LATIHAN MANDIRI</div>
+
+    <!-- SOAL 1 -->
+    <div class="soal-box">
+      <div class="soal-title">Soal 1</div>
+      <div>
+        Untuk membuat segelas susu cokelat, perbandingan antara <strong>sendok bubuk cokelat</strong> dan <strong>sendok gula pasir</strong> adalah $3 : 2$ (dapat ditulis $\frac{3}{2}$).<br>
+        Jika dimasukkan <strong>$9$ sendok bubuk cokelat</strong>, berapakah banyak sendok gula pasir yang harus ditambahkan agar rasanya tetap pas?
+      </div>
+      <div class="answer-space">
+        <div class="ans-guide-row">
+          <span class="ans-guide-label">&bull; Diketahui :</span>
+          <span class="ans-guide-line"></span>
+        </div>
+        <div class="ans-guide-row">
+          <span class="ans-guide-label">&bull; Ditanya :</span>
+          <span class="ans-guide-line"></span>
+        </div>
+        <div style="margin-top: 8px;">
+          <span class="ans-guide-label">&bull; Langkah Pengerjaan :</span>
+          <div class="ans-work-lines">
+            <div class="work-line"></div>
+            <div class="work-line"></div>
+            <div class="work-line"></div>
+            <div class="work-line"></div>
+          </div>
+        </div>
+        <div class="ans-guide-row" style="margin-bottom:0;margin-top:6px;">
+          <span class="ans-guide-label">&bull; Kesimpulan :</span>
+          <span class="ans-guide-line"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOAL 2 -->
+    <div class="soal-box">
+      <div class="soal-title">Soal 2</div>
+      <div>
+        Perbandingan banyak pensil warna milik <strong>Chica</strong> dan <strong>Malika</strong> adalah $2 : 5$ (dapat ditulis $\frac{2}{5}$).<br>
+        Jika Chica memiliki <strong>$8$ batang pensil warna</strong>, berapakah banyak pensil warna yang dimiliki oleh Malika?
+      </div>
+      <div class="answer-space">
+        <div class="ans-guide-row">
+          <span class="ans-guide-label">&bull; Diketahui :</span>
+          <span class="ans-guide-line"></span>
+        </div>
+        <div class="ans-guide-row">
+          <span class="ans-guide-label">&bull; Ditanya :</span>
+          <span class="ans-guide-line"></span>
+        </div>
+        <div style="margin-top: 8px;">
+          <span class="ans-guide-label">&bull; Langkah Pengerjaan :</span>
+          <div class="ans-work-lines">
+            <div class="work-line"></div>
+            <div class="work-line"></div>
+            <div class="work-line"></div>
+            <div class="work-line"></div>
+          </div>
+        </div>
+        <div class="ans-guide-row" style="margin-bottom:0;margin-top:6px;">
+          <span class="ans-guide-label">&bull; Kesimpulan :</span>
+          <span class="ans-guide-line"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PETUNJUK PENGUMPULAN -->
+  <div class="footer-note">
+    📸 <strong>Petunjuk Pengumpulan Tugas:</strong> Kerjakan latihan di atas dengan teliti, foto lembar jawaban Anda, lalu unggah melalui Portal Pembelajaran Matematika (Menu: <em>Kirim Tugas MTK</em>).
+  </div>
+
+</body>
+</html>

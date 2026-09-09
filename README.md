@@ -20,17 +20,22 @@ Aplikasi Web Pembelajaran Terpadu berbasis **GitHub Pages** yang terhubung langs
 ## 🚀 Cara Upload & Aktivasi (Hanya 1 Menit)
 
 1. Buka link upload: 👉 **[Upload ke Repository](https://github.com/portalmtk/portalmtk.github.io/upload/main)**
-2. Buka folder `PORTAL_GITHUB_PAGES` di komputer Anda, lalu tarik (*drag & drop*) file:
-   - `index.html`
+2. Buka folder `PORTAL_GITHUB_PAGES` di komputer Anda, lalu tarik (*drag & drop*) seluruh file ke GitHub:
+   - `index.html` (Kirim Tugas)
+   - `nilai.html` (Rekapitulasi & Cek Nilai)
+   - `jadwal.html` (Jadwal Pelajaran MTK)
+   - `materi.html` (Pusat Materi Belajar)
+   - `materi_perkalian_bentuk_akar.html` (Modul Bacaan Perkalian Akar)
+   - `rekap.html` (Tautan alternatif ke nilai.html)
    - `supabase_schema.sql`
    - `README.md`
 3. Gulir ke bawah dan klik tombol hijau **Commit changes**.
-4. Buka link pengaturan: 👉 **[Settings GitHub Pages](https://github.com/portalmtk/portalmtk.github.io/settings/pages)**
-   - Pada bagian **Branch**, pilih: `main` (atau `master`)
-   - Folder: `/ (root)`
-   - Klik **Save**.
-5. Selesai! Dalam 1-2 menit web portal Anda dapat langsung diakses publik oleh siswa dan guru di:
-   👉 **[https://portalmtk.github.io/](https://portalmtk.github.io/)**
+4. Selesai! Halaman mandiri dapat langsung diakses publik di:
+   - 📤 Kirim Tugas: 👉 **[https://portalmtk.github.io/](https://portalmtk.github.io/)**
+   - 📊 Cek Nilai: 👉 **[https://portalmtk.github.io/nilai.html](https://portalmtk.github.io/nilai.html)**
+   - 📅 Jadwal: 👉 **[https://portalmtk.github.io/jadwal.html](https://portalmtk.github.io/jadwal.html)**
+   - 📚 Materi: 👉 **[https://portalmtk.github.io/materi.html](https://portalmtk.github.io/materi.html)**
+   - 📖 Modul Akar: 👉 **[https://portalmtk.github.io/materi_perkalian_bentuk_akar.html](https://portalmtk.github.io/materi_perkalian_bentuk_akar.html)**
 
 ---
 
