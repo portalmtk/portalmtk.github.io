@@ -212,57 +212,51 @@
     }
     .btn-submit-quick:hover { transform: scale(1.03); }
 
-    /* LEMBAR MATERI PUTIH BERSIH DENGAN LATEX MURNI (OTENTIK BUKU TEKS) */
+    /* LEMBAR MATERI PUTIH BERSIH DENGAN FONT SEGOE UI & LATEX MURNI */
     .reading-sheet {
       background: #ffffff;
       color: #1e293b;
-      border-radius: 20px;
-      padding: 38px 32px;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+      border-radius: 16px;
+      padding: 36px 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
       border: 1px solid #e2e8f0;
-      line-height: 1.7;
+      line-height: 1.65;
+      font-size: 15px;
     }
     @media (max-width: 600px) {
-      .reading-sheet { padding: 24px 18px; border-radius: 16px; }
+      .reading-sheet { padding: 22px 16px; border-radius: 12px; }
     }
 
-    .badge-top-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 12px;
+    .reading-sheet,
+    .reading-sheet p,
+    .reading-sheet li,
+    .reading-sheet h1,
+    .reading-sheet h2,
+    .reading-sheet h3,
+    .reading-sheet strong,
+    .reading-sheet em,
+    .reading-sheet span {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
     }
-    .badge-label {
-      font-size: 0.75rem;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .badge-blue { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
-    .badge-amber { background: #fefce8; color: #b45309; border: 1px solid #fef08a; }
 
-    .reading-sheet h1, 
-    .reading-sheet h2, 
-    .reading-sheet h3 {
-      color: #0f172a;
-      margin-top: 24px;
-      margin-bottom: 10px;
-    }
     .reading-sheet h1 {
-      font-size: 1.45rem;
+      font-size: 1.35rem;
       font-weight: 800;
       color: #0f172a;
-      border-bottom: 2px solid #2563eb;
+      border-bottom: 2px solid #3b82f6;
       padding-bottom: 8px;
       margin-top: 4px;
+      margin-bottom: 16px;
     }
     .reading-sheet h3 {
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       font-weight: 800;
-      color: #1e3a8a;
+      color: #0f172a;
+      text-transform: uppercase;
       letter-spacing: 0.02em;
+      margin-top: 20px;
+      margin-bottom: 10px;
     }
 
     .reading-sheet hr {
@@ -273,16 +267,18 @@
 
     .reading-sheet p, 
     .reading-sheet li {
-      color: #334155;
-      font-size: 0.96rem;
+      color: #1e293b;
+      font-size: 15px;
+      line-height: 1.65;
     }
     .reading-sheet strong {
       color: #0f172a;
+      font-weight: 700;
     }
 
     .reading-sheet ol, 
     .reading-sheet ul {
-      padding-left: 24px;
+      padding-left: 22px;
       margin-bottom: 16px;
     }
     .reading-sheet li {
@@ -293,15 +289,16 @@
       margin-top: 6px;
     }
 
-    /* KOTAK RENDER LATEX MURNI & ALAMI */
+    /* KOTAK FORMULA LATEX SEPERTI PADA GAMBAR BUKU TEKS */
     .math-block {
-      background-color: #f8fafc;
-      border: 1px solid #e2e8f0;
+      background-color: #f1f5f9;
+      border: none;
       border-radius: 8px;
-      padding: 10px 16px;
-      margin: 10px 0;
+      padding: 12px 18px;
+      margin: 12px 0;
       overflow-x: auto;
-      color: #0f172a; /* Huruf formula hitam pekat murni matematika */
+      text-align: center;
+      color: #0f172a;
     }
 
     /* KOTAK AKSI PENGUMPULAN TUGAS */
@@ -421,14 +418,9 @@
       </a>
     </div>
 
-    <!-- LEMBAR MATERI: PUTIH BERSIH DENGAN LATEX MURNI -->
+    <!-- LEMBAR MATERI: PUTIH BERSIH DENGAN FONT SEGOE UI & LATEX MURNI -->
     <div class="reading-sheet">
       
-      <div class="badge-top-row">
-        <span class="badge-label badge-blue">Matematika Kelas VIII SMP/MTs</span>
-        <span class="badge-label badge-amber">Kurikulum Merdeka</span>
-      </div>
-
       <!-- JUDUL MATERI -->
       <h3>JUDUL MATERI</h3>
       <h1>Operasi Aljabar Bentuk Akar: Perkalian Bentuk Akar</h1>
