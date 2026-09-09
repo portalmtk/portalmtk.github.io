@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Operasi Aljabar Bentuk Akar: Perkalian Bentuk Akar - Portal Matematika Ceria</title>
-  <meta name="description" content="Modul Pembelajaran Matematika SMP/MTs Kelas VIII: Operasi Aljabar Bentuk Akar (Perkalian Bentuk Akar) Kurikulum Merdeka.">
+  <title>Operasi Aljabar Bentuk Akar: Perkalian Bentuk Akar - Portal MTK Ceria</title>
+  <meta name="description" content="Modul Materi Operasi Perkalian Bentuk Akar SMP/MTs Kelas VIII Kurikulum Merdeka.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
       --bg: #0c1222;
       --card-bg: #141e34;
       --card-border: #233252;
-      --text: #ffffff;
+      --text: #f8fafc;
       --text-muted: #94a3b8;
       --fun-purple: #8b5cf6;
       --fun-indigo: #6366f1;
@@ -38,7 +38,7 @@
       --fun-green: #10b981;
       --fun-yellow: #fbbf24;
       --fun-blue: #38bdf8;
-      --input-bg: #0d1527;
+      --math-bg: #090f1d;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -49,16 +49,16 @@
       padding: 16px 14px 60px 14px;
       display: flex;
       justify-content: center;
-      line-height: 1.65;
+      line-height: 1.7;
     }
-    .container { width: 100%; max-width: 680px; }
+    .container { width: 100%; max-width: 760px; }
 
-    /* Sticky Top Bar */
+    /* Top Sticky Bar */
     .sticky-nav-container {
       position: sticky;
       top: 10px;
       z-index: 300;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     .top-navbar {
       display: flex;
@@ -169,12 +169,12 @@
       color: #93c5fd;
     }
 
-    /* Sub-nav quick back */
+    /* Sub-bar navigasi */
     .subnav-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       gap: 10px;
       flex-wrap: wrap;
     }
@@ -211,366 +211,129 @@
       box-shadow: 0 4px 14px rgba(255, 94, 98, 0.3);
       transition: transform 0.2s;
     }
-    .btn-submit-quick:hover {
-      transform: scale(1.03);
-    }
+    .btn-submit-quick:hover { transform: scale(1.03); }
 
-    /* Hero Banner Modul */
-    .module-hero {
-      background: linear-gradient(135deg, #1e1b4b 0%, #141e34 100%);
-      border: 1px solid rgba(139, 92, 246, 0.35);
-      border-radius: 22px;
-      padding: 24px 20px;
-      margin-bottom: 22px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-    }
-    .module-hero::before {
-      content: "📐";
-      position: absolute;
-      right: 12px;
-      top: -10px;
-      font-size: 6rem;
-      opacity: 0.08;
-      pointer-events: none;
-    }
-    .hero-badge-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    .hero-badge {
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      padding: 4px 10px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .badge-class { background: rgba(56, 189, 248, 0.2); color: var(--fun-blue); border: 1px solid rgba(56, 189, 248, 0.4); }
-    .badge-kurmer { background: rgba(251, 191, 36, 0.2); color: var(--fun-yellow); border: 1px solid rgba(251, 191, 36, 0.4); }
-    .badge-jp { background: rgba(16, 185, 129, 0.2); color: var(--fun-green); border: 1px solid rgba(16, 185, 129, 0.4); }
-
-    .module-title-h3 {
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      color: var(--fun-purple);
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .module-title-h1 {
-      font-size: 1.55rem;
-      font-weight: 900;
-      line-height: 1.3;
-      margin-bottom: 12px;
-      background: linear-gradient(90deg, #ffffff 0%, #cbd5e1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .module-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 12px;
-      flex-wrap: wrap;
-    }
-    .module-meta span { display: inline-flex; align-items: center; gap: 5px; }
-
-    /* Content Cards */
-    .content-card {
+    /* LEMBAR BACAAN MATERI (POLOS, BERSIH, MUDAH DIPAHAMI SISWA) */
+    .reading-sheet {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 20px;
-      padding: 22px 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      padding: 36px 32px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      color: #e2e8f0;
     }
-    .card-header-bar {
+    @media (max-width: 600px) {
+      .reading-sheet { padding: 24px 18px; }
+    }
+
+    .meta-badge-row {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .tag-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .tag-blue { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .tag-yellow { background: rgba(251, 191, 36, 0.15); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.3); }
+
+    .reading-sheet h1, 
+    .reading-sheet h2, 
+    .reading-sheet h3 {
+      color: #ffffff;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+    .reading-sheet h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      border-bottom: 2px solid var(--fun-purple);
       padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-top: 6px;
     }
-    .card-icon-pill {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-    }
-    .card-title {
+    .reading-sheet h3 {
       font-size: 1.05rem;
       font-weight: 800;
-      color: #fff;
+      color: #93c5fd;
+      letter-spacing: 0.02em;
     }
 
-    /* Purpose Box */
-    .purpose-box {
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 20px;
-    }
-    .purpose-title {
-      font-size: 0.82rem;
-      font-weight: 900;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--fun-green);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .purpose-box p {
-      font-size: 0.92rem;
-      color: #e2e8f0;
-      margin-bottom: 8px;
-    }
-    .purpose-box ul {
-      padding-left: 20px;
-      color: #cbd5e1;
-      font-size: 0.92rem;
-    }
-    .purpose-box li { margin-bottom: 6px; }
-
-    /* Concept Points */
-    .concept-item {
-      background: rgba(13, 21, 39, 0.6);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 16px;
-      padding: 16px 18px;
-      margin-bottom: 14px;
-    }
-    .concept-num {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(99, 102, 241, 0.2);
-      color: #a5b4fc;
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      font-size: 0.78rem;
-      font-weight: 800;
-      padding: 2px 10px;
-      border-radius: 8px;
-      margin-bottom: 8px;
-    }
-    .concept-title {
-      font-size: 1rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-    .concept-body {
-      font-size: 0.92rem;
-      color: #cbd5e1;
-      line-height: 1.6;
+    .reading-sheet hr {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin: 24px 0;
     }
 
-    /* MathJax Formula Box */
-    .math-block {
-      background: #090f1d;
-      border: 1px solid #233252;
-      border-left: 4px solid var(--fun-purple);
-      padding: 14px 16px;
-      border-radius: 12px;
-      margin: 12px 0;
-      overflow-x: auto;
-      color: #7dd3fc;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
-    }
-    .math-note {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-top: 6px;
-    }
-
-    /* Example Box */
-    .example-box {
-      background: rgba(13, 21, 39, 0.7);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 18px;
+    .reading-sheet ol, 
+    .reading-sheet ul {
+      padding-left: 24px;
       margin-bottom: 16px;
     }
-    .example-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .example-tag {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.3));
-      color: #c7d2fe;
-      border: 1px solid rgba(139, 92, 246, 0.5);
-      font-size: 0.78rem;
-      font-weight: 800;
-      padding: 3px 10px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .example-q {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #ffffff;
+    .reading-sheet li {
       margin-bottom: 10px;
     }
-    .solution-box {
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px dashed rgba(56, 189, 248, 0.35);
-      border-radius: 12px;
-      padding: 12px 14px;
+    .sub-list {
+      list-style-type: lower-alpha;
       margin-top: 8px;
     }
-    .solution-title {
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: var(--fun-blue);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
 
-    /* Practice Challenges */
-    .challenge-box {
-      background: rgba(13, 21, 39, 0.7);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 16px 18px;
-      margin-bottom: 14px;
-    }
-    .challenge-q-title {
-      font-size: 0.94rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .challenge-num-circle {
-      background: var(--fun-purple);
-      color: #fff;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 900;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .sub-exercise-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 6px;
-    }
-    @media (max-width: 520px) {
-      .sub-exercise-grid { grid-template-columns: 1fr; }
-    }
-    .sub-ex-item {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
+    /* Kotak Formula Matematika: Bersih, Rapi, Kontras */
+    .math-block {
+      background-color: var(--math-bg);
+      border: 1px solid #233252;
+      border-left: 3px solid var(--fun-blue);
+      padding: 12px 16px;
       border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 0.92rem;
-      color: #93c5fd;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .sub-ex-label {
-      font-weight: 800;
-      color: var(--fun-yellow);
-      background: rgba(251, 191, 36, 0.15);
-      border-radius: 6px;
-      padding: 2px 6px;
-      font-size: 0.8rem;
+      margin: 12px 0;
+      overflow-x: auto;
+      color: #38bdf8;
     }
 
-    .context-box {
-      background: rgba(245, 158, 11, 0.08);
-      border: 1px solid rgba(245, 158, 11, 0.3);
+    /* Kotak Kirim Tugas di Akhir Halaman */
+    .action-cta-box {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.4);
       border-radius: 16px;
-      padding: 16px 18px;
-      margin-top: 14px;
-    }
-
-    /* Action CTA Box */
-    .cta-finish-box {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(139, 92, 246, 0.25) 100%);
-      border: 1px solid rgba(139, 92, 246, 0.45);
-      border-radius: 20px;
-      padding: 24px 20px;
+      padding: 22px 20px;
       text-align: center;
       margin-top: 26px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     }
-    .cta-finish-title {
-      font-size: 1.2rem;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 6px;
+    .action-cta-box p {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      margin-bottom: 14px;
     }
-    .cta-finish-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 18px;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .btn-cta-primary {
+    .btn-cta-large {
       background: linear-gradient(135deg, #ff5e62, #ff9966);
       color: #fff;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       font-weight: 800;
-      padding: 14px 24px;
-      border-radius: 16px;
+      padding: 12px 22px;
+      border-radius: 14px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 8px 24px rgba(255, 94, 98, 0.4);
-      transition: all 0.2s;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(255, 94, 98, 0.4);
+      transition: transform 0.2s;
     }
-    .btn-cta-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(255, 94, 98, 0.6);
-    }
+    .btn-cta-large:hover { transform: translateY(-2px); }
 
     /* Footer */
     .portal-footer {
       text-align: center;
-      margin-top: 36px;
-      padding-top: 20px;
+      margin-top: 32px;
+      padding-top: 18px;
       border-top: 1px solid var(--card-border);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
     }
     .portal-footer strong { color: #fff; }
@@ -580,7 +343,7 @@
 
   <div class="container">
 
-    <!-- TOP STICKY NAVBAR -->
+    <!-- TOP STICKY NAVBAR (ATURAN PAGE MODERN) -->
     <div class="sticky-nav-container">
       <div class="top-navbar">
         <a href="index.html" class="nav-brand">
@@ -631,14 +394,14 @@
             <span style="font-size:1.2rem;">📚</span>
             <div>
               <div>Modul Materi</div>
-              <small style="color:var(--text-muted);font-size:0.7rem;font-weight:400;">Pusat Sumber Belajar</small>
+              <small style="color:var(--text-muted);font-size:0.7rem;font-weight:400;">Pusat Belajar</small>
             </div>
           </a>
         </div>
       </div>
     </div>
 
-    <!-- SUB-NAV: BACK & ACTION -->
+    <!-- SUB-NAV: KEMBALI KE MODUL & KIRIM TUGAS -->
     <div class="subnav-bar">
       <a href="materi.html" class="btn-back">
         <span>⬅</span>
@@ -650,232 +413,159 @@
       </a>
     </div>
 
-    <!-- HERO MODUL -->
-    <div class="module-hero">
-      <div class="hero-badge-wrap">
-        <span class="hero-badge badge-class">📘 Kelas VIII SMP/MTs</span>
-        <span class="hero-badge badge-kurmer">🎯 Kurikulum Merdeka</span>
-        <span class="hero-badge badge-jp">⏱️ Alokasi: 2 JP</span>
+    <!-- ISI MATERI (TAMPILAN POLOS, ALAMI, DAN MUDAH DIBACA SISWA) -->
+    <div class="reading-sheet">
+      
+      <div class="meta-badge-row">
+        <span class="tag-badge tag-blue">📘 Matematika Kelas VIII</span>
+        <span class="tag-badge tag-yellow">🎯 Kurikulum Merdeka</span>
       </div>
-      <div class="module-title-h3">JUDUL MATERI</div>
-      <h1 class="module-title-h1">Operasi Aljabar Bentuk Akar: Perkalian Bentuk Akar</h1>
-      <div class="module-meta">
-        <span>👨‍🏫 Guru Pengampu: <strong>Bpk. Supianto, S.Pd.,Gr.</strong></span>
-        <span>•</span>
-        <span>📍 SMP Negeri 5 Muara Siram</span>
-      </div>
-    </div>
 
-    <!-- TUJUAN PEMBELAJARAN -->
-    <div class="purpose-box">
-      <div class="purpose-title">
-        <span>🎯</span>
-        <span>TUJUAN PEMBELAJARAN (Berdasarkan CP Kemendikbudristek)</span>
-      </div>
+      <!-- JUDUL MATERI -->
+      <h3>JUDUL MATERI</h3>
+      <h1>Operasi Aljabar Bentuk Akar: Perkalian Bentuk Akar</h1>
+
+      <hr>
+
+      <!-- TUJUAN PEMBELAJARAN -->
+      <h3>TUJUAN PEMBELAJARAN (Berdasarkan CP Kemendikbudristek)</h3>
       <p>Setelah mempelajari materi ini, peserta didik diharapkan dapat:</p>
       <ul>
         <li><strong>Menyelesaikan operasi perkalian pada bilangan bentuk akar</strong> dengan tepat dan menggunakannya untuk memecahkan masalah matematika kontekstual.</li>
       </ul>
-    </div>
 
-    <!-- MATERI OPERASI PERKALIAN BENTUK AKAR -->
-    <div class="content-card">
-      <div class="card-header-bar">
-        <div class="card-icon-pill" style="background:rgba(99,102,241,0.25);color:var(--fun-indigo);">📖</div>
-        <div class="card-title">MATERI OPERASI PERKALIAN BENTUK AKAR</div>
-      </div>
+      <hr>
 
-      <!-- Point 1 -->
-      <div class="concept-item">
-        <div class="concept-num">Poin 1</div>
-        <div class="concept-title">Konsep Dasar Perkalian Bentuk Akar</div>
-        <div class="concept-body">
+      <!-- MATERI OPERASI PERKALIAN BENTUK AKAR -->
+      <h3>MATERI OPERASI PERKALIAN BENTUK AKAR</h3>
+
+      <ol>
+        <li>
+          <strong>Konsep Dasar Perkalian Bentuk Akar</strong><br>
           Perkalian bentuk akar dapat dipahami melalui konsep luas bangun datar persegi panjang. Jika sebuah persegi panjang memiliki panjang $\sqrt{5}\text{ cm}$ dan lebar $\sqrt{2}\text{ cm}$, maka luasnya dapat dihitung dengan mengalikan kedua besaran tersebut:
           <div class="math-block">
             $$\text{Luas} = \text{panjang} \times \text{lebar} = \sqrt{5} \times \sqrt{2} = \sqrt{10}\text{ cm}^2$$
           </div>
-        </div>
-      </div>
+        </li>
 
-      <!-- Point 2 -->
-      <div class="concept-item">
-        <div class="concept-num">Poin 2</div>
-        <div class="concept-title">Bentuk Umum Perkalian Bentuk Akar</div>
-        <div class="concept-body">
+        <li>
+          <strong>Bentuk Umum Perkalian Bentuk Akar</strong><br>
           Secara umum, perkalian dua bilangan bentuk akar memenuhi sifat berikut:
-          <div class="math-block" style="border-left-color:var(--fun-yellow);">
+          <div class="math-block">
             $$a\sqrt{p} \times b\sqrt{q} = (a \times b)\sqrt{p \times q}$$
           </div>
-          <p class="math-note">Dengan syarat $a, b, p, q$ adalah bilangan bulat, serta $p$ dan $q$ bernilai positif ($p > 0, q > 0$).</p>
-        </div>
-      </div>
-
-      <!-- Point 3 -->
-      <div class="concept-item">
-        <div class="concept-num">Poin 3</div>
-        <div class="concept-title">Penyederhanaan Hasil Perkalian</div>
-        <div class="concept-body">
-          Jika hasil perkalian di dalam tanda akar ($\sqrt{p \times q}$) masih mengandung faktor bilangan kuadrat sempurna, maka bentuk akar tersebut harus disederhanakan terlebih dahulu.
-        </div>
-      </div>
-    </div>
-
-    <!-- CONTOH SOAL DAN PEMBAHASAN -->
-    <div class="content-card">
-      <div class="card-header-bar">
-        <div class="card-icon-pill" style="background:rgba(56,189,248,0.2);color:var(--fun-blue);">💡</div>
-        <div class="card-title">CONTOH SOAL DAN PEMBAHASAN</div>
-      </div>
-
-      <!-- Contoh 1 -->
-      <div class="example-box">
-        <div class="example-header">
-          <span class="example-tag">Contoh 1 • Perkalian Bentuk Akar Sederhana</span>
-        </div>
-        <div class="example-q">
-          Hitunglah hasil dari $\sqrt{3} \times \sqrt{7}$.
-        </div>
-        <div class="solution-box">
-          <div class="solution-title">✨ Alternatif Penyelesaian:</div>
-          <div class="math-block">
-            $$\sqrt{3} \times \sqrt{7} = \sqrt{3 \times 7} = \sqrt{21}$$
-          </div>
-        </div>
-      </div>
-
-      <!-- Contoh 2 -->
-      <div class="example-box">
-        <div class="example-header">
-          <span class="example-tag" style="border-color:rgba(251,191,36,0.5);color:#fde68a;">Contoh 2 • Perkalian Koefisien & Bentuk Akar</span>
-        </div>
-        <div class="example-q">
-          Tentukan hasil dari $2\sqrt{2} \times 2\sqrt{3}$.
-        </div>
-        <div class="solution-box">
-          <div class="solution-title" style="color:var(--fun-yellow);">✨ Alternatif Penyelesaian:</div>
-          <div class="math-block" style="border-left-color:var(--fun-yellow);">
-            $$2\sqrt{2} \times 2\sqrt{3} = (2 \times 2)\sqrt{2 \times 3} = 4\sqrt{6}$$
-          </div>
-        </div>
-      </div>
-
-      <!-- Contoh 3 -->
-      <div class="example-box">
-        <div class="example-header">
-          <span class="example-tag" style="border-color:rgba(255,94,98,0.5);color:#fca5a5;">Contoh 3 • Perkalian yang Perlu Disederhanakan</span>
-        </div>
-        <div class="example-q">
-          Sederhanakan bentuk perkalian $3\sqrt{5} \times 5\sqrt{10}$.
-        </div>
-        <div class="solution-box">
-          <div class="solution-title" style="color:var(--fun-coral);">✨ Alternatif Penyelesaian:</div>
-          <div class="math-block" style="border-left-color:var(--fun-coral);">
-            $$3\sqrt{5} \times 5\sqrt{10} = (3 \times 5)\sqrt{5 \times 10} = 15\sqrt{50}$$
-          </div>
-          <p style="font-size:0.9rem;color:#cbd5e1;margin-top:6px;">
-            Karena $\sqrt{50} = \sqrt{25 \times 2} = 5\sqrt{2}$, maka:
+          <p style="margin-top: 6px; font-size: 0.92rem; color: #94a3b8;">
+            <em>Dengan syarat $a, b, p, q$ adalah bilangan bulat, serta $p$ dan $q$ bernilai positif ($p > 0, q > 0$).</em>
           </p>
-          <div class="math-block" style="border-left-color:var(--fun-coral);">
-            $$15\sqrt{50} = 15 \times 5\sqrt{2} = 75\sqrt{2}$$
-          </div>
-        </div>
-      </div>
-    </div>
+        </li>
 
-    <!-- SOAL LATIHAN -->
-    <div class="content-card">
-      <div class="card-header-bar">
-        <div class="card-icon-pill" style="background:rgba(251,191,36,0.2);color:var(--fun-yellow);">📝</div>
-        <div>
-          <div class="card-title">SOAL LATIHAN</div>
-          <small style="color:var(--text-muted);font-size:0.8rem;font-style:italic;">Kerjakan soal-soal berikut dengan menyesuaikan langkah pada contoh di atas</small>
-        </div>
-      </div>
+        <li>
+          <strong>Penyederhanaan Hasil Perkalian</strong><br>
+          Jika hasil perkalian di dalam tanda akar ($\sqrt{p \times q}$) masih mengandung faktor bilangan kuadrat sempurna, maka bentuk akar tersebut harus disederhanakan terlebih dahulu.
+        </li>
+      </ol>
 
-      <!-- Soal 1 -->
-      <div class="challenge-box">
-        <div class="challenge-q-title">
-          <div class="challenge-num-circle">1</div>
-          <div>Tentukan hasil perkalian bentuk akar sederhana berikut:</div>
-        </div>
-        <div class="sub-exercise-grid">
-          <div class="sub-ex-item">
-            <span class="sub-ex-label">a</span>
-            <span>$\sqrt{5} \times \sqrt{6}$</span>
-          </div>
-          <div class="sub-ex-item">
-            <span class="sub-ex-label">b</span>
-            <span>$\sqrt{7} \times \sqrt{11}$</span>
-          </div>
-        </div>
-      </div>
+      <hr>
 
-      <!-- Soal 2 -->
-      <div class="challenge-box">
-        <div class="challenge-q-title">
-          <div class="challenge-num-circle">2</div>
-          <div>Hitunglah hasil perkalian koefisien dan bentuk akar berikut:</div>
-        </div>
-        <div class="sub-exercise-grid">
-          <div class="sub-ex-item">
-            <span class="sub-ex-label">a</span>
-            <span>$4\sqrt{3} \times 5\sqrt{2}$</span>
-          </div>
-          <div class="sub-ex-item">
-            <span class="sub-ex-label">b</span>
-            <span>$3\sqrt{5} \times 8\sqrt{2}$</span>
-          </div>
-        </div>
-      </div>
+      <!-- CONTOH SOAL DAN PEMBAHASAN -->
+      <h3>CONTOH SOAL DAN PEMBAHASAN</h3>
 
-      <!-- Soal 3 -->
-      <div class="challenge-box">
-        <div class="challenge-q-title">
-          <div class="challenge-num-circle">3</div>
-          <div>Sederhanakan bentuk perkalian berikut hingga bentuk yang paling sederhana:</div>
-        </div>
-        <div class="sub-exercise-grid">
-          <div class="sub-ex-item">
-            <span class="sub-ex-label">a</span>
-            <span>$3\sqrt{2} \times 6\sqrt{6}$</span>
-          </div>
-          <div class="sub-ex-item">
-            <span class="sub-ex-label">b</span>
-            <span>$5\sqrt{6} \times 7\sqrt{8}$</span>
-          </div>
-        </div>
-      </div>
+      <ul>
+        <li>
+          <strong>Contoh 1 (Perkalian Bentuk Akar Sederhana):</strong><br>
+          Hitunglah hasil dari $\sqrt{3} \times \sqrt{7}$.
+          <ul style="margin-top: 8px;">
+            <li>
+              <strong>Alternatif Penyelesaian:</strong>
+              <div class="math-block">
+                $$\sqrt{3} \times \sqrt{7} = \sqrt{3 \times 7} = \sqrt{21}$$
+              </div>
+            </li>
+          </ul>
+        </li>
 
-      <!-- Soal 4 Kontekstual -->
-      <div class="context-box">
-        <div class="challenge-q-title" style="margin-bottom:6px;">
-          <div class="challenge-num-circle" style="background:var(--fun-yellow);color:#0f172a;">4</div>
-          <div style="color:var(--fun-yellow);">Soal Kontekstual (Penerapan Kehidupan Sehari-hari)</div>
-        </div>
-        <p style="font-size:0.94rem;color:#f1f5f9;line-height:1.65;padding-left:30px;">
+        <li>
+          <strong>Contoh 2 (Perkalian Koefisien dan Bentuk Akar):</strong><br>
+          Tentukan hasil dari $2\sqrt{2} \times 2\sqrt{3}$.
+          <ul style="margin-top: 8px;">
+            <li>
+              <strong>Alternatif Penyelesaian:</strong>
+              <div class="math-block">
+                $$2\sqrt{2} \times 2\sqrt{3} = (2 \times 2)\sqrt{2 \times 3} = 4\sqrt{6}$$
+              </div>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <strong>Contoh 3 (Perkalian Bentuk Akar yang Perlu Disederhanakan):</strong><br>
+          Sederhanakan bentuk perkalian $3\sqrt{5} \times 5\sqrt{10}$.
+          <ul style="margin-top: 8px;">
+            <li>
+              <strong>Alternatif Penyelesaian:</strong>
+              <div class="math-block">
+                $$3\sqrt{5} \times 5\sqrt{10} = (3 \times 5)\sqrt{5 \times 10} = 15\sqrt{50}$$
+              </div>
+              <p style="margin-top: 6px;">Karena $\sqrt{50} = \sqrt{25 \times 2} = 5\sqrt{2}$, maka:</p>
+              <div class="math-block">
+                $$15\sqrt{50} = 15 \times 5\sqrt{2} = 75\sqrt{2}$$
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr>
+
+      <!-- SOAL LATIHAN -->
+      <h3>SOAL LATIHAN</h3>
+      <p style="color: #94a3b8; font-style: italic; margin-bottom: 14px;">
+        (Kerjakan soal-soal berikut dengan menyesuaikan langkah pada contoh di atas)
+      </p>
+
+      <ol>
+        <li>
+          Tentukan hasil perkalian bentuk akar sederhana berikut:
+          <ol class="sub-list">
+            <li>$\sqrt{5} \times \sqrt{6}$</li>
+            <li>$\sqrt{7} \times \sqrt{11}$</li>
+          </ol>
+        </li>
+        <li>
+          Hitunglah hasil perkalian koefisien dan bentuk akar berikut:
+          <ol class="sub-list">
+            <li>$4\sqrt{3} \times 5\sqrt{2}$</li>
+            <li>$3\sqrt{5} \times 8\sqrt{2}$</li>
+          </ol>
+        </li>
+        <li>
+          Sederhanakan bentuk perkalian berikut hingga bentuk yang paling sederhana:
+          <ol class="sub-list">
+            <li>$3\sqrt{2} \times 6\sqrt{6}$</li>
+            <li>$5\sqrt{6} \times 7\sqrt{8}$</li>
+          </ol>
+        </li>
+        <li>
+          <strong>Soal Kontekstual:</strong><br>
           Sebuah persegi panjang memiliki panjang $10\sqrt{72}\text{ cm}$ dan lebar $4\sqrt{8}\text{ cm}$. Hitunglah luas persegi panjang tersebut dan tuliskan jawaban dalam bentuk akar yang paling sederhana.
-        </p>
-      </div>
+        </li>
+      </ol>
 
-      <!-- Call To Action -->
-      <div class="cta-finish-box">
-        <div style="font-size:2rem;margin-bottom:6px;">🎉</div>
-        <div class="cta-finish-title">Sudah Selesai Mengerjakan Latihan?</div>
-        <p class="cta-finish-desc">
-          Foto jawaban di buku tulismu dengan jelas, lalu kirimkan langsung melalui Form Pengumpulan Tugas Matematika!
-        </p>
-        <a href="tugas.html" class="btn-cta-primary">
+      <!-- KOTAK AKSI TUGAS -->
+      <div class="action-cta-box">
+        <p>Sudah selesai mengerjakan latihan di buku tulismu? Unggah lembar jawaban sekarang:</p>
+        <a href="tugas.html" class="btn-cta-large">
           <span>📤</span>
-          <span>Kirim Jawaban Tugas Sekarang</span>
-          <span>➔</span>
+          <span>Kirim Lembar Tugas ke Portal</span>
         </a>
       </div>
+
     </div>
 
     <!-- FOOTER -->
     <div class="portal-footer">
       <p><strong>Portal Matematika Ceria</strong> • SMP Negeri 5 Muara Siram</p>
-      <p style="margin-top:4px;font-size:0.75rem;">Disusun berdasarkan Kurikulum Merdeka Kemendikbudristek • Bpk. Supianto, S.Pd.,Gr.</p>
+      <p style="margin-top:4px;font-size:0.75rem;">Guru Pengampu: Bpk. Supianto, S.Pd.,Gr. • Kurikulum Merdeka</p>
     </div>
 
   </div>
