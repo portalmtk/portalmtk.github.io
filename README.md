@@ -26,7 +26,8 @@ Aplikasi Web Pembelajaran Terpadu berbasis **GitHub Pages** yang terhubung langs
    - `nilai.html` (Rekapitulasi & Cek Nilai)
    - `jadwal.html` (Jadwal Pelajaran MTK)
    - `materi.html` (Pusat Materi Belajar)
-   - `materi_perkalian_bentuk_akar.html` (Modul Bacaan Perkalian Akar)
+   - `materi_perkalian_bentuk_akar.html` (Modul Bacaan Perkalian Akar - Kelas VIII)
+   - `materi_luas_permukaan_kubus_balok.html` (Modul Luas Permukaan Kubus & Balok - Kelas IX)
    - `rekap.html` (Tautan alternatif ke nilai.html)
    - `supabase_schema.sql`
    - `README.md`
@@ -37,7 +38,8 @@ Aplikasi Web Pembelajaran Terpadu berbasis **GitHub Pages** yang terhubung langs
    - 📊 Cek Nilai: 👉 **[https://portalmtk.github.io/nilai.html](https://portalmtk.github.io/nilai.html)**
    - 📅 Jadwal: 👉 **[https://portalmtk.github.io/jadwal.html](https://portalmtk.github.io/jadwal.html)**
    - 📚 Pusat Materi: 👉 **[https://portalmtk.github.io/materi.html](https://portalmtk.github.io/materi.html)**
-   - 📖 Modul Perkalian Akar: 👉 **[https://portalmtk.github.io/materi_perkalian_bentuk_akar.html](https://portalmtk.github.io/materi_perkalian_bentuk_akar.html)**
+   - 📖 Modul Kelas VIII: 👉 **[https://portalmtk.github.io/materi_perkalian_bentuk_akar.html](https://portalmtk.github.io/materi_perkalian_bentuk_akar.html)**
+   - 📖 Modul Kelas IX: 👉 **[https://portalmtk.github.io/materi_luas_permukaan_kubus_balok.html](https://portalmtk.github.io/materi_luas_permukaan_kubus_balok.html)**
 
 ---
 

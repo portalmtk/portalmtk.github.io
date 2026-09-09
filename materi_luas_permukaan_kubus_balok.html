@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luas Permukaan Bangun Ruang Sisi Datar: Kubus dan Balok - Portal MTK Ceria</title>
+  <meta name="description" content="Modul Pembelajaran Matematika SMP/MTs Kelas IX: Luas Permukaan Bangun Ruang Sisi Datar (Kubus dan Balok) Kurikulum Merdeka.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Script MathJax untuk Render Notasi Matematika LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    :root {
+      --bg: #0c1222;
+      --card-border: #233252;
+      --fun-purple: #8b5cf6;
+      --fun-indigo: #6366f1;
+      --fun-coral: #ff5e62;
+      --fun-orange: #ff9966;
+      --fun-yellow: #fbbf24;
+      --fun-blue: #38bdf8;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at top, #16203a 0%, var(--bg) 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      padding: 16px 14px 60px 14px;
+      display: flex;
+      justify-content: center;
+      line-height: 1.65;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .container { width: 100%; max-width: 760px; }
+
+    /* Top Sticky Bar */
+    .sticky-nav-container {
+      position: sticky;
+      top: 10px;
+      z-index: 300;
+      margin-bottom: 16px;
+    }
+    .top-navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(20, 30, 52, 0.95);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 10px 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      backdrop-filter: blur(14px);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+    }
+    .brand-text-title {
+      font-size: 0.98rem;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      background: linear-gradient(90deg, #ffffff, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-text-sub {
+      font-size: 0.72rem;
+      color: var(--fun-yellow);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-menu-toggle {
+      background: rgba(99, 102, 241, 0.2);
+      color: #fff;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: 12px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-menu-toggle:hover {
+      background: var(--fun-indigo);
+      transform: scale(1.04);
+    }
+
+    .menu-drawer {
+      display: none;
+      background: rgba(20, 30, 52, 0.98);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: 20px;
+      padding: 12px;
+      margin-top: 8px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      backdrop-filter: blur(16px);
+      animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .menu-drawer.show { display: block; }
+    @keyframes popIn {
+      0% { opacity: 0; transform: translateY(-10px) scale(0.97); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(13, 21, 39, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 12px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .menu-item:hover {
+      background: rgba(99, 102, 241, 0.25);
+      border-color: var(--fun-indigo);
+      transform: translateY(-2px);
+    }
+    .menu-item.active {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.3));
+      border-color: var(--fun-purple);
+      color: #93c5fd;
+    }
+
+    /* Sub-bar Navigasi */
+    .subnav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-back {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-back:hover {
+      background: rgba(99, 102, 241, 0.2);
+      color: #fff;
+      border-color: var(--fun-indigo);
+    }
+    .btn-submit-quick {
+      background: linear-gradient(135deg, var(--fun-coral), var(--fun-orange));
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(255, 94, 98, 0.3);
+      transition: transform 0.2s;
+    }
+    .btn-submit-quick:hover { transform: scale(1.03); }
+
+    /* LEMBAR MATERI PUTIH BERSIH */
+    .reading-sheet {
+      background: #ffffff;
+      color: #1e293b;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      border-radius: 16px;
+      padding: 36px 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      border: 1px solid #e2e8f0;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+    @media (max-width: 600px) {
+      .reading-sheet { padding: 22px 16px; border-radius: 12px; }
+    }
+
+    .top-navbar, .menu-drawer, .btn-submit-quick, .btn-back, .btn-submit-bottom, .portal-footer {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .reading-sheet h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0f172a;
+      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 8px;
+      margin-top: 4px;
+      margin-bottom: 16px;
+    }
+    .reading-sheet h3 {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .reading-sheet hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 22px 0;
+    }
+
+    .reading-sheet p, 
+    .reading-sheet li {
+      color: #1e293b;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .reading-sheet strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .reading-sheet ol, 
+    .reading-sheet ul {
+      padding-left: 22px;
+      margin-bottom: 16px;
+    }
+    .reading-sheet li {
+      margin-bottom: 10px;
+    }
+
+    /* KOTAK FORMULA LATEX SEPERTI PADA BUKU TEKS */
+    .math-block {
+      background-color: #f1f5f9;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 12px 0;
+      overflow-x: auto;
+      text-align: center;
+      color: #0f172a;
+      -webkit-overflow-scrolling: touch;
+    }
+    .math-block mjx-container[jax="CHTML"][display="true"] {
+      margin: 0.3em 0 !important;
+    }
+
+    /* OPTIMASI PENUH VERSI MOBILE (HP) */
+    @media (max-width: 540px) {
+      body {
+        padding: 8px 8px 45px 8px;
+      }
+      .reading-sheet {
+        padding: 20px 14px;
+        border-radius: 12px;
+        font-size: 14px;
+      }
+      .reading-sheet ol, 
+      .reading-sheet ul {
+        padding-left: 18px;
+      }
+      .reading-sheet h1 {
+        font-size: 1.22rem;
+      }
+      .reading-sheet h3 {
+        font-size: 0.92rem;
+      }
+      .math-block {
+        padding: 10px 8px;
+        margin: 10px 0;
+      }
+      .subnav-bar {
+        gap: 8px;
+      }
+      .btn-back, .btn-submit-quick {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.82rem;
+        padding: 8px 12px;
+      }
+      .top-navbar {
+        padding: 8px 12px;
+        border-radius: 14px;
+      }
+      .brand-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 1.1rem;
+      }
+      .brand-text-title {
+        font-size: 0.88rem;
+      }
+      .task-notice-box {
+        padding: 16px 12px;
+      }
+      .btn-submit-bottom {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* KOTAK AKSI PENGUMPULAN TUGAS */
+    .task-notice-box {
+      background: #f0fdf4;
+      border: 1.5px dashed #22c55e;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 30px;
+    }
+    .task-notice-box p {
+      color: #166534;
+      font-weight: 600;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+    .btn-submit-bottom {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 800;
+      padding: 12px 22px;
+      border-radius: 12px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+      transition: transform 0.2s;
+    }
+    .btn-submit-bottom:hover { transform: translateY(-2px); }
+
+    /* Footer */
+    .portal-footer {
+      text-align: center;
+      margin-top: 32px;
+      padding-top: 18px;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .portal-footer strong { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- TOP STICKY NAVBAR -->
+    <div class="sticky-nav-container">
+      <div class="top-navbar">
+        <a href="index.html" class="nav-brand">
+          <div class="brand-icon">📐</div>
+          <div>
+            <div class="brand-text-title">Portal MTK Ceria</div>
+            <div class="brand-text-sub">SMPN 5 MUARA SIRAM</div>
+          </div>
+        </a>
+        <button class="btn-menu-toggle" onclick="toggleMenu()" id="menuToggleBtn">
+          <span>☰</span>
+          <span>Menu</span>
+        </button>
+      </div>
+
+      <!-- DROPDOWN MENU DRAWER -->
+      <div class="menu-drawer" id="menuDrawer">
+        <div class="menu-grid">
+          <a href="index.html" class="menu-item">
+            <span style="font-size:1.2rem;">🏠</span>
+            <div>
+              <div>Beranda</div>
+              <small style="color:var(--text-muted);font-size:0.7rem;font-weight:400;">Portal Utama</small>
+            </div>
+          </a>
+          <a href="tugas.html" class="menu-item">
+            <span style="font-size:1.2rem;">📤</span>
+            <div>
+              <div>Kirim Tugas</div>
+              <small style="color:var(--text-muted);font-size:0.7rem;font-weight:400;">Upload Jawaban</small>
+            </div>
+          </a>
+          <a href="nilai.html" class="menu-item">
+            <span style="font-size:1.2rem;">📊</span>
+            <div>
+              <div>Rekap Nilai</div>
+              <small style="color:var(--text-muted);font-size:0.7rem;font-weight:400;">Cek Evaluasi</small>
+            </div>
+          </a>
+          <a href="jadwal.html" class="menu-item">
+            <span style="font-size:1.2rem;">📅</span>
+            <div>
+              <div>Jadwal Pelajaran</div>
+              <small style="color:var(--text-muted);font-size:0.7rem;font-weight:400;">Waktu & Kelas</small>
+            </div>
+          </a>
+          <a href="materi.html" class="menu-item active">
+            <span style="font-size:1.2rem;">📚</span>
+            <div>
+              <div>Modul Materi</div>
+              <small style="color:var(--text-muted);font-size:0.7rem;font-weight:400;">Pusat Belajar</small>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB-NAV: KEMBALI KE MODUL & KIRIM TUGAS -->
+    <div class="subnav-bar">
+      <a href="materi.html" class="btn-back">
+        <span>⬅</span>
+        <span>Kembali ke Daftar Materi</span>
+      </a>
+      <a href="tugas.html" class="btn-submit-quick">
+        <span>📤</span>
+        <span>Kirim Tugas Bab Ini</span>
+      </a>
+    </div>
+
+    <!-- LEMBAR MATERI -->
+    <div class="reading-sheet">
+      
+      <!-- JUDUL MATERI -->
+      <h3>JUDUL MATERI</h3>
+      <h1>Luas Permukaan Bangun Ruang Sisi Datar: Kubus dan Balok</h1>
+
+      <hr>
+
+      <!-- TUJUAN PEMBELAJARAN -->
+      <h3>TUJUAN PEMBELAJARAN (Berdasarkan CP Kemendikbudristek)</h3>
+      <p>Setelah mempelajari materi ini, peserta didik diharapkan mampu:</p>
+      <ul>
+        <li>Memahami konsep luas permukaan sebagai total luas dari seluruh sisi yang menutupi bangun ruang.</li>
+        <li>Menentukan dan menghitung luas permukaan kubus serta balok secara tepat dalam pemecahan masalah matematika.</li>
+      </ul>
+
+      <hr>
+
+      <!-- MATERI -->
+      <h3>MATERI LUAS PERMUKAAN BANGUN RUANG SISI DATAR (KUBUS DAN BALOK)</h3>
+
+      <ol>
+        <li>
+          <strong>Konsep Dasar Luas Permukaan</strong><br>
+          Luas permukaan suatu bangun ruang adalah total luas dari seluruh sisi bangun ruang tersebut yang dinyatakan dalam satuan persegi. Secara intuitif, luas permukaan dapat dibayangkan sebagai luas kertas atau bungkus yang dibutuhkan untuk menutupi seluruh permukaan luar bangun ruang secara sempurna.
+        </li>
+
+        <li>
+          <strong>Luas Permukaan Kubus</strong><br>
+          Kubus merupakan bangun ruang sisi datar yang dibatasi oleh 6 buah sisi berbentuk persegi yang kongruen dengan panjang rusuk $s$. Karena setiap sisinya memiliki luas $s^2$ dan terdapat 6 buah sisi, maka rumus luas permukaannya adalah:
+          <div class="math-block">
+            $$\text{Luas Permukaan Kubus} = 6 \times s^2$$
+          </div>
+        </li>
+
+        <li>
+          <strong>Luas Permukaan Balok</strong><br>
+          Balok merupakan bangun ruang yang dibatasi oleh 6 buah sisi berbentuk persegi panjang, di mana pasangan sisi yang berhadapan memiliki ukuran yang sama. Jika balok memiliki ukuran panjang alas $p$, lebar alas $l$, dan tinggi $t$, maka rumus luas permukaannya adalah:
+          <div class="math-block">
+            $$\text{Luas Permukaan Balok} = 2 \times (p \times l + p \times t + l \times t)$$
+          </div>
+        </li>
+      </ol>
+
+      <hr>
+
+      <!-- CONTOH SOAL DAN PEMBAHASAN -->
+      <h3>CONTOH SOAL DAN PEMBAHASAN</h3>
+
+      <ul>
+        <li>
+          <strong>Contoh 1 (Luas Permukaan Kubus):</strong><br>
+          Sebuah kubus memiliki panjang sisi $2\text{ m}$. Tentukan luas permukaan kubus tersebut!
+          <ul>
+            <li>
+              <strong>Alternatif Penyelesaian:</strong>
+              <div class="math-block">
+                $$\begin{aligned}
+                \text{Luas permukaan kubus} &= 6 \times s^2 \\
+                &= 6 \times 2 \times 2 \\
+                &= 24\text{ m}^2
+                \end{aligned}$$
+              </div>
+              <p><em>Jadi, luas permukaan kubus tersebut adalah $24\text{ m}^2$.</em></p>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <strong>Contoh 2 (Luas Permukaan Balok):</strong><br>
+          Sebuah balok memiliki ukuran panjang alas $2\text{ cm}$, lebar alas $3\text{ cm}$, dan tinggi $4\text{ cm}$. Tentukan luas permukaan balok tersebut!
+          <ul>
+            <li>
+              <strong>Alternatif Penyelesaian:</strong>
+              <div class="math-block">
+                $$\begin{aligned}
+                \text{Luas permukaan balok} &= 2 \times (p \times l + p \times t + l \times t) \\
+                &= 2 \times (2 \times 3 + 2 \times 4 + 3 \times 4) \\
+                &= 2 \times (6 + 8 + 12) \\
+                &= 2 \times 26 \\
+                &= 52\text{ cm}^2
+                \end{aligned}$$
+              </div>
+              <p><em>Jadi, luas permukaan balok tersebut adalah $52\text{ cm}^2$.</em></p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr>
+
+      <!-- SOAL LATIHAN -->
+      <h3>SOAL LATIHAN</h3>
+
+      <ol>
+        <li>
+          <strong>Soal 1 (Kubus):</strong><br>
+          Tentukan luas permukaan kubus yang memiliki panjang sisi $5\text{ cm}$!
+        </li>
+        <li>
+          <strong>Soal 2 (Balok):</strong><br>
+          Tentukan luas permukaan balok dengan ukuran panjang alas $4\text{ cm}$, lebar alas $5\text{ cm}$, dan tinggi $6\text{ cm}$!
+        </li>
+      </ol>
+
+      <!-- KOTAK PENGUMPULAN TUGAS -->
+      <div class="task-notice-box">
+        <p>📝 Sudah selesai mengerjakan latihan di buku tulismu?</p>
+        <a href="tugas.html" class="btn-submit-bottom">
+          <span>📤</span>
+          <span>Kirim Lembar Tugas Sekarang</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="portal-footer">
+      <p><strong>Portal Matematika Ceria</strong> • SMP Negeri 5 Muara Siram</p>
+      <p style="margin-top:4px;font-size:0.75rem;">Guru Pengampu: Bpk. Supianto, S.Pd.,Gr. • Kurikulum Merdeka</p>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const drawer = document.getElementById('menuDrawer');
+      drawer.classList.toggle('show');
+    }
+
+    document.addEventListener('click', function(e) {
+      const drawer = document.getElementById('menuDrawer');
+      const btn = document.getElementById('menuToggleBtn');
+      if (drawer && btn && !drawer.contains(e.target) && !btn.contains(e.target)) {
+        drawer.classList.remove('show');
+      }
+    });
+  </script>
+
+</body>
+</html>

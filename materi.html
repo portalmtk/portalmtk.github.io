@@ -522,6 +522,21 @@
         });
       }
 
+      // 1b. Tambahkan Materi Resmi Khusus Kelas IX (Luas Permukaan Kubus dan Balok)
+      if (selectedMateriKelas === "IX") {
+        items.push({
+          id: "resmi-kubus-balok",
+          kelas: "Kelas IX",
+          pertemuan: 1,
+          judul: "Luas Permukaan Bangun Ruang Sisi Datar: Kubus dan Balok",
+          deskripsi: "Konsep luas permukaan bangun ruang sisi datar, rumus luas permukaan kubus dan balok, contoh soal pembahasan, serta latihan mandiri.",
+          fileUrl: "materi_luas_permukaan_kubus_balok.html",
+          guru: "Supianto, S.Pd.,Gr.",
+          tanggal: "Kurikulum Merdeka",
+          isLocalPage: true
+        });
+      }
+
       // 2. Fetch materi tambahan dari Supabase
       try {
         const url = `${SUPABASE_URL}/rest/v1/materi_pelajaran?kelas=eq.${encodeURIComponent("Kelas " + selectedMateriKelas)}&order=pertemuan.asc,id.desc`;
