@@ -3,36 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Belajar Matematika - SMP Negeri 5 Muara Siram</title>
-  <meta name="description" content="Portal Pembelajaran Matematika SMP Negeri 5 Muara Siram: Menu Belajar, Materi Siap Baca, Kirim Tugas, dan Rekap Nilai.">
+  <title>Portal Matematika Ceria - SMP Negeri 5 Muara Siram</title>
+  <meta name="description" content="Portal Pembelajaran Matematika Interaktif dan Ceria SMP Negeri 5 Muara Siram bersama Bpk. Supianto, S.Pd.,Gr.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --primary: #4f46e5;
-      --primary-hover: #4338ca;
-      --primary-glow: rgba(79, 70, 229, 0.35);
-      --bg: #0b0f19;
-      --card-bg: #151d2f;
-      --card-border: #222f46;
-      --text: #f8fafc;
+      --bg: #0c1222;
+      --card-bg: #141e34;
+      --card-border: #233252;
+      --text: #ffffff;
       --text-muted: #94a3b8;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --gold: #fbbf24;
-      --input-bg: #0c121e;
-      --math-accent: #38bdf8;
+      --fun-purple: #8b5cf6;
+      --fun-indigo: #6366f1;
+      --fun-coral: #ff5e62;
+      --fun-orange: #ff9966;
+      --fun-green: #10b981;
+      --fun-yellow: #fbbf24;
+      --fun-blue: #38bdf8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px 14px 60px 14px; display: flex; justify-content: center; }
-    .container { width: 100%; max-width: 640px; }
+    body {
+      background: radial-gradient(circle at top, #16203a 0%, var(--bg) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 16px 14px 60px 14px;
+      display: flex;
+      justify-content: center;
+    }
+    .container { width: 100%; max-width: 620px; }
 
-    /* Sticky Navigation Container & Navbar */
+    /* Top Sticky Bar */
     .sticky-nav-container {
       position: sticky;
       top: 10px;
@@ -43,56 +48,54 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(21, 29, 47, 0.96);
+      background: rgba(20, 30, 52, 0.95);
       border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 10px 14px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      border-radius: 18px;
+      padding: 10px 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
     }
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
       color: inherit;
     }
     .brand-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: rgba(79, 70, 229, 0.2);
-      border: 1px solid rgba(79, 70, 229, 0.4);
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
     }
     .brand-text-title {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: #fff;
+      font-size: 0.98rem;
+      font-weight: 900;
       letter-spacing: -0.01em;
-      line-height: 1.1;
+      background: linear-gradient(90deg, #ffffff, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .brand-text-sub {
-      font-size: 0.7rem;
-      color: var(--math-accent);
-      font-weight: 700;
-      text-transform: uppercase;
+      font-size: 0.72rem;
+      color: var(--fun-yellow);
+      font-weight: 800;
       letter-spacing: 0.05em;
     }
 
-    /* Menu Toggle Button */
     .btn-menu-toggle {
-      background: rgba(79, 70, 229, 0.15);
+      background: rgba(99, 102, 241, 0.2);
       color: #fff;
-      border: 1px solid rgba(79, 70, 229, 0.35);
-      border-radius: 10px;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: 12px;
       padding: 8px 14px;
       font-size: 0.85rem;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -100,25 +103,24 @@
       transition: all 0.2s;
     }
     .btn-menu-toggle:hover {
-      background: var(--primary);
+      background: var(--fun-indigo);
+      transform: scale(1.05);
     }
 
-    /* Modern Sticky Dropdown Drawer Menu */
     .menu-drawer {
       display: none;
-      background: rgba(21, 29, 47, 0.98);
-      border: 1px solid rgba(79, 70, 229, 0.35);
-      border-radius: 18px;
+      background: rgba(20, 30, 52, 0.98);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: 20px;
       padding: 12px;
       margin-top: 8px;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      animation: fadeInDown 0.25s ease;
+      animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(-10px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
     .menu-drawer-grid {
       display: grid;
@@ -130,228 +132,292 @@
     }
     .menu-item-btn {
       padding: 12px 14px;
-      border-radius: 12px;
-      background: var(--input-bg);
+      border-radius: 14px;
+      background: #0d1527;
       border: 1px solid var(--card-border);
-      color: var(--text);
-      font-size: 0.86rem;
-      font-weight: 700;
-      cursor: pointer;
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 800;
       display: flex;
       align-items: center;
       gap: 10px;
       transition: all 0.2s;
-      text-align: left;
       text-decoration: none;
     }
     .menu-item-btn:hover {
-      border-color: var(--primary);
-      background: rgba(79, 70, 229, 0.1);
+      border-color: var(--fun-indigo);
+      background: rgba(99, 102, 241, 0.15);
+      transform: translateY(-2px);
     }
     .menu-item-btn.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 4px 14px var(--primary-glow);
+      background: linear-gradient(135deg, var(--fun-indigo), var(--fun-purple));
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
     }
 
-    /* Hero Banner */
-    .hero-box {
-      text-align: center;
-      background: linear-gradient(180deg, rgba(79, 70, 229, 0.12) 0%, rgba(21, 29, 47, 0.8) 100%);
-      border: 1px solid var(--card-border);
-      border-radius: 22px;
+    /* Welcome Hero Gamified Card */
+    .hero-gamified {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      border: 2px solid rgba(99, 102, 241, 0.3);
+      border-radius: 24px;
       padding: 24px 20px;
       margin-bottom: 22px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.45);
     }
-    .header-badge {
-      display: inline-block;
-      background: rgba(56, 189, 248, 0.12);
-      color: var(--math-accent);
-      font-size: 0.75rem;
+    .hero-gamified::before {
+      content: "✨";
+      position: absolute;
+      top: -10px;
+      right: 15px;
+      font-size: 5rem;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+    .hero-top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(251, 191, 36, 0.18);
+      color: var(--fun-yellow);
+      font-size: 0.76rem;
       font-weight: 800;
-      padding: 5px 14px;
+      padding: 4px 12px;
       border-radius: 999px;
-      margin-bottom: 10px;
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      margin-bottom: 12px;
     }
-    .hero-box h1 {
-      font-size: 1.55rem;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.02em;
+    .hero-title {
+      font-size: 1.6rem;
+      font-weight: 900;
       line-height: 1.25;
+      letter-spacing: -0.02em;
     }
-    .hero-guru {
-      font-size: 0.85rem;
-      color: #cbd5e1;
-      font-weight: 700;
-      margin-top: 6px;
+    .hero-title span {
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .hero-desc {
-      color: var(--text-muted);
+    .hero-teacher-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      background: rgba(255,255,255,0.06);
+      padding: 6px 14px;
+      border-radius: 12px;
       font-size: 0.82rem;
-      margin-top: 8px;
+      font-weight: 700;
+      color: #cbd5e1;
+    }
+    .hero-motto {
+      margin-top: 12px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
       line-height: 1.45;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
-    /* Section Title */
-    .section-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #fff;
+    /* Section Headings */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 900;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .section-title span {
-      font-size: 1.2rem;
-    }
 
-    /* Quick Menu Grid */
-    .portal-menu-grid {
+    /* Gamified Quest Cards Grid */
+    .quest-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
       margin-bottom: 26px;
     }
     @media (max-width: 440px) {
-      .portal-menu-grid { grid-template-columns: 1fr; }
+      .quest-grid { grid-template-columns: 1fr; }
     }
 
-    .menu-card {
+    .quest-card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 18px 16px;
+      border: 1.5px solid var(--card-border);
+      border-radius: 20px;
+      padding: 20px 16px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all 0.25s ease;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
     }
-    .menu-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--primary);
-      box-shadow: 0 10px 24px rgba(79, 70, 229, 0.25);
+    .quest-card:hover {
+      transform: translateY(-5px) scale(1.02);
     }
-    .menu-card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+
+    .qc-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       margin-bottom: 12px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.3);
     }
-    .menu-card-title {
-      font-size: 0.98rem;
+    .qc-badge {
+      font-size: 0.68rem;
       font-weight: 800;
-      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       margin-bottom: 4px;
+      display: block;
     }
-    .menu-card-desc {
+    .qc-title {
+      font-size: 1.05rem;
+      font-weight: 900;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+    .qc-desc {
       font-size: 0.78rem;
       color: var(--text-muted);
-      line-height: 1.4;
-      margin-bottom: 12px;
+      line-height: 1.38;
+      margin-bottom: 14px;
     }
-    .menu-card-action {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--math-accent);
-      display: flex;
+    .qc-btn {
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
       align-items: center;
-      gap: 4px;
-    }
-
-    /* Cards Warna Khusus */
-    .mc-tugas .menu-card-icon { background: rgba(79, 70, 229, 0.2); border: 1px solid rgba(79, 70, 229, 0.4); }
-    .mc-nilai .menu-card-icon { background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); }
-    .mc-jadwal .menu-card-icon { background: rgba(56, 189, 248, 0.2); border: 1px solid rgba(56, 189, 248, 0.4); }
-    .mc-materi .menu-card-icon { background: rgba(245, 158, 11, 0.2); border: 1px solid rgba(245, 158, 11, 0.4); }
-
-    /* Featured Materi Box */
-    .featured-materi-box {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 22px;
-      margin-bottom: 24px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-    }
-    .materi-featured-card {
-      background: var(--input-bg);
-      border: 1px solid var(--card-border);
-      border-left: 4px solid var(--success);
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 12px;
+      gap: 6px;
+      border-radius: 10px;
+      padding: 6px 12px;
+      width: fit-content;
       transition: all 0.2s;
     }
-    .materi-featured-card:hover {
-      border-color: rgba(16, 185, 129, 0.6);
-      transform: translateY(-2px);
+
+    /* Varian Warna Kartu */
+    .card-tugas { border-color: rgba(99, 102, 241, 0.4); }
+    .card-tugas:hover { border-color: var(--fun-indigo); box-shadow: 0 12px 28px rgba(99, 102, 241, 0.35); }
+    .card-tugas .qc-icon-wrap { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+    .card-tugas .qc-badge { color: #a5b4fc; }
+    .card-tugas .qc-btn { background: rgba(99, 102, 241, 0.2); color: #c7d2fe; }
+
+    .card-nilai { border-color: rgba(16, 185, 129, 0.4); }
+    .card-nilai:hover { border-color: var(--fun-green); box-shadow: 0 12px 28px rgba(16, 185, 129, 0.35); }
+    .card-nilai .qc-icon-wrap { background: linear-gradient(135deg, #059669, #10b981); }
+    .card-nilai .qc-badge { color: #6ee7b7; }
+    .card-nilai .qc-btn { background: rgba(16, 185, 129, 0.2); color: #a7f3d0; }
+
+    .card-jadwal { border-color: rgba(56, 189, 248, 0.4); }
+    .card-jadwal:hover { border-color: var(--fun-blue); box-shadow: 0 12px 28px rgba(56, 189, 248, 0.35); }
+    .card-jadwal .qc-icon-wrap { background: linear-gradient(135deg, #0284c7, #38bdf8); }
+    .card-jadwal .qc-badge { color: #7dd3fc; }
+    .card-jadwal .qc-btn { background: rgba(56, 189, 248, 0.2); color: #bae6fd; }
+
+    .card-materi { border-color: rgba(245, 158, 11, 0.4); }
+    .card-materi:hover { border-color: var(--fun-yellow); box-shadow: 0 12px 28px rgba(245, 158, 11, 0.35); }
+    .card-materi .qc-icon-wrap { background: linear-gradient(135deg, #d97706, #f59e0b); }
+    .card-materi .qc-badge { color: #fde68a; }
+    .card-materi .qc-btn { background: rgba(245, 158, 11, 0.2); color: #fef08a; }
+
+    /* Featured Modul Pembelajaran */
+    .featured-card-wrapper {
+      background: var(--card-bg);
+      border: 2px solid rgba(16, 185, 129, 0.35);
+      border-radius: 22px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.4);
+      position: relative;
     }
-    .materi-tag-badge {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--success);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      margin-bottom: 8px;
-    }
-    .materi-item-title {
-      font-size: 1.05rem;
-      font-weight: 800;
+    .badge-featured {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(90deg, #10b981, #059669);
       color: #fff;
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
+    .modul-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.35;
       margin-bottom: 6px;
     }
-    .materi-item-meta {
-      font-size: 0.78rem;
-      color: var(--math-accent);
-      font-weight: 700;
-      margin-bottom: 10px;
+    .modul-meta-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
     }
-    .materi-item-desc {
+    .meta-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      color: #93c5fd;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .modul-desc {
       font-size: 0.82rem;
       color: var(--text-muted);
       line-height: 1.45;
       margin-bottom: 16px;
     }
-    .btn-open-materi {
-      display: inline-flex;
+    .btn-launch-materi {
+      display: flex;
       align-items: center;
-      gap: 6px;
-      background: var(--primary);
-      color: #fff;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #10b981, #047857);
+      color: white;
       text-decoration: none;
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-size: 0.86rem;
-      font-weight: 700;
-      box-shadow: 0 4px 14px var(--primary-glow);
-      transition: all 0.2s;
+      padding: 13px 20px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+      transition: all 0.25s;
     }
-    .btn-open-materi:hover {
-      background: var(--primary-hover);
-      transform: translateY(-1px);
+    .btn-launch-materi:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(16, 185, 129, 0.6);
+      filter: brightness(1.1);
     }
 
+    /* Daily Math Tip Widget */
+    .math-tip-box {
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px dashed rgba(99, 102, 241, 0.35);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .tip-icon { font-size: 1.8rem; line-height: 1; }
+    .tip-title { font-size: 0.88rem; font-weight: 800; color: #a5b4fc; margin-bottom: 2px; }
+    .tip-text { font-size: 0.8rem; color: #cbd5e1; line-height: 1.4; }
+
     /* Footer */
-    .footer { text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 24px; }
+    .footer { text-align: center; font-size: 0.75rem; color: var(--text-muted); }
   </style>
 </head>
 <body>
@@ -373,7 +439,7 @@
         </button>
       </div>
 
-      <!-- MODERN TOGGLE MENU DRAWER -->
+      <!-- MODERN MENU DRAWER -->
       <div id="menuDrawer" class="menu-drawer">
         <div class="menu-drawer-grid">
           <a href="index.html" class="menu-item-btn active">
@@ -395,89 +461,113 @@
       </div>
     </div>
 
-    <!-- HERO PROFILE GURU & PORTAL -->
-    <div class="hero-box">
-      <div class="header-badge">SMP NEGERI 5 MUARA SIRAM</div>
-      <h1>PORTAL BELAJAR MATEMATIKA</h1>
-      <div class="hero-guru">👨‍🏫 Guru Pengampu: Bpk. Supianto, S.Pd.,Gr.</div>
-      <p class="hero-desc">
-        Pusat pembelajaran digital terpadu untuk pengumpulan tugas, pengecekan nilai transparan, jadwal pelajaran, dan modul materi siap belajar.
+    <!-- WELCOME GAMIFIED HERO BANNER -->
+    <div class="hero-gamified">
+      <div class="hero-top-badge">
+        <span>⭐</span> Portal Belajar Interaktif 2026
+      </div>
+      <h1 class="hero-title">
+        Selamat Datang,<br>
+        <span>Matematikawan Muda!</span> 🚀
+      </h1>
+      <div class="hero-teacher-badge">
+        <span>👨‍🏫</span> Guru Pengampu: Bpk. Supianto, S.Pd.,Gr.
+      </div>
+      <p class="hero-motto">
+        Selesaikan tugas tepat waktu, raih nilai terbaikmu, dan taklukkan rumus matematika dengan mudah dan menyenangkan!
       </p>
     </div>
 
-    <!-- SECTION: MENU UTAMA PORTAL -->
-    <div class="section-title">
-      <span>🧭</span> Menu Navigasi Portal
+    <!-- MISI BELAJAR / MENU UTAMA -->
+    <div class="section-header">
+      <div class="section-title">
+        <span>🧭</span> Pilih Misi Belajarmu:
+      </div>
     </div>
 
-    <div class="portal-menu-grid">
-      <!-- 1. KIRIM TUGAS -->
-      <a href="tugas.html" class="menu-card mc-tugas">
+    <div class="quest-grid">
+      <!-- MISI 1: KIRIM TUGAS -->
+      <a href="tugas.html" class="quest-card card-tugas">
         <div>
-          <div class="menu-card-icon">📤</div>
-          <div class="menu-card-title">Kirim Tugas MTK</div>
-          <div class="menu-card-desc">Unggah foto lembar jawaban tugas mandiri Kelas VII, VIII, dan IX.</div>
+          <div class="qc-icon-wrap">📤</div>
+          <span class="qc-badge">Misi 01</span>
+          <h3 class="qc-title">Kirim Tugas</h3>
+          <p class="qc-desc">Ambil foto jawaban tugasmu lalu kirim ke database guru.</p>
         </div>
-        <div class="menu-card-action">Buka Form Tugas &rarr;</div>
+        <div class="qc-btn">Setor Tugas &rarr;</div>
       </a>
 
-      <!-- 2. REKAP & NILAI -->
-      <a href="nilai.html" class="menu-card mc-nilai">
+      <!-- MISI 2: CEK NILAI -->
+      <a href="nilai.html" class="quest-card card-nilai">
         <div>
-          <div class="menu-card-icon">📊</div>
-          <div class="menu-card-title">Rekap &amp; Cek Nilai</div>
-          <div class="menu-card-desc">Cek status tugas terkumpul dan nilai hasil koreksi guru.</div>
+          <div class="qc-icon-wrap">🏆</div>
+          <span class="qc-badge">Papan Skor</span>
+          <h3 class="qc-title">Rekap &amp; Nilai</h3>
+          <p class="qc-desc">Cek hasil koreksi tugas dan perolehan bintang nilaimu.</p>
         </div>
-        <div class="menu-card-action">Lihat Rekap Nilai &rarr;</div>
+        <div class="qc-btn">Lihat Nilai &rarr;</div>
       </a>
 
-      <!-- 3. JADWAL -->
-      <a href="jadwal.html" class="menu-card mc-jadwal">
+      <!-- MISI 3: JADWAL -->
+      <a href="jadwal.html" class="quest-card card-jadwal">
         <div>
-          <div class="menu-card-icon">📅</div>
-          <div class="menu-card-title">Jadwal Pelajaran</div>
-          <div class="menu-card-desc">Jadwal tatap muka resmi matematika 4 JP per minggu setiap kelas.</div>
+          <div class="qc-icon-wrap">⏰</div>
+          <span class="qc-badge">Agenda</span>
+          <h3 class="qc-title">Jadwal MTK</h3>
+          <p class="qc-desc">Lihat jadwal tatap muka 4 JP per minggu di kelasmu.</p>
         </div>
-        <div class="menu-card-action">Cek Jadwal &rarr;</div>
+        <div class="qc-btn">Cek Jadwal &rarr;</div>
       </a>
 
-      <!-- 4. PUSAT MATERI -->
-      <a href="materi.html" class="menu-card mc-materi">
+      <!-- MISI 4: PUSAT MATERI -->
+      <a href="materi.html" class="quest-card card-materi">
         <div>
-          <div class="menu-card-icon">📚</div>
-          <div class="menu-card-title">Pusat Semua Materi</div>
-          <div class="menu-card-desc">Daftar lengkap modul, LKS, dan bahan ajar matematika per pertemuan.</div>
+          <div class="qc-icon-wrap">📚</div>
+          <span class="qc-badge">Perpustakaan</span>
+          <h3 class="qc-title">Semua Modul</h3>
+          <p class="qc-desc">Jelajahi seluruh modul, latihan LKS, dan materi kelas.</p>
         </div>
-        <div class="menu-card-action">Buka Pusat Materi &rarr;</div>
+        <div class="qc-btn">Buka Modul &rarr;</div>
       </a>
     </div>
 
-    <!-- SECTION: MATERI SIAP DIBACA -->
-    <div class="section-title">
-      <span>📖</span> Materi Pembelajaran Siap Dibuka
+    <!-- MATERI AKTIF SIAP DIBACA -->
+    <div class="section-header">
+      <div class="section-title">
+        <span>📖</span> Modul Siap Dibaca Sekarang:
+      </div>
     </div>
 
-    <div class="featured-materi-box">
-      <!-- KARTU 1: PERKALIAN BENTUK AKAR (KELAS VIII) -->
-      <div class="materi-featured-card">
-        <span class="materi-tag-badge">🔥 Materi Aktif • Kelas VIII</span>
-        <div class="materi-item-title">Operasi Aljabar Bentuk Akar: Perkalian Bentuk Akar</div>
-        <div class="materi-item-meta">Matematika Kelas VIII &bull; Bab Bentuk Akar &bull; Kurikulum Merdeka</div>
-        <p class="materi-item-desc">
-          Pelajari konsep perkalian bentuk akar melalui luas bangun persegi panjang, sifat umum perkalian koefisien, teknik penyederhanaan hasil perkalian, contoh soal bertahap, dan soal kontekstual.
-        </p>
-        <a href="materi_perkalian_bentuk_akar.html" class="btn-open-materi">
-          📖 Baca &amp; Pelajari Materi Sekarang &rarr;
-        </a>
+    <div class="featured-card-wrapper">
+      <span class="badge-featured">
+        <span>🔥</span> Modul Aktif Siap Belajar
+      </span>
+      <h2 class="modul-title">Operasi Aljabar Bentuk Akar: Perkalian Bentuk Akar</h2>
+      
+      <div class="modul-meta-tags">
+        <span class="meta-tag">Kelas VIII</span>
+        <span class="meta-tag">Bab Bentuk Akar</span>
+        <span class="meta-tag">Kurikulum Merdeka</span>
+        <span class="meta-tag">⏱️ 10 Menit Baca</span>
       </div>
 
-      <!-- KARTU 2: LINK PUSAT MODUL MATERI LENGKAP -->
-      <div style="background:var(--input-bg);border:1px dashed var(--card-border);border-radius:14px;padding:16px;text-align:center;margin-top:10px;">
-        <div style="font-size:0.88rem;font-weight:700;color:#fff;">Mencari modul atau materi pertemuan lainnya?</div>
-        <p style="font-size:0.78rem;color:var(--text-muted);margin:4px 0 12px 0;">Modul pembelajaran Kelas VII, VIII, dan IX dapat dilihat langsung di pusat materi.</p>
-        <a href="materi.html" style="color:var(--math-accent);text-decoration:none;font-size:0.82rem;font-weight:700;">
-          📚 Lihat Semua Modul Pembelajaran &rarr;
-        </a>
+      <p class="modul-desc">
+        Pahami cara mengalikan bentuk akar $a\sqrt{p} \times b\sqrt{q}$, trik menyederhanakan hasil perkalian akar, contoh pembahasan langkah demi langkah, serta soal kontekstual luas bidang.
+      </p>
+
+      <a href="materi_perkalian_bentuk_akar.html" class="btn-launch-materi">
+        <span>🚀</span> Buka &amp; Pelajari Modul Ini Sekarang &rarr;
+      </a>
+    </div>
+
+    <!-- FAKTA / TIPS SERU MATEMATIKA -->
+    <div class="math-tip-box">
+      <div class="tip-icon">💡</div>
+      <div>
+        <div class="tip-title">Tips Kilat Matematika:</div>
+        <div class="tip-text">
+          Ingat sifat sakti ini: <strong>$\sqrt{a} \times \sqrt{b} = \sqrt{a \times b}$</strong>. Kalikan angka di dalam akar, lalu sederhanakan jika ada bilangan kuadrat sempurna ($4, 9, 16, 25, \dots$)!
+        </div>
       </div>
     </div>
 
