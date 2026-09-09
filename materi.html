@@ -12,24 +12,30 @@
   
   <style>
     :root {
-      --primary: #4f46e5;
-      --primary-hover: #4338ca;
-      --primary-glow: rgba(79, 70, 229, 0.35);
-      --bg: #0b0f19;
-      --card-bg: #151d2f;
-      --card-border: #222f46;
-      --text: #f8fafc;
+      --bg: #0c1222;
+      --card-bg: #141e34;
+      --card-border: #233252;
+      --text: #ffffff;
       --text-muted: #94a3b8;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --gold: #fbbf24;
-      --input-bg: #0c121e;
+      --fun-purple: #8b5cf6;
+      --fun-indigo: #6366f1;
+      --fun-green: #10b981;
+      --fun-yellow: #fbbf24;
+      --fun-blue: #38bdf8;
+      --input-bg: #0d1527;
+      --primary: #f59e0b;
       --math-accent: #38bdf8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px 14px 60px 14px; display: flex; justify-content: center; }
+    body {
+      background: radial-gradient(circle at top, #16203a 0%, var(--bg) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 16px 14px 60px 14px;
+      display: flex;
+      justify-content: center;
+    }
     .container { width: 100%; max-width: 620px; }
 
     /* Sticky Navigation Container & Navbar */
@@ -37,62 +43,61 @@
       position: sticky;
       top: 10px;
       z-index: 300;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     .top-navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(21, 29, 47, 0.96);
+      background: rgba(20, 30, 52, 0.95);
       border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 10px 14px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      border-radius: 18px;
+      padding: 10px 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
     }
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
       color: inherit;
     }
     .brand-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: rgba(79, 70, 229, 0.2);
-      border: 1px solid rgba(79, 70, 229, 0.4);
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
     }
     .brand-text-title {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: #fff;
+      font-size: 0.98rem;
+      font-weight: 900;
       letter-spacing: -0.01em;
-      line-height: 1.1;
+      background: linear-gradient(90deg, #ffffff, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .brand-text-sub {
-      font-size: 0.7rem;
-      color: var(--math-accent);
-      font-weight: 700;
-      text-transform: uppercase;
+      font-size: 0.72rem;
+      color: var(--fun-yellow);
+      font-weight: 800;
       letter-spacing: 0.05em;
     }
 
     /* Menu Toggle Button */
     .btn-menu-toggle {
-      background: rgba(79, 70, 229, 0.15);
+      background: rgba(99, 102, 241, 0.2);
       color: #fff;
-      border: 1px solid rgba(79, 70, 229, 0.35);
-      border-radius: 10px;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: 12px;
       padding: 8px 14px;
       font-size: 0.85rem;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -100,25 +105,25 @@
       transition: all 0.2s;
     }
     .btn-menu-toggle:hover {
-      background: var(--primary);
+      background: var(--fun-indigo);
+      transform: scale(1.05);
     }
 
     /* Sticky Dropdown Drawer Menu */
     .menu-drawer {
       display: none;
-      background: rgba(21, 29, 47, 0.98);
-      border: 1px solid rgba(79, 70, 229, 0.35);
-      border-radius: 18px;
+      background: rgba(20, 30, 52, 0.98);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: 20px;
       padding: 12px;
       margin-top: 8px;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      animation: fadeInDown 0.25s ease;
+      animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(-10px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
     .menu-drawer-grid {
       display: grid;
@@ -130,13 +135,12 @@
     }
     .menu-item-btn {
       padding: 12px 14px;
-      border-radius: 12px;
-      background: var(--input-bg);
+      border-radius: 14px;
+      background: #0d1527;
       border: 1px solid var(--card-border);
-      color: var(--text);
-      font-size: 0.86rem;
-      font-weight: 700;
-      cursor: pointer;
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 800;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -145,87 +149,128 @@
       text-decoration: none;
     }
     .menu-item-btn:hover {
-      border-color: var(--primary);
-      background: rgba(79, 70, 229, 0.1);
+      border-color: var(--fun-indigo);
+      background: rgba(99, 102, 241, 0.15);
+      transform: translateY(-2px);
     }
     .menu-item-btn.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 4px 14px var(--primary-glow);
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
     }
 
-    /* Header Banner */
-    .header { text-align: center; margin-bottom: 18px; }
-    .header-badge { display: inline-block; background: rgba(56, 189, 248, 0.12); color: var(--math-accent); font-size: 0.75rem; font-weight: 800; padding: 4px 14px; border-radius: 999px; margin-bottom: 8px; border: 1px solid rgba(56, 189, 248, 0.25); }
-    .header h1 { font-size: 1.48rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
-    .header p { color: var(--text-muted); font-size: 0.82rem; margin-top: 4px; line-height: 1.4; }
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(20, 30, 52, 0.7) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 24px;
+      padding: 22px 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 158, 11, 0.2);
+      color: #fde68a;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .page-sub {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      margin-top: 6px;
+    }
 
     /* Card */
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 22px;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+      border: 1.5px solid var(--card-border);
+      border-radius: 24px;
+      padding: 22px 20px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.45);
       margin-bottom: 20px;
     }
     .form-group { margin-bottom: 18px; }
-    label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+    label { display: block; font-size: 0.88rem; font-weight: 800; margin-bottom: 10px; color: #fff; }
 
     /* Class Pills Selector */
     .class-pills { display: flex; gap: 8px; margin-bottom: 4px; }
     .class-pill {
       flex: 1;
       text-align: center;
-      padding: 10px 6px;
-      border-radius: 12px;
+      padding: 12px 6px;
+      border-radius: 14px;
       background: var(--input-bg);
-      border: 1px solid var(--card-border);
+      border: 1.5px solid var(--card-border);
       color: var(--text-muted);
-      font-size: 0.85rem;
-      font-weight: 700;
+      font-size: 0.88rem;
+      font-weight: 800;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+    .class-pill:hover { border-color: var(--fun-yellow); color: #fff; }
     .class-pill.active {
-      background: rgba(79, 70, 229, 0.2);
-      border-color: var(--primary);
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      border-color: #fde68a;
       color: #fff;
-      box-shadow: 0 0 0 1px var(--primary);
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45);
+      transform: translateY(-2px);
     }
 
     .recap-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 8px; flex-wrap: wrap; }
-    .btn-action-sm { background: #1e293b; color: #a5b4fc; border: 1px solid var(--card-border); border-radius: 8px; padding: 6px 12px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; transition: all 0.15s; text-decoration: none; }
-    .btn-action-sm:hover { background: #2b3952; color: #fff; }
+    .btn-action-sm { background: #1e293b; color: #a5b4fc; border: 1px solid var(--card-border); border-radius: 10px; padding: 7px 14px; font-size: 0.8rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; text-decoration: none; }
+    .btn-action-sm:hover { background: #2b3952; color: #fff; transform: translateY(-1px); }
     .btn-action-sm.active { background: #10b981; color: white; border-color: #10b981; }
 
     /* Materi Cards */
-    .materi-card { background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 18px; margin-bottom: 14px; transition: border-color 0.2s, transform 0.15s; }
-    .materi-card:hover { border-color: rgba(79, 70, 229, 0.5); transform: translateY(-2px); }
+    .materi-card {
+      background: var(--input-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 18px;
+      padding: 20px 18px;
+      margin-bottom: 14px;
+      transition: all 0.25s;
+    }
+    .materi-card:hover {
+      border-color: rgba(245, 158, 11, 0.6);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+    }
     .materi-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 8px; }
-    .badge-pertemuan { font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 999px; background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
-    .materi-title { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
-    .materi-mapel-info { font-size: 0.78rem; color: var(--math-accent); font-weight: 700; margin-bottom: 8px; }
-    .materi-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.45; margin-bottom: 14px; }
-    .materi-actions { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); }
-    .materi-meta { font-size: 0.72rem; color: var(--text-muted); }
-    .btn-download-materi { padding: 8px 16px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 0.84rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px var(--primary-glow); }
-    .btn-download-materi:hover { background: var(--primary-hover); }
+    .badge-pertemuan { font-size: 0.74rem; font-weight: 900; padding: 4px 12px; border-radius: 999px; background: rgba(245, 158, 11, 0.2); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .materi-title { font-size: 1.1rem; font-weight: 900; color: #fff; margin-bottom: 4px; }
+    .materi-mapel-info { font-size: 0.8rem; color: var(--math-accent); font-weight: 800; margin-bottom: 8px; }
+    .materi-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.45; margin-bottom: 16px; }
+    .materi-actions { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .materi-meta { font-size: 0.74rem; color: var(--text-muted); }
+    .btn-download-materi { padding: 10px 18px; background: linear-gradient(135deg, #d97706, #f59e0b); color: #fff; border: none; border-radius: 12px; font-size: 0.86rem; font-weight: 800; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4); transition: all 0.2s; }
+    .btn-download-materi:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
     /* Modals */
-    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); z-index: 999; justify-content: center; align-items: center; padding: 14px; }
-    .modal-content { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 20px; position: relative; }
-    .modal-close { position: absolute; top: 14px; right: 14px; background: #1e293b; color: #fff; border: none; font-size: 1.1rem; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    input[type="text"], textarea, select { width: 100%; padding: 12px 14px; border-radius: 12px; background: var(--input-bg); border: 1px solid var(--card-border); color: #fff; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
-    input:focus, textarea:focus { border-color: var(--primary); }
-    .btn-submit { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 0.98rem; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px var(--primary-glow); }
-    .btn-submit:hover:not(:disabled) { background: var(--primary-hover); }
-    .pin-modal-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; max-width: 320px; width: 100%; padding: 24px; text-align: center; }
-    .pin-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
-    .pin-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; }
-    .pin-input { width: 100%; padding: 12px 14px; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 12px; color: #fff; font-size: 1rem; text-align: center; letter-spacing: 4px; font-weight: 700; outline: none; margin-bottom: 12px; }
-    .pin-error { color: #f87171; font-size: 0.82rem; display: none; margin-bottom: 8px; }
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px); z-index: 999; justify-content: center; align-items: center; padding: 14px; }
+    .modal-content { background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 22px; max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 22px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
+    .modal-close { position: absolute; top: 14px; right: 14px; background: #1e293b; color: #fff; border: none; font-size: 1.1rem; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    input[type="text"], input[type="number"], textarea, select { width: 100%; padding: 12px 14px; border-radius: 12px; background: var(--input-bg); border: 1.5px solid var(--card-border); color: #fff; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
+    input:focus, textarea:focus { border-color: var(--fun-yellow); }
+    .btn-submit { width: 100%; padding: 14px; background: linear-gradient(135deg, #d97706, #f59e0b); color: white; border: none; border-radius: 14px; font-size: 0.98rem; font-weight: 900; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4); }
+    .btn-submit:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-1px); }
+    .pin-modal-box { background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 22px; max-width: 330px; width: 100%; padding: 26px; text-align: center; }
+    .pin-title { font-size: 1.2rem; font-weight: 900; margin-bottom: 6px; }
+    .pin-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px; line-height: 1.4; }
+    .pin-input { width: 100%; padding: 14px; background: var(--input-bg); border: 1.5px solid var(--card-border); border-radius: 14px; color: #fff; font-size: 1.1rem; text-align: center; letter-spacing: 4px; font-weight: 800; outline: none; margin-bottom: 14px; }
+    .pin-error { color: #f87171; font-size: 0.82rem; display: none; margin-bottom: 8px; font-weight: 700; }
 
     /* Footer */
     .footer { text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 24px; }
@@ -272,11 +317,13 @@
       </div>
     </div>
 
-    <!-- BANNER IDENTITAS GURU & MAPEL -->
-    <div class="header">
-      <div class="header-badge">GURU PENGAMPU: SUPIANTO, S.Pd.,Gr.</div>
-      <h1>MATERI &amp; MODUL BELAJAR</h1>
-      <p>Modul materi matematika, latihan mandiri, dan bahan bacaan per pertemuan</p>
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-badge">
+        <span>📚</span> Perpustakaan Modul &amp; LKS
+      </div>
+      <h1 class="page-title">MATERI &amp; MODUL BELAJAR</h1>
+      <p class="page-sub">Kumpulan modul resmi, rangkuman rumus, dan bahan ajar matematika per pertemuan</p>
     </div>
 
     <!-- CARD MATERI -->

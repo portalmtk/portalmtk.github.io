@@ -233,9 +233,30 @@
       border-top: 1px solid #e2e8f0;
       padding-top: 8px;
     }
+    @media print {
+      .no-print { display: none !important; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- BAR NAVIGASI ONLINE (DISEMBUNYIKAN SAAT DICETAK) -->
+  <div class="no-print" style="margin-bottom:14px;background:#0f172a;color:#fff;padding:10px 16px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <a href="materi.html" style="color:#38bdf8;text-decoration:none;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:4px;">
+        ⬅ Kembali ke Modul
+      </a>
+      <span style="color:#475569;">|</span>
+      <a href="index.html" style="color:#94a3b8;text-decoration:none;font-size:12px;font-weight:600;">🏠 Beranda</a>
+      <a href="tugas.html" style="color:#94a3b8;text-decoration:none;font-size:12px;font-weight:600;">📤 Kirim Tugas</a>
+      <a href="nilai.html" style="color:#94a3b8;text-decoration:none;font-size:12px;font-weight:600;">📊 Rekap Nilai</a>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button onclick="window.print()" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-weight:700;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;">
+        🖨️ Cetak LKPD
+      </button>
+    </div>
+  </div>
 
   <!-- KOP LEMBAR KERJA PESERTA DIDIK -->
   <table class="header-table">

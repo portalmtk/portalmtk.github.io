@@ -8,91 +8,94 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --primary: #4f46e5;
-      --primary-hover: #4338ca;
-      --primary-glow: rgba(79, 70, 229, 0.35);
-      --bg: #0b0f19;
-      --card-bg: #151d2f;
-      --card-border: #222f46;
-      --text: #f8fafc;
+      --bg: #0c1222;
+      --card-bg: #141e34;
+      --card-border: #233252;
+      --text: #ffffff;
       --text-muted: #94a3b8;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --gold: #fbbf24;
-      --input-bg: #0c121e;
-      --math-accent: #38bdf8;
+      --fun-purple: #8b5cf6;
+      --fun-indigo: #6366f1;
+      --fun-coral: #ff5e62;
+      --fun-green: #10b981;
+      --fun-yellow: #fbbf24;
+      --fun-blue: #38bdf8;
+      --input-bg: #0d1527;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px 14px 60px 14px; display: flex; justify-content: center; }
+    body {
+      background: radial-gradient(circle at top, #16203a 0%, var(--bg) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 16px 14px 60px 14px;
+      display: flex;
+      justify-content: center;
+    }
     .container { width: 100%; max-width: 620px; }
 
-    /* Sticky Navigation Container & Navbar */
+    /* Top Sticky Bar */
     .sticky-nav-container {
       position: sticky;
       top: 10px;
       z-index: 300;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     .top-navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(21, 29, 47, 0.96);
+      background: rgba(20, 30, 52, 0.95);
       border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 10px 14px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      border-radius: 18px;
+      padding: 10px 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
     }
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
       color: inherit;
     }
     .brand-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: rgba(79, 70, 229, 0.2);
-      border: 1px solid rgba(79, 70, 229, 0.4);
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
     }
     .brand-text-title {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: #fff;
+      font-size: 0.98rem;
+      font-weight: 900;
       letter-spacing: -0.01em;
-      line-height: 1.1;
+      background: linear-gradient(90deg, #ffffff, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .brand-text-sub {
-      font-size: 0.7rem;
-      color: var(--math-accent);
-      font-weight: 700;
-      text-transform: uppercase;
+      font-size: 0.72rem;
+      color: var(--fun-yellow);
+      font-weight: 800;
       letter-spacing: 0.05em;
     }
 
-    /* Menu Toggle Button */
     .btn-menu-toggle {
-      background: rgba(79, 70, 229, 0.15);
+      background: rgba(99, 102, 241, 0.2);
       color: #fff;
-      border: 1px solid rgba(79, 70, 229, 0.35);
-      border-radius: 10px;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: 12px;
       padding: 8px 14px;
       font-size: 0.85rem;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -100,25 +103,24 @@
       transition: all 0.2s;
     }
     .btn-menu-toggle:hover {
-      background: var(--primary);
+      background: var(--fun-indigo);
+      transform: scale(1.05);
     }
 
-    /* Modern Sticky Dropdown Drawer Menu */
     .menu-drawer {
       display: none;
-      background: rgba(21, 29, 47, 0.98);
-      border: 1px solid rgba(79, 70, 229, 0.35);
-      border-radius: 18px;
+      background: rgba(20, 30, 52, 0.98);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: 20px;
       padding: 12px;
       margin-top: 8px;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      animation: fadeInDown 0.25s ease;
+      animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(-10px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
     .menu-drawer-grid {
       display: grid;
@@ -130,150 +132,212 @@
     }
     .menu-item-btn {
       padding: 12px 14px;
-      border-radius: 12px;
-      background: var(--input-bg);
+      border-radius: 14px;
+      background: #0d1527;
       border: 1px solid var(--card-border);
-      color: var(--text);
-      font-size: 0.86rem;
-      font-weight: 700;
-      cursor: pointer;
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 800;
       display: flex;
       align-items: center;
       gap: 10px;
       transition: all 0.2s;
-      text-align: left;
       text-decoration: none;
     }
     .menu-item-btn:hover {
-      border-color: var(--primary);
-      background: rgba(79, 70, 229, 0.1);
+      border-color: var(--fun-indigo);
+      background: rgba(99, 102, 241, 0.15);
+      transform: translateY(-2px);
     }
     .menu-item-btn.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 4px 14px var(--primary-glow);
+      background: linear-gradient(135deg, var(--fun-indigo), var(--fun-purple));
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
     }
 
-    /* Header Banner */
-    .header { text-align: center; margin-bottom: 18px; }
-    .header-badge { display: inline-block; background: rgba(56, 189, 248, 0.12); color: var(--math-accent); font-size: 0.75rem; font-weight: 800; padding: 4px 14px; border-radius: 999px; margin-bottom: 8px; border: 1px solid rgba(56, 189, 248, 0.25); }
-    .header h1 { font-size: 1.48rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
-    .header p { color: var(--text-muted); font-size: 0.82rem; margin-top: 4px; line-height: 1.4; }
-
-    /* Card */
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 22px;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(20, 30, 52, 0.7) 100%);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 24px;
+      padding: 22px 18px;
       margin-bottom: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
-    .form-group { margin-bottom: 18px; }
-    label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+    .page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+    }
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .page-sub {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      margin-top: 6px;
+    }
 
-    /* Class Pills Selector */
-    .class-pills { display: flex; gap: 8px; margin-bottom: 4px; }
+    /* Form Card */
+    .fun-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 24px;
+      padding: 24px 20px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.45);
+      margin-bottom: 24px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--fun-indigo), var(--fun-purple));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.76rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    /* Class Pills */
+    .class-pills { display: flex; gap: 8px; }
     .class-pill {
       flex: 1;
       text-align: center;
-      padding: 10px 6px;
-      border-radius: 12px;
+      padding: 12px 6px;
+      border-radius: 14px;
       background: var(--input-bg);
-      border: 1px solid var(--card-border);
+      border: 1.5px solid var(--card-border);
       color: var(--text-muted);
-      font-size: 0.85rem;
-      font-weight: 700;
+      font-size: 0.88rem;
+      font-weight: 800;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+    .class-pill:hover { border-color: var(--fun-indigo); color: #fff; }
     .class-pill.active {
-      background: rgba(79, 70, 229, 0.2);
-      border-color: var(--primary);
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      border-color: #818cf8;
       color: #fff;
-      box-shadow: 0 0 0 1px var(--primary);
+      box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45);
+      transform: translateY(-2px);
     }
 
-    select, input[type="text"] {
+    /* Select */
+    select {
       width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
       background: var(--input-bg);
-      border: 1px solid var(--card-border);
+      border: 1.5px solid var(--card-border);
       color: #fff;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
+      font-weight: 700;
       outline: none;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
     }
-    select:focus, input:focus { border-color: var(--primary); }
+    select:focus {
+      border-color: var(--fun-indigo);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
     option:disabled { color: #64748b; }
 
-    /* Upload Box & Multi Photo Gallery */
+    /* Upload Box */
     .upload-box {
-      border: 2px dashed var(--card-border);
-      border-radius: 14px;
-      padding: 22px 16px;
+      border: 2px dashed rgba(99, 102, 241, 0.4);
+      border-radius: 18px;
+      padding: 26px 18px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s;
-      background: rgba(12, 18, 30, 0.5);
+      transition: all 0.25s;
+      background: rgba(13, 21, 39, 0.7);
     }
-    .upload-box:hover { border-color: var(--primary); background: rgba(79, 70, 229, 0.06); }
-    .upload-icon { font-size: 2.2rem; margin-bottom: 6px; }
-    .upload-text { font-size: 0.88rem; color: var(--text); font-weight: 600; }
-    .upload-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+    .upload-box:hover {
+      border-color: var(--fun-indigo);
+      background: rgba(99, 102, 241, 0.1);
+      transform: translateY(-2px);
+    }
+    .upload-icon { font-size: 2.6rem; margin-bottom: 8px; }
+    .upload-text { font-size: 0.95rem; color: #fff; font-weight: 800; }
+    .upload-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
 
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 10px; }
-    .gallery-item { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--card-border); background: var(--input-bg); aspect-ratio: 1; }
+    /* Gallery */
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(105px, 1fr)); gap: 10px; margin-top: 12px; }
+    .gallery-item { position: relative; border-radius: 12px; overflow: hidden; border: 1.5px solid var(--card-border); background: var(--input-bg); aspect-ratio: 1; }
     .gallery-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .gallery-item-badge { position: absolute; bottom: 6px; left: 6px; background: rgba(0,0,0,0.75); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
-    .gallery-item-del { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; background: rgba(239, 68, 68, 0.85); color: white; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; cursor: pointer; }
-    .gallery-item-del:hover { transform: scale(1.1); background: var(--danger); }
+    .gallery-item-badge { position: absolute; bottom: 6px; left: 6px; background: rgba(0,0,0,0.8); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 2px 7px; border-radius: 6px; }
+    .gallery-item-del { position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
+    .gallery-item-del:hover { transform: scale(1.15); background: #dc2626; }
 
-    /* Buttons */
-    .btn-submit {
+    /* Submit Button */
+    .btn-submit-glow {
       width: 100%;
-      padding: 14px;
-      background: var(--primary);
+      padding: 16px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
       color: white;
       border: none;
-      border-radius: 12px;
-      font-size: 0.98rem;
-      font-weight: 700;
+      border-radius: 16px;
+      font-size: 1.05rem;
+      font-weight: 900;
       cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 4px 16px var(--primary-glow);
+      transition: all 0.25s;
+      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
-    .btn-submit:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-1px); }
-    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .btn-secondary { width: 100%; padding: 12px; background: #1e293b; color: var(--text); border: 1px solid var(--card-border); border-radius: 12px; font-size: 0.875rem; font-weight: 600; cursor: pointer; margin-top: 8px; }
-    .btn-secondary:hover { background: #283548; }
-    .btn-action-sm { background: #1e293b; color: #a5b4fc; border: 1px solid var(--card-border); border-radius: 8px; padding: 6px 12px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+    .btn-submit-glow:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(79, 70, 229, 0.65);
+      filter: brightness(1.1);
+    }
+    .btn-submit-glow:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-    /* Alerts and spinners */
-    .alert-error { display: none; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-top: 12px; }
-    .loading-spinner { display: none; text-align: center; margin-top: 14px; font-size: 0.85rem; color: var(--text-muted); }
+    .btn-action-sm { background: #1e293b; color: #a5b4fc; border: 1px solid var(--card-border); border-radius: 10px; padding: 6px 12px; font-size: 0.8rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+    .alert-error { display: none; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; padding: 12px 14px; border-radius: 12px; font-size: 0.85rem; margin-top: 14px; }
+    .loading-spinner { display: none; text-align: center; margin-top: 14px; font-size: 0.88rem; color: #93c5fd; font-weight: 700; }
 
-    /* Success Receipt */
+    /* Success Card */
     .success-box { display: none; text-align: center; padding: 10px 4px; }
-    .success-icon-wrap { width: 64px; height: 64px; background: rgba(16, 185, 129, 0.15); border: 2px solid rgba(16, 185, 129, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 14px auto; }
-    .success-title { font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
-    .success-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px; }
-    .receipt-card { background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px; text-align: left; margin-bottom: 18px; }
-    .receipt-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.85rem; }
+    .success-badge-icon { width: 72px; height: 72px; background: linear-gradient(135deg, #059669, #10b981); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.4rem; margin: 0 auto 16px auto; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45); }
+    .success-title { font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+    .receipt-card { background: var(--input-bg); border: 1.5px solid var(--card-border); border-radius: 18px; padding: 18px; text-align: left; margin: 18px 0; }
+    .receipt-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.88rem; }
     .receipt-row:last-child { border-bottom: none; }
-    .receipt-label { color: var(--text-muted); }
-    .receipt-val { font-weight: 700; color: #fff; }
+    .receipt-label { color: var(--text-muted); font-weight: 600; }
+    .receipt-val { font-weight: 800; color: #fff; }
+    .btn-secondary { width: 100%; padding: 13px; background: #1e293b; color: var(--text); border: 1px solid var(--card-border); border-radius: 14px; font-size: 0.9rem; font-weight: 800; cursor: pointer; margin-top: 8px; }
 
-    /* Footer */
     .footer { text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 24px; }
   </style>
 </head>
 <body>
   <div class="container">
     
-    <!-- STICKY NAVBAR & TOGGLE MENU WRAPPER -->
+    <!-- STICKY NAVBAR -->
     <div class="sticky-nav-container">
       <div class="top-navbar">
         <a href="index.html" class="nav-brand">
@@ -289,7 +353,7 @@
         </button>
       </div>
 
-      <!-- MODERN TOGGLE MENU DRAWER -->
+      <!-- MODERN MENU DRAWER -->
       <div id="menuDrawer" class="menu-drawer">
         <div class="menu-drawer-grid">
           <a href="index.html" class="menu-item-btn">
@@ -311,19 +375,21 @@
       </div>
     </div>
 
-    <!-- BANNER IDENTITAS GURU & MAPEL -->
-    <div class="header">
-      <div class="header-badge">GURU PENGAMPU: SUPIANTO, S.Pd.,Gr.</div>
-      <h1>PENGUMPULAN TUGAS</h1>
-      <p>Kirim lembar tugas Matematika mandiri Kelas VII, VIII, dan IX</p>
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-badge">
+        <span>🚀</span> Misi 01 Pembelajaran
+      </div>
+      <h1 class="page-title">KIRIM TUGAS MANDIRI</h1>
+      <p class="page-sub">Kumpulkan foto lembar jawaban tugasmu langsung ke database guru pengampu</p>
     </div>
 
-    <!-- CARD FORM PENGUMPULAN TUGAS -->
-    <div class="card">
+    <!-- FORM CARD -->
+    <div class="fun-card">
       <form id="taskForm" onsubmit="submitForm(event)">
         <!-- 1. PILIH KELAS -->
         <div class="form-group">
-          <label>1. Pilih Kelas Anda:</label>
+          <label class="form-label"><span class="step-num">1</span> Pilih Tingkat Kelasmu:</label>
           <div class="class-pills">
             <button type="button" class="class-pill active" onclick="selectClass('VII', this)">Kelas VII</button>
             <button type="button" class="class-pill" onclick="selectClass('VIII', this)">Kelas VIII</button>
@@ -333,20 +399,20 @@
 
         <!-- 2. PILIH NAMA SISWA -->
         <div class="form-group">
-          <label for="siswaSelect">2. Nama Siswa: <span id="selectLoading" style="font-size:0.75rem;color:var(--text-muted);font-weight:normal;"></span></label>
+          <label class="form-label" for="siswaSelect"><span class="step-num">2</span> Pilih Nama Kamu: <span id="selectLoading" style="font-size:0.75rem;color:var(--text-muted);font-weight:normal;"></span></label>
           <select id="siswaSelect" required>
-            <option value="">-- Pilih Nama Anda --</option>
+            <option value="">-- Ketuk untuk Memilih Nama Anda --</option>
           </select>
         </div>
 
         <!-- 3. MULTI FOTO LEMBAR TUGAS MTK -->
         <div class="form-group">
-          <label>3. Foto Lembar / Buku Tugas Matematika: <span style="color:#818cf8;font-size:0.75rem;font-weight:normal;">(Bisa pilih beberapa foto)</span></label>
+          <label class="form-label"><span class="step-num">3</span> Foto Lembar Tugas: <span style="color:#a5b4fc;font-size:0.76rem;font-weight:normal;">(Bisa ambil beberapa foto)</span></label>
           <div class="upload-box" id="uploadBox" onclick="document.getElementById('fileInput').click()">
             <div id="uploadPlaceholder">
               <div class="upload-icon">📸</div>
-              <div class="upload-text">Pilih Gambar Tugas Matematika / Ambil Foto</div>
-              <div class="upload-sub">Ketuk di sini untuk memilih 1 atau beberapa foto lembar jawaban tugas</div>
+              <div class="upload-text">Ambil Foto / Pilih dari Galeri</div>
+              <div class="upload-sub">Ketuk di sini untuk memilih 1 atau lebih foto lembar tugas</div>
             </div>
           </div>
           <input type="file" id="fileInput" accept="image/*" multiple style="display:none;" onchange="handleFiles(event)">
@@ -354,7 +420,7 @@
           <!-- PREVIEW GALERI MULTI FOTO -->
           <div id="galleryContainer" style="display:none;margin-top:14px;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-              <span id="photoCountBadge" style="font-size:0.8rem;font-weight:700;color:#818cf8;background:rgba(79,70,229,0.15);padding:4px 10px;border-radius:999px;border:1px solid rgba(79,70,229,0.3);">0 Foto</span>
+              <span id="photoCountBadge" style="font-size:0.8rem;font-weight:800;color:#c7d2fe;background:rgba(99,102,241,0.2);padding:5px 12px;border-radius:999px;border:1px solid rgba(99,102,241,0.4);">0 Foto Siap</span>
               <button type="button" class="btn-action-sm" onclick="document.getElementById('fileInput').click()">➕ Tambah Foto Lain</button>
             </div>
             <div id="galleryGrid" class="gallery-grid"></div>
@@ -363,34 +429,38 @@
 
         <div id="alertBox" class="alert-error"></div>
 
-        <button type="submit" id="btnKirim" class="btn-submit">🚀 KIRIM TUGAS MATEMATIKA</button>
-        <div id="loading" class="loading-spinner">⏳ Sedang mengunggah foto tugas ke database...</div>
+        <button type="submit" id="btnKirim" class="btn-submit-glow">
+          <span>🚀</span> SETOR TUGAS SEKARANG ✨
+        </button>
+        <div id="loading" class="loading-spinner">⏳ Mengompresi &amp; mengunggah foto tugas ke database...</div>
       </form>
 
       <!-- LAPORAN TANDA TERIMA PENGIRIMAN -->
       <div id="successCard" class="success-box">
-        <div class="success-icon-wrap">✅</div>
-        <h2 class="success-title">Tugas Matematika Berhasil Terkirim!</h2>
-        <p class="success-desc">Data dan lembar tugas Anda telah tersimpan secara resmi untuk dinilai oleh Bpk. Supianto, S.Pd.,Gr.</p>
+        <div class="success-badge-icon">🎉</div>
+        <h2 class="success-title">Hore, Tugasmu Berhasil Terkirim!</h2>
+        <p style="font-size:0.84rem;color:var(--text-muted);">Data tugas Anda telah tersimpan secara resmi untuk dinilai oleh Bpk. Supianto, S.Pd.,Gr.</p>
         
         <div class="receipt-card">
-          <div class="receipt-row"><span class="receipt-label">Mata Pelajaran:</span><span class="receipt-val" style="color:var(--math-accent);">Matematika</span></div>
-          <div class="receipt-row"><span class="receipt-label">Kelas:</span><span class="receipt-val" id="recKelas" style="color:#818cf8;">-</span></div>
+          <div class="receipt-row"><span class="receipt-label">Mata Pelajaran:</span><span class="receipt-val" style="color:var(--fun-blue);">Matematika</span></div>
+          <div class="receipt-row"><span class="receipt-label">Kelas:</span><span class="receipt-val" id="recKelas" style="color:#a5b4fc;">-</span></div>
           <div class="receipt-row"><span class="receipt-label">No. Absen:</span><span class="receipt-val" id="recNo">-</span></div>
           <div class="receipt-row"><span class="receipt-label">Nama Siswa:</span><span class="receipt-val" id="recNama">-</span></div>
-          <div class="receipt-row"><span class="receipt-label">Foto Tugas:</span><span class="receipt-val" id="recFoto" style="color:#818cf8;">-</span></div>
-          <div class="receipt-row"><span class="receipt-label">Waktu Kirim:</span><span class="receipt-val" id="recWaktu" style="color:var(--success);">-</span></div>
-          <div class="receipt-row"><span class="receipt-label">Status:</span><span class="receipt-val" style="color:var(--success);">Tercatat &amp; Terkunci 🔒</span></div>
+          <div class="receipt-row"><span class="receipt-label">Jumlah Foto:</span><span class="receipt-val" id="recFoto" style="color:var(--fun-yellow);">-</span></div>
+          <div class="receipt-row"><span class="receipt-label">Waktu Kirim:</span><span class="receipt-val" id="recWaktu" style="color:var(--fun-green);">-</span></div>
+          <div class="receipt-row"><span class="receipt-label">Status:</span><span class="receipt-val" style="color:var(--fun-green);">Tercatat &amp; Terkunci 🔒</span></div>
         </div>
 
-        <a href="nilai.html" class="btn-submit" style="display:block;text-align:center;text-decoration:none;margin-bottom:8px;">📊 Buka Halaman Rekap &amp; Nilai</a>
+        <a href="nilai.html" class="btn-submit-glow" style="text-decoration:none;margin-bottom:8px;">
+          <span>🏆</span> Lihat Papan Skor &amp; Nilai &rarr;
+        </a>
         <button class="btn-secondary" onclick="resetFormToNew()">➕ Pilih Siswa Lain</button>
       </div>
     </div>
 
     <!-- FOOTER -->
     <div class="footer">
-      &copy; 2026 SMP Negeri 5 Muara Siram &bull; Portal Matematika
+      &copy; 2026 SMP Negeri 5 Muara Siram &bull; Portal Belajar Matematika
     </div>
 
   </div>
@@ -467,7 +537,7 @@
 
     async function syncCollectedStatus() {
       const selectLoading = document.getElementById("selectLoading");
-      selectLoading.textContent = "(Memeriksa status...)";
+      selectLoading.textContent = "(Sinkronisasi...)";
       try {
         const kelasParam = encodeURIComponent("Kelas " + selectedKelas);
         const res = await fetch(`${SUPABASE_URL}/rest/v1/tugas_siswa?kelas=eq.${kelasParam}&select=nama_siswa`, {
@@ -494,14 +564,14 @@
 
     function renderDropdown() {
       const select = document.getElementById("siswaSelect");
-      select.innerHTML = '<option value="">-- Pilih Nama Anda --</option>';
+      select.innerHTML = '<option value="">-- Ketuk untuk Memilih Nama Anda --</option>';
       const daftar = DATA_KELAS[selectedKelas] || [];
 
       daftar.forEach(s => {
         const opt = document.createElement("option");
         opt.value = JSON.stringify(s);
         const isLocked = collectedSet.has(s.nama.toString().trim().toLowerCase());
-        opt.textContent = `${s.no}. ${s.nama}${isLocked ? ' (Sudah Mengumpulkan)' : ''}`;
+        opt.textContent = `${s.no}. ${s.nama}${isLocked ? ' 🔒 (Sudah Mengumpulkan)' : ''}`;
         if (isLocked) opt.disabled = true;
         select.appendChild(opt);
       });
@@ -570,7 +640,7 @@
       }
 
       cont.style.display = "block";
-      badge.textContent = `${selectedImages.length} Foto Siap Dikirim`;
+      badge.textContent = `📸 ${selectedImages.length} Foto Siap Dikirim`;
 
       selectedImages.forEach((imgSrc, idx) => {
         const item = document.createElement("div");
